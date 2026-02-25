@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+<BaseLayout title="Blog — Clik">
+  <main class="mx-auto max-w-3xl px-6 pt-28">
+    <p class="text-zinc-400">Post not found.</p>
+  </main>
+</BaseLayout>

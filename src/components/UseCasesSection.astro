@@ -1,0 +1,63 @@
+---
+const useCases = [
+  {
+    slug: 'cooking',
+    emoji: '🍳',
+    label: 'Cooking',
+    description: 'AI that understands ingredients, steps, and recipe structure. Your edit practically builds itself.',
+  },
+  {
+    slug: 'grwm',
+    emoji: '💄',
+    label: 'GRWM',
+    description: 'Edited before you get back from that first date. AI that follows the get-ready arc and paces your cuts.',
+  },
+  {
+    slug: 'talking-head',
+    emoji: '🎙️',
+    label: 'Talking Head',
+    description: 'Say less. Keep the best takes. AI that strips filler and finds your strongest moments.',
+  },
+  {
+    slug: 'vlogs',
+    emoji: '🎒',
+    label: 'Vlogs',
+    description: 'Turn a full day of footage into a story worth watching. AI that finds the narrative arc in your day.',
+  },
+  {
+    slug: 'diy',
+    emoji: '🔨',
+    label: 'DIY',
+    description: 'Show every step, skip every wait. AI that understands the process and builds a watchable tutorial.',
+  },
+];
+---
+
+<section id="use-cases" class="px-6 py-24">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-16 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-violet-400">Use Cases</p>
+      <h2 class="text-4xl font-bold text-white md:text-5xl">
+        Built for every format<br class="hidden md:block" />
+        you create.
+      </h2>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {useCases.map((uc, i) => (
+        <a
+          href={`/use-cases/${uc.slug}`}
+          class={`group relative overflow-hidden rounded-2xl border border-white/8 bg-zinc-900 p-6 transition-all hover:border-white/16 hover:bg-zinc-800/80 ${i === 0 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
+        >
+          <div class="mb-4 text-3xl">{uc.emoji}</div>
+          <h3 class="mb-2 text-lg font-semibold text-white">{uc.label}</h3>
+          <p class="text-sm leading-relaxed text-zinc-400">{uc.description}</p>
+          <div class="mt-4 flex items-center gap-1 text-sm font-medium text-violet-400 transition-all group-hover:gap-2">
+            See how it works
+            <span class="transition-transform group-hover:translate-x-0.5">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

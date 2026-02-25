@@ -1,0 +1,54 @@
+---
+const before = [
+  '"I\'ll edit this weekend" (never happens)',
+  'Backlog of unedited footage piling up',
+  'Sporadic, inconsistent posting',
+  'Hours lost to cutting dead air',
+];
+
+const after = [
+  '"Upload and it\'s done" (actually happens)',
+  'Backlog becomes your content library',
+  '3–4 posts per week, like clockwork',
+  'Rough cut ready in minutes',
+];
+---
+
+<section class="px-6 py-24">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl font-bold text-white md:text-5xl">
+        Create more, post consistently,<br class="hidden md:block" />
+        and grow faster.
+      </h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <!-- Before -->
+      <div class="rounded-2xl border border-red-500/10 bg-red-500/5 p-8">
+        <p class="mb-6 text-sm font-semibold uppercase tracking-widest text-red-400">Before Clik</p>
+        <ul class="space-y-4">
+          {before.map((item) => (
+            <li class="flex items-start gap-3 text-zinc-400">
+              <span class="mt-0.5 text-red-500">✕</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- After -->
+      <div class="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-8">
+        <p class="mb-6 text-sm font-semibold uppercase tracking-widest text-emerald-400">After Clik</p>
+        <ul class="space-y-4">
+          {after.map((item) => (
+            <li class="flex items-start gap-3 text-zinc-100">
+              <span class="mt-0.5 text-emerald-400">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

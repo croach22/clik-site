@@ -1,0 +1,65 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Upload your footage',
+    description: 'Drop in your raw clips — no trimming, no prep. Just the footage straight from your camera or phone.',
+  },
+  {
+    number: '02',
+    title: 'Select your video type',
+    description: 'Choose the format you\'re making: cooking, GRWM, vlog, talking head, DIY. Clik tailors the edit to your content.',
+  },
+  {
+    number: '03',
+    title: 'AI reads your footage',
+    description: 'Our AI detects the storyline in your footage — visual actions, scenes, talking points, ingredients, steps, and more.',
+  },
+  {
+    number: '04',
+    title: 'Rough draft in seconds',
+    description: 'Clik automatically trims dead air, paces the cuts, and delivers a rough cut that\'s ready to review.',
+  },
+  {
+    number: '05',
+    title: 'Finishing touches your way',
+    description: 'Refine via conversation ("cut the first 10 seconds") or use the traditional timeline. Your call.',
+  },
+];
+---
+
+<section id="how-it-works" class="px-6 py-24">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-16 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-violet-400">How it works</p>
+      <h2 class="text-4xl font-bold text-white md:text-5xl">
+        From raw footage to finished<br class="hidden md:block" />
+        video in minutes.
+      </h2>
+    </div>
+
+    <div class="relative">
+      <!-- Vertical line -->
+      <div class="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-violet-500/50 via-violet-500/20 to-transparent md:left-1/2"></div>
+
+      <div class="space-y-12">
+        {steps.map((step, i) => (
+          <div class={`relative flex gap-8 md:gap-16 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            <!-- Step number bubble (mobile: left, desktop: center) -->
+            <div class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-violet-500/30 bg-zinc-950 text-sm font-bold text-violet-400 md:absolute md:left-1/2 md:-translate-x-1/2">
+              {step.number}
+            </div>
+
+            <!-- Content (alternates sides on desktop) -->
+            <div class={`md:w-[calc(50%-3rem)] ${i % 2 === 0 ? 'md:ml-auto md:pr-0' : 'md:mr-auto md:pl-0'} pl-6 md:pl-0`}>
+              <div class="rounded-2xl border border-white/8 bg-zinc-900 p-6">
+                <h3 class="mb-2 text-lg font-semibold text-white">{step.title}</h3>
+                <p class="leading-relaxed text-zinc-400">{step.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

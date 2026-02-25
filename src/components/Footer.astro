@@ -1,24 +1,81 @@
 ---
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
-<footer class="border-t border-white/5 bg-brand-bg px-6 py-12">
+<footer class="border-t border-white/5 bg-brand-bg px-6 pt-16 pb-10">
   <div class="mx-auto max-w-6xl">
-    <div class="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-      <a href="/">
-        <img src="/logo-white.svg" alt="Clik" class="h-6 w-auto" />
-      </a>
 
-      <div class="flex flex-wrap gap-6 text-sm text-brand-cream/40">
-        <a href="mailto:conner@clik.vision" class="transition-colors hover:text-brand-cream">Contact</a>
-        <a href="https://www.instagram.com/clik.ai/" class="transition-colors hover:text-brand-cream">Instagram</a>
-        <a href="https://www.linkedin.com/company/clik-vision" class="transition-colors hover:text-brand-cream">LinkedIn</a>
-        <a href="/terms" class="transition-colors hover:text-brand-cream">Terms</a>
-        <a href="/privacy" class="transition-colors hover:text-brand-cream">Privacy</a>
+    <!-- Top: 4-column grid -->
+    <div class="grid grid-cols-2 gap-10 md:grid-cols-4 mb-14">
+
+      <!-- Col 1: Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="inline-block mb-4">
+          <img src="/logo-white.svg" alt="Clik" class="h-6 w-auto" />
+        </a>
+        <p class="text-sm text-brand-cream/35 leading-relaxed max-w-[180px]">
+          AI video editor that sees and hears what you're filming.
+        </p>
       </div>
+
+      <!-- Col 2: Product -->
+      <div>
+        <p class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4">Product</p>
+        <ul class="space-y-2.5 text-sm text-brand-cream/45">
+          <li><a href="/#how-it-works" class="hover:text-brand-cream transition-colors">How it works</a></li>
+          <li><a href="/use-cases/cooking" class="hover:text-brand-cream transition-colors">Cooking</a></li>
+          <li><a href="/use-cases/grwm" class="hover:text-brand-cream transition-colors">GRWM</a></li>
+          <li><a href="/use-cases/talking-head" class="hover:text-brand-cream transition-colors">Talking Head</a></li>
+          <li><a href="/use-cases/vlogs" class="hover:text-brand-cream transition-colors">Vlogs</a></li>
+          <li><a href="/use-cases/diy" class="hover:text-brand-cream transition-colors">DIY</a></li>
+          <li><a href="/docs" class="hover:text-brand-cream transition-colors">Docs</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Articles -->
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4">Articles</p>
+        <ul class="space-y-2.5 text-sm text-brand-cream/45">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}`} class="hover:text-brand-cream transition-colors line-clamp-1">
+                {post.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 4: Company -->
+      <div>
+        <p class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4">Company</p>
+        <ul class="space-y-2.5 text-sm text-brand-cream/45">
+          <li><a href="/blog" class="hover:text-brand-cream transition-colors">Blog</a></li>
+          <li><a href="mailto:conner@clik.vision" class="hover:text-brand-cream transition-colors">Contact</a></li>
+          <li><a href="https://www.instagram.com/clik.ai/" class="hover:text-brand-cream transition-colors">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/clik-vision" class="hover:text-brand-cream transition-colors">LinkedIn</a></li>
+          <li><a href="/terms" class="hover:text-brand-cream transition-colors">Terms</a></li>
+          <li><a href="/privacy" class="hover:text-brand-cream transition-colors">Privacy</a></li>
+        </ul>
+      </div>
+
     </div>
 
-    <p class="mt-8 text-sm text-brand-cream/20">
-      &copy; {new Date().getFullYear()} Clik. All rights reserved.
-    </p>
+    <!-- Bottom bar -->
+    <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <p class="text-xs text-brand-cream/20">
+        &copy; {new Date().getFullYear()} Clik. All rights reserved.
+      </p>
+      <a
+        href="https://app.clik.vision/sign-up"
+        class="text-xs text-brand-magenta/60 hover:text-brand-magenta transition-colors"
+      >
+        Start editing free →
+      </a>
+    </div>
+
   </div>
 </footer>

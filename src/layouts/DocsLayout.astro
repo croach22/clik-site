@@ -22,10 +22,7 @@ const grouped = GROUP_ORDER.map(group => ({
   title={currentSlug ? `${title} — Clik Docs` : title}
   description={description ?? `Clik documentation: ${title}`}
 >
-  {/* Background gradient */}
-  <div class="pointer-events-none fixed top-0 right-0 w-[700px] h-[550px] z-0" style="background: radial-gradient(ellipse at top right, rgba(84,129,232,0.08) 0%, transparent 65%)" />
-
-  <div class="relative z-10 flex min-h-screen pt-16">
+  <div class="flex min-h-screen pt-16" style="background: radial-gradient(ellipse at 90% 0%, rgba(84,129,232,0.13) 0%, transparent 50%)">
 
     {/* ── Sidebar ── */}
     <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r border-white/5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
@@ -61,7 +58,7 @@ const grouped = GROUP_ORDER.map(group => ({
     </aside>
 
     {/* ── Main content ── */}
-    <main class="flex-1 min-w-0 px-8 py-12 md:px-14 lg:px-16 max-w-3xl">
+    <main class="flex-1 min-w-0 mx-auto px-8 py-12 md:px-14 lg:px-16 max-w-3xl">
       <slot />
     </main>
 

@@ -22,7 +22,7 @@ const grouped = GROUP_ORDER.map(group => ({
   title={currentSlug ? `${title} — Clik Docs` : title}
   description={description ?? `Clik documentation: ${title}`}
 >
-  <div class="flex min-h-screen pt-16" style="background: radial-gradient(ellipse at 90% 0%, rgba(84,129,232,0.13) 0%, transparent 50%)">
+  <div class="flex min-h-screen pt-16">
 
     {/* ── Sidebar ── */}
     <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r border-white/5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
@@ -64,3 +64,14 @@ const grouped = GROUP_ORDER.map(group => ({
 
   </div>
 </BaseLayout>
+
+<style is:global>
+  /* Docs-only: blue gradient glow bleeds through the semi-transparent nav */
+  body {
+    background-image: radial-gradient(
+      ellipse at 85% -5%,
+      rgba(84, 129, 232, 0.18) 0%,
+      transparent 55%
+    );
+  }
+</style>

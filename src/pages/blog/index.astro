@@ -1,10 +1,79 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
 ---
-<BaseLayout title="Blog — Clik">
-  <main class="mx-auto max-w-3xl px-6 pt-28 pb-20">
-    <h1 class="text-3xl font-bold text-white mb-2">Blog</h1>
-    <p class="text-zinc-400 mb-12">Tips, updates, and stories from Clik.</p>
-    <p class="text-zinc-500 text-sm">No posts yet — check back soon.</p>
+<BaseLayout
+  title="Blog — Clik"
+  description="Tips, guides, and stories for short-form video creators. From editing tricks to AI workflows."
+>
+  <main class="mx-auto max-w-6xl px-6 pt-28 pb-24">
+
+    <!-- Header -->
+    <div class="mb-14">
+      <p class="text-sm font-display tracking-widest text-brand-magenta uppercase mb-3">From the team</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-cream mb-4">Blog</h1>
+      <p class="text-zinc-400 text-lg max-w-xl">Tips, guides, and stories for creators who want to spend less time editing and more time filming.</p>
+    </div>
+
+    <!-- Article grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="group flex flex-col rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200"
+        >
+          <!-- Cover image -->
+          <div class="aspect-video overflow-hidden bg-zinc-900">
+            <img
+              src={post.data.coverImage}
+              alt={post.data.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='/images/articles/placeholder.svg'"
+            />
+          </div>
+
+          <!-- Card body -->
+          <div class="flex flex-col flex-1 p-5 gap-3">
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5">
+              {post.data.tags.slice(0, 2).map((tag) => (
+                <span class="text-xs px-2 py-0.5 rounded-full bg-white/[0.06] text-zinc-400 border border-white/[0.08]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-base font-semibold text-brand-cream leading-snug group-hover:text-white transition-colors line-clamp-2">
+              {post.data.title}
+            </h2>
+
+            <!-- Description -->
+            <p class="text-sm text-zinc-400 leading-relaxed line-clamp-2 flex-1">
+              {post.data.description}
+            </p>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+              <time class="text-xs text-zinc-500" datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+              <span class="text-xs text-brand-magenta group-hover:translate-x-0.5 transition-transform">
+                Read →
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
   </main>
 </BaseLayout>

@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import ConceptChat from './ConceptChat';
 
 export default function HeroAnimated() {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -50,12 +51,6 @@ export default function HeroAnimated() {
       </div>
 
       <div className="relative mx-auto max-w-4xl">
-        {/* Badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-zinc-400">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-          Now in beta
-        </div>
-
         {/* Headline — gradient spotlight clips to text, tracks cursor globally */}
         <h1
           ref={headingRef}
@@ -96,6 +91,11 @@ export default function HeroAnimated() {
             See how it works
           </a>
         </div>
+      </div>
+
+      {/* Concept Chat */}
+      <div className="relative mx-auto mt-16 w-full max-w-2xl">
+        <ConceptChat />
       </div>
 
       {/* Product screenshot */}

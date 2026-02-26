@@ -63,16 +63,28 @@ export default function HeroAnimated() {
             backgroundClip: 'text',
           }}
         >
-          AI video editor that
+          The AI Creative
           <br />
-          sees and hears
+          Assistant for
           <br />
-          what you&apos;re filming.
+          Video Creators
         </h1>
 
         {/* Subhead */}
         <p className="mx-auto mb-10 max-w-xl text-lg text-zinc-400 md:text-xl">
-          Go from raw footage to a clean, publish-ready edit in minutes.
+          Plan content, shape your story, and{' '}
+          <span
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+            className="font-semibold"
+          >
+            edit real footage 10x faster
+          </span>
+          {' '}— without losing creative control.
         </p>
 
         {/* CTAs */}
@@ -106,9 +118,11 @@ export default function HeroAnimated() {
             <div className="h-3 w-3 rounded-full bg-zinc-700" />
             <div className="h-3 w-3 rounded-full bg-zinc-700" />
           </div>
-          <div className="flex h-[420px] items-center justify-center bg-zinc-900">
-            <p className="text-sm text-zinc-600">[ Product screenshot ]</p>
-          </div>
+          <img
+            src="/images/product-screenshot.png"
+            alt="Clik video editor interface showing media search, timeline, and AI assistant"
+            className="w-full"
+          />
         </div>
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a080d] to-transparent" />
       </div>

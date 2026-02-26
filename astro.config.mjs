@@ -23,4 +23,5 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [rehypePlaceholderImages],
   },
+  server: { host: '0.0.0.0' },
 });

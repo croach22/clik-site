@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConceptChat from '../components/ConceptChat.tsx';
+---
+
+<BaseLayout title="Clik — Concept">
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 py-24 relative">
+
+    <!-- Background glow -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-[#F9838E]/6 via-[#DC1DD9]/6 to-[#5481E8]/6 blur-3xl" />
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-center text-4xl md:text-5xl font-bold leading-[1.15] mb-4 max-w-2xl relative">
+      The AI Creative Assistant<br />
+      <span class="gradient-text-brand">for Video Creators</span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="text-zinc-400 text-base md:text-lg text-center mb-12 max-w-xl relative leading-relaxed">
+      Plan content, shape your story, and edit real footage 10x faster —<br class="hidden md:block" /> without losing creative control.
+    </p>
+
+    <!-- Chat -->
+    <div class="w-full max-w-2xl relative">
+      <ConceptChat client:load />
+    </div>
+
+  </main>
+</BaseLayout>

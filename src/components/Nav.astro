@@ -5,13 +5,7 @@ const navLinks = [
   { label: 'Docs',         href: '/docs'           },
 ];
 
-const useCases = [
-  { label: 'Cooking',      href: '/use-cases/cooking',      emoji: '🍳' },
-  { label: 'GRWM',         href: '/use-cases/grwm',         emoji: '💄' },
-  { label: 'Talking Head', href: '/use-cases/talking-head', emoji: '🎙️' },
-  { label: 'Vlogs',        href: '/use-cases/vlogs',         emoji: '🎒' },
-  { label: 'DIY',          href: '/use-cases/diy',           emoji: '🔨' },
-];
+// Use cases dropdown disabled for now — links to section on homepage instead
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-brand-bg/80 backdrop-blur-md">
@@ -32,43 +26,12 @@ const useCases = [
         </a>
       ))}
 
-      {/* Use Cases — hover dropdown */}
-      <div class="use-cases-trigger group relative">
-        <button
-          class="flex items-center gap-1.5 text-sm text-brand-cream/60 transition-colors hover:text-brand-cream group-hover:text-brand-cream"
-          aria-haspopup="true"
-        >
-          Use Cases
-          <svg
-            class="chevron h-3 w-3 transition-transform duration-300 ease-out"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
-        {/* Invisible bridge — keeps hover alive as mouse travels to dropdown */}
-        <div class="absolute left-1/2 top-full h-3 w-40 -translate-x-1/2" />
-
-        {/* Dropdown panel */}
-        <div class="dropdown absolute left-1/2 top-[calc(100%+12px)] w-52 -translate-x-1/2">
-          <div class="overflow-hidden rounded-2xl border border-white/10 bg-[#0f0d14]/95 shadow-2xl shadow-black/60 backdrop-blur-xl">
-            <div class="p-1.5">
-              {useCases.map((uc) => (
-                <a
-                  href={uc.href}
-                  class="nav-dropdown-item flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-brand-cream/55 transition-colors hover:bg-white/5 hover:text-brand-cream"
-                >
-                  <span class="text-base leading-none">{uc.emoji}</span>
-                  {uc.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <a
+        href="/#use-cases"
+        class="text-sm text-brand-cream/60 transition-colors hover:text-brand-cream"
+      >
+        Use Cases
+      </a>
 
     </div>
 
@@ -82,38 +45,3 @@ const useCases = [
   </div>
 </nav>
 
-<style>
-  /* Dropdown hidden state */
-  .dropdown {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-6px);
-    pointer-events: none;
-    transition:
-      opacity 0.2s ease-out,
-      transform 0.2s ease-out;
-  }
-
-  /* Dropdown visible on hover */
-  .use-cases-trigger:hover .dropdown {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-  }
-
-  /* Chevron rotates on hover */
-  .use-cases-trigger:hover .chevron {
-    transform: rotate(180deg);
-  }
-
-  /* Stagger dropdown items in */
-  .use-cases-trigger:hover .nav-dropdown-item:nth-child(1) { animation: dropItem 0.18s ease-out 0.00s both; }
-  .use-cases-trigger:hover .nav-dropdown-item:nth-child(2) { animation: dropItem 0.18s ease-out 0.04s both; }
-  .use-cases-trigger:hover .nav-dropdown-item:nth-child(3) { animation: dropItem 0.18s ease-out 0.08s both; }
-  .use-cases-trigger:hover .nav-dropdown-item:nth-child(4) { animation: dropItem 0.18s ease-out 0.12s both; }
-  .use-cases-trigger:hover .nav-dropdown-item:nth-child(5) { animation: dropItem 0.18s ease-out 0.16s both; }
-
-  @keyframes dropItem {
-    from { opacity: 0; transform: translateY(-4px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-</style>

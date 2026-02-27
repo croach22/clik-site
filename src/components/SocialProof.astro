@@ -1,19 +1,28 @@
 ---
 const testimonials = [
   {
-    quote: "Placeholder testimonial — add a real creator quote here.",
-    author: "Creator Name",
-    handle: "@handle",
+    quote: "Clik has completely changed not only how I edit but how I film. What used to take over two hours now takes 20 minutes, and I enjoy the entire process around cooking content much more now.",
+    author: "Randy Stoever",
+    handle: "@hotoffthestoever",
+    instagram: "https://www.instagram.com/hotoffthestoever/",
+    avatar: "/images/avatars/randy-stoever.jpg",
+    accent: '#F9838E',
   },
   {
-    quote: "Placeholder testimonial — add a real creator quote here.",
-    author: "Creator Name",
-    handle: "@handle",
+    quote: "I've tried so many AI content tools; Clik is my favorite by far.",
+    author: "Gigi Robinson",
+    handle: "@itsgigirobinson",
+    instagram: "https://www.instagram.com/itsgigirobinson/",
+    avatar: "/images/avatars/gigi-robinson.jpg",
+    accent: '#DC1DD9',
   },
   {
-    quote: "Placeholder testimonial — add a real creator quote here.",
-    author: "Creator Name",
-    handle: "@handle",
+    quote: "I've tried a lot of AI tools, but none of them understand the visuals of cooking like Clik. I came into this with low expectations, and it honestly blew my mind.",
+    author: "Cody Harman",
+    handle: "@mrcoachcody",
+    instagram: "https://www.instagram.com/mrcoachcody/",
+    avatar: "/images/avatars/cody-harman.jpg",
+    accent: '#5481E8',
   },
 ];
 ---
@@ -29,11 +38,38 @@ const testimonials = [
 
     <div class="grid gap-6 md:grid-cols-3">
       {testimonials.map((t) => (
-        <div class="rounded-2xl border border-white/8 bg-zinc-900 p-6">
-          <p class="mb-6 leading-relaxed text-zinc-300">"{t.quote}"</p>
-          <div>
-            <p class="font-semibold text-white">{t.author}</p>
-            <p class="text-sm text-zinc-500">{t.handle}</p>
+        <div class="group flex flex-col rounded-2xl border border-white/8 bg-zinc-900 p-6 transition-colors hover:border-white/12">
+          <p class="flex-1 text-base leading-relaxed text-zinc-300">"{t.quote}"</p>
+          <div class="mt-6 flex items-center gap-3">
+            {/* Avatar — shows placeholder initials if image not found */}
+            <div
+              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full overflow-hidden"
+              style={`background: ${t.accent}20; border: 1px solid ${t.accent}30;`}
+            >
+              <img
+                src={t.avatar}
+                alt={t.author}
+                class="h-full w-full object-cover"
+                onerror={`this.style.display='none'; this.nextElementSibling.style.display='flex';`}
+              />
+              <span
+                class="hidden items-center justify-center text-xs font-semibold"
+                style={`color: ${t.accent}; display: none;`}
+              >
+                {t.author.split(' ').map(n => n[0]).join('')}
+              </span>
+            </div>
+            <div>
+              <p class="font-semibold text-white">{t.author}</p>
+              <a
+                href={t.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
+              >
+                {t.handle}
+              </a>
+            </div>
           </div>
         </div>
       ))}

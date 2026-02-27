@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const presets = [
-  { id: "cooking", emoji: "🍳", label: "Edit a cooking video for me" },
-  { id: "startup", emoji: "🚀", label: "Build a content plan for my startup" },
-  { id: "shotlist", emoji: "🎬", label: "Help me build a shot list" },
-  { id: "vlog", emoji: "📱", label: "Brainstorm what to capture for my daily vlog" },
+  { id: "cooking", emoji: "🍳", label: "Edit a cooking video for me", color: "border-orange-500/20 bg-orange-500/[0.06] hover:border-orange-400/30 hover:bg-orange-500/10" },
+  { id: "startup", emoji: "🚀", label: "Build a content plan for my startup", color: "border-blue-500/20 bg-blue-500/[0.06] hover:border-blue-400/30 hover:bg-blue-500/10" },
+  { id: "shotlist", emoji: "🎬", label: "Help me build a shot list", color: "border-red-500/20 bg-red-500/[0.06] hover:border-red-400/30 hover:bg-red-500/10" },
+  { id: "vlog", emoji: "📱", label: "Brainstorm what to capture for my daily vlog", color: "border-violet-500/20 bg-violet-500/[0.06] hover:border-violet-400/30 hover:bg-violet-500/10" },
 ];
 
 const responses: Record<string, string> = {
@@ -287,7 +287,7 @@ export default function ConceptChat() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + i * 0.06 }}
                     onClick={() => handlePreset(p)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 text-xs hover:border-white/20 hover:bg-white/8 hover:text-white transition-all duration-200 cursor-pointer"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-zinc-400 text-xs hover:text-white transition-all duration-200 cursor-pointer ${p.color}`}
                   >
                     <span>{p.emoji}</span>
                     <span>{p.label}</span>

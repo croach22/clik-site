@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroAnimated from '../components/HeroAnimated';
-import Manifesto from '../components/Manifesto.astro';
 import ValueSection from '../components/ValueSection.astro';
-import UseCasesSection from '../components/UseCasesSection.astro';
-import ScrollDemo from '../components/ScrollDemo';
-import HowItWorks from '../components/HowItWorks.astro';
+import FeaturePlan from '../components/FeaturePlan';
+import FeatureEdit from '../components/FeatureEdit';
+import ManifestoScroll from '../components/ManifestoScroll';
+import UseCasesGrid from '../components/UseCasesGrid';
 import SocialProof from '../components/SocialProof.astro';
 import CTASection from '../components/CTASection.astro';
 ---
@@ -15,11 +15,11 @@ import CTASection from '../components/CTASection.astro';
   description="Go from raw footage to a clean, publish-ready edit in minutes. AI video editing built for creators."
 >
   <HeroAnimated client:load />
-  <Manifesto />
   <ValueSection />
-  <UseCasesSection />
-  <ScrollDemo client:load />
-  <HowItWorks />
+  <FeaturePlan client:load />
+  <FeatureEdit client:load />
+  <UseCasesGrid client:load />
+  <ManifestoScroll client:load />
   <SocialProof />
   <CTASection />
 </BaseLayout>

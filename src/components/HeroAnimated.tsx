@@ -63,28 +63,16 @@ export default function HeroAnimated() {
             backgroundClip: 'text',
           }}
         >
-          The AI Creative
+          Create With Intention.
           <br />
-          Assistant for
+          Edit With Speed.
           <br />
-          Video Creators
+          Grow With Confidence.
         </h1>
 
         {/* Subhead */}
         <p className="mx-auto mb-10 max-w-xl text-lg text-zinc-400 md:text-xl">
-          Plan content, shape your story, and{' '}
-          <span
-            style={{
-              backgroundImage: 'linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-            className="font-semibold"
-          >
-            edit real footage 10x faster
-          </span>
-          {' '}— without losing creative control.
+          Clik helps video creators structure stronger stories and turn footage into polished edits in minutes.
         </p>
 
         {/* CTAs */}

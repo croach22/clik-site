@@ -95,6 +95,11 @@ export default function HeroAnimated() {
 
       {/* Concept Chat */}
       <div className="relative mx-auto mt-16 w-full max-w-2xl">
+        <p className="mb-4 text-center font-display text-xs tracking-widest uppercase text-zinc-500">
+          <span className="line-through decoration-zinc-600">FAQ</span>
+          <span className="mx-2 text-zinc-700">→</span>
+          <span className="text-zinc-300">Ask me anything</span>
+        </p>
         <ConceptChat />
       </div>
 

@@ -19,6 +19,7 @@ const rehypePlaceholderImages = () => (tree) => {
 };
 
 export default defineConfig({
+  output: 'hybrid',
   integrations: [tailwind(), react()],
   markdown: {
     rehypePlugins: [rehypePlaceholderImages],

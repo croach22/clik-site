@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
+import vercel from '@astrojs/vercel/serverless';
 import { visit } from 'unist-util-visit';
 
 // Replaces placeholder:image-name.jpg src values with a branded SVG
@@ -20,6 +21,7 @@ const rehypePlaceholderImages = () => (tree) => {
 
 export default defineConfig({
   output: 'hybrid',
+  adapter: vercel(),
   integrations: [tailwind(), react()],
   markdown: {
     rehypePlugins: [rehypePlaceholderImages],

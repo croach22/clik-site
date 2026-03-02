@@ -63,11 +63,11 @@ export default function HeroAnimated() {
             backgroundClip: 'text',
           }}
         >
-          Your AI content strategist,
+          Create With Intention.
           <br />
-          writer, and editor —
+          Edit With Speed.
           <br />
-          in one tool.
+          Grow With Confidence.
         </h1>
 
         {/* Subhead */}

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node -e \"const fs=require('fs');const p='.vercel/output/functions/_render.func/.vc-config.json';if(fs.existsSync(p)){const c=JSON.parse(fs.readFileSync(p));c.runtime='nodejs20.x';fs.writeFileSync(p,JSON.stringify(c,null,2))}\"",
     "preview": "astro preview"
   },
   "dependencies": {

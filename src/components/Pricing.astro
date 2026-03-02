@@ -1,0 +1,112 @@
+---
+const tiers = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: '/mo',
+    badge: '',
+    features: ['1 hr footage/mo', '720p exports', '3 projects'],
+    cta: 'Start for Free',
+    ctaHref: 'https://app.clik.vision/sign-up',
+    highlighted: false,
+  },
+  {
+    name: 'Creator',
+    price: '$30',
+    period: '/mo',
+    badge: 'Popular',
+    features: ['5 hrs footage/mo', '1080p exports', 'Unlimited projects', 'Priority processing'],
+    cta: 'Get Started',
+    ctaHref: 'https://app.clik.vision/sign-up',
+    highlighted: true,
+  },
+  {
+    name: 'Pro',
+    price: '$60',
+    period: '/mo',
+    badge: '',
+    features: ['10 hrs footage/mo', '4K exports', 'Unlimited projects', 'Priority processing'],
+    cta: 'Get Started',
+    ctaHref: 'https://app.clik.vision/sign-up',
+    highlighted: false,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    badge: '',
+    features: ['Unlimited footage processing', 'Web-based client review', 'Style matching across client accounts'],
+    cta: 'Contact Us',
+    ctaHref: 'mailto:conner@clik.vision',
+    highlighted: false,
+  },
+];
+---
+
+<section id="pricing" class="py-24 px-6">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-xs font-display tracking-widest uppercase text-brand-cream/40 mb-4 text-center">Pricing</p>
+    <h2 class="text-3xl md:text-5xl font-bold text-brand-cream text-center mb-16">
+      Simple pricing. No surprises.
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      {tiers.map((tier) => (
+        <div
+          class:list={[
+            'rounded-2xl border p-5 sm:p-6 md:p-8 flex flex-col',
+            tier.highlighted
+              ? 'border-brand-blue/30 bg-brand-blue/[0.06]'
+              : 'border-white/10 bg-white/[0.03]',
+          ]}
+        >
+          <div class="flex items-center gap-2 mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-brand-cream">{tier.name}</h3>
+            {tier.badge && (
+              <span
+                class="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                style="color: #5481E8; border: 1px solid rgba(84, 129, 232, 0.3); background: rgba(84, 129, 232, 0.1);"
+              >
+                {tier.badge}
+              </span>
+            )}
+          </div>
+
+          <div
+            class:list={[
+              'rounded-lg px-4 py-3 mb-6 text-center',
+              tier.highlighted
+                ? 'bg-brand-blue/10'
+                : 'bg-white/[0.04]',
+            ]}
+          >
+            <span class="text-2xl font-bold text-brand-cream">{tier.price}</span>
+            {tier.period && <span class="text-sm text-brand-cream/50">{tier.period}</span>}
+          </div>
+
+          <ul class="space-y-3 flex-1 mb-6">
+            {tier.features.map((feature) => (
+              <li class="flex items-start gap-2.5 text-sm text-brand-cream/60">
+                <span class="mt-1 h-2 w-2 shrink-0 rounded-full border border-brand-cream/20" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={tier.ctaHref}
+            class:list={[
+              'block w-full rounded-lg py-3 text-center text-sm font-semibold transition-opacity hover:opacity-90',
+              tier.highlighted
+                ? 'bg-brand-blue text-white'
+                : 'border border-white/10 text-brand-cream/70 hover:border-white/20',
+            ]}
+          >
+            {tier.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

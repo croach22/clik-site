@@ -141,23 +141,27 @@ export default function UseCasesGrid() {
           </h2>
         </div>
 
-        {/* Top row — 3 cards */}
-        <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* All 5 cards — single column on mobile (80vw each), 3+2 on desktop */}
+        <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-6 justify-items-center">
           {TOP_ROW.map((card) => (
-            <UseCard key={card.slug} card={card} />
+            <div key={card.slug} className="w-[80vw] sm:w-auto sm:col-span-2">
+              <UseCard card={card} />
+            </div>
           ))}
         </div>
 
         {/* Bottom row — 2 cards, slides up to overlap */}
         <motion.div
-          className="relative mx-auto grid max-w-[66%] grid-cols-2 gap-4 sm:max-w-none sm:w-2/3 sm:mx-auto"
+          className="relative grid grid-cols-1 gap-4 sm:grid-cols-6 justify-items-center"
           style={{
             y: bottomY,
             opacity: bottomOpacity,
           }}
         >
-          {BOTTOM_ROW.map((card) => (
-            <UseCard key={card.slug} card={card} />
+          {BOTTOM_ROW.map((card, i) => (
+            <div key={card.slug} className={`w-[80vw] sm:w-auto sm:col-span-2 ${i === 0 ? 'sm:col-start-2' : ''}`}>
+              <UseCard card={card} />
+            </div>
           ))}
         </motion.div>
       </div>

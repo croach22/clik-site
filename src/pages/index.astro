@@ -8,6 +8,8 @@ import ManifestoScroll from '../components/ManifestoScroll';
 import UseCasesGrid from '../components/UseCasesGrid';
 import SocialProof from '../components/SocialProof.astro';
 import CTASection from '../components/CTASection.astro';
+import FoundingCTA from '../components/FoundingCTA.astro';
+import Pricing from '../components/Pricing.astro';
 ---
 
 <BaseLayout
@@ -16,10 +18,12 @@ import CTASection from '../components/CTASection.astro';
 >
   <HeroAnimated client:load />
   <ValueSection />
-  <FeaturePlan client:load />
   <FeatureEdit client:load />
+  <FeaturePlan client:load />
   <UseCasesGrid client:load />
   <ManifestoScroll client:load />
+  <FoundingCTA />
   <SocialProof />
+  <Pricing />
   <CTASection />
 </BaseLayout>

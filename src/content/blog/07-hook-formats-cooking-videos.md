@@ -9,7 +9,7 @@ coverImage: "/images/articles/cooking-video-hooks-cover.jpg"
 
 # Hook Formats for Cooking Videos: Final Plating, Taste Tests & Mini Compilations
 
-![A stunning close-up hero shot of a beautifully plated dish with dramatic lighting as a video thumbnail](placeholder:cooking-hero-shot.jpg)
+![A stunning close-up hero shot of a beautifully plated dish with dramatic lighting as a video thumbnail](/images/articles/cooking-hero-shot.jpg)
 
 You can cook something incredible, film it beautifully, edit it perfectly — and still get 200 views because the first 3 seconds weren't strong enough.
 
@@ -33,7 +33,7 @@ The cooking education, the technique, the narrative — all of that can come aft
 
 ## Hook Format 1: The Final Plating Reveal
 
-![Close-up of hands carefully placing a garnish on a beautifully plated dish, the final step before serving](placeholder:final-plating-close-up.jpg)
+![Close-up of hands carefully placing a garnish on a beautifully plated dish, the final step before serving](/images/articles/final-plating-close-up.jpg)
 
 **The format:** Open with the most visually striking shot of your finished dish. The completed plate, the final drizzle, the moment the dish looks its absolute best.
 
@@ -53,7 +53,7 @@ The cooking education, the technique, the narrative — all of that can come aft
 
 ## Hook Format 2: The Taste Test Reaction
 
-![A creator taking their first bite of a finished dish with a genuine, expressive reaction on camera](placeholder:taste-test-reaction.jpg)
+![A creator taking their first bite of a finished dish with a genuine, expressive reaction on camera](/images/articles/taste-test-reaction.jpg)
 
 **The format:** Open with your genuine first-bite reaction to the finished dish. Not a staged performance — a real response to something you made and actually love.
 
@@ -74,7 +74,7 @@ The cooking education, the technique, the narrative — all of that can come aft
 
 ## Hook Format 3: The Mini Compilation (The Teaser)
 
-![A rapid sequence of cooking highlights: sizzling pan, sauce pour, plating, final bite — all in quick succession](placeholder:cooking-mini-compilation.jpg)
+![A rapid sequence of cooking highlights: sizzling pan, sauce pour, plating, final bite — all in quick succession](/images/articles/cooking-mini-compilation.jpg)
 
 **The format:** Open with a 3–5 second rapid-cut sequence of the most visually compelling moments from the video — sizzling, pouring, plating, textures, motion — before segueing into the full recipe.
 
@@ -94,7 +94,7 @@ The cooking education, the technique, the narrative — all of that can come aft
 
 ## Bonus: The Unexpected Detail Hook
 
-![An extreme close-up of a sauce reducing with tiny bubbles, a knife cutting through a crispy crust, or cheese pulling dramatically](placeholder:unexpected-detail-shot.jpg)
+![An extreme close-up of a sauce reducing with tiny bubbles, a knife cutting through a crispy crust, or cheese pulling dramatically](/images/articles/unexpected-detail-shot.jpg)
 
 **The format:** Open with a single, unexpected extreme close-up of something visually satisfying — a crust being broken, cheese being pulled, a sauce reducing, the moment a poached egg is cut.
 
@@ -111,7 +111,7 @@ The cooking education, the technique, the narrative — all of that can come aft
 
 ## The Hook Is Part of the Recipe
 
-![A storyboard sketch showing the hook format choices for a cooking video: final plate, reaction, or compilation](placeholder:cooking-video-storyboard.jpg)
+![A storyboard sketch showing the hook format choices for a cooking video: final plate, reaction, or compilation](/images/articles/cooking-video-storyboard.jpg)
 
 One mindset shift that changes how you film: **the hook is something you plan before you cook, not something you find in the edit.**
 
@@ -138,6 +138,6 @@ You don't need to use the same hook format every time — in fact, varying your 
 
 The most effective way to learn which hooks work for your content is to test more of them. That means posting more, which means editing faster.
 
-Tools like [Clik.vision](https://www.clik.vision) help cooking creators move through raw footage quickly — building initial timelines from your best visual moments so you can spend time on hook decisions and creative polish rather than manual clip sorting. The faster you get to a first draft, the faster you can post, and the faster you learn what works.
+Tools like [Clik](https://www.clik.vision) help cooking creators move through raw footage quickly — building initial timelines from your best visual moments so you can spend time on hook decisions and creative polish rather than manual clip sorting. The faster you get to a first draft, the faster you can post, and the faster you learn what works.
 
 Because in short-form content, iteration beats perfection every time.

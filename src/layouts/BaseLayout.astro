@@ -2,6 +2,9 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import FoundingBanner from '../components/FoundingBanner.astro';
+import MobileEmailDrawer from '../components/MobileEmailDrawer';
+import FloatingCTA from '../components/FloatingCTA.astro';
 
 interface Props {
   title: string;
@@ -19,8 +22,22 @@ const { title, description = 'Clik — AI video editor for creators' } = Astro.p
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 <body>
+  <FoundingBanner />
   <Nav />
   <slot />
   <Footer />
+  <FloatingCTA />
+  <MobileEmailDrawer client:load />
+  <script>
+    // On mobile, intercept sign-up links and show email drawer instead
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth > 768) return;
+      const link = (e.target as HTMLElement).closest('a[href*="sign-up"]');
+      if (link && window.__openEmailDrawer) {
+        e.preventDefault();
+        window.__openEmailDrawer();
+      }
+    });
+  </script>
 </body>
 </html>

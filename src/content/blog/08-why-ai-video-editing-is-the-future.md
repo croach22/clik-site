@@ -9,7 +9,7 @@ coverImage: "/images/articles/ai-video-editing-future-cover.jpg"
 
 # Why AI Video Editing Is the Future for Solo Content Creators
 
-![A solo creator at a desk surrounded by camera gear, editing on a laptop late at night](placeholder:solo-creator-editing.jpg)
+![A solo creator at a desk surrounded by camera gear, editing on a laptop late at night](/images/articles/solo-creator-editing.jpg)
 
 Running a content channel as a solo creator means wearing every hat. You're the director, the cinematographer, the on-screen talent, the editor, the social media manager, the caption writer, and the analytics reviewer. All of it.
 
@@ -35,7 +35,7 @@ For a solo creator who also has a job, a business, a life — that's not sustain
 
 ## What AI Actually Changes
 
-![AI video editing interface showing automatic clip selection and timeline assembly from raw footage](placeholder:ai-editing-workflow.jpg)
+![AI video editing interface showing automatic clip selection and timeline assembly from raw footage](/images/articles/ai-editing-workflow.jpg)
 
 AI video editing tools don't replace creative judgment. They replace the parts of editing that don't require creativity.
 
@@ -69,7 +69,7 @@ Visual-first AI tools — ones that analyze footage for composition, motion, ene
 
 ## The Compounding Effect of Posting More
 
-![A graph showing consistent content posting leading to exponential follower growth over time](placeholder:creator-growth-chart.jpg)
+![A graph showing consistent content posting leading to exponential follower growth over time](/images/articles/creator-growth-chart.jpg)
 
 Here's something most creators underestimate: in short-form content, **volume compounds**.
 
@@ -95,7 +95,7 @@ A professional photographer uses Lightroom presets as a starting point and then 
 
 ## What the Best Solo Creators Have Already Figured Out
 
-![A creator filming casually on a phone in a well-lit kitchen, evidence of a streamlined, low-friction setup](placeholder:creator-casual-filming.jpg)
+![A creator filming casually on a phone in a well-lit kitchen, evidence of a streamlined, low-friction setup](/images/articles/creator-casual-filming.jpg)
 
 The solo creators who are growing fastest in 2026 have mostly stopped trying to do everything the traditional way. They've:
 
@@ -114,8 +114,8 @@ The solo creator in 2026 is being asked to compete with production teams, media 
 
 AI video editing doesn't level that playing field entirely. But it removes one of the biggest asymmetries: post-production time. The creator with an AI-assisted workflow can produce more content, iterate faster, and sustain their output longer without burning out.
 
-For visual creators especially — cooking, travel, events, lifestyle — tools like [Clik.vision](https://www.clik.vision) are built specifically for the footage-first workflow that most AI tools have ignored. Upload your raw clips, get a first draft, spend your creative energy on what actually matters.
+For visual creators especially — cooking, travel, events, lifestyle — tools like [Clik](https://www.clik.vision) are built specifically for the footage-first workflow that most AI tools have ignored. Upload your raw clips, get a first draft, spend your creative energy on what actually matters.
 
 The future of solo content creation isn't more hours at the edit bay. It's smarter time spent on the parts only you can do.
 
-[See how Clik.vision works for solo creators →](https://www.clik.vision)
+[See how Clik works for solo creators →](https://www.clik.vision)

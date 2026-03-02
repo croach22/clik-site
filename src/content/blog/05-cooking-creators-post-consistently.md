@@ -9,7 +9,7 @@ coverImage: "/images/articles/cooking-creator-consistency-cover.jpg"
 
 # How Cooking Creators Can Post More Consistently Without Burning Out
 
-![A cooking creator setting up a camera over their kitchen counter before filming a recipe](placeholder:cooking-creator-setup.jpg)
+![A cooking creator setting up a camera over their kitchen counter before filming a recipe](/images/articles/cooking-creator-setup.jpg)
 
 Ask any cooking creator what's holding back their posting consistency and they'll almost never say "I don't know what to cook." The ideas are usually there. The recipes are there. The kitchen is there.
 
@@ -39,7 +39,7 @@ The solution isn't to film less. It's to get through the edit faster.
 
 ## Tip 1: Batch Film, Then Batch Edit
 
-![Overhead shot of three different recipe stages laid out on a kitchen counter ready for filming](placeholder:batch-filming-setup.jpg)
+![Overhead shot of three different recipe stages laid out on a kitchen counter ready for filming](/images/articles/batch-filming-setup.jpg)
 
 The most effective schedule for cooking creators is to treat filming and editing as completely separate days.
 
@@ -63,7 +63,7 @@ The more practical approach: **shoot the action multiple times and pick in the e
 
 ## Tip 3: Build a Repeatable Shot List
 
-![A cooking creator filming a close-up of sizzling food in a pan with a macro lens attachment](placeholder:cooking-closeup-shot.jpg)
+![A cooking creator filming a close-up of sizzling food in a pan with a macro lens attachment](/images/articles/cooking-closeup-shot.jpg)
 
 Improvising your shots every time you film is a time sink. Build a standard shot list that you follow for every recipe — then adapt as needed.
 
@@ -92,11 +92,11 @@ Set a time limit for each edit. If you're making short-form content, a reasonabl
 
 ## Tip 5: Use AI to Handle the First Draft
 
-![A laptop screen showing an AI-generated video timeline built from raw cooking footage clips](placeholder:ai-cooking-edit-timeline.jpg)
+![A laptop screen showing an AI-generated video timeline built from raw cooking footage clips](/images/articles/ai-cooking-edit-timeline.jpg)
 
 The most time-consuming part of editing cooking content is pulling selects: scrubbing through all your footage, identifying the best takes, and arranging them into a rough structure. This can easily take 30–45 minutes before you've made a single creative decision.
 
-AI tools like [Clik.vision](https://www.clik.vision) are built to handle this step. Upload your raw cooking footage and the AI analyzes your clips visually — identifying the most compelling visual moments, understanding composition and motion, and assembling a first-draft timeline. You start from a rough edit, not a blank timeline.
+AI tools like [Clik](https://www.clik.vision) are built to handle this step. Upload your raw cooking footage and the AI analyzes your clips visually — identifying the most compelling visual moments, understanding composition and motion, and assembling a first-draft timeline. You start from a rough edit, not a blank timeline.
 
 For cooking creators specifically, this matters because food content is highly visual. The AI doesn't need dialogue or narration to understand that a close-up of a sizzling pan is more interesting than a static wide shot of an empty counter. It reads visual quality, and it puts your best moments forward.
 
@@ -121,7 +121,7 @@ A theme doesn't mean you repeat yourself. It means you have a frame that makes t
 
 ## The Compounding Advantage of Consistency
 
-![A phone showing a creator's growing follower count and video analytics](placeholder:creator-analytics-growth.jpg)
+![A phone showing a creator's growing follower count and video analytics](/images/articles/creator-analytics-growth.jpg)
 
 In short-form content, consistency compounds. An account posting four times a week reaches the algorithm more often, surfaces to more followers, and builds audience habit. Viewers come to expect your content on a regular cadence — and that expectation drives engagement.
 

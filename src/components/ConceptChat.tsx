@@ -5,7 +5,8 @@ const presets = [
   { id: "planning", emoji: "🧠", label: "How does the planning assistant work?", color: "border-violet-500/20 bg-violet-500/[0.06] hover:border-violet-400/30 hover:bg-violet-500/10" },
   { id: "cooking", emoji: "🍳", label: "Can you edit a cooking video?", color: "border-orange-500/20 bg-orange-500/[0.06] hover:border-orange-400/30 hover:bg-orange-500/10" },
   { id: "formats", emoji: "🎬", label: "What formats do you support?", color: "border-blue-500/20 bg-blue-500/[0.06] hover:border-blue-400/30 hover:bg-blue-500/10" },
-  { id: "limits", emoji: "🤔", label: "What can't you do yet?", color: "border-red-500/20 bg-red-500/[0.06] hover:border-red-400/30 hover:bg-red-500/10" },
+  { id: "loved", emoji: "💬", label: "What do users love most about Clik?", color: "border-emerald-500/20 bg-emerald-500/[0.06] hover:border-emerald-400/30 hover:bg-emerald-500/10" },
+  { id: "creativity", emoji: "🎨", label: "AI? Doesn't that kill creativity?", color: "border-rose-500/20 bg-rose-500/[0.06] hover:border-rose-400/30 hover:bg-rose-500/10" },
 ];
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -58,6 +59,7 @@ export default function ConceptChat() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [exchangeCount, setExchangeCount] = useState(0);
+  const [usedPresets, setUsedPresets] = useState<Set<string>>(new Set());
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,7 +68,7 @@ export default function ConceptChat() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [streamedText, phase, messages]);
+  }, [streamedText, phase, messages, usedPresets]);
 
   const sendMessage = useCallback(async (message: string) => {
     if (phase === "thinking" || phase === "responding" || !message.trim()) return;
@@ -136,7 +138,10 @@ export default function ConceptChat() {
     }
   }, [phase, messages]);
 
-  const handlePreset = (preset: (typeof presets)[0]) => sendMessage(preset.label);
+  const handlePreset = (preset: (typeof presets)[0]) => {
+    setUsedPresets((prev) => new Set(prev).add(preset.id));
+    sendMessage(preset.label);
+  };
 
   const handleTextSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,20 +162,23 @@ export default function ConceptChat() {
     setEmail("");
     setSubmitted(false);
     setExchangeCount(0);
+    setUsedPresets(new Set());
     setTimeout(() => inputRef.current?.focus(), 100);
   };
 
   const isInputDisabled = phase === "thinking" || phase === "responding";
-  const showPresets = messages.length === 0 && phase === "idle";
+  const remainingPresets = presets.filter((p) => !usedPresets.has(p.id));
+  const showPresets = (phase === "idle" || phase === "done") && remainingPresets.length > 0;
   const showCapture = exchangeCount >= 2 && phase === "done";
+  const isActive = messages.length > 0;
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Chat window */}
-      <div className="rounded-2xl border border-white/15 bg-white/[0.025] overflow-hidden">
+      {/* Chat window — expands when user engages */}
+      <div className={`rounded-2xl border border-white/15 bg-white/[0.025] overflow-hidden flex flex-col transition-all duration-500 ${isActive ? 'max-h-[85vh]' : ''}`}>
 
         {/* Messages */}
-        <div ref={scrollRef} className="px-5 py-6 space-y-3 min-h-[180px] max-h-[400px] overflow-y-auto">
+        <div ref={scrollRef} className={`px-5 py-6 space-y-3 overflow-y-auto flex-1 ${isActive ? 'min-h-[200px]' : 'min-h-[180px] max-h-[400px]'}`}>
 
           {/* Clik greeting bubble */}
           <motion.div
@@ -247,26 +255,23 @@ export default function ConceptChat() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
 
-        {/* Input area */}
-        <div className="px-4 py-4">
-          {/* Preset chips — only shown initially */}
+          {/* Preset chips — inside chat area, after messages */}
           <AnimatePresence>
             {showPresets && (
               <motion.div
                 key="chips"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="flex flex-wrap justify-end gap-1.5 mb-3"
+                className="flex flex-wrap justify-end gap-1.5 pt-2"
               >
-                {presets.map((p, i) => (
+                {remainingPresets.map((p, i) => (
                   <motion.button
                     key={p.id}
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.06 }}
+                    transition={{ delay: 0.15 + i * 0.06 }}
                     onClick={() => handlePreset(p)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-zinc-400 text-xs hover:text-white transition-all duration-200 cursor-pointer ${p.color}`}
                   >
@@ -277,8 +282,10 @@ export default function ConceptChat() {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
 
-          {/* Text input — always available for follow-ups */}
+        {/* Input area */}
+        <div className="px-4 py-4 border-t border-white/5">
           <form onSubmit={handleTextSubmit} className="flex gap-2">
             <input
               ref={inputRef}

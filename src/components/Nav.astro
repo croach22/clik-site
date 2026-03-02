@@ -1,20 +1,20 @@
 ---
 const navLinks = [
   { label: 'How it works', href: '/#how-it-works' },
-  { label: 'Blog',         href: '/blog'           },
-  { label: 'Docs',         href: '/docs'           },
+  { label: 'Use Cases',    href: '/#use-cases'    },
+  { label: 'Pricing',      href: '/#pricing'      },
+  { label: 'Learn',        href: '/docs'           },
 ];
-
-// Use cases dropdown disabled for now — links to section on homepage instead
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-brand-bg/80 backdrop-blur-md">
+<nav class="fixed left-0 right-0 z-50 border-b border-white/5 bg-brand-bg/80 backdrop-blur-md" style="top: 0px;">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 
     <a href="/" class="flex items-center">
       <img src="/logo-white.svg" alt="Clik" class="h-7 w-auto" />
     </a>
 
+    <!-- Desktop nav -->
     <div class="hidden items-center gap-8 md:flex">
 
       {navLinks.map((link) => (
@@ -27,21 +27,97 @@ const navLinks = [
       ))}
 
       <a
-        href="/#use-cases"
-        class="text-sm text-brand-cream/60 transition-colors hover:text-brand-cream"
+        href="/founding-creators"
+        class="text-sm font-medium transition-colors hover:text-brand-cream"
+        style="color: #D4A853;"
       >
-        Use Cases
+        Founding Creators
       </a>
 
     </div>
 
-    <a
-      href="https://app.clik.vision/sign-up"
-      class="group relative overflow-hidden rounded-full bg-brand-cream px-4 py-2 text-sm font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white"
-    >
-      <span class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style="background: linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8)" />
-      <span class="relative">Start for Free</span>
-    </a>
+    <div class="flex items-center gap-4">
+      <!-- CTA (desktop only) -->
+      <a
+        href="https://app.clik.vision/sign-up"
+        class="group relative hidden overflow-hidden rounded-full bg-brand-cream px-4 py-2.5 text-sm font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white md:inline-block"
+      >
+        <span class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style="background: linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8)" />
+        <span class="relative">Start for Free</span>
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="flex h-10 w-10 items-center justify-center rounded-lg md:hidden"
+        aria-label="Open menu"
+      >
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+          <path d="M0 1h20M0 7h20M0 13h20" stroke="#F9F7F1" stroke-width="1.5" />
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[55] hidden flex-col bg-brand-bg/95 backdrop-blur-lg">
+  <div class="flex items-center justify-between px-6 py-4">
+    <a href="/" class="flex items-center">
+      <img src="/logo-white.svg" alt="Clik" class="h-7 w-auto" />
+    </a>
+    <button id="mobile-menu-close" class="flex h-10 w-10 items-center justify-center rounded-lg" aria-label="Close menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M1 1l14 14M15 1L1 15" stroke="#F9F7F1" stroke-width="1.5" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="flex flex-1 flex-col items-center justify-center gap-8">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-menu-link text-2xl font-semibold text-brand-cream/80 transition-colors hover:text-brand-cream"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="/founding-creators"
+      class="mobile-menu-link text-2xl font-semibold transition-colors hover:text-brand-cream"
+      style="color: #D4A853;"
+    >
+      Founding Creators
+    </a>
+
+    <a
+      href="https://app.clik.vision/sign-up"
+      class="mobile-menu-link mt-4 rounded-full bg-brand-cream px-8 py-3.5 text-base font-semibold text-zinc-950"
+    >
+      Start for Free
+    </a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('mobile-menu-close');
+  const links = menu?.querySelectorAll('.mobile-menu-link');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    menu?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    menu?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  btn?.addEventListener('click', openMenu);
+  close?.addEventListener('click', closeMenu);
+  links?.forEach((link) => link.addEventListener('click', closeMenu));
+</script>

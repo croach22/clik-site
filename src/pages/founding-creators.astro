@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EarningsCalculator from '../components/EarningsCalculator';
+import FoundingCreatorForm from '../components/FoundingCreatorForm';
+---
+
+<BaseLayout
+  title="Founding Creator Program — Clik"
+  description="Free access to Clik + 30% lifetime affiliate commission for early creators who help grow the platform."
+>
+
+<!-- Hero -->
+<section class="relative pt-28 pb-24 px-6 text-center overflow-hidden md:pt-40">
+  <div class="mx-auto max-w-3xl relative z-10">
+    <p class="text-sm font-display tracking-widest uppercase text-brand-gold mb-6">Founding Creator Program</p>
+    <h1 class="text-3xl md:text-6xl font-bold text-brand-cream leading-tight mb-6">
+      We're Building the Future of Short-Form Content.
+      <span class="block mt-2">We Want You In the Room.</span>
+    </h1>
+    <p class="text-lg text-brand-cream/60 max-w-xl mx-auto mb-10">
+      Free product access. 30% lifetime affiliate commission. A seat at the table while we build this thing.
+    </p>
+    <a
+      href="#apply"
+      class="inline-block rounded-full px-8 py-3.5 text-base font-semibold text-zinc-900 transition-all hover:scale-105"
+      style="background-color: #D4A853;"
+    >
+      Apply Now
+    </a>
+  </div>
+</section>
+
+<!-- The Pitch -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-8">We'll be honest with you.</h2>
+    <div class="space-y-6 text-lg text-brand-cream/60 leading-relaxed">
+      <p>
+        Clik is a two-person team. We're building an AI video editor that actually understands what you're filming — one that sees the visuals, hears the audio, and turns raw footage into a clean edit in minutes.
+      </p>
+      <p>
+        We're not a giant company with a massive marketing budget. We're two people who think the current editing workflow is broken and want to fix it.
+      </p>
+      <p>
+        That's why we're launching the Founding Creator Program. We need creators who are willing to try something new, give us honest feedback, and tell their audience about it if they love it.
+      </p>
+      <p>
+        In exchange, we're giving you everything for free — and a real way to earn from it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- What Founding Creators Get -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream text-center mb-16">What Founding Creators Get</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- Card 1: Free Forever -->
+      <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+        <div class="text-3xl mb-4">🎬</div>
+        <h3 class="text-2xl font-bold text-brand-cream mb-3">Free access to Clik. Forever.</h3>
+        <p class="text-brand-cream/60 leading-relaxed mb-6">
+          No trial. No credit card. Full access to every feature we build — as long as you're actively creating.
+        </p>
+        <p class="text-sm text-brand-cream/40">
+          <span class="text-brand-gold font-medium">Your commitment:</span> maintain a regular posting cadence. You don't need to go viral — just keep creating.
+        </p>
+      </div>
+
+      <!-- Card 2: 30% Lifetime Commission -->
+      <div class="rounded-2xl border border-brand-gold/30 bg-brand-gold/[0.04] p-8 md:p-10">
+        <div class="text-3xl mb-4">💰</div>
+        <h3 class="text-2xl font-bold text-brand-cream mb-3">30% lifetime commission.</h3>
+        <p class="text-brand-cream/60 leading-relaxed mb-6">
+          Every person who signs up for Clik through your link — you earn 30% of what they pay. Every month. For as long as they're a customer.
+        </p>
+        <p class="text-sm text-brand-cream/40">
+          <span class="text-brand-gold font-medium">This compounds.</span> Refer 10 people this month, 10 next month — now you're earning on 20. It only grows.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Do the Math -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream text-center mb-6">Do the Math</h2>
+    <p class="text-lg text-brand-cream/60 text-center max-w-xl mx-auto mb-4 leading-relaxed">
+      Your audience is full of creators who spend hours editing. One post about Clik could drive hundreds of sign-ups — and you earn on every single one, every month.
+    </p>
+    <p class="text-lg text-brand-cream/60 text-center max-w-xl mx-auto mb-12 leading-relaxed">
+      Drag the slider and see what that looks like.
+    </p>
+    <EarningsCalculator client:visible />
+  </div>
+</section>
+
+<!-- This Is Not Another Brand Deal -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-8">This Is Not Another Brand Deal</h2>
+    <div class="space-y-6 text-lg text-brand-cream/60 leading-relaxed">
+      <p>
+        Brand deals pay once. You film a video, post it, get a check, and it's over. If the product sucks, your audience notices.
+      </p>
+      <p>
+        This is different. You're recommending a tool you actually use. You earn on every person you refer — not once, but every month they stay. The better Clik gets, the more your referrals stick, the more you earn.
+      </p>
+      <p>
+        Your incentives and ours are perfectly aligned: build a great product, help creators edit faster, grow together.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Who We're Looking For -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream text-center mb-16">Who We're Looking For</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+
+      {[
+        { niche: 'Cooking', icon: '🍳', desc: 'Recipe videos, meal prep, kitchen tips' },
+        { niche: 'Fitness', icon: '💪', desc: 'Workouts, form checks, transformations' },
+        { niche: 'Beauty', icon: '💄', desc: 'GRWM, tutorials, product reviews' },
+        { niche: 'DIY', icon: '🔨', desc: 'Projects, builds, how-tos' },
+        { niche: 'Education', icon: '📚', desc: 'Explainers, tutorials, lessons' },
+      ].map((item) => (
+        <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6 text-center">
+          <div class="text-3xl mb-3">{item.icon}</div>
+          <h3 class="text-lg font-semibold text-brand-cream mb-1">{item.niche}</h3>
+          <p class="text-sm text-brand-cream/40">{item.desc}</p>
+        </div>
+      ))}
+
+      <div class="rounded-xl border border-brand-gold/20 bg-brand-gold/[0.04] p-6 text-center flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-brand-gold mb-1">Don't see your niche?</p>
+        <p class="text-sm text-brand-cream/40">If you create short-form video, we want to hear from you.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why "Founding" -->
+<section class="py-24 px-6">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-8">Why "Founding"</h2>
+    <div class="space-y-6 text-lg text-brand-cream/60 leading-relaxed">
+      <p>
+        Because this isn't a coupon code. You're not a customer — you're a partner.
+      </p>
+      <p>
+        Founding Creators get a direct line to the CEO. Your feedback doesn't go into a ticket queue — it goes straight into the product. You tell us what's broken, what's missing, what would make this the only editing tool you'll ever need.
+      </p>
+      <p>
+        We build it. You test it. We iterate together. That's the deal.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Application Form -->
+<section id="apply" class="py-20 px-6 md:py-32">
+  <div class="mx-auto max-w-2xl">
+    <h2 class="text-3xl md:text-5xl font-bold text-brand-cream mb-6 text-center">
+      Ready to stop editing and start creating?
+    </h2>
+    <p class="text-lg text-brand-cream/60 mb-12 text-center">
+      Join the Founding Creator Program. Free access, 30% lifetime commission, and a real seat at the table.
+    </p>
+    <FoundingCreatorForm client:visible />
+  </div>
+</section>
+
+</BaseLayout>

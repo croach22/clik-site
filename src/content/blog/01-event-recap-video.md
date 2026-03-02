@@ -9,7 +9,7 @@ coverImage: "/images/articles/event-recap-cover.jpg"
 
 # How to Shoot and Edit an Event Recap Video (Even If You're Not an Editor)
 
-![A wide shot of a lively event venue with people networking and branded signage](placeholder:event-venue-wide.jpg)
+![A wide shot of a lively event venue with people networking and branded signage](/images/articles/event-venue-wide.jpg)
 
 You've just wrapped an event. The energy was great, the turnout was solid, and someone — probably you — now has to put together a recap video. If you're a marketer, a community manager, or literally anyone whose main job is *not* editing video, the idea of sitting down in Premiere Pro probably sounds exhausting.
 
@@ -37,7 +37,7 @@ For marketers producing event content, this is genuinely good news. Because B-ro
 
 ## The Shot List: What to Actually Capture
 
-![Close-up of event check-in table with branded materials and name badges](placeholder:event-checkin-detail.jpg)
+![Close-up of event check-in table with branded materials and name badges](/images/articles/event-checkin-detail.jpg)
 
 Before you even think about editing, you need footage. Here's the shot list that makes event recaps work — broken down by category:
 
@@ -71,7 +71,7 @@ You don't need all of these. But if you have 20–30 varied clips across these c
 
 ## The Golden Rule: Shoot More Than You Think You Need
 
-![A videographer capturing candid crowd moments at an indoor event](placeholder:videographer-event.jpg)
+![A person recording an event on their iPhone in a crowd](/images/articles/videographer-event.jpg)
 
 Most first-time event videographers undershoot. They get the keynote, a few crowd shots, maybe a food table, and call it a day. Then they get to the edit and realize they have nothing to cut between.
 
@@ -104,7 +104,7 @@ Close on something with energy — a crowd shot, a toast, a candid laugh. Don't 
 
 ## What About Interviews?
 
-![Speaker on stage with audience in the background, captured from a medium distance](placeholder:speaker-stage.jpg)
+![Speaker on stage with audience in the background, captured from a medium distance](/images/articles/speaker-stage.jpg)
 
 Interviews and testimonials absolutely have a place in event content — but they work best as a *second* piece of content, not mixed into the recap.
 
@@ -116,11 +116,11 @@ A longer "highlights + interviews" cut (3–5 minutes) can live on YouTube or yo
 
 ## The Shortcut for the Actual Editing
 
-![An AI video editing interface showing a timeline built from event footage clips](placeholder:ai-editing-interface.jpg)
+![An AI video editing interface showing a timeline built from event footage clips](/images/articles/ai-editing-interface.jpg)
 
 The hardest part of event recap editing isn't the creative decisions — it's the time it takes to go from 40 clips down to 15. Scrubbing footage, pulling selects, building a rough timeline. That's where most non-editors get stuck and the project stalls for two weeks.
 
-Tools like [Clik.vision](https://www.clik.vision) are built for exactly this. Upload your raw footage and the AI builds you an initial timeline from your best visual moments — no dialogue analysis required, no manual scrubbing. You go from raw clips to a workable draft, then you make the creative calls on what stays and what doesn't.
+Tools like [Clik](https://www.clik.vision) are built for exactly this. Upload your raw footage and the AI builds you an initial timeline from your best visual moments — no dialogue analysis required, no manual scrubbing. You go from raw clips to a workable draft, then you make the creative calls on what stays and what doesn't.
 
 For marketers who need to move fast and don't have an editor on staff, it's the difference between a recap video that ships the week of the event versus one that never ships at all.
 

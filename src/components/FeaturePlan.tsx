@@ -296,10 +296,22 @@ export default function FeaturePlan() {
         {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <p
-            className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
+            className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"
             style={{ color: '#DC1DD9' }}
           >
             Plan
+            <span
+              className="rounded-full text-xs normal-case tracking-normal"
+              style={{
+                color: '#D4A853',
+                fontSize: 10,
+                border: '1px solid #D4A85340',
+                padding: '2px 8px',
+                background: '#D4A85310',
+              }}
+            >
+              Coming Soon
+            </span>
           </p>
           <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-5"

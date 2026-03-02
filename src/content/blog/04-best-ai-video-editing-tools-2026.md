@@ -9,7 +9,7 @@ coverImage: "/images/articles/best-ai-video-tools-cover.jpg"
 
 # Best AI Video Editing Tools for Short-Form Creators in 2026
 
-![A flat-lay of a creator's desk with a camera, laptop showing a video timeline, and a phone with social media open](placeholder:creator-desk-setup.jpg)
+![A creator broadcasting live on their smartphone](/images/articles/creator-desk-setup.jpg)
 
 The short-form creator economy doesn't slow down. TikTok, Instagram Reels, and YouTube Shorts have collectively trained audiences to expect a constant feed of well-edited, visually engaging content — and creators are expected to keep up.
 
@@ -32,25 +32,25 @@ With that in mind, here's the breakdown.
 
 ---
 
-## 1. Clik.vision — Best for Visual-First Original Footage Creators
+## 1. Clik — Best for Visual-First Original Footage Creators
 
-![Clik.vision interface showing an AI-generated draft timeline from raw cooking footage](placeholder:clikvision-interface.jpg)
+![A creator editing video on a laptop](/images/articles/clikvision-interface.jpg)
 
 **Best for:** Cooking creators, travel vloggers, event videographers, lifestyle creators, "Get Away With Me" content
 
-**What it does:** Clik.vision is an AI editing agent that takes raw, unedited footage and builds a first-cut timeline. Rather than working from transcripts or dialogue, it analyzes your clips visually — understanding composition, motion, and visual storytelling — and assembles a draft edit from your best moments.
+**What it does:** Clik is an AI editing agent that takes raw, unedited footage and builds a first-cut timeline. Rather than working from transcripts or dialogue, it analyzes your clips visually — understanding composition, motion, and visual storytelling — and assembles a draft edit from your best moments.
 
 For creators who shoot original footage and need to go from camera to cut quickly, this is the most direct workflow available. It's not a repurposing tool; it's a starting-point editor that does the tedious work of pulling selects and building a rough timeline.
 
 **Standout feature:** Visual-first AI that works with B-roll, not just spoken content. One of the few tools that meaningfully helps cooking and travel creators edit faster.
 
-**Try it:** [clik.vision](https://www.clik.vision)
+**Try it:** [Clik](https://www.clik.vision)
 
 ---
 
 ## 2. Descript — Best for Podcast and Interview Creators
 
-![A podcast recording setup with microphones and a laptop showing a transcript-based edit](placeholder:podcast-recording-setup.jpg)
+![A podcast recording setup with microphones and a laptop showing a transcript-based edit](/images/articles/podcast-recording-setup.jpg)
 
 **Best for:** Podcasters, interview creators, talking-head YouTubers, webinar hosts
 
@@ -64,7 +64,7 @@ For creators who shoot original footage and need to go from camera to cut quickl
 
 ## 3. Opus Clip — Best for Repurposing Long-Form Content
 
-![A long YouTube video being broken down into multiple short clips on a screen](placeholder:opus-clip-repurposing.jpg)
+![A long YouTube video being broken down into multiple short clips on a screen](/images/articles/opus-clip-repurposing.jpg)
 
 **Best for:** Creators with existing long-form video who want to maximize distribution
 
@@ -104,10 +104,10 @@ For creators who shoot original footage and need to go from camera to cut quickl
 
 | Creator Type | Recommended Tool |
 |---|---|
-| Cooking / Food Creator | Clik.vision |
-| Travel Vlogger | Clik.vision |
-| Event Videographer / Marketer | Clik.vision |
-| Lifestyle / Vlogger (visual-first) | Clik.vision |
+| Cooking / Food Creator | Clik |
+| Travel Vlogger | Clik |
+| Event Videographer / Marketer | Clik |
+| Lifestyle / Vlogger (visual-first) | Clik |
 | Podcaster / Interview Creator | Descript |
 | Long-form YouTube Repurposer | Opus Clip |
 | Mobile-first Solo Creator | Captions.ai |
@@ -117,7 +117,7 @@ For creators who shoot original footage and need to go from camera to cut quickl
 
 ## A Note on "AI Editing" vs. AI-Assisted Editing
 
-![Side-by-side of raw messy footage clips versus a clean edited timeline on screen](placeholder:raw-vs-edited-comparison.jpg)
+![Side-by-side of raw messy footage clips versus a clean edited timeline on screen](/images/articles/raw-vs-edited-comparison.jpg)
 
 One thing worth clarifying: most tools marketed as "AI video editors" are really AI-*assisted* editors. They speed up parts of the process — clipping, captioning, transcript editing — but don't replace creative judgment.
 
@@ -131,6 +131,6 @@ In 2026, the creators who move fastest aren't the ones who edit everything manua
 
 If you're a short-form creator working with original footage — cooking, travel, events, lifestyle — the gap in the market has been the lack of a tool that understands *visual* content. Most AI video tools were built for dialogue-first workflows, leaving visual creators to manage B-roll the old-fashioned way.
 
-Clik.vision was built to close that gap. If that's your world, it's worth trying.
+Clik was built to close that gap. If that's your world, it's worth trying.
 
-[Start editing with Clik.vision →](https://www.clik.vision)
+[Start editing with Clik →](https://www.clik.vision)

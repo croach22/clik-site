@@ -44,7 +44,7 @@ export default function HeroAnimated() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-24 text-center">
+    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-32 md:pt-24 text-center">
       {/* Subtle static bg glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/8 blur-[140px]" />
@@ -54,7 +54,7 @@ export default function HeroAnimated() {
         {/* Headline — gradient spotlight clips to text, tracks cursor globally */}
         <h1
           ref={headingRef}
-          className="mb-6 text-5xl font-bold leading-[1.1] tracking-tight md:text-7xl"
+          className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl"
           style={{
             backgroundImage:
               'radial-gradient(circle 200px at 50% 50%, #F9838E 0%, #DC1DD9 40%, #5481E8 70%, #F9F7F1 90%)',
@@ -63,11 +63,11 @@ export default function HeroAnimated() {
             backgroundClip: 'text',
           }}
         >
-          Create With Intention.
+          Your AI content strategist,
           <br />
-          Edit With Speed.
+          writer, and editor —
           <br />
-          Grow With Confidence.
+          in one tool.
         </h1>
 
         {/* Subhead */}
@@ -76,7 +76,7 @@ export default function HeroAnimated() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="flex items-center justify-center gap-4">
           <a
             href="https://app.clik.vision/sign-up"
             className="group relative overflow-hidden rounded-full bg-white px-8 py-3.5 text-base font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white"

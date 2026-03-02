@@ -14,6 +14,7 @@ export default {
           blue:    '#5481E8',
           cream:   '#F9F7F1',
           bg:      '#0a080d',
+          gold:    '#D4A853',
         },
       },
       backgroundImage: {

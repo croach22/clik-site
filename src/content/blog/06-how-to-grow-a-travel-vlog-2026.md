@@ -9,7 +9,7 @@ coverImage: "/images/articles/travel-vlog-growth-cover.jpg"
 
 # How to Grow a Travel Vlog in 2026: The Get Away With Me Creator Guide
 
-![A travel creator filming a stunning coastal landscape at golden hour with a mirrorless camera](placeholder:travel-creator-golden-hour.jpg)
+![A travel creator filming a stunning coastal landscape at golden hour with a mirrorless camera](/images/articles/travel-creator-golden-hour.jpg)
 
 Travel content has never been more popular — and never more crowded. Every platform is flooded with drone footage, aesthetic hotel rooms, and "day in my life" videos from cities around the world. Most of it looks the same.
 
@@ -35,7 +35,7 @@ Most travel creators underestimate all three. They spend weeks on a single video
 
 ## Step 1: Find Your Specific Angle
 
-![A travel vlogger exploring a local market, camera in hand, interacting with vendors](placeholder:travel-creator-local-market.jpg)
+![A travel vlogger exploring a local market, camera in hand, interacting with vendors](/images/articles/travel-creator-local-market.jpg)
 
 "Travel content" is too broad to grow a channel in 2026. You need a reason for someone to follow *you* specifically — not just watch one video.
 
@@ -75,7 +75,7 @@ Your first frame is prime real estate. Treat it that way.
 
 ## Step 3: Shoot for the Edit, Not the Archive
 
-![Multiple camera angles of the same travel scene being reviewed on a laptop](placeholder:travel-footage-review.jpg)
+![Multiple camera angles of the same travel scene being reviewed on a laptop](/images/articles/travel-footage-review.jpg)
 
 One of the most common mistakes travel creators make is shooting everything and editing nothing. They come home with 6 hours of footage from a 3-day trip and then get paralyzed by the volume.
 
@@ -108,7 +108,7 @@ Editing principles that work:
 
 ## Step 5: Post More Than You Think You Should
 
-![A content calendar with travel video thumbnails planned across multiple weeks](placeholder:travel-content-calendar.jpg)
+![A content calendar with travel video thumbnails planned across multiple weeks](/images/articles/travel-content-calendar.jpg)
 
 The biggest growth unlock for travel creators in 2026 is volume. Not at the expense of quality — but the assumption that each video needs to be a 10/10 production is holding most creators back.
 
@@ -124,7 +124,7 @@ A realistic posting cadence for growth: **3–5 short-form pieces per week**, wi
 
 The logistical reality of travel content is that editing is the bottleneck. You're often trying to post while still traveling — or coming home to a backlog that takes weeks to clear.
 
-Tools like [Clik.vision](https://www.clik.vision) help by taking your raw travel footage and building an initial timeline from your best visual moments. For travel creators specifically, this means the AI is pulling your most compelling shots — the golden hour sequences, the intimate street moments, the detail close-ups — and giving you a first draft to react to, rather than a blank timeline to fill.
+Tools like [Clik](https://www.clik.vision) help by taking your raw travel footage and building an initial timeline from your best visual moments. For travel creators specifically, this means the AI is pulling your most compelling shots — the golden hour sequences, the intimate street moments, the detail close-ups — and giving you a first draft to react to, rather than a blank timeline to fill.
 
 It won't replace your creative eye. But it removes the part of editing that doesn't require creativity: the scrubbing, the sorting, the rough assembly. For travel creators working through large volumes of footage, that's a meaningful time save.
 

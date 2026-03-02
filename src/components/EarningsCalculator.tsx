@@ -5,7 +5,7 @@ const MAX = 500;
 
 export default function EarningsCalculator() {
   const [referrals, setReferrals] = useState(100);
-  const yearly = Math.round(referrals * 30 * 0.30 * 12);
+  const yearly = Math.round(referrals * 29 * 0.30 * 12);
   const pct = (referrals - MIN) / (MAX - MIN);
 
   return (
@@ -74,7 +74,7 @@ export default function EarningsCalculator() {
           <span className="text-3xl md:text-4xl text-brand-cream/40">/yr</span>
         </p>
         <p className="text-brand-cream/50 text-base">
-          {referrals} creator{referrals !== 1 ? 's' : ''} &times; $30/mo &times; 30% &times; 12 months
+          {referrals} creator{referrals !== 1 ? 's' : ''} &times; $29/mo &times; 30% &times; 12 months
         </p>
       </div>
     </div>

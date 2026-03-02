@@ -12,7 +12,7 @@ const posts = (await getCollection('blog')).sort(
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10 md:justify-items-center">
 
       <!-- Col 1: Brand -->
-      <div class="col-span-2 md:col-span-1 md:justify-self-start">
+      <div class="sm:col-span-2 md:col-span-1 md:justify-self-start">
         <a href="/" class="inline-block mb-4">
           <img src="/logo-white.svg" alt="Clik" class="h-6 w-auto" />
         </a>
@@ -36,7 +36,7 @@ const posts = (await getCollection('blog')).sort(
       <div>
         <a href="/blog" class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4 block hover:text-brand-cream/40 transition-colors">Blog</a>
         <ul class="space-y-2.5 text-sm text-brand-cream/45">
-          {posts.map((post) => (
+          {posts.slice(0, 4).map((post) => (
             <li>
               <a href={`/blog/${post.slug}`} class="hover:text-brand-cream transition-colors line-clamp-1">
                 {post.data.title}

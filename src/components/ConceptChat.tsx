@@ -354,22 +354,35 @@ export default function ConceptChat() {
                   <p className="text-zinc-400 text-sm leading-relaxed mb-5">
                     Sign in to save this and keep going — the more we work together, the better I get at helping you create.
                   </p>
-                  <form onSubmit={handleEmailSubmit} className="flex gap-2">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="your@email.com"
-                      className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/20 transition-colors"
-                    />
-                    <button
-                      type="submit"
-                      className="px-5 py-2.5 rounded-xl bg-[#F9F7F1] text-[#0a080d] text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer"
+                  {/* Desktop: direct signup link */}
+                  <div className="hidden md:block">
+                    <a
+                      href="https://app.clik.vision/sign-up"
+                      className="inline-block w-full rounded-xl bg-[#F9F7F1] text-[#0a080d] text-sm font-semibold hover:opacity-90 transition-opacity text-center py-2.5"
                     >
-                      Continue →
-                    </button>
-                  </form>
-                  <p className="text-zinc-600 text-xs mt-3">Free to start. No credit card required.</p>
+                      Start for Free →
+                    </a>
+                    <p className="text-zinc-600 text-xs mt-3">Free to start. No credit card required.</p>
+                  </div>
+                  {/* Mobile: email capture form */}
+                  <div className="md:hidden">
+                    <form onSubmit={handleEmailSubmit} className="flex gap-2">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/20 transition-colors"
+                      />
+                      <button
+                        type="submit"
+                        className="px-5 py-2.5 rounded-xl bg-[#F9F7F1] text-[#0a080d] text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer"
+                      >
+                        Continue →
+                      </button>
+                    </form>
+                    <p className="text-zinc-600 text-xs mt-3">We'll send you a link to try Clik on desktop.</p>
+                  </div>
                 </motion.div>
               ) : (
                 <motion.div
@@ -379,7 +392,7 @@ export default function ConceptChat() {
                   className="text-center py-2"
                 >
                   <p className="text-emerald-400 font-semibold mb-1.5">You're in</p>
-                  <p className="text-zinc-400 text-sm">We'll be in touch soon.</p>
+                  <p className="text-zinc-400 text-sm">Check your inbox — we sent you a link.</p>
                 </motion.div>
               )}
             </AnimatePresence>

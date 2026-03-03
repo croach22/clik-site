@@ -330,7 +330,7 @@ export default function FeatureEdit() {
   const latestAiIndex = aiMessages.length - 1;
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 px-6 overflow-hidden">
+    <section ref={sectionRef} id="how-it-works" className="relative py-24 md:py-32 px-6 overflow-hidden">
       <div className="mx-auto max-w-6xl flex flex-col lg:flex-row-reverse items-start gap-12 lg:gap-20">
 
         {/* ── Right: copy (reversed layout from Plan) ── */}

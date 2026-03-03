@@ -80,6 +80,13 @@ export default function ConceptChat() {
     setPhase("thinking");
     setStreamedText("");
 
+    if (typeof window !== 'undefined' && window.posthog) {
+      window.posthog.capture('chat_message_sent', {
+        message_number: updatedMessages.filter(m => m.role === 'user').length,
+        is_preset: presets.some(p => p.label === message.trim()),
+      });
+    }
+
     // Abort any in-flight request
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -151,6 +158,11 @@ export default function ConceptChat() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    if (typeof window !== 'undefined' && window.posthog) {
+      window.posthog.capture('chat_email_captured', {
+        exchanges_before_capture: exchangeCount,
+      });
+    }
     setSubmitted(true);
   };
 

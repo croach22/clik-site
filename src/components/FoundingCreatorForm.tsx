@@ -58,6 +58,12 @@ export default function FoundingCreatorForm() {
     if (typeof window !== 'undefined' && window.fbq) {
       window.fbq('track', 'Lead', { content_name: 'founding-creator-application' });
     }
+    if (typeof window !== 'undefined' && window.posthog) {
+      window.posthog.capture('founding_creator_applied', {
+        content_type: form.contentType,
+        followers: form.followers,
+      });
+    }
 
     setSubmitting(false);
     setSubmitted(true);

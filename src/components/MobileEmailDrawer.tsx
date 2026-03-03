@@ -33,6 +33,9 @@ export default function MobileEmailDrawer() {
     if (typeof window !== 'undefined' && window.fbq) {
       window.fbq('track', 'Lead', { content_name: 'mobile-drawer' });
     }
+    if (typeof window !== 'undefined' && window.posthog) {
+      window.posthog.capture('mobile_email_submitted');
+    }
 
     setPhase('confirmed');
     setTimeout(() => setPhase('founding'), 2000);
@@ -179,5 +182,6 @@ export default function MobileEmailDrawer() {
 declare global {
   interface Window {
     __openEmailDrawer?: () => void;
+    posthog?: { capture: (event: string, properties?: Record<string, any>) => void };
   }
 }

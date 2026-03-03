@@ -1,5 +1,8 @@
 import pkg from '@notionhq/client';
 import mdPkg from 'notion-to-md';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
 
 const { Client } = pkg;
 const { NotionToMarkdown } = mdPkg;
@@ -48,10 +51,39 @@ export async function getAllDocs(): Promise<DocPage[]> {
     .sort((a, b) => a.order - b.order);
 }
 
-export async function getDocContent(pageId: string): Promise<string> {
+async function downloadImage(url: string, slug: string): Promise<string> {
+  const hash = crypto.createHash('md5').update(url.split('?')[0]).digest('hex').slice(0, 10);
+  const ext = url.match(/\.(png|jpg|jpeg|gif|webp|svg)/i)?.[1] || 'png';
+  const filename = `${slug}-${hash}.${ext}`;
+  const dir = path.join(process.cwd(), 'public', 'images', 'docs');
+  const filepath = path.join(dir, filename);
+
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(filepath)) {
+    const res = await fetch(url);
+    if (res.ok) {
+      const buffer = Buffer.from(await res.arrayBuffer());
+      fs.writeFileSync(filepath, buffer);
+    }
+  }
+
+  return `/images/docs/${filename}`;
+}
+
+export async function getDocContent(pageId: string, slug: string = 'doc'): Promise<string> {
   const mdBlocks = await n2m.pageToMarkdown(pageId);
-  const md = n2m.toMarkdownString(mdBlocks);
-  return md.parent || '';
+  let md = n2m.toMarkdownString(mdBlocks).parent || '';
+
+  // Download all images and rewrite URLs
+  const imgRegex = /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g;
+  const matches = [...md.matchAll(imgRegex)];
+  for (const match of matches) {
+    const [full, alt, url] = match;
+    const localPath = await downloadImage(url, slug);
+    md = md.replace(full, `![${alt}](${localPath})`);
+  }
+
+  return md;
 }
 
 // Groups in display order

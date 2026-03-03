@@ -155,13 +155,25 @@ export default function ConceptChat() {
     sendMessage(inputValue);
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    try {
+      await fetch('https://submit-form.com/GLCzgE2Hc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email, source: 'chat-email-capture' }),
+      });
+    } catch {
+      // Continue gracefully
+    }
     if (typeof window !== 'undefined' && window.posthog) {
       window.posthog.capture('chat_email_captured', {
         exchanges_before_capture: exchangeCount,
       });
+    }
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead', { content_name: 'chat-email-capture' });
     }
     setSubmitted(true);
   };

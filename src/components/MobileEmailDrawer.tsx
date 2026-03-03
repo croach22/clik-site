@@ -30,6 +30,10 @@ export default function MobileEmailDrawer() {
       // Continue gracefully even if submission fails
     }
 
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead', { content_name: 'mobile-drawer' });
+    }
+
     setPhase('confirmed');
     setTimeout(() => setPhase('founding'), 2000);
   };

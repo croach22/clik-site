@@ -55,6 +55,10 @@ export default function FoundingCreatorForm() {
       // Continue gracefully
     }
 
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead', { content_name: 'founding-creator-application' });
+    }
+
     setSubmitting(false);
     setSubmitted(true);
   };

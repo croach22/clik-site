@@ -63,11 +63,7 @@ export default function HeroAnimated() {
             backgroundClip: 'text',
           }}
         >
-          Create With Intention.
-          <br />
-          Edit With Speed.
-          <br />
-          Grow With Confidence.
+          From raw footage to viral short in minutes
         </h1>
 
         {/* Subhead */}

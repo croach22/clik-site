@@ -111,7 +111,6 @@ Clik handles about 90% of the editing work for you. Users love that they don't h
 ## Founding Creator Program
 
 Clik offers a **Founding Creator Program** for early creators:
-- **Free access to Clik forever** (no trial, no credit card) as long as you maintain a regular posting cadence
 - **30% lifetime affiliate commission** on every person you refer — every month, for as long as they're a customer
 - This is a partnership, not a brand deal — Founding Creators get a direct line to the CEO and their feedback goes straight into the product
 - Apply at the Founding Creators page on the website

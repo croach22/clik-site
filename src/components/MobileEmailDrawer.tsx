@@ -151,7 +151,7 @@ export default function MobileEmailDrawer() {
                       Founding Creator Program
                     </h3>
                     <p className="mb-6 text-sm text-zinc-950/60">
-                      Free access to Clik + 30% lifetime commission on every creator you refer. Limited spots.
+                      30% lifetime commission on every creator you refer. Limited spots.
                     </p>
                     <a
                       href="/founding-creators"

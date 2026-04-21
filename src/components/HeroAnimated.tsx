@@ -105,7 +105,7 @@ export default function HeroAnimated() {
             maxWidth: '16ch',
           }}
         >
-          From raw footage to viral short in minutes
+          From raw footage to viral shorts in minutes
         </h1>
 
         {/* Subhead */}

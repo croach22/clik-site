@@ -22,11 +22,31 @@ export default function HeroAnimated() {
 
     document.addEventListener('mousemove', handleMouseMove);
 
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    const applyGradient = () => {
+      if (headingRef.current && mq.matches) {
+        headingRef.current.style.backgroundImage = `radial-gradient(circle 200px at 50% 50%, #F9838E 0%, #DC1DD9 40%, #5481E8 70%, #F9F7F1 90%)`;
+        headingRef.current.style.WebkitBackgroundClip = 'text';
+        headingRef.current.style.WebkitTextFillColor = 'transparent';
+        headingRef.current.style.backgroundClip = 'text';
+      } else if (headingRef.current) {
+        headingRef.current.style.backgroundImage = '';
+        headingRef.current.style.WebkitBackgroundClip = '';
+        headingRef.current.style.WebkitTextFillColor = '';
+        headingRef.current.style.backgroundClip = '';
+        headingRef.current.style.color = '#F9F7F1';
+      }
+    };
+
+    applyGradient();
+    mq.addEventListener('change', applyGradient);
+
     const tick = () => {
       current.current.x = lerp(current.current.x, target.current.x, 0.07);
       current.current.y = lerp(current.current.y, target.current.y, 0.07);
 
-      if (headingRef.current) {
+      if (headingRef.current && mq.matches) {
         const { x, y } = current.current;
         headingRef.current.style.backgroundImage = `radial-gradient(circle 200px at ${x}% ${y}%, #F9838E 0%, #DC1DD9 40%, #5481E8 70%, #F9F7F1 90%)`;
       }
@@ -38,6 +58,7 @@ export default function HeroAnimated() {
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      mq.removeEventListener('change', applyGradient);
       if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);
@@ -79,14 +100,9 @@ export default function HeroAnimated() {
         {/* Headline — gradient spotlight clips to text, tracks cursor globally */}
         <h1
           ref={headingRef}
-          className="mx-auto mb-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl"
+          className="hero-headline mx-auto mb-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl"
           style={{
             maxWidth: '16ch',
-            backgroundImage:
-              'radial-gradient(circle 200px at 50% 50%, #F9838E 0%, #DC1DD9 40%, #5481E8 70%, #F9F7F1 90%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
           }}
         >
           From raw footage to viral short in minutes
@@ -98,19 +114,19 @@ export default function HeroAnimated() {
         </p>
 
         {/* CTAs */}
-        <div className="flex items-center justify-center gap-4 mt-10">
+        <div className="flex items-center justify-center gap-3 mt-10">
           <a
             href="https://app.clik.vision/sign-up"
-            className="group relative overflow-hidden rounded-full bg-white px-8 py-3.5 text-base font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white"
+            className="group relative overflow-hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white md:px-8 md:py-3.5 md:text-base"
           >
             <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: 'linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8)' }} />
-            <span className="relative">Start for Free</span>
+            <span className="relative whitespace-nowrap">Start for Free</span>
           </a>
           <a
             href="https://calendly.com/clikphotos/clik-agency-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-white/10 px-8 py-3.5 text-base font-medium text-zinc-300 transition-colors hover:border-white/20 hover:text-white"
+            className="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-zinc-300 transition-colors hover:border-white/20 hover:text-white md:px-8 md:py-3.5 md:text-base whitespace-nowrap"
           >
             Book a Demo
           </a>

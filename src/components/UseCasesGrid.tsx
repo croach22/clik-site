@@ -59,20 +59,20 @@ function UseCard({ card }: { card: typeof TOP_ROW[number] }) {
     >
       {/* Video background */}
       <video
-        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500"
-        src={`/videos/use-cases/${card.slug}.mp4`}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        onCanPlayThrough={(e) => {
-          (e.target as HTMLVideoElement).style.opacity = '1';
-        }}
-        onLoadedData={(e) => {
-          (e.target as HTMLVideoElement).style.opacity = '1';
-        }}
-      />
+          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500"
+          src={`/videos/use-cases/${card.slug}.mp4`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlayThrough={(e) => {
+            (e.target as HTMLVideoElement).style.opacity = '1';
+          }}
+          onLoadedData={(e) => {
+            (e.target as HTMLVideoElement).style.opacity = '1';
+          }}
+        />
       {/* Fallback gradient (shows until video loads) */}
       <div
         className="absolute inset-0 opacity-20"
@@ -92,11 +92,19 @@ function UseCard({ card }: { card: typeof TOP_ROW[number] }) {
           {card.label}
         </h3>
         <p
-          className="text-sm leading-relaxed"
+          className="text-sm leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-24"
           style={{ color: '#ffffff70' }}
         >
           {card.description}
         </p>
+        <a
+          href="https://app.clik.vision/sign-up"
+          className="mt-3 inline-block text-sm font-medium opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+          style={{ color: card.accent }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          Try it free &rarr;
+        </a>
       </div>
 
       {/* Hover border glow */}
@@ -122,7 +130,7 @@ export default function UseCasesGrid() {
   const bottomOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
   return (
-    <section ref={sectionRef} id="use-cases" className="px-6 py-24">
+    <section ref={sectionRef} id="formats" className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
 
         {/* Header */}
@@ -131,7 +139,7 @@ export default function UseCasesGrid() {
             className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]"
             style={{ color: '#a78bfa88' }}
           >
-            Use Cases
+            Formats
           </p>
           <h2
             className="text-3xl font-bold md:text-5xl"
@@ -150,7 +158,7 @@ export default function UseCasesGrid() {
           ))}
         </div>
 
-        {/* Bottom row — 2 cards, slides up to overlap */}
+        {/* Bottom row — 2 cards, centered, slides up to overlap */}
         <motion.div
           className="relative grid grid-cols-1 gap-4 sm:grid-cols-6 justify-items-center"
           style={{

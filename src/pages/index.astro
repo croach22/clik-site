@@ -4,12 +4,14 @@ import HeroAnimated from '../components/HeroAnimated';
 import ValueSection from '../components/ValueSection.astro';
 import FeaturePlan from '../components/FeaturePlan';
 import FeatureEdit from '../components/FeatureEdit';
+import FeatureWorkflowAgent from '../components/FeatureWorkflowAgent';
 import ManifestoScroll from '../components/ManifestoScroll';
 import UseCasesGrid from '../components/UseCasesGrid';
 import SocialProof from '../components/SocialProof.astro';
 import CTASection from '../components/CTASection.astro';
 import FoundingCTA from '../components/FoundingCTA.astro';
 import Pricing from '../components/Pricing.astro';
+import ConceptChat from '../components/ConceptChat';
 ---
 
 <BaseLayout
@@ -18,12 +20,23 @@ import Pricing from '../components/Pricing.astro';
 >
   <div data-section="hero"><HeroAnimated client:load /></div>
   <div data-section="value"><ValueSection /></div>
-  <div data-section="feature-edit"><FeatureEdit client:load /></div>
-  <div data-section="feature-plan"><FeaturePlan client:load /></div>
+  <div id="feature-edit" data-section="feature-edit"><FeatureEdit client:load /></div>
+  <div id="feature-workflow-agent" data-section="feature-workflow-agent"><FeatureWorkflowAgent client:load /></div>
+  <div id="feature-plan" data-section="feature-plan"><FeaturePlan client:load /></div>
+  <div data-section="social-proof"><SocialProof /></div>
   <div data-section="use-cases"><UseCasesGrid client:load /></div>
   <div data-section="manifesto"><ManifestoScroll client:load /></div>
   <div data-section="founding-cta"><FoundingCTA /></div>
-  <div data-section="social-proof"><SocialProof /></div>
   <div data-section="pricing"><Pricing /></div>
   <div data-section="cta"><CTASection /></div>
+  <div data-section="faq" class="px-6 py-24">
+    <div class="mx-auto max-w-2xl">
+      <p class="mb-4 text-center font-display text-xs tracking-widest uppercase text-zinc-500">
+        <span class="line-through decoration-zinc-600">FAQ</span>
+        <span class="mx-2 text-zinc-700">&rarr;</span>
+        <span class="text-zinc-300">Ask me anything</span>
+      </p>
+      <ConceptChat client:load />
+    </div>
+  </div>
 </BaseLayout>

@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import ConceptChat from './ConceptChat';
 
 export default function HeroAnimated() {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -51,11 +50,38 @@ export default function HeroAnimated() {
       </div>
 
       <div className="relative mx-auto max-w-4xl">
+        {/* Workflow Agent launch pill */}
+        <div className="mt-8 mb-8 flex justify-center">
+          <a
+            href="#feature-workflow-agent"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('[data-section="feature-workflow-agent"]')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="group inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium transition-all hover:scale-105"
+            style={{
+              border: '1px solid #5481E830',
+              background: '#5481E80A',
+              color: '#5481E8',
+            }}
+          >
+            <span
+              className="rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+              style={{ background: '#5481E820', color: '#5481E8' }}
+            >
+              New
+            </span>
+            <span style={{ color: '#F9F7F1CC' }}>Batch Workflow Agent</span>
+            <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+          </a>
+        </div>
+
         {/* Headline — gradient spotlight clips to text, tracks cursor globally */}
         <h1
           ref={headingRef}
-          className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl"
+          className="mx-auto mb-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl"
           style={{
+            maxWidth: '16ch',
             backgroundImage:
               'radial-gradient(circle 200px at 50% 50%, #F9838E 0%, #DC1DD9 40%, #5481E8 70%, #F9F7F1 90%)',
             WebkitBackgroundClip: 'text',
@@ -67,12 +93,12 @@ export default function HeroAnimated() {
         </h1>
 
         {/* Subhead */}
-        <p className="mx-auto mb-10 max-w-xl text-lg text-zinc-400 md:text-xl">
-          Clik helps video creators structure stronger stories and turn footage into polished edits in minutes.
+        <p className="mx-auto mt-6 mb-10 max-w-xl text-lg text-zinc-400 md:text-xl">
+          AI agents that help creators and video professionals produce better content and grow their business.
         </p>
 
         {/* CTAs */}
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 mt-10">
           <a
             href="https://app.clik.vision/sign-up"
             className="group relative overflow-hidden rounded-full bg-white px-8 py-3.5 text-base font-semibold text-zinc-950 transition-all hover:scale-105 hover:text-white"
@@ -81,26 +107,18 @@ export default function HeroAnimated() {
             <span className="relative">Start for Free</span>
           </a>
           <a
-            href="#how-it-works"
+            href="https://calendly.com/clikphotos/clik-agency-demo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-white/10 px-8 py-3.5 text-base font-medium text-zinc-300 transition-colors hover:border-white/20 hover:text-white"
           >
-            See how it works
+            Book a Demo
           </a>
         </div>
       </div>
 
-      {/* Concept Chat */}
-      <div className="relative mx-auto mt-16 w-full max-w-2xl">
-        <p className="mb-4 text-center font-display text-xs tracking-widest uppercase text-zinc-500">
-          <span className="line-through decoration-zinc-600">FAQ</span>
-          <span className="mx-2 text-zinc-700">→</span>
-          <span className="text-zinc-300">Ask me anything</span>
-        </p>
-        <ConceptChat />
-      </div>
-
       {/* Product screenshot */}
-      <div className="relative mx-auto mt-16 w-full max-w-5xl">
+      <div className="relative mx-auto mt-24 w-full max-w-5xl">
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/50">
           <div className="flex items-center gap-2 border-b border-white/5 px-4 py-3">
             <div className="h-3 w-3 rounded-full bg-zinc-700" />

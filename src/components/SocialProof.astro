@@ -1,78 +1,141 @@
 ---
 const testimonials = [
   {
+    quote: "Finding good editors is the only reason I can't scale. Clik solves that problem.",
+    author: "Content Agency",
+    handle: "$30K MRR",
+    accent: '#5481E8',
+  },
+  {
+    quote: "This totally changes how we work. With drafts ready instantly, our creative directors take projects deeper and iterate faster. Our editors just make finishing touches. Now we can scale without hiring more editors.",
+    author: "Feed Studios LA",
+    handle: "Content Agency",
+    accent: '#DC1DD9',
+  },
+  {
+    quote: "This just turned an 8 hour edit process into 2. I went from opening my computer to posting on YouTube in 2 hours. It was magical.",
+    author: "Matt Ragland",
+    handle: "YouTuber",
+    accent: '#F9838E',
+  },
+  {
+    quote: "This will totally change how people create content.",
+    author: "Zach Neman",
+    handle: "@cheffinwithzach",
+    accent: '#D4A853',
+  },
+  {
     quote: "Clik has completely changed not only how I edit but how I film. What used to take over two hours now takes 20 minutes, and I enjoy the entire process around cooking content much more now.",
     author: "Randy Stoever",
     handle: "@hotoffthestoever",
-    instagram: "https://www.instagram.com/hotoffthestoever/",
-    avatar: "/images/avatars/randy-stoever.jpg",
     accent: '#F9838E',
   },
   {
     quote: "I've tried so many AI content tools; Clik is my favorite by far.",
     author: "Gigi Robinson",
     handle: "@itsgigirobinson",
-    instagram: "https://www.instagram.com/itsgigirobinson/",
-    avatar: "/images/avatars/gigi-robinson.jpg",
     accent: '#DC1DD9',
   },
-  {
-    quote: "I've tried a lot of AI tools, but none of them understand the visuals of cooking like Clik. I came into this with low expectations, and it honestly blew my mind.",
-    author: "Cody Harman",
-    handle: "@mrcoachcody",
-    instagram: "https://www.instagram.com/mrcoachcody/",
-    avatar: "/images/avatars/cody-harman.jpg",
-    accent: '#5481E8',
-  },
 ];
+
+// Split testimonials into two rows for the marquee
+// With 4 items, put 2 in each row. When more are added, split evenly.
+const mid = Math.ceil(testimonials.length / 2);
+const row1 = testimonials.slice(0, mid);
+const row2 = testimonials.slice(mid);
 ---
 
-<section class="border-y border-white/5 bg-zinc-900/30 px-6 py-24">
-  <div class="mx-auto max-w-6xl">
+<section class="py-24 overflow-hidden">
+  <div class="mx-auto max-w-6xl px-6">
     <div class="mb-16 text-center">
       <h2 class="text-4xl font-bold text-white md:text-5xl">
-        Creators are posting<br class="hidden md:block" />
-        more than ever.
+        Teams and creators are<br class="hidden md:block" />
+        shipping faster than ever.
       </h2>
     </div>
+  </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
-      {testimonials.map((t) => (
-        <div class="group flex flex-col rounded-2xl border border-white/8 bg-zinc-900 p-6 transition-colors hover:border-white/12">
-          <p class="flex-1 text-base leading-relaxed text-zinc-300">"{t.quote}"</p>
-          <div class="mt-6 flex items-center gap-3">
-            {/* Avatar — shows placeholder initials if image not found */}
-            <div
-              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full overflow-hidden"
-              style={`background: ${t.accent}20; border: 1px solid ${t.accent}30;`}
-            >
-              <img
-                src={t.avatar}
-                alt={t.author}
-                class="h-full w-full object-cover"
-                onerror={`this.style.display='none'; this.nextElementSibling.style.display='flex';`}
-              />
-              <span
-                class="hidden items-center justify-center text-xs font-semibold"
-                style={`color: ${t.accent}; display: none;`}
-              >
-                {t.author.split(' ').map(n => n[0]).join('')}
-              </span>
-            </div>
-            <div>
-              <p class="font-semibold text-white">{t.author}</p>
-              <a
-                href={t.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
-              >
-                {t.handle}
-              </a>
-            </div>
+  {/* Desktop: two-row marquee */}
+  <div class="hidden md:block space-y-4">
+    {/* Row 1 — scrolls left */}
+    <div class="marquee-row group" style="--marquee-direction: normal;">
+      <div class="marquee-track">
+        {[...row1, ...row1, ...row1, ...row1].map((t, i) => (
+          <div
+            class="marquee-card flex-shrink-0 w-[380px] rounded-xl bg-white/[0.03] p-5"
+          >
+            <p class="text-[15px] leading-relaxed text-zinc-300 mb-3">"{t.quote}"</p>
+            <p class="text-sm">
+              <span class="font-medium text-white">{t.author}</span>
+              <span class="text-zinc-500"> · {t.handle}</span>
+            </p>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+    </div>
+
+    {/* Row 2 — scrolls right */}
+    <div class="marquee-row group" style="--marquee-direction: reverse;">
+      <div class="marquee-track">
+        {[...row2, ...row2, ...row2, ...row2].map((t, i) => (
+          <div
+            class="marquee-card flex-shrink-0 w-[380px] rounded-xl bg-white/[0.03] p-5"
+          >
+            <p class="text-[15px] leading-relaxed text-zinc-300 mb-3">"{t.quote}"</p>
+            <p class="text-sm">
+              <span class="font-medium text-white">{t.author}</span>
+              <span class="text-zinc-500"> · {t.handle}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Mobile: single row, swipe-scrollable with auto-scroll */}
+  <div class="md:hidden">
+    <div class="marquee-row group" style="--marquee-direction: normal;">
+      <div class="marquee-track">
+        {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
+          <div
+            class="marquee-card flex-shrink-0 w-[300px] rounded-xl bg-white/[0.03] p-5"
+          >
+            <p class="text-[15px] leading-relaxed text-zinc-300 mb-3">"{t.quote}"</p>
+            <p class="text-sm">
+              <span class="font-medium text-white">{t.author}</span>
+              <span class="text-zinc-500"> · {t.handle}</span>
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .marquee-row {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee-scroll 50s linear infinite;
+    animation-direction: var(--marquee-direction, normal);
+  }
+
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

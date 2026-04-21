@@ -339,7 +339,7 @@ export default function FeatureEdit() {
             className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
             style={{ color: '#5481E8' }}
           >
-            Edit
+            Edit Agent
           </p>
           <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-5"

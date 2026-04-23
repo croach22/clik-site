@@ -5,6 +5,7 @@ const PANELS = [
     faded: 'not edit.',
     body: 'You have the footage and you can describe the story you want to tell. Now you get to do that, without scrubbing timelines all day.',
     accent: '#DC1DD9',
+    link: null as { href: string; text: string } | null,
   },
   {
     label: 'Video Pros',
@@ -12,6 +13,7 @@ const PANELS = [
     faded: 'not headcount.',
     body: 'Feed the agent a shoot day and a brief. It returns long-form rough cuts and curated shorts. Your editors finish the work, they don\u2019t start from scratch.',
     accent: '#5481E8',
+    link: { href: '/use-cases/agencies', text: 'See how agencies run Clik' },
   },
 ];
 
@@ -72,6 +74,17 @@ export default function ManifestoScroll() {
               >
                 {panel.body}
               </p>
+
+              {panel.link && (
+                <a
+                  href={panel.link.href}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-80"
+                  style={{ color: panel.accent }}
+                >
+                  {panel.link.text}
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
             </div>
           ))}
         </div>

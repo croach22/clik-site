@@ -87,4 +87,4 @@ export async function getDocContent(pageId: string, slug: string = 'doc'): Promi
 }
 
 // Groups in display order
-export const GROUP_ORDER = ['Getting Started', 'Editing', 'Captioning and Exports'];
+export const GROUP_ORDER = ['Getting Started', 'Editing', 'Workflows', 'Captioning and Exports'];

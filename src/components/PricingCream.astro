@@ -1,0 +1,174 @@
+---
+// Cream-surface Pricing — kit pattern: 4 cards w/ KV metadata, middle Creator featured Royce.
+type Tier = {
+  idx: string;
+  name: string;
+  price: string;
+  period: string;
+  featured: boolean;
+  kv: [string, string][];
+  cta: string;
+  ctaHref: string;
+  exportsTo?: ('adobe' | 'davinci' | 'finalcut')[];
+};
+
+const tiers: Tier[] = [
+  {
+    idx: '01',
+    name: 'Free',
+    price: '$0',
+    period: '/mo',
+    featured: false,
+    kv: [
+      ['FOOTAGE',  '1H / MO'],
+      ['EXPORT',   '720P'],
+      ['PROJECTS', '3'],
+      ['VIBES',    'SCRAPPY'],
+    ],
+    cta: 'Start for free',
+    ctaHref: 'https://app.clik.vision/sign-up',
+  },
+  {
+    idx: '02',
+    name: 'Creator',
+    price: '$29',
+    period: '/mo',
+    featured: true,
+    kv: [
+      ['FOOTAGE',  '3H / MO'],
+      ['EXPORT',   '1080P'],
+      ['PROJECTS', '10'],
+      ['VIBES',    'SHIPPING'],
+    ],
+    cta: 'Get started',
+    ctaHref: 'https://app.clik.vision/sign-up',
+  },
+  {
+    idx: '03',
+    name: 'Pro',
+    price: '$59',
+    period: '/mo',
+    featured: false,
+    kv: [
+      ['FOOTAGE',  '6H / MO'],
+      ['EXPORT',   'XML · 4K SOON'],
+      ['PROJECTS', '20'],
+      ['VIBES',    'DIRECTOR'],
+    ],
+    cta: 'Get started',
+    ctaHref: 'https://app.clik.vision/sign-up',
+    exportsTo: ['adobe', 'davinci', 'finalcut'],
+  },
+  {
+    idx: '04',
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    featured: false,
+    kv: [
+      ['FOOTAGE',  'UNLIMITED'],
+      ['EXPORT',   'XML · 4K SOON'],
+      ['PROJECTS', 'CUSTOM'],
+      ['VIBES',    'CREATIVE TEAM'],
+    ],
+    cta: 'Talk to sales',
+    ctaHref: 'https://calendly.com/clikphotos/clik-agency-demo',
+    exportsTo: ['adobe', 'davinci', 'finalcut'],
+  },
+];
+
+// App-tile icons — small rounded-square abbreviations in midnight, palette-consistent.
+const ICONS: Record<NonNullable<Tier['exportsTo']>[number], { label: string; abbr: string }> = {
+  adobe:    { label: 'Adobe Premiere Pro', abbr: 'Pr'  },
+  davinci:  { label: 'DaVinci Resolve',    abbr: 'DR'  },
+  finalcut: { label: 'Final Cut Pro',      abbr: 'FCP' },
+};
+---
+
+<section id="pricing" class="px-6 md:px-12 py-24 md:py-32">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 04 ]</span>
+      <span class="rule"></span>
+      <span class="label">PRICING</span>
+    </div>
+
+    <h2 class="font-display font-medium text-clik-midnight mb-12" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch;">
+      Pick a tier. Ship the cut<span class="clik-period">.</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pricing-grid">
+      {tiers.map((t) => (
+        <div class={`clik-card ${t.featured ? 'is-featured' : ''} flex flex-col gap-4 relative`} style="padding: 28px 24px;">
+          {t.featured && (
+            <span
+              class="clik-chip clik-chip-fill-royce absolute -top-3 left-6"
+              style="font-size: 9px;"
+            >POPULAR</span>
+          )}
+
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">
+            PLAN · {t.idx}
+          </div>
+          <div class="font-display font-medium text-clik-midnight" style="font-size: 30px; line-height: 1.1; letter-spacing: -0.02em;">
+            {t.name}
+          </div>
+          <div>
+            <span class="font-ui font-black text-clik-midnight" style="font-size: 34px;">{t.price}</span>
+            {t.period && <span class="font-ui text-clik-midnight/55" style="font-size: 14px;">{` ${t.period}`}</span>}
+          </div>
+
+          <div class="clik-kv">
+            {t.kv.map(([k, v]) => (
+              <div class={`row ${k === 'VIBES' ? 'vibes' : ''}`}>
+                <span>{k}</span><span class="v">{v}</span>
+              </div>
+            ))}
+          </div>
+
+          {t.exportsTo && (
+            <div class="flex items-center gap-3 mt-1">
+              <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-clik-midnight/55">
+                WORKS WITH
+              </span>
+              <div class="flex items-center gap-1.5">
+                {t.exportsTo.map((key) => (
+                  <span class="works-tile" title={ICONS[key].label} aria-label={ICONS[key].label}>
+                    {ICONS[key].abbr}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <a
+            href={t.ctaHref}
+            class={`clik-btn ${t.featured ? 'clik-btn-primary' : 'clik-btn-secondary'} mt-2 w-full justify-center`}
+          >
+            {t.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .works-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    min-width: 22px;
+    padding: 0 5px;
+    border: 1px solid var(--clik-mid-25);
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--clik-midnight);
+    background: var(--clik-cream);
+    line-height: 1;
+  }
+</style>

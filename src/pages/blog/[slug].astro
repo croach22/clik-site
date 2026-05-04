@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTASection from '../../components/CTASection.astro';
+import CTACream from '../../components/CTACream.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -18,32 +18,32 @@ function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 ---
-<BaseLayout title={`${entry.data.title} — Clik`} description={entry.data.description}>
+<BaseLayout title={`${entry.data.title} — Clik`} description={entry.data.description} theme="cream">
 
-  <article class="mx-auto max-w-3xl px-6 pt-28 pb-16">
+  <article class="mx-auto max-w-3xl px-6 pt-32 pb-16">
 
     <!-- Tags -->
     <div class="flex flex-wrap gap-2 mb-5">
       {entry.data.tags.map((tag) => (
-        <span class="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] text-zinc-400 border border-white/[0.08]">
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-pill border border-clik-midnight/15 text-clik-midnight/55">
           {tag}
         </span>
       ))}
     </div>
 
     <!-- Title -->
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-cream leading-tight mb-4">
+    <h1 class="font-display font-medium text-clik-midnight leading-tight mb-4" style="font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.02em;">
       {entry.data.title}
     </h1>
 
     <!-- Description + date -->
-    <p class="text-lg text-zinc-300 leading-relaxed mb-3">{entry.data.description}</p>
-    <time class="text-sm text-zinc-500 block mb-10" datetime={entry.data.date.toISOString()}>
+    <p class="font-ui text-lg text-clik-midnight/70 leading-relaxed mb-3">{entry.data.description}</p>
+    <time class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/45 block mb-10" datetime={entry.data.date.toISOString()}>
       {formatDate(entry.data.date)}
     </time>
 
     <!-- Cover image -->
-    <div class="rounded-xl overflow-hidden mb-12 aspect-video bg-zinc-900">
+    <div class="rounded-xl overflow-hidden mb-12 aspect-video bg-clik-bone">
       <img
         src={entry.data.coverImage}
         alt={entry.data.title}
@@ -53,51 +53,67 @@ function formatDate(date: Date) {
     </div>
 
     <!-- Body -->
-    <div class="prose prose-invert prose-brand max-w-none">
+    <div class="prose prose-cream max-w-none">
       <Content />
     </div>
 
     <!-- Back link -->
-    <div class="mt-16 pt-8 border-t border-white/[0.08]">
-      <a href="/blog" class="text-sm text-brand-magenta hover:text-brand-coral transition-colors">
-        ← Back to Blog
+    <div class="mt-16 pt-8 border-t border-clik-midnight/12">
+      <a href="/blog" class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce hover:opacity-80 transition-opacity">
+        ← BACK TO BLOG
       </a>
     </div>
 
   </article>
 
-  <CTASection />
+  <CTACream />
 
 </BaseLayout>
 
 <style is:global>
-  /* Brand-tuned prose overrides */
-  .prose-brand {
-    --tw-prose-body: #c4bfcc;
-    --tw-prose-headings: #F9F7F1;
-    --tw-prose-lead: #a09aac;
-    --tw-prose-links: #DC1DD9;
-    --tw-prose-bold: #F9F7F1;
-    --tw-prose-counters: #6b7280;
-    --tw-prose-bullets: #4b5563;
-    --tw-prose-hr: rgba(255,255,255,0.08);
-    --tw-prose-quotes: #F9F7F1;
-    --tw-prose-quote-borders: #DC1DD9;
-    --tw-prose-captions: #6b7280;
-    --tw-prose-code: #F9838E;
-    --tw-prose-pre-code: #F9F7F1;
-    --tw-prose-pre-bg: rgba(255,255,255,0.04);
-    --tw-prose-th-borders: rgba(255,255,255,0.1);
-    --tw-prose-td-borders: rgba(255,255,255,0.06);
+  /* Cream-theme prose */
+  .prose-cream {
+    --tw-prose-body:           rgba(14, 24, 52, 0.8);
+    --tw-prose-headings:       #0E1834;
+    --tw-prose-lead:           rgba(14, 24, 52, 0.7);
+    --tw-prose-links:          #5481E8;
+    --tw-prose-bold:           #0E1834;
+    --tw-prose-counters:       rgba(14, 24, 52, 0.5);
+    --tw-prose-bullets:        rgba(14, 24, 52, 0.35);
+    --tw-prose-hr:             rgba(14, 24, 52, 0.10);
+    --tw-prose-quotes:         #0E1834;
+    --tw-prose-quote-borders:  #5481E8;
+    --tw-prose-captions:       rgba(14, 24, 52, 0.45);
+    --tw-prose-code:           #F9838E;
+    --tw-prose-pre-code:       #F9F7F1;
+    --tw-prose-pre-bg:         #0E1834;
+    --tw-prose-th-borders:     rgba(14, 24, 52, 0.12);
+    --tw-prose-td-borders:     rgba(14, 24, 52, 0.08);
   }
-  .prose-brand h2 { margin-top: 2.5rem; }
-  .prose-brand h3 { margin-top: 2rem; }
-  .prose-brand a { text-decoration: none; border-bottom: 1px solid rgba(220,29,217,0.4); transition: border-color 0.2s; }
-  .prose-brand a:hover { border-color: #DC1DD9; }
-  .prose-brand table { font-size: 0.875rem; }
-  .prose-brand th { background: rgba(255,255,255,0.04); }
-  .prose-brand img { border-radius: 0.75rem; }
-  .prose-brand .placeholder-img { opacity: 0.6; }
-  /* Blockquote accent */
-  .prose-brand blockquote { border-left-color: #DC1DD9; background: rgba(220,29,217,0.05); padding: 1rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; }
+  .prose-cream {
+    font-family: var(--font-ui);
+  }
+  .prose-cream h1, .prose-cream h2, .prose-cream h3, .prose-cream h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .prose-cream h2 { margin-top: 2.5rem; }
+  .prose-cream h3 { margin-top: 2rem; }
+  .prose-cream a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(84, 129, 232, 0.4);
+    transition: border-color 0.2s;
+  }
+  .prose-cream a:hover { border-color: #5481E8; }
+  .prose-cream table { font-size: 0.875rem; }
+  .prose-cream th { background: rgba(14, 24, 52, 0.04); }
+  .prose-cream img { border-radius: 0.75rem; }
+  .prose-cream .placeholder-img { opacity: 0.5; }
+  .prose-cream blockquote {
+    border-left-color: #5481E8;
+    background: rgba(84, 129, 232, 0.05);
+    padding: 1rem 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
 </style>

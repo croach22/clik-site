@@ -1,0 +1,90 @@
+---
+// Use cases — single row of 5 portrait cards, smaller than original 9/14 aspect.
+// Drops emoji per spec; videos play looped, label always visible (mobile-friendly).
+const CARDS = [
+  { slug: 'cooking',      label: 'Cooking',      description: 'Detects ingredients, steps, plating — your recipe becomes a draft instantly.' },
+  { slug: 'grwm',         label: 'GRWM',         description: 'Products, outfits, and look transitions — paced to match your routine.' },
+  { slug: 'vlogs',        label: 'Vlogs',        description: 'A timeline full of moments that tell the story of your day.' },
+  { slug: 'talking-head', label: 'Talking Head', description: 'Dead space and bad takes, cut instantly — script or yap.' },
+  { slug: 'diy',          label: 'DIY',          description: 'Goodbye dead space. Hello timeline full of real actions.' },
+];
+---
+
+<section id="formats" class="px-6 md:px-12 py-24 md:py-32">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 06 ]</span>
+      <span class="rule"></span>
+      <span class="label">FORMATS</span>
+    </div>
+
+    <h2 class="font-display font-medium text-clik-midnight mb-12" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch;">
+      Every format has a structure.<br/>We learned yours<span class="clik-period">.</span>
+    </h2>
+
+    <!-- Single row, 5 cards, smaller and shorter than original -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      {CARDS.map((card, i) => (
+        <div class="flex flex-col gap-3">
+          <div class="use-card">
+            <video
+              class="use-video"
+              src={`/videos/use-cases/${card.slug}.mp4`}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              poster=""
+            ></video>
+            <div class="use-overlay"></div>
+            <div class="use-scene font-mono text-[9px] uppercase tracking-[0.14em] text-clik-cream/70">
+              SCENE · {String(i + 1).padStart(2, '0')}
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display font-medium text-clik-midnight mb-1" style="font-size: 18px; line-height: 1.2; letter-spacing: -0.01em;">
+              {card.label}
+            </h3>
+            <p class="font-ui text-clik-midnight/55" style="font-size: 13px; line-height: 1.45;">
+              {card.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .use-card {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--clik-mid-12);
+    background: #14161e;
+    transition: border-color var(--dur-base) var(--ease-soft);
+  }
+  .use-card:hover { border-color: var(--clik-royce); }
+  .use-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .use-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,24,52,0.55) 0%, rgba(14,24,52,0) 45%);
+    pointer-events: none;
+  }
+  .use-scene {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    z-index: 2;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+// Cream-surface hero — viewfinder L-brackets frame the headline + CTAs only.
+// Screenshot below is unframed; bottom gradient fades it into the cream bg.
+---
+
+<section class="relative pt-32 md:pt-36">
+  <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-24">
+
+    <!-- REC chip pinned to top-right of the page-level container, outside the frame -->
+    <div class="absolute top-0 right-6 md:right-12 hidden sm:block">
+      <span class="clik-chip clik-chip-rec">
+        <span class="dot"></span>REC · 00:02:14:09
+      </span>
+    </div>
+
+    <!-- Headline frame: viewfinder L-brackets span the full container width,
+         vertically wrap from above the eyebrow to below the CTAs -->
+    <div class="relative w-full py-8">
+      <span class="vf vf-tl"></span>
+      <span class="vf vf-tr"></span>
+      <span class="vf vf-bl"></span>
+      <span class="vf vf-br"></span>
+
+      <!-- Eyebrow / launch pill -->
+      <a
+        href="#feature-workflow-agent"
+        class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce no-underline"
+      >
+        <span class="rounded-pill border border-clik-royce/30 bg-clik-royce/8 px-2 py-[3px] text-[9px] font-bold text-clik-royce">NEW</span>
+        Batch Workflow Agent
+        <span aria-hidden="true">→</span>
+      </a>
+
+      <!-- Headline -->
+      <h1
+        class="mt-6 font-display font-medium tracking-display text-clik-midnight"
+        style="font-size: clamp(44px, 8vw, 72px); line-height: 1; letter-spacing: -0.02em; max-width: 16ch;"
+      >
+        From raw footage<br/>
+        to viral shorts in minutes<span class="clik-period">.</span>
+      </h1>
+
+      <!-- Body -->
+      <p class="mt-6 max-w-[520px] font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.55;">
+        Talk to your footage. <em>"Tighten the intro." "Swap the hook." "Cut the dead space at 0:15."</em>
+        Clik does the work. You stay creative.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-primary">
+          Start for free <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Product screenshot — no chrome, no L-brackets, just bottom fade -->
+    <div class="mt-16 md:mt-24 relative">
+      <div class="hero-shot relative">
+        <img
+          src="/images/product-screenshot.png"
+          alt="Clik video editor showing media search, timeline, and AI assistant"
+          class="block w-full rounded-[8px]"
+        />
+        <!-- Cream gradient fade at the bottom — dissolves screenshot into page bg -->
+        <div class="hero-shot-fade pointer-events-none absolute inset-x-0 bottom-0"></div>
+      </div>
+    </div>
+
+    <!-- Bottom-right: lens metadata -->
+    <div class="mt-6 flex justify-end">
+      <span class="clik-lens">f/1.8 · ISO 400 · 24FPS</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Viewfinder L-brackets — frame the headline + CTAs region */
+  .vf {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--clik-midnight);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .vf-tl { top: 0; left: 0;       border-top: 1.5px solid; border-left: 1.5px solid; }
+  .vf-tr { top: 0; right: 0;      border-top: 1.5px solid; border-right: 1.5px solid; }
+  .vf-bl { bottom: 0; left: 0;    border-bottom: 1.5px solid; border-left: 1.5px solid; }
+  .vf-br { bottom: 0; right: 0;   border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+  .hero-shot { position: relative; }
+  .hero-shot-fade {
+    height: 35%;
+    background: linear-gradient(to top, var(--clik-cream) 0%, rgba(249, 247, 241, 0.9) 30%, rgba(249, 247, 241, 0) 100%);
+  }
+</style>

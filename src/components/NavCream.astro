@@ -1,0 +1,167 @@
+---
+// Cream nav — same architecture as legacy Nav (How it works dropdown, Use Cases, Pricing,
+// Learn, Founding Creators, Book a Demo, Start for Free) — just light-surface + brand restyled.
+const navLinks = [
+  { label: 'Use Cases', href: '/#use-cases' },
+  { label: 'Pricing',   href: '/#pricing'   },
+  { label: 'Learn',     href: '/docs'       },
+];
+
+const agents = [
+  { label: 'Edit Agent',       href: '/#feature-edit',           isNew: false },
+  { label: 'Workflow Agent',   href: '/#feature-workflow-agent', isNew: true  },
+  { label: 'Brainstorm Agent', href: '/#feature-plan',           isNew: false },
+];
+---
+
+<nav class="fixed left-0 right-0 top-0 z-50 border-b border-clik-midnight/10 bg-clik-cream/90 backdrop-blur-md">
+  <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 md:px-12">
+
+    <a href="/" class="flex items-center">
+      <img src="/logo-black.svg" alt="Clik" class="h-7 w-auto" />
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden items-center gap-8 md:flex">
+
+      <!-- How it works dropdown -->
+      <div class="group relative">
+        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight">
+          How it works
+          <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
+            <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+          <div class="min-w-[200px] rounded-xl border border-clik-midnight/10 bg-clik-cream p-1.5 shadow-sm">
+            {agents.map((agent) => (
+              <a
+                href={agent.href}
+                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-midnight/80 transition-colors hover:bg-clik-midnight/5 hover:text-clik-midnight"
+              >
+                {agent.label}
+                {agent.isNew && (
+                  <span class="rounded-pill bg-clik-royce/15 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">
+                    New
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight"
+        >
+          {link.label}
+        </a>
+      ))}
+
+      <a
+        href="/founding-creators"
+        class="font-ui text-sm font-bold text-clik-salmon transition-opacity hover:opacity-80"
+      >
+        Founding Creators
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a
+        href="https://calendly.com/clikphotos/clik-agency-demo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight md:inline-block"
+      >
+        Book a Demo
+      </a>
+      <a
+        href="https://app.clik.vision/sign-up"
+        class="clik-btn clik-btn-primary hidden md:inline-flex"
+      >
+        Start for free <span aria-hidden="true">→</span>
+      </a>
+      <button
+        id="mobile-menu-btn"
+        class="flex h-10 w-10 items-center justify-center rounded-lg md:hidden"
+        aria-label="Open menu"
+      >
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+          <path d="M0 1h20M0 7h20M0 13h20" stroke="#0E1834" stroke-width="1.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay (cream) -->
+<div id="mobile-menu" class="fixed inset-0 z-[55] hidden flex-col bg-clik-cream/98 backdrop-blur-lg">
+  <div class="flex items-center justify-between px-6 py-5">
+    <a href="/" class="flex items-center">
+      <img src="/logo-black.svg" alt="Clik" class="h-7 w-auto" />
+    </a>
+    <button id="mobile-menu-close" class="flex h-10 w-10 items-center justify-center" aria-label="Close menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M1 1l14 14M15 1L1 15" stroke="#0E1834" stroke-width="1.5" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="flex flex-1 flex-col items-center justify-center gap-8">
+    <div class="flex flex-col items-center gap-3">
+      <span class="font-display text-2xl font-medium text-clik-midnight/80">How it works</span>
+      {agents.map((agent) => (
+        <a
+          href={agent.href}
+          class="mobile-menu-link font-ui text-base text-clik-midnight/55 transition-colors hover:text-clik-midnight"
+        >
+          {agent.label}
+        </a>
+      ))}
+    </div>
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-menu-link font-display text-2xl font-medium text-clik-midnight/80 transition-colors hover:text-clik-midnight"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="/founding-creators"
+      class="mobile-menu-link font-display text-2xl font-medium text-clik-salmon transition-opacity hover:opacity-80"
+    >
+      Founding Creators
+    </a>
+    <a
+      href="https://app.clik.vision/sign-up"
+      class="mobile-menu-link clik-btn clik-btn-primary mt-4"
+    >
+      Start for free <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('mobile-menu-close');
+  const links = menu?.querySelectorAll('.mobile-menu-link');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    menu?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    menu?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  btn?.addEventListener('click', openMenu);
+  close?.addEventListener('click', closeMenu);
+  links?.forEach((link) => link.addEventListener('click', closeMenu));
+</script>

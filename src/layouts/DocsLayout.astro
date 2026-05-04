@@ -21,11 +21,12 @@ const grouped = GROUP_ORDER.map(group => ({
 <BaseLayout
   title={currentSlug ? `${title} — Clik Docs` : title}
   description={description ?? `Clik documentation: ${title}`}
+  theme="cream"
 >
   <div class="flex min-h-screen pt-16">
 
     {/* ── Sidebar ── */}
-    <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r border-white/5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+    <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r border-clik-midnight/10 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="px-6 py-7 flex-1">
 
         {/* Search trigger */}
@@ -34,16 +35,16 @@ const grouped = GROUP_ORDER.map(group => ({
         {/* Nav groups */}
         {grouped.map(({ group, docs }) => (
           <div class="mb-7">
-            <p class="mb-2.5 text-sm font-bold text-white">{group}</p>
+            <p class="mb-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">{group}</p>
             <ul>
               {docs.map(doc => (
                 <li>
                   <a
                     href={`/docs/${doc.slug}`}
-                    class={`block border-l-2 py-1.5 pl-3.5 text-sm transition-colors ${
+                    class={`block border-l-2 py-1.5 pl-3.5 font-ui text-sm transition-colors ${
                       doc.slug === currentSlug
-                        ? 'border-[#5481E8] text-white font-medium'
-                        : 'border-transparent text-zinc-500 hover:text-zinc-200 hover:border-[#5481E8]/30'
+                        ? 'border-clik-royce text-clik-midnight font-bold'
+                        : 'border-transparent text-clik-midnight/55 hover:text-clik-midnight hover:border-clik-royce/40'
                     }`}
                   >
                     {doc.title}
@@ -64,14 +65,3 @@ const grouped = GROUP_ORDER.map(group => ({
 
   </div>
 </BaseLayout>
-
-<style is:global>
-  /* Docs-only: blue gradient glow bleeds through the semi-transparent nav */
-  body {
-    background-image: radial-gradient(
-      ellipse at 85% -5%,
-      rgba(84, 129, 232, 0.18) 0%,
-      transparent 55%
-    );
-  }
-</style>

@@ -70,8 +70,8 @@ export default function FoundingCreatorForm() {
   };
 
   const inputClass =
-    'w-full rounded-xl border border-brand-gold/20 bg-brand-gold/[0.04] px-4 py-3.5 text-base text-brand-cream placeholder-brand-cream/30 outline-none transition-colors focus:border-brand-gold/40';
-  const labelClass = 'block text-sm font-medium text-brand-cream/70 mb-1.5';
+    'w-full rounded-xl border border-clik-midnight/15 bg-clik-cream px-4 py-3.5 text-base text-clik-midnight placeholder:text-clik-midnight/35 outline-none transition-colors focus:border-clik-royce/60';
+  const labelClass = 'block font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70 mb-2';
 
   return (
     <div className="mx-auto max-w-lg">
@@ -98,7 +98,7 @@ export default function FoundingCreatorForm() {
             <div>
               <label className={labelClass}>Instagram handle *</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-cream/30">@</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-clik-midnight/45">@</span>
                 <input
                   type="text"
                   value={form.instagram}
@@ -115,7 +115,7 @@ export default function FoundingCreatorForm() {
                 value={form.contentType}
                 onChange={(e) => update('contentType', e.target.value)}
                 className={`${inputClass} appearance-none`}
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F9F7F180' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230E183480' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
               >
                 <option value="" disabled>Select one</option>
                 {CONTENT_TYPES.map((type) => (
@@ -130,7 +130,7 @@ export default function FoundingCreatorForm() {
                 value={form.followers}
                 onChange={(e) => update('followers', e.target.value)}
                 className={`${inputClass} appearance-none`}
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F9F7F180' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230E183480' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
               >
                 <option value="" disabled>Select one</option>
                 <option value="1K–10K">1K – 10K</option>
@@ -147,13 +147,12 @@ export default function FoundingCreatorForm() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-xl py-3.5 text-base font-semibold text-zinc-950 transition-all hover:scale-[1.02] disabled:opacity-60"
-              style={{ backgroundColor: '#D4A853' }}
+              className="clik-btn clik-btn-primary w-full justify-center disabled:opacity-60"
             >
-              {submitting ? 'Submitting...' : 'Apply Now'}
+              {submitting ? 'Submitting…' : <>Apply now <span aria-hidden="true">→</span></>}
             </button>
 
-            <p className="text-center text-xs text-brand-cream/30">
+            <p className="text-center text-xs text-clik-midnight/45">
               Limited spots. We review every application personally.
             </p>
           </motion.form>
@@ -163,12 +162,12 @@ export default function FoundingCreatorForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="rounded-2xl border border-brand-gold/20 bg-brand-gold/[0.04] p-10 text-center"
+            className="rounded-2xl border border-clik-royce/25 bg-clik-royce/5 p-10 text-center"
           >
-            <p className="text-2xl font-bold text-brand-cream mb-2">
+            <p className="font-display font-medium text-clik-midnight mb-2" style={{ fontSize: '24px', letterSpacing: '-0.02em' }}>
               You're on the list.
             </p>
-            <p className="text-brand-cream/50">
+            <p className="text-clik-midnight/70">
               We'll review your application and reach out soon. Keep creating in the meantime.
             </p>
           </motion.div>

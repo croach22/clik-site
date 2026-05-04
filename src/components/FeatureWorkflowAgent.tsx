@@ -21,10 +21,10 @@ function BatchVisual() {
   ];
 
   const outputs = [
-    { label: 'Full Episode Rough Cut', duration: '12:34', accent: '#5481E8' },
-    { label: 'Short 1 \u2014 Script 1 Hook A', duration: '0:42', accent: '#F9838E' },
-    { label: 'Short 2 \u2014 Script 1 Hook B', duration: '0:38', accent: '#DC1DD9' },
-    { label: 'Short 3 \u2014 Script 2', duration: '0:58', accent: '#D4A853' },
+    { label: 'Full Episode Rough Cut',       duration: '12:34', accent: '#5481E8' }, // royce
+    { label: 'Short 1 \u2014 Script 1 Hook A', duration: '0:42',  accent: '#F9838E' }, // salmon
+    { label: 'Short 2 \u2014 Script 1 Hook B', duration: '0:38',  accent: '#9785B8' }, // lavender
+    { label: 'Short 3 \u2014 Script 2',        duration: '0:58',  accent: '#C5A578' }, // ochre
   ];
 
   return (
@@ -33,17 +33,17 @@ function BatchVisual() {
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: '#ffffff10', background: '#ffffff03' }}
+        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#E8E5DC' }}
       >
         {/* Window chrome */}
         <div
           className="flex items-center gap-1.5 px-4 py-3 border-b"
-          style={{ borderColor: '#ffffff08' }}
+          style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}
         >
-          <div className="w-2 h-2 rounded-full bg-zinc-700" />
-          <div className="w-2 h-2 rounded-full bg-zinc-700" />
-          <div className="w-2 h-2 rounded-full bg-zinc-700" />
-          <span className="ml-3 text-[10px] font-mono" style={{ color: '#ffffff20' }}>
+          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
             workflow agent
           </span>
         </div>
@@ -52,10 +52,10 @@ function BatchVisual() {
           {/* Input files */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#ffffff40' }}>
+              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
                 Input
               </span>
-              <div className="flex-1 h-px" style={{ background: '#ffffff08' }} />
+              <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
             </div>
             <div className="space-y-1.5">
               {inputFiles.map((f, i) => (
@@ -65,13 +65,13 @@ function BatchVisual() {
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
                   transition={{ delay: i * 0.1, duration: 0.3 }}
                   className="flex items-center gap-2.5 rounded-lg px-3 py-2"
-                  style={{ background: '#ffffff05', border: '1px solid #ffffff08' }}
+                  style={{ background: 'rgba(14, 24, 52, 0.04)', border: '1px solid rgba(14, 24, 52, 0.08)' }}
                 >
-                  <span className="text-xs" style={{ color: f.name.endsWith('.pdf') ? '#D4A853' : '#5481E8' }}>
+                  <span className="text-xs" style={{ color: f.name.endsWith('.pdf') ? '#5481E8' : '#5481E8' }}>
                     {f.name.endsWith('.pdf') ? '\u{1F4CB}' : '\u{1F3AC}'}
                   </span>
-                  <span className="text-xs flex-1" style={{ color: '#F9F7F1AA' }}>{f.name}</span>
-                  <span className="text-[10px]" style={{ color: '#ffffff30' }}>{f.size}</span>
+                  <span className="text-xs flex-1" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>{f.name}</span>
+                  <span className="text-[10px]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>{f.size}</span>
                 </motion.div>
               ))}
             </div>
@@ -95,7 +95,7 @@ function BatchVisual() {
                 />
               ))}
             </div>
-            <span className="text-[10px]" style={{ color: '#ffffff30' }}>
+            <span className="text-[10px]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>
               Processing batch footage against brief...
             </span>
           </motion.div>
@@ -103,10 +103,10 @@ function BatchVisual() {
           {/* Output drafts */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#ffffff40' }}>
+              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
                 Output
               </span>
-              <div className="flex-1 h-px" style={{ background: '#ffffff08' }} />
+              <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
             </div>
             <div className="space-y-1.5">
               {outputs.map((o, i) => (
@@ -119,7 +119,7 @@ function BatchVisual() {
                   style={{ background: `${o.accent}08`, border: `1px solid ${o.accent}18` }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: o.accent }} />
-                  <span className="text-xs flex-1" style={{ color: '#F9F7F1BB' }}>{o.label}</span>
+                  <span className="text-xs flex-1" style={{ color: 'rgba(14, 24, 52, 0.78)' }}>{o.label}</span>
                   <span className="text-[10px] font-mono" style={{ color: `${o.accent}80` }}>{o.duration}</span>
                 </motion.div>
               ))}
@@ -156,12 +156,12 @@ export default function FeatureWorkflowAgent() {
             </span>
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-5"
-            style={{ color: '#F9F7F1' }}
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
-            Shoot day in. Multiple drafts out.
+            Shoot day in. Multiple drafts out<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: '#ffffff70' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
             Feed the agent batch footage from a shoot day plus a brief from your creative director — topics, angles,
             direction for clips. It spits out a long-form rough cut and a curated set of shorts, all configured to the
             brief. Editors just make the finishing touches.
@@ -176,7 +176,7 @@ export default function FeatureWorkflowAgent() {
                 style={{
                   border: '1px solid #5481E820',
                   background: '#5481E808',
-                  color: '#F9F7F1AA',
+                  color: 'rgba(14, 24, 52, 0.7)',
                 }}
               >
                 <span style={{ color: ACCENT, fontSize: 10 }}>{cap.icon}</span>
@@ -186,7 +186,7 @@ export default function FeatureWorkflowAgent() {
           </div>
 
           {/* Comparison line */}
-          <p className="text-sm mb-4" style={{ color: '#ffffff50' }}>
+          <p className="text-sm mb-4" style={{ color: 'rgba(14, 24, 52, 0.55)' }}>
             Like Opus Clips, but with creative control.
           </p>
 
@@ -207,10 +207,7 @@ export default function FeatureWorkflowAgent() {
             href="https://calendly.com/clikphotos/clik-agency-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:scale-105"
-            style={{
-              background: `linear-gradient(135deg, ${ACCENT}, #DC1DD9)`,
-            }}
+            className="clik-btn clik-btn-primary"
           >
             Book a Demo
           </a>

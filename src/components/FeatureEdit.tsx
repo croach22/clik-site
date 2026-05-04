@@ -29,43 +29,46 @@ const SCRIPT: Step[] = [
 const LOOP_PAUSE = 3000;
 const FADE_OUT_DURATION = 800;
 
+// ── Muted accent palette for product viz (desaturated, cream-friendly) ──
+// Royce blue + salmon stay as primary brand. Sage / lavender / ochre add subtle
+// differentiation across clips and uploads without violating the page chrome rules.
+const ROYCE    = '#5481E8';
+const SALMON   = '#F9838E';
+const SAGE     = '#7CA088';
+const LAVENDER = '#9785B8';
+const OCHRE    = '#C5A578';
+
 // ── Timeline clips (initial order) ──
 const CLIPS = [
-  { id: 'vo', label: '"Let\'s make Bolognese"', color: '#DC1DD9', width: 90, isVoiceover: true },
-  { id: 'onion', label: 'Cutting onion', color: '#F9838E', width: 70 },
-  { id: 'carrots', label: 'Grating carrots', color: '#5481E8', width: 65 },
-  { id: 'celery', label: 'Cutting celery', color: '#5481E8', width: 60 },
-  { id: 'meat', label: 'Adding meat', color: '#D4A853', width: 70 },
-  { id: 'plating', label: 'Final Plating', color: '#D4A853', width: 75 },
+  { id: 'vo',      label: '"Let\'s make Bolognese"', color: LAVENDER, width: 90, isVoiceover: true },
+  { id: 'onion',   label: 'Cutting onion',           color: SALMON,   width: 70 },
+  { id: 'carrots', label: 'Grating carrots',         color: OCHRE,    width: 65 },
+  { id: 'celery',  label: 'Cutting celery',          color: SAGE,     width: 60 },
+  { id: 'meat',    label: 'Adding meat',             color: ROYCE,    width: 70 },
+  { id: 'plating', label: 'Final Plating',           color: SALMON,   width: 75 },
 ];
 
 // After rearrange: plating moves to front as the hook
 const CLIPS_REARRANGED = [
-  { id: 'plating', label: 'Final Plating', color: '#D4A853', width: 75, isHook: true },
-  { id: 'vo', label: '"Let\'s make Bolognese"', color: '#DC1DD9', width: 90, isVoiceover: true },
-  { id: 'onion', label: 'Cutting onion', color: '#F9838E', width: 70 },
-  { id: 'carrots', label: 'Grating carrots', color: '#5481E8', width: 65 },
-  { id: 'celery', label: 'Cutting celery', color: '#5481E8', width: 60 },
-  { id: 'meat', label: 'Adding meat', color: '#D4A853', width: 70 },
+  { id: 'plating', label: 'Final Plating',           color: SALMON,   width: 75, isHook: true },
+  { id: 'vo',      label: '"Let\'s make Bolognese"', color: LAVENDER, width: 90, isVoiceover: true },
+  { id: 'onion',   label: 'Cutting onion',           color: SALMON,   width: 70 },
+  { id: 'carrots', label: 'Grating carrots',         color: OCHRE,    width: 65 },
+  { id: 'celery',  label: 'Cutting celery',          color: SAGE,     width: 60 },
+  { id: 'meat',    label: 'Adding meat',             color: ROYCE,    width: 70 },
 ];
 
-// ── Fake upload thumbnails (iPhone naming) ──
-const UPLOADS = [
-  { id: 1, name: 'IMG_7947.MOV', color: '#F9838E15', accent: '#F9838E' },
-  { id: 2, name: 'IMG_7948.MOV', color: '#DC1DD915', accent: '#DC1DD9' },
-  { id: 3, name: 'IMG_7949.MOV', color: '#5481E815', accent: '#5481E8' },
-  { id: 4, name: 'IMG_7950.MOV', color: '#5481E815', accent: '#5481E8' },
-  { id: 5, name: 'IMG_7951.MOV', color: '#D4A85315', accent: '#D4A853' },
-  { id: 6, name: 'IMG_7952.MOV', color: '#F9838E15', accent: '#F9838E' },
-  { id: 7, name: 'IMG_7953.MOV', color: '#DC1DD915', accent: '#DC1DD9' },
-  { id: 8, name: 'IMG_7954.MOV', color: '#5481E815', accent: '#5481E8' },
-  { id: 9, name: 'IMG_7955.MOV', color: '#D4A85315', accent: '#D4A853' },
-  { id: 10, name: 'IMG_7956.MOV', color: '#F9838E15', accent: '#F9838E' },
-  { id: 11, name: 'IMG_7957.MOV', color: '#DC1DD915', accent: '#DC1DD9' },
-  { id: 12, name: 'IMG_7958.MOV', color: '#5481E815', accent: '#5481E8' },
-  { id: 13, name: 'IMG_7959.MOV', color: '#D4A85315', accent: '#D4A853' },
-  { id: 14, name: 'IMG_7960.MOV', color: '#F9838E15', accent: '#F9838E' },
-];
+// ── Fake upload thumbnails — rotate through 5 muted accents ──
+const UPLOAD_ACCENTS = [SALMON, SAGE, ROYCE, LAVENDER, OCHRE];
+const UPLOADS = Array.from({ length: 14 }, (_, i) => {
+  const accent = UPLOAD_ACCENTS[i % UPLOAD_ACCENTS.length];
+  return {
+    id: i + 1,
+    name: `IMG_${7947 + i}.MOV`,
+    color: `${accent}15`,
+    accent,
+  };
+});
 
 // ── Capability pills ──
 const CAPABILITIES = [
@@ -82,7 +85,7 @@ function TypingDots() {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="w-1.5 h-1.5 rounded-full bg-zinc-500 block"
+          className="w-1.5 h-1.5 rounded-full bg-clik-midnight/40 block"
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
         />
@@ -101,9 +104,9 @@ function UploadArea({ visible }: { visible: boolean }) {
     >
       <div
         className="rounded-lg border border-dashed px-4 py-3 text-center"
-        style={{ borderColor: '#ffffff15', background: '#ffffff04' }}
+        style={{ borderColor: 'rgba(14, 24, 52, 0.15)', background: 'rgba(14, 24, 52, 0.04)' }}
       >
-        <p className="text-xs mb-2" style={{ color: '#ffffff40' }}>Drop your footage</p>
+        <p className="text-xs mb-2" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>Drop your footage</p>
         <div className="flex gap-1 justify-center flex-wrap">
           {UPLOADS.map((u, i) => (
             <motion.div
@@ -140,20 +143,20 @@ function OptionsSelector({ visible }: { visible: boolean }) {
     >
       {/* Story driver toggle */}
       <div className="flex-1 space-y-1.5">
-        <span className="text-[10px] font-mono" style={{ color: '#ffffff30' }}>Story driver</span>
+        <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>Story driver</span>
         <div className="flex gap-1">
           <motion.div
-            initial={{ borderColor: '#ffffff10' }}
+            initial={{ borderColor: 'rgba(14, 24, 52, 0.10)' }}
             animate={{ borderColor: '#5481E860', background: '#5481E815' }}
             transition={{ delay: 0.3, duration: 0.3 }}
             className="flex-1 rounded-lg border px-2.5 py-2 text-xs text-center"
-            style={{ background: '#ffffff06' }}
+            style={{ background: 'rgba(14, 24, 52, 0.05)' }}
           >
             <span style={{ color: '#5481E8' }}>Visual</span>
           </motion.div>
           <div
             className="flex-1 rounded-lg border px-2.5 py-2 text-xs text-center"
-            style={{ borderColor: '#ffffff10', background: '#ffffff04', color: '#ffffff30' }}
+            style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: 'rgba(14, 24, 52, 0.04)', color: 'rgba(14, 24, 52, 0.45)' }}
           >
             Dialogue
           </div>
@@ -161,16 +164,16 @@ function OptionsSelector({ visible }: { visible: boolean }) {
       </div>
       {/* Hook selector */}
       <div className="flex-1 space-y-1.5">
-        <span className="text-[10px] font-mono" style={{ color: '#ffffff30' }}>Hook</span>
+        <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>Hook</span>
         <motion.div
-          initial={{ borderColor: '#ffffff10' }}
-          animate={{ borderColor: '#D4A85360' }}
+          initial={{ borderColor: 'rgba(14, 24, 52, 0.10)' }}
+          animate={{ borderColor: '#F9838E60' }}
           transition={{ delay: 0.5, duration: 0.3 }}
           className="rounded-lg border px-3 py-2 text-xs flex items-center justify-between"
-          style={{ background: '#ffffff06' }}
+          style={{ background: 'rgba(14, 24, 52, 0.05)' }}
         >
-          <span style={{ color: '#F9F7F1CC' }}>Final plating</span>
-          <span style={{ color: '#ffffff30' }}>▾</span>
+          <span style={{ color: 'rgba(14, 24, 52, 0.85)' }}>Final plating</span>
+          <span style={{ color: 'rgba(14, 24, 52, 0.45)' }}>▾</span>
         </motion.div>
       </div>
     </motion.div>
@@ -189,11 +192,11 @@ function AIMessage({ text, isLatest }: { text: string; isLatest: boolean }) {
         animate={isLatest ? { opacity: [0.4, 1, 0.4] } : { opacity: 0.3 }}
         transition={isLatest ? { repeat: Infinity, duration: 2 } : {}}
         className="mt-0.5 flex-shrink-0 text-xs"
-        style={{ color: '#DC1DD9' }}
+        style={{ color: '#F9838E' }}
       >
         ✦
       </motion.span>
-      <span className="text-sm" style={{ color: isLatest ? '#F9F7F1CC' : '#F9F7F180' }}>
+      <span className="text-sm" style={{ color: isLatest ? 'rgba(14, 24, 52, 0.85)' : 'rgba(14, 24, 52, 0.5)' }}>
         {text}
       </span>
     </motion.div>
@@ -219,9 +222,9 @@ function Timeline({ clips, label }: { clips: TimelineClip[]; label?: string }) {
     >
       {label && (
         <div className="flex items-center gap-3">
-          <div className="h-px flex-1" style={{ background: '#ffffff10' }} />
-          <span className="text-[10px] font-mono" style={{ color: '#ffffff25' }}>{label}</span>
-          <div className="h-px flex-1" style={{ background: '#ffffff10' }} />
+          <div className="h-px flex-1" style={{ background: 'rgba(14, 24, 52, 0.10)' }} />
+          <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>{label}</span>
+          <div className="h-px flex-1" style={{ background: 'rgba(14, 24, 52, 0.10)' }} />
         </div>
       )}
       <div className="flex gap-1">
@@ -342,12 +345,12 @@ export default function FeatureEdit() {
             Edit Agent
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-5"
-            style={{ color: '#F9F7F1' }}
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
-            Raw footage in. Rough draft out.
+            Raw footage in. Rough draft out<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: '#ffffff70' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
             Upload your clips, pick a format, and get a publish-ready edit in minutes.
             Find missing moments with AI Search. Add viral captions with one click.
           </p>
@@ -361,7 +364,7 @@ export default function FeatureEdit() {
                 style={{
                   border: '1px solid #5481E820',
                   background: '#5481E808',
-                  color: '#F9F7F1AA',
+                  color: 'rgba(14, 24, 52, 0.7)',
                 }}
               >
                 <span style={{ color: '#5481E8', fontSize: 10 }}>{cap.icon}</span>
@@ -378,22 +381,22 @@ export default function FeatureEdit() {
             transition={{ duration: fading ? FADE_OUT_DURATION / 1000 : 0.3 }}
             className="rounded-2xl border overflow-hidden"
             style={{
-              borderColor: '#ffffff10',
-              background: '#ffffff03',
+              borderColor: 'rgba(14, 24, 52, 0.10)',
+              background: '#E8E5DC',
             }}
           >
             {/* Window chrome */}
-            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: '#ffffff08' }}>
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <span className="ml-3 text-[10px] font-mono" style={{ color: '#ffffff20' }}>
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}>
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
                 clik editor
               </span>
             </div>
 
             {/* Animation area */}
-            <div ref={animRef} className="px-4 py-5 space-y-4 h-[380px] md:h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
+            <div ref={animRef} className="no-scrollbar px-4 py-5 space-y-4 h-[380px] md:h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
 
               {/* Upload step */}
               <UploadArea visible={showUpload} />
@@ -410,8 +413,8 @@ export default function FeatureEdit() {
                     animate={{ opacity: 1 }}
                     className="space-y-2 rounded-xl px-3.5 py-3"
                     style={{
-                      border: '1px solid #DC1DD915',
-                      background: 'linear-gradient(135deg, #DC1DD906, #5481E804)',
+                      border: '1px solid rgba(84, 129, 232, 0.15)',
+                      background: 'rgba(84, 129, 232, 0.05)',
                     }}
                   >
                     {aiMessages.map((msg, i) => (

@@ -1,36 +1,360 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* =========================================================================
+   Clik · Design System tokens
+   Source: Clik Brand Spec v0.1 (2026.05.02)
+   Direction: Warm cinematic editorial × technical metadata.
+   ========================================================================= */
+
+/* --- Webfonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,30..100&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@font-face {
+  font-family: 'Aileron';
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-400-normal.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aileron';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-700-normal.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aileron';
+  font-weight: 900;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-900-normal.woff2') format('woff2');
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Brand color tokens */
+  --clik-midnight: #0E1834;
+  --clik-cream:    #F9F7F1;
+  --clik-royce:    #5481E8;
+  --clik-salmon:   #F9838E;
+  --clik-bone:     #E8E5DC;
+  --clik-tally:    #E24B4A;
+
+  /* Computed alphas on midnight */
+  --clik-mid-90: rgba(14, 24, 52, 0.90);
+  --clik-mid-70: rgba(14, 24, 52, 0.70);
+  --clik-mid-55: rgba(14, 24, 52, 0.55);
+  --clik-mid-45: rgba(14, 24, 52, 0.45);
+  --clik-mid-25: rgba(14, 24, 52, 0.25);
+  --clik-mid-12: rgba(14, 24, 52, 0.12);
+  --clik-mid-08: rgba(14, 24, 52, 0.08);
+  --clik-mid-06: rgba(14, 24, 52, 0.06);
+
+  /* Computed alphas on cream */
+  --clik-cream-90: rgba(249, 247, 241, 0.90);
+  --clik-cream-70: rgba(249, 247, 241, 0.70);
+  --clik-cream-55: rgba(249, 247, 241, 0.55);
+  --clik-cream-25: rgba(249, 247, 241, 0.25);
+  --clik-cream-12: rgba(249, 247, 241, 0.12);
+  --clik-cream-08: rgba(249, 247, 241, 0.08);
+
+  /* Semantic roles — light surface (default) */
+  --bg:        var(--clik-cream);
+  --surface:   var(--clik-cream);
+  --surface-2: var(--clik-bone);
+  --fg-1:      var(--clik-midnight);
+  --fg-2:      var(--clik-mid-70);
+  --fg-3:      var(--clik-mid-55);
+  --fg-4:      var(--clik-mid-45);
+  --border-1:  var(--clik-mid-06);
+  --border-2:  var(--clik-mid-12);
+  --border-3:  var(--clik-mid-25);
+  --accent:    var(--clik-royce);
+  --accent-fg: var(--clik-cream);
+  --warm:      var(--clik-salmon);
+  --rec:       var(--clik-tally);
+
+  /* Type families */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-ui:      'Aileron', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-lcd:     'VT323', 'JetBrains Mono', monospace;
+
+  /* Type scale */
+  --fs-display-xl: 68px;
+  --fs-display-l:  46px;
+  --fs-h1: 36px;
+  --fs-h2: 28px;
+  --fs-h3: 21px;
+  --fs-body-l: 18px;
+  --fs-body: 15px;
+  --fs-mono: 11px;
+  --fs-mono-sm: 10px;
+
+  --tr-display:   -0.02em;
+  --tr-mono:       0.14em;
+  --tr-mono-tight: 0.08em;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+  --dur-rec:  1100ms;
+}
+
+[data-theme='dark'], .on-midnight {
+  --bg:        var(--clik-midnight);
+  --surface:   var(--clik-midnight);
+  --surface-2: rgba(255,255,255,0.04);
+  --fg-1:      var(--clik-cream);
+  --fg-2:      var(--clik-cream-70);
+  --fg-3:      var(--clik-cream-55);
+  --fg-4:      var(--clik-cream-25);
+  --border-1:  var(--clik-cream-08);
+  --border-2:  var(--clik-cream-12);
+  --border-3:  var(--clik-cream-25);
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
+    /* Default stays dark for unmigrated pages (blog, concept, docs, etc.).
+       Pages opting into the new design system add `class="theme-cream"` on body via BaseLayout. */
     background-color: #0a080d;
     color: #F9F7F1;
+    font-family: var(--font-ui);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Inter', system-ui, sans-serif;
+  }
+  body.theme-cream {
+    background-color: var(--clik-cream);
+    color: var(--clik-midnight);
+  }
+  body.theme-cream h1,
+  body.theme-cream h2,
+  body.theme-cream h3,
+  body.theme-cream h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: var(--tr-display);
+    text-wrap: balance;
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
   }
 }
 
-@layer utilities {
-  .gradient-brand {
-    background: linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8);
+@layer components {
+  /* Mono / metadata text */
+  .clik-mono {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    font-feature-settings: 'tnum' 1;
+    font-variant-numeric: tabular-nums;
   }
-  .gradient-text-brand {
-    background: linear-gradient(135deg, #F9838E, #DC1DD9, #5481E8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .clik-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    color: var(--clik-royce);
+    display: inline-block;
   }
-  .gradient-text {
-    background: linear-gradient(to right, #a78bfa, #22d3ee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .clik-period { color: var(--clik-royce); }
+
+  /* Buttons */
+  .clik-btn {
+    height: 40px;
+    padding: 0 22px;
+    border-radius: var(--r-pill);
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-soft),
+                border-color var(--dur-fast) var(--ease-soft),
+                opacity var(--dur-fast) var(--ease-soft);
+  }
+  .clik-btn:active { opacity: 0.9; }
+  .clik-btn-primary {
+    background: var(--clik-royce);
+    color: var(--clik-cream);
+  }
+  .clik-btn-primary:hover { background: #4a74d3; }
+  .clik-btn-secondary {
+    background: transparent;
+    color: var(--clik-midnight);
+    border: 1px solid var(--clik-mid-25);
+  }
+  .clik-btn-secondary:hover { border-color: var(--clik-midnight); }
+  .clik-btn-dark {
+    background: var(--clik-midnight);
+    color: var(--clik-cream);
+  }
+
+  /* Section header — [ 01 ] ──── LABEL */
+  .clik-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .clik-section-header .idx {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: var(--tr-mono);
+    color: var(--clik-royce);
+  }
+  .clik-section-header .rule {
+    height: 1px;
+    width: 32px;
+    background: var(--clik-mid-25);
+  }
+  .clik-section-header .label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    color: var(--clik-mid-70);
+  }
+
+  /* Metadata chip */
+  .clik-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    border: 1px solid var(--clik-mid-25);
+    color: var(--clik-midnight);
+    background: transparent;
+  }
+  .clik-chip-rec .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--clik-tally);
+    animation: clik-rec-pulse var(--dur-rec) ease-in-out infinite;
+  }
+  .clik-chip-fill-royce {
+    background: var(--clik-royce);
+    border-color: transparent;
+    color: var(--clik-cream);
+  }
+  .clik-chip-fill-salmon {
+    background: var(--clik-salmon);
+    border-color: transparent;
+    color: var(--clik-midnight);
+  }
+
+  /* Bracket-framed window — viewfinder L-corners on all 4 corners */
+  .clik-frame {
+    position: relative;
+    padding: 22px;
+  }
+  .clik-frame::before,
+  .clik-frame::after,
+  .clik-frame > .clik-corner-tr,
+  .clik-frame > .clik-corner-bl {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: currentColor;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .clik-frame::before {
+    top: 0; left: 0;
+    border-top: 1.5px solid;
+    border-left: 1.5px solid;
+  }
+  .clik-frame::after {
+    bottom: 0; right: 0;
+    border-bottom: 1.5px solid;
+    border-right: 1.5px solid;
+  }
+  .clik-frame > .clik-corner-tr {
+    top: 0; right: 0;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+  }
+  .clik-frame > .clik-corner-bl {
+    bottom: 0; left: 0;
+    border-bottom: 1.5px solid currentColor;
+    border-left: 1.5px solid currentColor;
+  }
+
+  /* Cards */
+  .clik-card {
+    background: var(--clik-cream);
+    border: 1px solid var(--clik-mid-06);
+    border-radius: var(--r-md);
+    padding: 24px;
+    transition: border-color var(--dur-base) var(--ease-soft);
+  }
+  .clik-card:hover { border-color: var(--clik-mid-25); }
+  .clik-card.is-featured {
+    border: 2px solid var(--clik-royce);
+    position: relative;
+  }
+
+  /* Key-value table */
+  .clik-kv {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: var(--tr-mono-tight);
+    text-transform: uppercase;
+  }
+  .clik-kv .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--clik-mid-25);
+  }
+  .clik-kv .row:last-child { border-bottom: none; }
+  .clik-kv .row.vibes .v { color: var(--clik-royce); }
+
+  /* Lens metadata text — bottom-right of brand-led moments */
+  .clik-lens {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    color: var(--clik-mid-45);
   }
 }
+
+@keyframes clik-rec-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+@keyframes clik-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Hide scrollbar but keep scrolling — used inside animated panels */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

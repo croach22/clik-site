@@ -1,0 +1,95 @@
+---
+// Cream-surface hero — viewfinder L-brackets frame the headline + CTAs only.
+// Screenshot below is unframed; bottom gradient fades it into the cream bg.
+const today = new Date();
+const recDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+---
+
+<section class="relative pt-32 md:pt-36">
+  <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-24">
+
+    <!-- Headline frame: all four viewfinder L-brackets present at the corners.
+         Generous internal padding so eyebrow / headline / REC chip / lens metadata
+         all sit inset from the brackets — same pattern as the final CTA section. -->
+    <div class="relative w-full px-8 py-16 md:px-16 md:py-20">
+      <span class="vf vf-tl"></span>
+      <span class="vf vf-tr"></span>
+      <span class="vf vf-bl"></span>
+      <span class="vf vf-br"></span>
+
+      <!-- REC pill — INSIDE the frame at top-right, inset from the TR bracket -->
+      <div class="absolute top-6 right-6 md:top-8 md:right-8 hidden sm:block">
+        <span class="clik-chip clik-chip-rec bg-clik-cream">
+          <span class="dot"></span>REC · <span id="rec-date">{recDate}</span>
+        </span>
+      </div>
+
+      <!-- Kicker -->
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+        AI-Powered Content Ops
+      </p>
+
+      <!-- Headline -->
+      <h1
+        class="mt-6 font-display font-medium tracking-display text-clik-midnight"
+        style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 32ch;"
+      >
+        Raw footage in.<br/>
+        A plan and post-ready cuts out<span class="clik-period">.</span>
+      </h1>
+
+      <!-- Body -->
+      <p class="mt-6 max-w-[620px] font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.55;">
+        Hand Clik a brief and raw footage. It audits your shoot against the brief and drafts every video that's in there — 95% done, just add your touch.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-primary">
+          Start for free <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero animation — looping batch workflow visualization -->
+    <div class="mt-16 md:mt-24">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="/videos/hero-animation-poster.jpg"
+        aria-label="Clik batch workflow animation showing raw footage and brief converging into 22 parallel drafts and an editor"
+        class="block w-full rounded-[8px] border border-clik-midnight/15"
+      >
+        <source src="/videos/hero-animation.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Update REC date to today on page load (build is static so the SSR'd date can drift)
+  const el = document.getElementById('rec-date');
+  if (el) {
+    const d = new Date();
+    el.textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+  }
+</script>
+
+<style>
+  /* Viewfinder L-brackets — frame the headline + CTAs region */
+  .vf {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--clik-midnight);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .vf-tl { top: 0; left: 0;       border-top: 1.5px solid; border-left: 1.5px solid; }
+  .vf-tr { top: 0; right: 0;      border-top: 1.5px solid; border-right: 1.5px solid; }
+  .vf-bl { bottom: 0; left: 0;    border-bottom: 1.5px solid; border-left: 1.5px solid; }
+  .vf-br { bottom: 0; right: 0;   border-bottom: 1.5px solid; border-right: 1.5px solid; }
+</style>

@@ -1,0 +1,55 @@
+---
+const before = [
+  'Hours lost to manual editing',
+  'Backlog of footage that never ships',
+  'Editing is the bottleneck between shoot and publish',
+  'Stuck in the timeline instead of creating',
+];
+
+const after = [
+  'Rough cuts ready before you open the timeline',
+  'Turn one shoot day into a week of content',
+  'Ship faster without adding hours or headcount',
+  'Stay creative, finish faster',
+];
+---
+
+<section class="px-6 md:px-12 py-24">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 01 ]</span>
+      <span class="rule"></span>
+      <span class="label">THE TRADE</span>
+    </div>
+
+    <h2 class="font-display font-medium text-clik-midnight mb-12" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em;">
+      Ship more. Edit less<span class="clik-period">.</span>
+    </h2>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="clik-card relative" style="padding: 28px;">
+        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-tally mb-5">BEFORE CLIK</div>
+        <ul class="space-y-3">
+          {before.map((item) => (
+            <li class="flex items-start gap-3 text-clik-midnight/55">
+              <span class="mt-1 text-clik-tally font-mono">✕</span>
+              <span class="font-ui" style="font-size: 15px; line-height: 1.55;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="clik-card relative" style="padding: 28px; border-color: var(--clik-royce); border-width: 1px;">
+        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce mb-5">AFTER CLIK</div>
+        <ul class="space-y-3">
+          {after.map((item) => (
+            <li class="flex items-start gap-3 text-clik-midnight">
+              <span class="mt-1 text-clik-royce font-mono">✓</span>
+              <span class="font-ui" style="font-size: 15px; line-height: 1.55;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

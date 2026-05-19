@@ -3,42 +3,42 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-white/5 bg-brand-bg px-6 pt-16 pb-10">
-  <div class="mx-auto max-w-6xl">
+<footer class="on-midnight" style="background: var(--clik-midnight); color: var(--clik-cream); padding: 64px 24px 40px; margin-top: 64px;">
+  <div class="mx-auto max-w-[1200px]">
 
-    <!-- Top: 4-column grid -->
-    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10 md:justify-items-center">
+    <!-- Top: 4-col grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 items-start">
 
-      <!-- Col 1: Brand -->
-      <div class="sm:col-span-2 md:col-span-1 md:justify-self-start">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
         <a href="/" class="inline-block mb-4">
-          <img src="/logo-white.svg" alt="Clik" class="h-6 w-auto" />
+          <img src="/logo-white.svg" alt="Clik" class="h-7 w-auto" />
         </a>
-        <p class="text-sm text-brand-cream/35 leading-relaxed max-w-[180px]">
-          Go from raw footage to a polished edit in minutes.
+        <p class="font-ui text-clik-cream/55 max-w-[34ch]" style="font-size: 14px; line-height: 1.55;">
+          AI agents for video editing. Talk to your footage.
         </p>
       </div>
 
-      <!-- Col 2: Product -->
+      <!-- Product -->
       <div>
-        <p class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4">Product</p>
-        <ul class="space-y-2.5 text-sm text-brand-cream/45">
-          <li><a href="/#how-it-works" class="hover:text-brand-cream transition-colors">How it works</a></li>
-          <li><a href="/#use-cases" class="hover:text-brand-cream transition-colors">Use Cases</a></li>
-          <li><a href="/#pricing" class="hover:text-brand-cream transition-colors">Pricing</a></li>
-          <li><a href="/docs" class="hover:text-brand-cream transition-colors">Learn</a></li>
+        <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55 mb-4">PRODUCT</p>
+        <ul class="space-y-2.5 font-ui" style="font-size: 14px;">
+          <li><a href="/#features" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Features</a></li>
+          <li><a href="/#pricing" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Pricing</a></li>
+          <li><a href="/docs" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Docs</a></li>
         </ul>
       </div>
 
-      <!-- Col 3: Blog -->
+      <!-- Blog -->
       <div>
-        <a href="/blog" class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4 block hover:text-brand-cream/40 transition-colors">Blog</a>
-        <ul class="space-y-2.5 text-sm text-brand-cream/45">
+        <a href="/blog" class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55 mb-4 block hover:text-clik-cream transition-colors">BLOG</a>
+        <ul class="space-y-2.5 font-ui" style="font-size: 14px;">
           {posts.slice(0, 4).map((post) => (
             <li>
-              <a href={`/blog/${post.slug}`} class="hover:text-brand-cream transition-colors line-clamp-1">
+              <a href={`/blog/${post.slug}`} class="text-clik-cream/80 hover:text-clik-cream transition-colors line-clamp-1">
                 {post.data.title}
               </a>
             </li>
@@ -46,32 +46,29 @@ const posts = (await getCollection('blog')).sort(
         </ul>
       </div>
 
-      <!-- Col 4: Company -->
+      <!-- Company -->
       <div>
-        <p class="text-xs font-display tracking-widest text-brand-cream/25 uppercase mb-4">Company</p>
-        <ul class="space-y-2.5 text-sm text-brand-cream/45">
-          <li><a href="/founding-creators" class="hover:text-brand-cream transition-colors text-brand-gold/70">Founding Creators</a></li>
-          <li><a href="mailto:conner@clik.vision" class="hover:text-brand-cream transition-colors">Contact</a></li>
-          <li><a href="https://www.instagram.com/clik.ai/" class="hover:text-brand-cream transition-colors">Instagram</a></li>
-          <li><a href="https://www.linkedin.com/company/clik-vision" class="hover:text-brand-cream transition-colors">LinkedIn</a></li>
-          <li><a href="/terms" class="hover:text-brand-cream transition-colors">Terms</a></li>
-          <li><a href="/privacy" class="hover:text-brand-cream transition-colors">Privacy</a></li>
+        <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55 mb-4">COMPANY</p>
+        <ul class="space-y-2.5 font-ui" style="font-size: 14px;">
+          <li><a href="/founding-creators" class="text-clik-royce hover:opacity-80 transition-opacity">Founding Creators</a></li>
+          <li><a href="mailto:conner@clik.vision" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Contact</a></li>
+          <li><a href="https://www.instagram.com/clik.ai/" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/clik-vision" class="text-clik-cream/80 hover:text-clik-cream transition-colors">LinkedIn</a></li>
+          <li><a href="/terms" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Terms</a></li>
+          <li><a href="/privacy" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Privacy</a></li>
         </ul>
       </div>
 
     </div>
 
     <!-- Bottom bar -->
-    <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-      <p class="text-xs text-brand-cream/20">
-        &copy; {new Date().getFullYear()} Clik. All rights reserved.
-      </p>
-      <a
-        href="https://app.clik.vision/sign-up"
-        class="text-xs text-brand-magenta/60 hover:text-brand-magenta transition-colors"
-      >
-        Start editing free →
-      </a>
+    <div class="mt-12 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style="border-top: 1px solid var(--clik-cream-12);">
+      <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55">
+        © {year} CLIK · ALL TAKES RESERVED
+      </span>
+      <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55">
+        VIBES · GOOD
+      </span>
     </div>
 
   </div>

@@ -1,14 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AgencyQualificationForm from '../../components/AgencyQualificationForm';
+import AgencyPilotForm from '../../components/AgencyPilotForm';
 
-const comparisonRows = [
-  { label: 'Monthly cost',            hire: '$5k–$10k per editor',       clik: 'Flat monthly — custom for your volume' },
-  { label: 'Ramp time',               hire: '2–6 weeks',                 clik: 'Same day' },
-  { label: 'Scale to 5× volume',      hire: 'Hire 3–4 more editors',     clik: 'Same plan' },
-  { label: 'Client footage quality',  hire: 'Editor scrubs manually',    clik: 'Auto-matched to brief' },
-  { label: 'Creative director role',  hire: 'Reviewer on Frame.io',      clik: 'Driver in Clik' },
-  { label: "Your editor's work",      hire: 'Starts from scratch',       clik: 'Finishes 90%-done drafts' },
+const capabilities = [
+  {
+    title: 'Open at the 90% mark.',
+    body: 'Every video in your script arrives as a near-finished rough cut. AI Search surfaces any clip your editor wants to swap. Their job is craft, not assembly.',
+  },
+  {
+    title: 'The agent tells you what’s missing.',
+    body: 'Clik reads your brief and notices the gaps — a shot you didn’t get, a graphic that doesn’t exist yet, a hook with no matching B-roll. It surfaces in chat, not buried in a flag. Your CD can reshoot, pivot, or rewrite — early.',
+  },
+  {
+    title: 'Plugs into your stack.',
+    body: 'Export to XML for Premiere Pro, DaVinci Resolve, or Final Cut Pro when it’s time to finish. Drive, Dropbox, and Box triggers coming soon. Clik fits how your editors already work.',
+  },
 ];
 
 const steps = [
@@ -25,8 +31,8 @@ const steps = [
     body: 'One project per variant. Each ~90% done when your editor opens it.',
   },
   {
-    title: 'Editors finish.',
-    body: 'Tighten pacing, swap hooks, add finishing touches. No more starting from scratch.',
+    title: 'Editors finish in Clik.',
+    body: "Add caption text overlays right in Clik's web editor — your whole team collaborates online, no project files to pass around. Export to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you need deeper timeline control.",
   },
 ];
 
@@ -38,204 +44,360 @@ const planIncludes = [
 ];
 
 const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
-const SIGNUP = 'https://app.clik.vision/sign-up';
 ---
 
 <BaseLayout
   title="Clik for Agencies — Scale your agency without hiring more editors"
   description="Feed Clik a shoot day and a brief. It returns long-form rough cuts and curated shorts. Your editors finish the work — they don't start from scratch."
+  theme="cream"
 >
 
   <!-- Hero -->
-  <section class="relative px-6 pt-28 pb-20 text-center overflow-hidden md:pt-40 md:pb-24">
-    <div class="pointer-events-none absolute left-1/2 top-20 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-[#5481E8]/10 blur-[120px]"></div>
-    <div class="relative mx-auto max-w-3xl">
-      <p class="text-sm font-display tracking-widest uppercase text-[#5481E8] mb-6">For Agencies</p>
-      <h1 class="text-4xl md:text-6xl font-bold text-brand-cream leading-tight mb-6">
-        Scale your agency without hiring more editors.
-      </h1>
-      <p class="text-lg md:text-xl text-brand-cream/60 leading-relaxed max-w-2xl mx-auto mb-10">
-        Feed Clik a shoot day and a brief. It returns long-form rough cuts and curated shorts. Your editors finish the work — they don't start from scratch.
-      </p>
-      <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a
-          href={CALENDLY}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block rounded-full bg-white px-10 py-4 text-base font-semibold text-zinc-950 transition-opacity hover:opacity-90"
-        >
-          Book a Demo
-        </a>
-        <a
-          href={SIGNUP}
-          class="inline-block rounded-full border border-white/15 px-10 py-4 text-base font-medium text-zinc-300 transition-colors hover:border-white/25 hover:text-white"
-        >
-          Start for Free
-        </a>
+  <section class="relative pt-32 md:pt-36">
+    <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-20">
+      <div class="relative w-full px-8 py-16 md:px-16 md:py-20">
+        <span class="vf vf-tl"></span>
+        <span class="vf vf-tr"></span>
+        <span class="vf vf-bl"></span>
+        <span class="vf vf-br"></span>
+
+        <div class="grid gap-12 md:grid-cols-[1fr_360px] md:gap-16 items-start">
+          <!-- Left column: kicker + headline + sub -->
+          <div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">For Agencies</p>
+
+            <h1
+              class="mt-6 font-display font-medium tracking-display text-clik-midnight"
+              style="font-size: clamp(40px, 6vw, 60px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch;"
+            >
+              3× your client capacity with the editors you already have<span class="clik-period">.</span>
+            </h1>
+
+            <p class="mt-6 max-w-[560px] font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.55;">
+              Feed Clik a shoot and a brief — it returns categorized footage and a batch of rough cuts your editors finish, not start.
+            </p>
+          </div>
+
+          <!-- Right column: pilot lead form -->
+          <div class="w-full md:max-w-[360px]">
+            <AgencyPilotForm client:load />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Problem -->
-  <section class="px-6 py-24">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-8 leading-tight">
-        Editing is your revenue cap, not demand.
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 01 ]</span>
+        <span class="rule"></span>
+        <span class="label">THE PROBLEM</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-3xl px-0 md:px-0">
+      <h2 class="font-display font-medium text-clik-midnight mb-8" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch;">
+        Editing is your revenue cap, not demand<span class="clik-period">.</span>
       </h2>
-      <p class="text-lg text-brand-cream/60 leading-relaxed mb-8">
+      <p class="font-ui text-clik-midnight/70 mb-8" style="font-size: 18px; line-height: 1.6;">
         The work keeps coming in. Your editors can't keep up. The usual options:
       </p>
       <ul class="space-y-5 mb-8">
         <li class="flex gap-4">
-          <span class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#F9838E]"></span>
-          <p class="text-lg text-brand-cream/70 leading-relaxed">
-            <span class="font-semibold text-brand-cream">Hire more in-house editors.</span> $5k–$10k/mo each, plus ramp time, recruiting, and management overhead.
+          <span class="mt-3 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-clik-salmon"></span>
+          <p class="font-ui text-clik-midnight/80" style="font-size: 18px; line-height: 1.6;">
+            <span class="font-semibold text-clik-midnight">Hire more in-house editors.</span> $5k–$10k/mo each, plus ramp time, recruiting, and management overhead.
           </p>
         </li>
         <li class="flex gap-4">
-          <span class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#F9838E]"></span>
-          <p class="text-lg text-brand-cream/70 leading-relaxed">
-            <span class="font-semibold text-brand-cream">Offshore it.</span> Cheaper, but quality varies and only ~⅓ of their time is actually editing.
+          <span class="mt-3 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-clik-salmon"></span>
+          <p class="font-ui text-clik-midnight/80" style="font-size: 18px; line-height: 1.6;">
+            <span class="font-semibold text-clik-midnight">Offshore it.</span> Cheaper, but quality varies and async revisions drag every project across days.
           </p>
         </li>
         <li class="flex gap-4">
-          <span class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#F9838E]"></span>
-          <p class="text-lg text-brand-cream/70 leading-relaxed">
-            <span class="font-semibold text-brand-cream">Turn down clients.</span> Safe in the short term. Kills growth.
+          <span class="mt-3 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-clik-salmon"></span>
+          <p class="font-ui text-clik-midnight/80" style="font-size: 18px; line-height: 1.6;">
+            <span class="font-semibold text-clik-midnight">Turn down clients.</span> Safe in the short term. Kills growth.
           </p>
         </li>
       </ul>
-      <p class="text-lg text-brand-cream/60 leading-relaxed">
-        Meanwhile, your creative directors spend half their week stuck in Frame.io review loops instead of actually directing creative.
+      <p class="font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.6;">
+        Meanwhile, your creative directors live in Frame.io review loops instead of actually directing creative.
       </p>
     </div>
   </section>
 
-  <!-- Two paths to scaling -->
-  <section class="px-6 py-24">
-    <div class="mx-auto max-w-4xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-12 text-center">
-        Two paths to scaling.
+  <!-- What Clik delivers, day one -->
+  <section class="px-6 md:px-12 py-20 md:py-24 bg-clik-bone/40">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 02 ]</span>
+        <span class="rule"></span>
+        <span class="label">BEFORE EDITORS START</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-midnight mb-4 max-w-[22ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        What Clik delivers, day one<span class="clik-period">.</span>
       </h2>
+      <p class="font-ui text-clik-midnight/70 mb-12 max-w-[60ch]" style="font-size: 18px; line-height: 1.6;">
+        Upload a shoot and a brief. Before your editor opens the project, Clik has already done two things.
+      </p>
 
-      <div class="overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03]">
-        <div class="grid grid-cols-[1.1fr_1fr_1fr] text-sm md:text-base">
-          <!-- Header row -->
-          <div class="border-b border-white/8 px-5 py-4 md:px-6"></div>
-          <div class="border-b border-l border-white/8 px-5 py-4 text-zinc-400 font-medium md:px-6">
-            Hire more editors
-          </div>
-          <div class="border-b border-l border-white/8 bg-[#5481E8]/5 px-5 py-4 font-semibold text-[#5481E8] md:px-6">
-            Run Clik
-          </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- LEFT: Brief audit report -->
+        <div class="clik-card flex flex-col" style="padding: 32px;">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            01 · Brief Audit
+          </p>
+          <h3 class="font-display font-medium text-clik-midnight mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            An audit of your shoot, against your brief.
+          </h3>
+          <p class="font-ui text-clik-midnight/70 mb-6" style="font-size: 16px; line-height: 1.55;">
+            Clik reads the brief, scans the footage, and tells you what's there — and what isn't.
+          </p>
 
-          {comparisonRows.map((row, i) => (
-            <>
-              <div class={`px-5 py-4 font-medium text-brand-cream md:px-6 ${i < comparisonRows.length - 1 ? 'border-b border-white/5' : ''}`}>
-                {row.label}
+          <div class="mt-auto rounded-xl border border-clik-midnight/12 bg-clik-cream p-5">
+            <div class="flex items-center justify-between border-b border-clik-midnight/8 pb-3 mb-4">
+              <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+                Spring Cleanser — UGC Brief
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce font-bold">
+                12 / 14 captured
+              </span>
+            </div>
+            <ul class="space-y-2.5 font-ui text-clik-midnight/85" style="font-size: 14px; line-height: 1.5;">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/15 font-mono text-[10px] font-bold text-clik-royce">✓</span>
+                Hook to-camera: "POV: my skin finally calmed down"
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/15 font-mono text-[10px] font-bold text-clik-royce">✓</span>
+                Product application — face-cam, AM routine
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-tally/15 font-mono text-[10px] font-bold text-clik-tally">✗</span>
+                Missing: direct-to-camera testimonial — "why this one"
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-tally/15 font-mono text-[10px] font-bold text-clik-tally">✗</span>
+                Missing: golden hour b-roll — product on bathroom counter
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/20 font-mono text-[10px] font-bold text-clik-salmon">+</span>
+                Off-script: "this honestly smells like a spa" at 02:14
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/20 font-mono text-[10px] font-bold text-clik-salmon">+</span>
+                Alt hook take: hand-brush hair back reads stronger
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: First drafts speed comparison -->
+        <div class="clik-card flex flex-col" style="padding: 32px;">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            02 · First Drafts
+          </p>
+          <h3 class="font-display font-medium text-clik-midnight mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            Drafts in 12 minutes, not 3 days.
+          </h3>
+          <p class="font-ui text-clik-midnight/70 mb-8" style="font-size: 16px; line-height: 1.55;">
+            Every variant in your script lands as a 90%-done rough cut. Your editors finish — they don't start from scratch.
+          </p>
+
+          <div class="mt-auto space-y-3">
+            <div class="rounded-xl border border-clik-royce/30 bg-clik-royce/8 p-6">
+              <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce mb-2 font-bold">
+                With Clik
+              </p>
+              <p class="font-display font-medium text-clik-midnight" style="font-size: clamp(44px, 6vw, 64px); line-height: 1; letter-spacing: -0.03em;">
+                12 min
+              </p>
+              <p class="mt-2 font-ui text-clik-midnight/70" style="font-size: 14px; line-height: 1.5;">
+                Brief in. Per-variant drafts ready for editors.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-clik-midnight/12 bg-clik-cream p-5">
+              <div class="flex items-baseline justify-between">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55 font-bold">
+                  Editor from scratch
+                </p>
+                <p class="font-display font-medium text-clik-midnight/55" style="font-size: 28px; line-height: 1; letter-spacing: -0.02em;">
+                  ~3 days
+                </p>
               </div>
-              <div class={`border-l border-white/8 px-5 py-4 text-zinc-400 md:px-6 ${i < comparisonRows.length - 1 ? 'border-b border-white/5' : ''}`}>
-                {row.hire}
-              </div>
-              <div class={`border-l border-white/8 bg-[#5481E8]/5 px-5 py-4 text-brand-cream md:px-6 ${i < comparisonRows.length - 1 ? 'border-b border-white/5' : ''}`}>
-                {row.clik}
-              </div>
-            </>
-          ))}
+              <p class="mt-2 font-ui text-clik-midnight/55" style="font-size: 13px; line-height: 1.5;">
+                Typical agency assembly + first-pass turnaround, per variant.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <p class="mt-10 text-lg text-brand-cream/60 leading-relaxed text-center max-w-2xl mx-auto">
-        Hiring gets more expensive every time you scale. Clik doesn't.
-      </p>
     </div>
   </section>
 
   <!-- How agencies run Clik -->
-  <section class="px-6 py-24">
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 03 ]</span>
+        <span class="rule"></span>
+        <span class="label">HOW IT WORKS</span>
+      </div>
+    </div>
     <div class="mx-auto max-w-3xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-12 text-center">
-        How agencies run Clik.
+      <h2 class="font-display font-medium text-clik-midnight mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        How agencies run Clik<span class="clik-period">.</span>
       </h2>
 
-      <ol class="space-y-6">
+      <ol class="space-y-5">
         {steps.map((step, i) => (
-          <li class="flex gap-5 rounded-xl border border-white/8 bg-white/[0.03] p-6">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#5481E8]/30 bg-[#5481E8]/10 text-sm font-semibold text-[#5481E8]">
-              {i + 1}
+          <li class="clik-card flex gap-5" style="padding: 28px;">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-clik-royce/30 bg-clik-royce/10 font-mono text-sm font-bold text-clik-royce">
+              {String(i + 1).padStart(2, '0')}
             </span>
             <div>
-              <p class="mb-2 text-lg font-semibold text-brand-cream">{step.title}</p>
-              <p class="text-base text-brand-cream/60 leading-relaxed">{step.body}</p>
+              <p class="mb-2 font-display font-medium text-clik-midnight" style="font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;">{step.title}</p>
+              <p class="font-ui text-clik-midnight/70" style="font-size: 16px; line-height: 1.55;">{step.body}</p>
             </div>
           </li>
         ))}
       </ol>
 
-      <p class="mt-10 text-lg text-brand-cream/60 leading-relaxed text-center">
+      <p class="mt-10 font-ui text-clik-midnight/70 text-center" style="font-size: 18px; line-height: 1.6;">
         Same team. Multiples more output.
       </p>
     </div>
   </section>
 
+  <!-- Capabilities -->
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 04 ]</span>
+        <span class="rule"></span>
+        <span class="label">CAPABILITIES</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-midnight mb-12 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        The unfair advantages<span class="clik-period">.</span>
+      </h2>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        {capabilities.map((cap) => (
+          <div class="clik-card" style="padding: 28px;">
+            <h3 class="font-display font-medium text-clik-midnight mb-4" style="font-size: clamp(20px, 2.2vw, 24px); line-height: 1.2; letter-spacing: -0.01em;">
+              {cap.title}
+            </h3>
+            <p class="font-ui text-clik-midnight/70" style="font-size: 16px; line-height: 1.6;">
+              {cap.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Proof -->
-  <section class="px-6 py-24">
+  <section class="px-6 md:px-12 py-20 md:py-24 bg-clik-bone/40">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 05 ]</span>
+        <span class="rule"></span>
+        <span class="label">PROOF</span>
+      </div>
+    </div>
     <div class="mx-auto max-w-4xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-12 text-center">Proof.</h2>
+      <h2 class="font-display font-medium text-clik-midnight mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Proof<span class="clik-period">.</span>
+      </h2>
 
       <div class="grid gap-5 md:grid-cols-2">
-        <!-- Testimonial 1 -->
-        <div class="rounded-2xl border border-[#DC1DD9]/25 bg-white/[0.03] p-7">
-          <p class="text-base text-brand-cream/80 leading-relaxed mb-5">
+        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7">
+          <p class="font-ui text-clik-midnight/85 leading-relaxed mb-5" style="font-size: 16px;">
             "With drafts ready instantly, our creative directors take projects deeper and iterate faster. Our editors just make finishing touches. Now we can scale without hiring more editors."
           </p>
-          <p class="text-sm">
-            <span class="font-semibold text-brand-cream">Feed Studios LA</span>
+          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+            <span class="font-bold text-clik-midnight">Feed Studios LA</span>
           </p>
         </div>
 
-        <!-- Testimonial 2 -->
-        <div class="rounded-2xl border border-[#5481E8]/25 bg-white/[0.03] p-7">
-          <p class="text-base text-brand-cream/80 leading-relaxed mb-5">
-            "Finding good editors is the only reason I can't scale. Clik solves that problem."
+        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7">
+          <p class="font-ui text-clik-midnight/85 leading-relaxed mb-5" style="font-size: 16px;">
+            "Clik finds extra concepts in my footage that a traditional editor would never bother to pull. Same shoot, more deliverables, less time."
           </p>
-          <p class="text-sm">
-            <span class="font-semibold text-brand-cream">Content Agency</span>
-            <span class="text-zinc-500"> · $30K MRR</span>
+          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+            <span class="font-bold text-clik-midnight">Bobby</span>
+            <span class="text-clik-midnight/45"> · Founder, MAE Media</span>
           </p>
         </div>
       </div>
 
-      <!-- Highlighted stat -->
-      <div class="mt-8 rounded-2xl border border-[#5481E8]/30 bg-[#5481E8]/10 p-8 text-center">
-        <p class="text-lg md:text-xl text-brand-cream leading-relaxed">
-          Feed Studios LA estimates Clik cuts <span class="font-semibold text-[#5481E8]">~90% of the work</span> out of their editing flow.
+      <div class="mt-8 rounded-2xl border border-clik-royce/30 bg-clik-royce/8 p-8 text-center">
+        <p class="font-display font-medium text-clik-midnight" style="font-size: clamp(20px, 2.4vw, 24px); line-height: 1.3; letter-spacing: -0.01em;">
+          Feed Studios LA estimates Clik cuts <span class="text-clik-royce font-semibold">~90% of the work</span> out of their editing flow.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Agency plans -->
-  <section class="px-6 py-24">
+  <section id="agency-plans" class="scroll-mt-24 px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header justify-center">
+        <span class="idx">[ 06 ]</span>
+        <span class="rule"></span>
+        <span class="label">AGENCY PLANS</span>
+      </div>
+    </div>
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-4 leading-tight">
-        Agency plans — built for your volume.
+      <h2 class="font-display font-medium text-clik-midnight mb-4" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Built for your volume<span class="clik-period">.</span>
       </h2>
-      <p class="text-lg text-brand-cream/60 leading-relaxed mb-12 max-w-2xl mx-auto">
-        Every agency runs at a different scale. Tell us about your volume, client mix, and team — we'll build a plan that fits.
+      <p class="font-ui text-clik-midnight/70 mb-12 max-w-2xl mx-auto" style="font-size: 18px; line-height: 1.6;">
+        Transparent floor. Custom from there — scaled to your monthly output.
       </p>
 
-      <div class="rounded-2xl border border-white/8 bg-white/[0.03] p-8 md:p-10 text-left">
-        <p class="mb-5 text-sm font-semibold uppercase tracking-widest text-zinc-500">
+      <div
+        class="clik-frame relative text-left"
+        style="color: var(--clik-midnight); padding: clamp(28px, 4vw, 40px);"
+      >
+        <span class="clik-corner-tr"></span>
+        <span class="clik-corner-bl"></span>
+
+        <div class="mb-8 pb-8 border-b border-clik-midnight/12">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce font-bold">
+            Starting at
+          </p>
+          <div class="flex items-baseline gap-2">
+            <span class="font-display font-medium text-clik-midnight" style="font-size: clamp(48px, 7vw, 72px); line-height: 1; letter-spacing: -0.03em;">
+              $499
+            </span>
+            <span class="font-mono text-[14px] uppercase tracking-[0.14em] text-clik-midnight/55">
+              / mo
+            </span>
+          </div>
+          <p class="mt-3 font-ui text-clik-midnight/70" style="font-size: 15px; line-height: 1.5;">
+            Volume-based — scales with your monthly video output. Cancel anytime.
+          </p>
+        </div>
+
+        <p class="mb-5 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
           Every plan includes:
         </p>
         <ul class="space-y-3 mb-8">
           {planIncludes.map((item) => (
             <li class="flex items-start gap-3">
-              <svg class="mt-1 h-4 w-4 shrink-0 text-[#5481E8]" viewBox="0 0 16 16" fill="none">
+              <svg class="mt-1 h-4 w-4 shrink-0 text-clik-royce" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span class="text-base text-brand-cream/80 leading-relaxed">{item}</span>
+              <span class="font-ui text-clik-midnight/85" style="font-size: 16px; line-height: 1.55;">{item}</span>
             </li>
           ))}
         </ul>
@@ -244,73 +406,46 @@ const SIGNUP = 'https://app.clik.vision/sign-up';
             href={CALENDLY}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block rounded-full bg-white px-8 py-3.5 text-base font-semibold text-zinc-950 transition-opacity hover:opacity-90"
+            class="clik-btn clik-btn-primary"
           >
-            Book a Demo
+            Chat with CEO <span aria-hidden="true">→</span>
           </a>
-          <span class="text-sm text-brand-cream/50">to get a custom quote.</span>
+          <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">
+            for custom quotes & higher volume.
+          </span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Loom walkthrough qualification -->
-  <section class="px-6 py-24">
-    <div class="mx-auto max-w-3xl">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-6 leading-tight">
-          Want proof it works on your footage?
-        </h2>
-        <div class="space-y-5 text-lg text-brand-cream/60 leading-relaxed max-w-2xl mx-auto">
-          <p>
-            For agencies producing 100+ videos a month. Share a Google Drive folder with a batch of real footage and a brief. We'll run Clik on it and send back a personalized walkthrough of the drafts it produced — usually within 2 business days.
-          </p>
-          <p>
-            Your footage stays private. We delete it after the walkthrough is sent.
-          </p>
-        </div>
-        <a
-          href="#agency-qualification-form"
-          class="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-base font-semibold text-zinc-950 transition-opacity hover:opacity-90"
-        >
-          See Clik on your footage
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-
-      <div id="agency-qualification-form" class="rounded-2xl border border-white/8 bg-white/[0.03] p-6 md:p-10 scroll-mt-24">
-        <AgencyQualificationForm client:visible />
+  <!-- Trial path — run a batch on your footage -->
+  <section class="px-6 md:px-12 py-20 md:py-24 bg-clik-bone/40">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 07 ]</span>
+        <span class="rule"></span>
+        <span class="label">SEE IT ON YOUR FOOTAGE</span>
       </div>
     </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="relative px-6 py-24 md:py-32">
-    <div class="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#5481E8]/10 blur-[100px]"></div>
-    <div class="relative mx-auto max-w-3xl text-center">
-      <h2 class="mb-6 text-4xl md:text-6xl font-bold text-brand-cream leading-tight">
-        See it on your own footage.
-      </h2>
-      <p class="mb-10 text-lg text-brand-cream/60 leading-relaxed">
-        Upload a batch, get multiple drafts back in minutes.
-      </p>
-      <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a
-          href={CALENDLY}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block rounded-full bg-white px-10 py-4 text-base font-semibold text-zinc-950 transition-opacity hover:opacity-90"
-        >
-          Book a Demo
-        </a>
-        <a
-          href={SIGNUP}
-          class="inline-block rounded-full border border-white/15 px-10 py-4 text-base font-medium text-zinc-300 transition-colors hover:border-white/25 hover:text-white"
-        >
-          Start for Free
-        </a>
-      </div>
+    <div id="agency-qualification-form" class="mx-auto max-w-[1200px] scroll-mt-24">
+      <AgencyPilotForm client:visible variant="accent" />
     </div>
   </section>
 
 </BaseLayout>
+
+<style>
+  /* Viewfinder L-brackets — mirror HeroCream */
+  .vf {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--clik-midnight);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .vf-tl { top: 0; left: 0;       border-top: 1.5px solid; border-left: 1.5px solid; }
+  .vf-tr { top: 0; right: 0;      border-top: 1.5px solid; border-right: 1.5px solid; }
+  .vf-bl { bottom: 0; left: 0;    border-bottom: 1.5px solid; border-left: 1.5px solid; }
+  .vf-br { bottom: 0; right: 0;   border-bottom: 1.5px solid; border-right: 1.5px solid; }
+</style>

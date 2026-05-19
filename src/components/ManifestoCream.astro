@@ -1,0 +1,60 @@
+---
+const PANELS = [
+  {
+    label: 'CREATORS',
+    headline: 'who want to direct,',
+    faded: 'not edit.',
+    body: 'You have the footage and you can describe the story you want to tell. Now you get to do that, without scrubbing timelines all day.',
+  },
+  {
+    label: 'VIDEO PROS',
+    headline: 'who want to scale output,',
+    faded: 'not headcount.',
+    body: "Feed the agent a shoot day and a brief. It returns long-form rough cuts and curated shorts. Your editors finish the work, they don't start from scratch.",
+    href: '/use-cases/agencies',
+    cta: 'For agencies',
+  },
+];
+---
+
+<section id="use-cases" class="px-6 md:px-12 py-24 md:py-32 bg-clik-bone/40">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 06 ]</span>
+      <span class="rule"></span>
+      <span class="label">WHO IT'S FOR</span>
+    </div>
+
+    <h2 class="font-display font-medium text-clik-midnight mb-12" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch;">
+      Built for creators and video pros<span class="clik-period">.</span>
+    </h2>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {PANELS.map((panel) => (
+        <div class="clik-card" style="padding: 32px;">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="clik-chip clik-chip-fill-royce" style="font-size: 9px;">
+              <span class="dot" style="background: var(--clik-cream);"></span>
+              {panel.label}
+            </span>
+          </div>
+          <h3 class="font-display font-medium text-clik-midnight mb-4" style="font-size: clamp(22px, 2.6vw, 28px); line-height: 1.15; letter-spacing: -0.02em;">
+            who want to <span class="text-clik-midnight">{panel.headline.replace('who want to ', '')}</span>
+            <span class="text-clik-midnight/45"> {panel.faded}</span>
+          </h3>
+          <p class="font-ui text-clik-midnight/70" style="font-size: 16px; line-height: 1.55;">
+            {panel.body}
+          </p>
+          {panel.href && (
+            <a
+              href={panel.href}
+              class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce no-underline hover:opacity-80"
+            >
+              {panel.cta} <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

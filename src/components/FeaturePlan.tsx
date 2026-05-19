@@ -77,7 +77,7 @@ function TypingDots() {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="w-1.5 h-1.5 rounded-full bg-zinc-500 block"
+          className="w-1.5 h-1.5 rounded-full bg-clik-midnight/40 block"
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
         />
@@ -98,9 +98,9 @@ function UserBubble({ text }: { text: string }) {
       <div
         className="rounded-2xl rounded-br-sm px-4 py-2.5 text-sm max-w-[85%]"
         style={{
-          background: '#ffffff0C',
-          border: '1px solid #ffffff14',
-          color: '#F9F7F1CC',
+          background: 'rgba(14, 24, 52, 0.05)',
+          border: '1px solid rgba(14, 24, 52, 0.14)',
+          color: 'rgba(14, 24, 52, 0.85)',
         }}
       >
         {text}
@@ -120,16 +120,16 @@ function AITextBubble({ text }: { text: string }) {
       <div
         className="flex items-start gap-2.5 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm max-w-[85%]"
         style={{
-          border: '1px solid #DC1DD920',
-          background: 'linear-gradient(135deg, #DC1DD90A, #5481E806)',
-          color: '#F9F7F1CC',
+          border: '1px solid rgba(84, 129, 232, 0.25)',
+          background: 'rgba(84, 129, 232, 0.06)',
+          color: 'rgba(14, 24, 52, 0.85)',
         }}
       >
         <motion.span
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
           className="mt-0.5 flex-shrink-0 text-xs"
-          style={{ color: '#DC1DD9' }}
+          style={{ color: '#5481E8' }}
         >
           ✦
         </motion.span>
@@ -150,7 +150,7 @@ function AICardBubble({ title, items }: { title: string; items: string[] }) {
       <div
         className="rounded-xl px-4 py-3 text-sm max-w-[85%] w-full"
         style={{
-          background: '#ffffff06',
+          background: 'rgba(14, 24, 52, 0.05)',
           border: '1px solid #5481E820',
         }}
       >
@@ -168,7 +168,7 @@ function AICardBubble({ title, items }: { title: string; items: string[] }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1, duration: 0.25 }}
               className="flex items-start gap-2 text-xs"
-              style={{ color: '#F9F7F1AA' }}
+              style={{ color: 'rgba(14, 24, 52, 0.7)' }}
             >
               <span className="mt-0.5 flex-shrink-0" style={{ color: '#5481E860' }}>{i + 1}.</span>
               <span>{item}</span>
@@ -205,9 +205,9 @@ function AITipBubble({ text }: { text: string }) {
       <div
         className="flex items-start gap-2 rounded-xl px-3.5 py-2.5 text-xs max-w-[85%]"
         style={{
-          background: '#D4A85308',
-          border: '1px solid #D4A85320',
-          color: '#D4A853CC',
+          background: 'rgba(249, 131, 142, 0.06)',
+          border: '1px solid rgba(249, 131, 142, 0.25)',
+          color: '#F9838E',
         }}
       >
         <span className="mt-0.5 flex-shrink-0">&#9888;</span>
@@ -295,19 +295,18 @@ export default function FeaturePlan() {
 
         {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
-          <p
-            className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: '#DC1DD9' }}
-          >
-            Brainstorm Agent
-          </p>
+          <div className="clik-section-header">
+            <span className="idx">[ 05 ]</span>
+            <span className="rule"></span>
+            <span className="label">BRAINSTORM AGENT</span>
+          </div>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-5"
-            style={{ color: '#F9F7F1' }}
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
-            Like having a creative team behind you.
+            Like having a creative team behind you<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: '#ffffff70' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
             Your AI creative strategist helps you brainstorm ideas, write scripts,
             and build shot lists — so when you hit record, you know exactly what to shoot.
           </p>
@@ -319,12 +318,12 @@ export default function FeaturePlan() {
                 key={cap.label}
                 className="flex items-center gap-2 rounded-full px-4 py-2 text-sm"
                 style={{
-                  border: '1px solid #DC1DD920',
-                  background: '#DC1DD908',
-                  color: '#F9F7F1AA',
+                  border: '1px solid rgba(84, 129, 232, 0.25)',
+                  background: 'rgba(84, 129, 232, 0.06)',
+                  color: 'rgba(14, 24, 52, 0.7)',
                 }}
               >
-                <span style={{ color: '#DC1DD9', fontSize: 10 }}>{cap.icon}</span>
+                <span style={{ color: '#5481E8', fontSize: 10 }}>{cap.icon}</span>
                 {cap.label}
               </span>
             ))}
@@ -338,22 +337,22 @@ export default function FeaturePlan() {
             transition={{ duration: fading ? FADE_OUT_DURATION / 1000 : 0.3 }}
             className="rounded-2xl border overflow-hidden"
             style={{
-              borderColor: '#ffffff10',
-              background: '#ffffff03',
+              borderColor: 'rgba(14, 24, 52, 0.10)',
+              background: '#F1EEE5',
             }}
           >
             {/* Window chrome */}
-            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: '#ffffff08' }}>
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <div className="w-2 h-2 rounded-full bg-zinc-700" />
-              <span className="ml-3 text-[10px] font-mono" style={{ color: '#ffffff20' }}>
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}>
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+              <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
                 clik assistant
               </span>
             </div>
 
             {/* Chat area */}
-            <div ref={chatRef} className="px-4 py-5 space-y-3 h-[380px] md:h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
+            <div ref={chatRef} className="no-scrollbar px-4 py-5 space-y-3 h-[380px] md:h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
               <AnimatePresence mode="sync">
                 {visibleMessages.map((msg, i) => {
                   const key = `${msg.type}-${i}`;
@@ -380,8 +379,8 @@ export default function FeaturePlan() {
                     <div
                       className="rounded-2xl rounded-bl-sm"
                       style={{
-                        border: '1px solid #DC1DD920',
-                        background: 'linear-gradient(135deg, #DC1DD90A, #5481E806)',
+                        border: '1px solid rgba(84, 129, 232, 0.25)',
+                        background: 'rgba(84, 129, 232, 0.06)',
                       }}
                     >
                       <TypingDots />
@@ -396,16 +395,16 @@ export default function FeaturePlan() {
               <div
                 className="flex items-center gap-3 rounded-xl px-4 py-2.5"
                 style={{
-                  background: '#ffffff05',
-                  border: '1px solid #ffffff0A',
+                  background: 'rgba(14, 24, 52, 0.04)',
+                  border: '1px solid rgba(14, 24, 52, 0.10)',
                 }}
               >
-                <span className="text-sm" style={{ color: '#ffffff20' }}>
+                <span className="text-sm" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
                   Ask anything about your content...
                 </span>
                 <div className="ml-auto">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="#ffffff20" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="rgba(14, 24, 52, 0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
               </div>

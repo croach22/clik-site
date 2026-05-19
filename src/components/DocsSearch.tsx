@@ -120,13 +120,16 @@ export default function DocsSearch({ docs }: { docs: Doc[] }) {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', marginBottom: 24 }}>
-        <svg style={{ width: 14, height: 14, flexShrink: 0, color: '#71717a' }} viewBox="0 0 16 16" fill="none">
+      <button onClick={() => setOpen(true)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left', background: 'rgba(14, 24, 52, 0.04)', border: '1px solid rgba(14, 24, 52, 0.15)', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', marginBottom: 24, transition: 'border-color 120ms ease' }}
+        onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(14, 24, 52, 0.30)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(14, 24, 52, 0.15)'; }}
+      >
+        <svg style={{ width: 14, height: 14, flexShrink: 0, color: 'rgba(14, 24, 52, 0.55)' }} viewBox="0 0 16 16" fill="none">
           <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.4" />
           <path d="M10.5 10.5L14 14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
-        <span style={{ flex: 1, fontSize: 12, color: '#52525b' }}>Search...</span>
-        <kbd style={{ display: 'inline-flex', alignItems: 'center', fontSize: 10, color: '#52525b', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4, padding: '2px 5px', fontFamily: 'inherit' }}>⌘K</kbd>
+        <span style={{ flex: 1, fontSize: 13, color: 'rgba(14, 24, 52, 0.55)' }}>Search…</span>
+        <kbd style={{ display: 'inline-flex', alignItems: 'center', fontSize: 10, color: 'rgba(14, 24, 52, 0.55)', background: 'rgba(14, 24, 52, 0.06)', border: '1px solid rgba(14, 24, 52, 0.15)', borderRadius: 4, padding: '2px 5px', fontFamily: 'inherit' }}>⌘K</kbd>
       </button>
       {open && typeof document !== 'undefined' ? createPortal(modal, document.body) : null}
     </>

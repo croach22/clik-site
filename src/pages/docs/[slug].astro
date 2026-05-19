@@ -25,22 +25,22 @@ const next = idx < allDocs.length - 1 ? allDocs[idx + 1] : null;
 
 <DocsLayout title={doc.title} currentSlug={doc.slug}>
 
-  <p class="mb-3 text-xs text-zinc-500 pt-2">{doc.group}</p>
-  <h1 class="mb-8 text-4xl font-bold text-white leading-tight tracking-tight">{doc.title}</h1>
+  <p class="mb-3 font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55 pt-2">{doc.group}</p>
+  <h1 class="mb-8 font-display font-medium text-clik-midnight leading-tight" style="font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em;">{doc.title}</h1>
 
   <article class="docs-content" set:html={html} />
 
-  <div class="mt-16 flex items-center justify-between border-t border-white/8 pt-8 gap-4">
+  <div class="mt-16 flex items-center justify-between border-t border-clik-midnight/12 pt-8 gap-4">
     {prev ? (
       <a href={`/docs/${prev.slug}`} class="group flex flex-col gap-1 max-w-[45%]">
-        <span class="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors">← Previous</span>
-        <span class="text-sm font-medium text-zinc-300 group-hover:text-brand-cream transition-colors">{prev.title}</span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">← PREVIOUS</span>
+        <span class="font-ui text-sm font-bold text-clik-midnight group-hover:text-clik-royce transition-colors">{prev.title}</span>
       </a>
     ) : <div />}
     {next && (
       <a href={`/docs/${next.slug}`} class="group flex flex-col gap-1 text-right max-w-[45%]">
-        <span class="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors">Next →</span>
-        <span class="text-sm font-medium text-zinc-300 group-hover:text-brand-cream transition-colors">{next.title}</span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">NEXT →</span>
+        <span class="font-ui text-sm font-bold text-clik-midnight group-hover:text-clik-royce transition-colors">{next.title}</span>
       </a>
     )}
   </div>
@@ -48,21 +48,89 @@ const next = idx < allDocs.length - 1 ? allDocs[idx + 1] : null;
 </DocsLayout>
 
 <style is:global>
-  .docs-content { color: #a1a1aa; line-height: 1.75; font-size: 0.9375rem; }
-  .docs-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.375rem; font-weight: 700; color: #F9F7F1; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 0.5rem; }
-  .docs-content h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.125rem; font-weight: 600; color: #F9F7F1DD; }
+  .docs-content {
+    color: rgba(14, 24, 52, 0.8);
+    line-height: 1.75;
+    font-size: 0.9375rem;
+    font-family: var(--font-ui);
+  }
+  .docs-content h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #0E1834;
+    border-bottom: 1px solid rgba(14, 24, 52, 0.10);
+    padding-bottom: 0.5rem;
+  }
+  .docs-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #0E1834;
+  }
   .docs-content p { margin-bottom: 1.1rem; }
-  .docs-content a { color: #5481E8; text-decoration: underline; text-underline-offset: 3px; transition: color 0.15s; }
-  .docs-content a:hover { color: #7aa0f0; }
+  .docs-content a {
+    color: #5481E8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+  .docs-content a:hover { color: #4a74d3; }
   .docs-content ul, .docs-content ol { margin-bottom: 1.1rem; padding-left: 1.5rem; }
   .docs-content ul { list-style-type: disc; }
   .docs-content ol { list-style-type: decimal; }
   .docs-content li { margin-bottom: 0.4rem; }
-  .docs-content code { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.3rem; padding: 0.15em 0.4em; font-size: 0.875em; color: #F9838E; font-family: 'SF Mono', 'Fira Code', monospace; }
-  .docs-content pre { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.25rem; }
-  .docs-content pre code { background: none; border: none; padding: 0; color: #F9F7F1CC; font-size: 0.85rem; }
-  .docs-content blockquote { border-left: 3px solid #5481E8; margin-left: 0; padding-left: 1.25rem; color: #a1a1aa; font-style: italic; margin-bottom: 1.25rem; }
-  .docs-content img { max-width: 100%; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.08); margin: 1.5rem 0; }
-  .docs-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0; }
-  .docs-content strong { color: #F9F7F1CC; font-weight: 600; }
+  .docs-content code {
+    background: rgba(14, 24, 52, 0.06);
+    border: 1px solid rgba(14, 24, 52, 0.10);
+    border-radius: 0.3rem;
+    padding: 0.15em 0.4em;
+    font-size: 0.875em;
+    color: #F9838E;
+    font-family: var(--font-mono);
+  }
+  .docs-content pre {
+    background: #0E1834;
+    border: 1px solid rgba(14, 24, 52, 0.12);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+  .docs-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(249, 247, 241, 0.85);
+    font-size: 0.85rem;
+  }
+  .docs-content blockquote {
+    border-left: 3px solid #5481E8;
+    margin-left: 0;
+    padding-left: 1.25rem;
+    color: rgba(14, 24, 52, 0.7);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+  .docs-content img {
+    max-width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(14, 24, 52, 0.10);
+    margin: 1.5rem 0;
+  }
+  .docs-content hr {
+    border: none;
+    border-top: 1px solid rgba(14, 24, 52, 0.10);
+    margin: 2rem 0;
+  }
+  .docs-content strong {
+    color: #0E1834;
+    font-weight: 700;
+  }
 </style>

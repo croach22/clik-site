@@ -23,45 +23,49 @@ const grouped = GROUP_ORDER.map(group => ({
   description={description ?? `Clik documentation: ${title}`}
   theme="cream"
 >
-  <div class="flex min-h-screen pt-16">
+  {/* Docs viewport — capped at 1200px and inset 12/24px so the sidebar's left edge
+      aligns with the floating nav's left content edge. */}
+  <div class="mx-auto max-w-[1200px] px-3 md:px-6">
+    <div class="flex min-h-screen pt-24">
 
-    {/* ── Sidebar ── */}
-    <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r border-clik-midnight/10 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
-      <div class="px-6 py-7 flex-1">
+      {/* ── Sidebar ── */}
+      <aside class="no-scrollbar hidden lg:flex flex-col w-60 shrink-0 sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto pr-6 border-r border-clik-midnight/10">
+        <div class="py-2 flex-1">
 
-        {/* Search trigger */}
-        <DocsSearch docs={allDocs} client:load />
+          {/* Search trigger */}
+          <DocsSearch docs={allDocs} client:load />
 
-        {/* Nav groups */}
-        {grouped.map(({ group, docs }) => (
-          <div class="mb-7">
-            <p class="mb-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">{group}</p>
-            <ul>
-              {docs.map(doc => (
-                <li>
-                  <a
-                    href={`/docs/${doc.slug}`}
-                    class={`block border-l-2 py-1.5 pl-3.5 font-ui text-sm transition-colors ${
-                      doc.slug === currentSlug
-                        ? 'border-clik-royce text-clik-midnight font-bold'
-                        : 'border-transparent text-clik-midnight/55 hover:text-clik-midnight hover:border-clik-royce/40'
-                    }`}
-                  >
-                    {doc.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          {/* Nav groups */}
+          {grouped.map(({ group, docs }) => (
+            <div class="mb-7">
+              <p class="mb-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">{group}</p>
+              <ul>
+                {docs.map(doc => (
+                  <li>
+                    <a
+                      href={`/docs/${doc.slug}`}
+                      class={`block border-l-2 py-1.5 pl-3.5 font-ui text-sm transition-colors ${
+                        doc.slug === currentSlug
+                          ? 'border-clik-royce text-clik-midnight font-bold'
+                          : 'border-transparent text-clik-midnight/55 hover:text-clik-midnight hover:border-clik-royce/40'
+                      }`}
+                    >
+                      {doc.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-      </div>
-    </aside>
+        </div>
+      </aside>
 
-    {/* ── Main content ── */}
-    <main class="flex-1 min-w-0 mx-auto px-8 py-12 md:px-14 lg:px-16 max-w-3xl">
-      <slot />
-    </main>
+      {/* ── Main content ── */}
+      <main class="flex-1 min-w-0 mx-auto px-6 py-8 md:px-10 lg:px-14 max-w-3xl">
+        <slot />
+      </main>
 
+    </div>
   </div>
 </BaseLayout>

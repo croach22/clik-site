@@ -16,7 +16,7 @@ export default {
           cream:    '#F9F7F1',
           royce:    '#5481E8',
           salmon:   '#F9838E',
-          bone:     '#E8E5DC',
+          bone:     '#F1EEE5',
           tally:    '#E24B4A',
         },
         // Legacy brand tokens — kept temporarily so unported pages (blog, concept, etc.) build.

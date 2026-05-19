@@ -22,11 +22,13 @@
   src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-700-normal.woff2') format('woff2');
   font-display: swap;
 }
+/* Aileron 900 isn't published on fontsource — use 800 instead.
+   Tailwind `font-extrabold` maps here; `font-black` falls through. */
 @font-face {
   font-family: 'Aileron';
-  font-weight: 900;
+  font-weight: 800;
   font-style: normal;
-  src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-900-normal.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/aileron@5.0.5/files/aileron-latin-800-normal.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -40,7 +42,7 @@
   --clik-cream:    #F9F7F1;
   --clik-royce:    #5481E8;
   --clik-salmon:   #F9838E;
-  --clik-bone:     #E8E5DC;
+  --clik-bone:     #F1EEE5;
   --clik-tally:    #E24B4A;
 
   /* Computed alphas on midnight */
@@ -106,7 +108,7 @@
   /* Motion */
   --ease-out:  cubic-bezier(0.2, 0.7, 0.2, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 140ms;
+  --dur-fast: 120ms;
   --dur-base: 220ms;
   --dur-slow: 420ms;
   --dur-rec:  1100ms;
@@ -128,6 +130,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* Fixed nav clearance — anchor links land below nav, not behind it. */
   }
   body {
     /* Default stays dark for unmigrated pages (blog, concept, docs, etc.).
@@ -172,13 +175,15 @@
     color: var(--clik-royce);
     display: inline-block;
   }
+  /* Period punctuation — royce blue per Conner's preference. */
   .clik-period { color: var(--clik-royce); }
 
-  /* Buttons */
+  /* Buttons — 8px radius, committed in v2 spec.
+     Pill (999px) is reserved for chips/metadata only — don't blur the line. */
   .clik-btn {
     height: 40px;
     padding: 0 22px;
-    border-radius: var(--r-pill);
+    border-radius: var(--r-sm);
     font-family: var(--font-ui);
     font-weight: 700;
     font-size: 13px;
@@ -209,6 +214,12 @@
     background: var(--clik-midnight);
     color: var(--clik-cream);
   }
+  /* Light primary — for CTAs on midnight surfaces (nav, final CTA band) */
+  .clik-btn-light {
+    background: var(--clik-cream);
+    color: var(--clik-midnight);
+  }
+  .clik-btn-light:hover { background: var(--clik-bone); }
 
   /* Section header — [ 01 ] ──── LABEL */
   .clik-section-header {

@@ -33,7 +33,7 @@ function BatchVisual() {
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#E8E5DC' }}
+        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#F1EEE5' }}
       >
         {/* Window chrome */}
         <div
@@ -134,32 +134,19 @@ function BatchVisual() {
 export default function FeatureWorkflowAgent() {
   return (
     <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-      <div className="mx-auto max-w-6xl flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
-        {/* Left: copy */}
+      <div className="mx-auto max-w-6xl flex flex-col lg:flex-row-reverse items-start gap-12 lg:gap-20">
+        {/* Right: copy (alternating layout — opposite of Edit Agent) */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
-          <p
-            className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: ACCENT }}
-          >
-            Workflow Agent
-            <span
-              className="rounded-full text-xs normal-case tracking-normal"
-              style={{
-                color: '#5481E8',
-                fontSize: 10,
-                border: '1px solid #5481E840',
-                padding: '2px 8px',
-                background: '#5481E810',
-              }}
-            >
-              New
-            </span>
-          </p>
+          <div className="clik-section-header">
+            <span className="idx">[ 04 ]</span>
+            <span className="rule"></span>
+            <span className="label">WORKFLOW AGENT · NEW</span>
+          </div>
           <h2
             className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
-            Shoot day in. Multiple drafts out<span style={{ color: '#5481E8' }}>.</span>
+            Shoot day in. Twenty drafts out<span style={{ color: '#5481E8' }}>.</span>
           </h2>
           <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
             Feed the agent batch footage from a shoot day plus a brief from your creative director — topics, angles,
@@ -185,11 +172,6 @@ export default function FeatureWorkflowAgent() {
             ))}
           </div>
 
-          {/* Comparison line */}
-          <p className="text-sm mb-4" style={{ color: 'rgba(14, 24, 52, 0.55)' }}>
-            Like Opus Clips, but with creative control.
-          </p>
-
           {/* Proof line */}
           <div
             className="rounded-xl px-4 py-3 text-sm mb-8"
@@ -213,7 +195,7 @@ export default function FeatureWorkflowAgent() {
           </a>
         </div>
 
-        {/* Right: batch visual */}
+        {/* Left: batch visual */}
         <div className="flex-1 w-full lg:max-w-xl">
           <BatchVisual />
         </div>

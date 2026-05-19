@@ -295,12 +295,11 @@ export default function FeaturePlan() {
 
         {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
-          <p
-            className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: '#5481E8' }}
-          >
-            Brainstorm Agent
-          </p>
+          <div className="clik-section-header">
+            <span className="idx">[ 05 ]</span>
+            <span className="rule"></span>
+            <span className="label">BRAINSTORM AGENT</span>
+          </div>
           <h2
             className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
@@ -339,7 +338,7 @@ export default function FeaturePlan() {
             className="rounded-2xl border overflow-hidden"
             style={{
               borderColor: 'rgba(14, 24, 52, 0.10)',
-              background: '#E8E5DC',
+              background: '#F1EEE5',
             }}
           >
             {/* Window chrome */}

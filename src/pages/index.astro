@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroCream from '../components/HeroCream.astro';
+import AgencyBandCream from '../components/AgencyBandCream.astro';
 import ValueCream from '../components/ValueCream.astro';
 import FeatureEdit from '../components/FeatureEdit';
 import FeatureWorkflowAgent from '../components/FeatureWorkflowAgent';
@@ -19,11 +20,12 @@ import CTACream from '../components/CTACream.astro';
   theme="cream"
 >
   <div data-section="hero"><HeroCream /></div>
+  <div data-section="agency-band"><AgencyBandCream /></div>
   <div data-section="value"><ValueCream /></div>
+  <div data-section="social-proof"><QuoteCream /></div>
   <div id="feature-edit" data-section="feature-edit"><FeatureEdit client:load /></div>
   <div id="feature-workflow-agent" data-section="feature-workflow-agent"><FeatureWorkflowAgent client:load /></div>
   <div id="feature-plan" data-section="feature-plan"><FeaturePlan client:load /></div>
-  <div data-section="social-proof"><QuoteCream /></div>
   <div data-section="manifesto"><ManifestoCream /></div>
   <div data-section="formats"><UseCasesCream /></div>
   <div data-section="founding-cta"><FoundingCTACream /></div>

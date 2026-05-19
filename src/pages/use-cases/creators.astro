@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import UseCasesCream from '../../components/UseCasesCream.astro';
+import FoundingCTACream from '../../components/FoundingCTACream.astro';
+
+const capabilities = [
+  {
+    title: 'You direct. Clik edits.',
+    body: 'Tell Clik what you want — punchier hook, slower pace, swap the B-roll, cut the dead space. It does the timeline work. You make the calls.',
+  },
+  {
+    title: 'The agent finds what you missed.',
+    body: "Clik watches the whole shoot, not just the takes you remember. The line you said off-script, the moment between cuts, the alt take that's actually better — all surfaced, all searchable.",
+  },
+  {
+    title: 'One shoot becomes many videos.',
+    body: 'The hero edit. The shorts. The alt hooks. The thumbnail moments. Clik pulls every variant from a single shoot so you film once and post for a week.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Upload your shoot and your idea.',
+    body: 'Drop in your footage. Tell Clik what you’re making — a vlog, a recipe, a tutorial, a sit-down talk. Drop in a rough script if you have one.',
+  },
+  {
+    title: 'Clik reads the room.',
+    body: "It watches your footage, finds your hooks, flags what's missing, and tells you what else is in there worth pulling.",
+  },
+  {
+    title: 'Pick your formats.',
+    body: 'Long-form for YouTube. Vertical shorts for TikTok and Reels. Alt hook variants for testing. Pick one, pick five.',
+  },
+  {
+    title: 'Finish your way.',
+    body: "Polish in Clik's web editor — captions, swaps, trims. Or export to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you want full control.",
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'This just turned an 8 hour edit process into 2. I went from opening my computer to posting on YouTube in 2 hours. It was magical.',
+    author: 'Matt Ragland',
+    handle: 'YouTuber',
+  },
+  {
+    quote: 'Clik has completely changed not only how I edit but how I film. What used to take over two hours now takes 20 minutes.',
+    author: 'Randy Stoever',
+    handle: '@hotoffthestoever',
+  },
+  {
+    quote: "I've tried so many AI content tools — Clik is my favorite by far.",
+    author: 'Gigi Robinson',
+    handle: '@itsgigirobinson',
+  },
+];
+---
+
+<BaseLayout
+  title="Clik for Creators — Make 5× the content from the same shoot"
+  description="Stop editing one video at a time. Clik turns one shoot into the hero, the shorts, and the alt hooks — so you film once and post for a week."
+  theme="cream"
+>
+
+  <!-- Hero -->
+  <section class="relative pt-32 md:pt-36">
+    <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-12">
+      <div class="relative w-full px-8 py-16 md:px-16 md:py-20">
+        <span class="vf vf-tl"></span>
+        <span class="vf vf-tr"></span>
+        <span class="vf vf-bl"></span>
+        <span class="vf vf-br"></span>
+
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">For Creators</p>
+
+        <h1
+          class="mt-6 font-display font-medium tracking-display text-clik-midnight"
+          style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 18ch;"
+        >
+          Make 5× the content from the same shoot<span class="clik-period">.</span>
+        </h1>
+
+        <p class="mt-6 max-w-[620px] font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.55;">
+          You filmed it. Clik edits it. Get rough cuts for the hero, the shorts, and the alt hooks — from one shoot.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-primary">
+            Start for free <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [01] Problem -->
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 01 ]</span>
+        <span class="rule"></span>
+        <span class="label">THE PROBLEM</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-display font-medium text-clik-midnight mb-8" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch;">
+        You film more than you post. And it’s killing you<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-midnight/70 mb-6" style="font-size: 18px; line-height: 1.6;">
+        The ideas are there. The footage is there. Your camera roll is a graveyard of stuff that could’ve been a hit if you’d just had time to cut it.
+      </p>
+      <p class="font-ui text-clik-midnight/70 mb-6" style="font-size: 18px; line-height: 1.6;">
+        Instead it’s Sunday night again. You’re 6 hours into a timeline. The clip you actually want to use is buried somewhere on hour 3 of the shoot. You’re going to post late. You’re going to post one thing instead of three. And on Monday you’ll watch someone else post the exact idea you had three weeks ago.
+      </p>
+      <p class="font-ui text-clik-midnight mb-0 font-semibold" style="font-size: 18px; line-height: 1.6;">
+        Editing isn’t the part of this you love. It’s the part you survive.
+      </p>
+    </div>
+  </section>
+
+  <!-- [02] Before you open the timeline -->
+  <section class="px-6 md:px-12 py-20 md:py-24 bg-clik-bone/40">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 02 ]</span>
+        <span class="rule"></span>
+        <span class="label">BEFORE YOU OPEN THE TIMELINE</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-midnight mb-4 max-w-[22ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        What Clik delivers, day one<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-midnight/70 mb-12 max-w-[60ch]" style="font-size: 18px; line-height: 1.6;">
+        Upload a shoot. Tell Clik what you’re making. Before you’d normally finish your first cut, Clik has already done two things.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- LEFT: Shoot breakdown / audit -->
+        <div class="clik-card flex flex-col" style="padding: 32px;">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            01 · Shoot Breakdown
+          </p>
+          <h3 class="font-display font-medium text-clik-midnight mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            Every moment, surfaced.
+          </h3>
+          <p class="font-ui text-clik-midnight/70 mb-6" style="font-size: 16px; line-height: 1.55;">
+            Clik watches your footage and tells you what’s there. Hooks, B-roll, the line you forgot you said, the candid moment in between takes. Searchable, taggable, ready to pull.
+          </p>
+
+          <div class="mt-auto rounded-xl border border-clik-midnight/12 bg-clik-cream p-5">
+            <div class="flex items-center justify-between border-b border-clik-midnight/8 pb-3 mb-4">
+              <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+                Morning Routine — Vlog
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce font-bold">
+                14 / 16 beats captured
+              </span>
+            </div>
+            <ul class="space-y-2.5 font-ui text-clik-midnight/85" style="font-size: 14px; line-height: 1.5;">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/15 font-mono text-[10px] font-bold text-clik-royce">✓</span>
+                Hook: "this is my non-negotiable" at 00:08
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/15 font-mono text-[10px] font-bold text-clik-royce">✓</span>
+                Coffee pour, b-roll
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/15 font-mono text-[10px] font-bold text-clik-royce">✓</span>
+                Outfit reveal — full body
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-tally/15 font-mono text-[10px] font-bold text-clik-tally">✗</span>
+                Missing: closing CTA — "comment your routine"
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-tally/15 font-mono text-[10px] font-bold text-clik-tally">✗</span>
+                Missing: phone notification cutaway (mentioned in script)
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/20 font-mono text-[10px] font-bold text-clik-salmon">+</span>
+                Off-script: matcha spill bit at 04:22 — great alt hook
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/20 font-mono text-[10px] font-bold text-clik-salmon">+</span>
+                Bonus: window light close-up — works as B-roll on three drafts
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: First drafts speed -->
+        <div class="clik-card flex flex-col" style="padding: 32px;">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            02 · First Drafts
+          </p>
+          <h3 class="font-display font-medium text-clik-midnight mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            Cuts in 12 minutes, not all weekend.
+          </h3>
+          <p class="font-ui text-clik-midnight/70 mb-8" style="font-size: 16px; line-height: 1.55;">
+            Every format your shoot can become — the long-form hero, the short, the alt-hook A/B, the cooking version, the reaction — lands as a 90%-done draft. You open them, pick the takes you love, and ship.
+          </p>
+
+          <div class="mt-auto space-y-3">
+            <div class="rounded-xl border border-clik-royce/30 bg-clik-royce/8 p-6">
+              <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce mb-2 font-bold">
+                With Clik
+              </p>
+              <p class="font-display font-medium text-clik-midnight" style="font-size: clamp(44px, 6vw, 64px); line-height: 1; letter-spacing: -0.03em;">
+                12 min
+              </p>
+              <p class="mt-2 font-ui text-clik-midnight/70" style="font-size: 14px; line-height: 1.5;">
+                One shoot in. Every format out — as 90%-done drafts.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-clik-midnight/12 bg-clik-cream p-5">
+              <div class="flex items-baseline justify-between">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55 font-bold">
+                  Editing it yourself
+                </p>
+                <p class="font-display font-medium text-clik-midnight/55" style="font-size: 28px; line-height: 1; letter-spacing: -0.02em;">
+                  All weekend
+                </p>
+              </div>
+              <p class="mt-2 font-ui text-clik-midnight/55" style="font-size: 13px; line-height: 1.5;">
+                Per format. And you’ve only got so many weekends.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [03] How it works -->
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 03 ]</span>
+        <span class="rule"></span>
+        <span class="label">THE WORKFLOW</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-display font-medium text-clik-midnight mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        How it works<span class="clik-period">.</span>
+      </h2>
+
+      <ol class="space-y-5">
+        {steps.map((step, i) => (
+          <li class="clik-card flex gap-5" style="padding: 28px;">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-clik-royce/30 bg-clik-royce/10 font-mono text-sm font-bold text-clik-royce">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <p class="mb-2 font-display font-medium text-clik-midnight" style="font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;">{step.title}</p>
+              <p class="font-ui text-clik-midnight/70" style="font-size: 16px; line-height: 1.55;">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-10 font-ui text-clik-midnight/70 text-center" style="font-size: 18px; line-height: 1.6;">
+        Same shoot. A week of content.
+      </p>
+    </div>
+  </section>
+
+  <!-- [04] Capabilities -->
+  <section class="px-6 md:px-12 py-20 md:py-24">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 04 ]</span>
+        <span class="rule"></span>
+        <span class="label">CAPABILITIES</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-midnight mb-12 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        The reason you’ll post more<span class="clik-period">.</span>
+      </h2>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        {capabilities.map((cap) => (
+          <div class="clik-card" style="padding: 28px;">
+            <h3 class="font-display font-medium text-clik-midnight mb-4" style="font-size: clamp(20px, 2.2vw, 24px); line-height: 1.2; letter-spacing: -0.01em;">
+              {cap.title}
+            </h3>
+            <p class="font-ui text-clik-midnight/70" style="font-size: 16px; line-height: 1.6;">
+              {cap.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- [05] Proof -->
+  <section class="px-6 md:px-12 py-20 md:py-24 bg-clik-bone/40">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 05 ]</span>
+        <span class="rule"></span>
+        <span class="label">PROOF</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-midnight mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Proof<span class="clik-period">.</span>
+      </h2>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7">
+            <p class="font-ui text-clik-midnight/85 leading-relaxed mb-5" style="font-size: 16px;">
+              "{t.quote}"
+            </p>
+            <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+              <span class="font-bold text-clik-midnight">{t.author}</span>
+              <span class="text-clik-midnight/45"> · {t.handle}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- [06] Formats — reuse home-page component -->
+  <UseCasesCream />
+
+  <!-- [07] Founding Creators — reuse home-page component -->
+  <FoundingCTACream />
+
+  <!-- [08] Final CTA -->
+  <section class="px-6 md:px-12 py-20 md:py-32">
+    <div class="mx-auto max-w-[1200px]">
+      <div class="clik-section-header mb-8">
+        <span class="idx">[ 08 ]</span>
+        <span class="rule"></span>
+        <span class="label">START</span>
+      </div>
+      <div
+        class="on-midnight relative"
+        style="background: var(--clik-midnight); border-radius: 12px; padding: clamp(48px, 7vw, 96px) clamp(24px, 5vw, 64px); color: var(--clik-cream);"
+      >
+        <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: -0.02em; max-width: 16ch;">
+          Your camera roll deserves better<span class="clik-period">.</span>
+        </h2>
+        <p class="mt-6 max-w-[52ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
+          Upload your first shoot free. See what’s actually in it.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-light">
+            Start for free <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Viewfinder L-brackets — mirror HeroCream */
+  .vf {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--clik-midnight);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .vf-tl { top: 0; left: 0;       border-top: 1.5px solid; border-left: 1.5px solid; }
+  .vf-tr { top: 0; right: 0;      border-top: 1.5px solid; border-right: 1.5px solid; }
+  .vf-bl { bottom: 0; left: 0;    border-bottom: 1.5px solid; border-left: 1.5px solid; }
+  .vf-br { bottom: 0; right: 0;   border-bottom: 1.5px solid; border-right: 1.5px solid; }
+</style>

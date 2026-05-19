@@ -95,6 +95,23 @@ const { title, description = 'Clik — AI video editor for creators', theme = 'd
       }
     });
 
+    // Smooth-scroll for same-page hash links.
+    document.addEventListener('click', (e) => {
+      // Respect modifier keys (cmd/ctrl/shift = open in new tab) and middle-click
+      const me = e as MouseEvent;
+      if (me.metaKey || me.ctrlKey || me.shiftKey || me.altKey || me.button !== 0) return;
+      const a = (e.target as HTMLElement)?.closest?.('a[href*="#"]') as HTMLAnchorElement | null;
+      if (!a) return;
+      if (a.target === '_blank' || a.hasAttribute('download')) return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+      const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', url.hash);
+    });
+
     // Track CTA clicks
     document.addEventListener('click', (e) => {
       const link = (e.target as HTMLElement).closest('a[href*="sign-up"]');

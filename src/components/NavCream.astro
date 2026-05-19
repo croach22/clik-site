@@ -1,10 +1,15 @@
 ---
-// Cream nav — same architecture as legacy Nav (How it works dropdown, Use Cases, Pricing,
-// Learn, Founding Creators, Book a Demo, Start for Free) — just light-surface + brand restyled.
+// Midnight nav for cream pages — inverted contrast against the cream body.
+// Founding Creators lives in the footer, not the primary nav.
+
+// Pricing is audience-contextual: on the agencies page, "Pricing" jumps to the
+// agency plans section. Everywhere else it goes to the home pricing tier grid.
+const onAgenciesPage = Astro.url.pathname.startsWith('/use-cases/agencies');
+const pricingHref = onAgenciesPage ? '#agency-plans' : '/#pricing';
+
 const navLinks = [
-  { label: 'Use Cases', href: '/#use-cases' },
-  { label: 'Pricing',   href: '/#pricing'   },
-  { label: 'Learn',     href: '/docs'       },
+  { label: 'Pricing', href: pricingHref },
+  { label: 'Learn',   href: '/docs'     },
 ];
 
 const agents = [
@@ -12,13 +17,18 @@ const agents = [
   { label: 'Workflow Agent',   href: '/#feature-workflow-agent', isNew: true  },
   { label: 'Brainstorm Agent', href: '/#feature-plan',           isNew: false },
 ];
+
+const useCases = [
+  { label: 'For Creators', href: '/use-cases/creators' },
+  { label: 'For Agencies', href: '/use-cases/agencies' },
+];
 ---
 
-<nav class="fixed left-0 right-0 top-0 z-50 border-b border-clik-midnight/10 bg-clik-cream/90 backdrop-blur-md">
-  <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 md:px-12">
+<nav class="on-midnight fixed left-0 right-0 top-1.5 z-50 px-3 md:top-2.5 md:px-6">
+  <div class="mx-auto flex max-w-[1200px] items-center justify-between border border-clik-cream/10 p-2 backdrop-blur-md md:p-2.5" style="background: rgba(14, 24, 52, 0.92); border-radius: 18px;">
 
     <a href="/" class="flex items-center">
-      <img src="/logo-black.svg" alt="Clik" class="h-7 w-auto" />
+      <img src="/logo-white.svg" alt="Clik" class="h-5 w-auto md:h-6" />
     </a>
 
     <!-- Desktop nav -->
@@ -26,22 +36,22 @@ const agents = [
 
       <!-- How it works dropdown -->
       <div class="group relative">
-        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight">
+        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream">
           How it works
           <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
             <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
         <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
-          <div class="min-w-[200px] rounded-xl border border-clik-midnight/10 bg-clik-cream p-1.5 shadow-sm">
+          <div class="min-w-[200px] rounded-xl border border-clik-cream/10 p-1.5" style="background: #0E1834;">
             {agents.map((agent) => (
               <a
                 href={agent.href}
-                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-midnight/80 transition-colors hover:bg-clik-midnight/5 hover:text-clik-midnight"
+                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
               >
                 {agent.label}
                 {agent.isNew && (
-                  <span class="rounded-pill bg-clik-royce/15 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">
+                  <span class="rounded-pill bg-clik-royce/25 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">
                     New
                   </span>
                 )}
@@ -51,35 +61,48 @@ const agents = [
         </div>
       </div>
 
+      <!-- Use Cases dropdown -->
+      <div class="group relative">
+        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream">
+          Use Cases
+          <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
+            <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+          <div class="min-w-[200px] rounded-xl border border-clik-cream/10 p-1.5" style="background: #0E1834;">
+            {useCases.map((item) => (
+              <a
+                href={item.href}
+                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight"
+          class="font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream"
         >
           {link.label}
         </a>
       ))}
-
-      <a
-        href="/founding-creators"
-        class="font-ui text-sm font-bold text-clik-salmon transition-opacity hover:opacity-80"
-      >
-        Founding Creators
-      </a>
     </div>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-4">
       <a
-        href="https://calendly.com/clikphotos/clik-agency-demo"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden font-ui text-sm font-bold text-clik-midnight/70 transition-colors hover:text-clik-midnight md:inline-block"
+        href="https://app.clik.vision"
+        class="hidden font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream md:inline-block"
       >
-        Book a Demo
+        Sign in
       </a>
       <a
         href="https://app.clik.vision/sign-up"
-        class="clik-btn clik-btn-primary hidden md:inline-flex"
+        class="clik-btn clik-btn-light hidden md:inline-flex"
       >
         Start for free <span aria-hidden="true">→</span>
       </a>
@@ -89,79 +112,212 @@ const agents = [
         aria-label="Open menu"
       >
         <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-          <path d="M0 1h20M0 7h20M0 13h20" stroke="#0E1834" stroke-width="1.5" />
+          <path d="M0 1h20M0 7h20M0 13h20" stroke="#F9F7F1" stroke-width="1.5" />
         </svg>
       </button>
     </div>
   </div>
 </nav>
 
-<!-- Mobile menu overlay (cream) -->
-<div id="mobile-menu" class="fixed inset-0 z-[55] hidden flex-col bg-clik-cream/98 backdrop-blur-lg">
-  <div class="flex items-center justify-between px-6 py-5">
-    <a href="/" class="flex items-center">
-      <img src="/logo-black.svg" alt="Clik" class="h-7 w-auto" />
-    </a>
-    <button id="mobile-menu-close" class="flex h-10 w-10 items-center justify-center" aria-label="Close menu">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M1 1l14 14M15 1L1 15" stroke="#0E1834" stroke-width="1.5" />
-      </svg>
-    </button>
+<!-- Mobile menu — bottom-sheet drawer on cream surface, brand language -->
+<div
+  id="mobile-menu-backdrop"
+  class="pointer-events-none fixed inset-0 z-[55] bg-black/55 opacity-0 transition-opacity duration-200 ease-out md:hidden"
+  aria-hidden="true"
+></div>
+
+<div
+  id="mobile-menu-drawer"
+  class="mobile-menu-drawer fixed inset-x-0 bottom-0 z-[60] flex max-h-[75vh] translate-y-full flex-col rounded-t-[20px] transition-transform duration-[280ms] ease-out md:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+>
+  <!-- Drag handle pill -->
+  <div class="flex shrink-0 justify-center pt-3 pb-2">
+    <span class="block h-1 w-9 rounded-full bg-clik-midnight/20" aria-hidden="true"></span>
   </div>
 
-  <div class="flex flex-1 flex-col items-center justify-center gap-8">
-    <div class="flex flex-col items-center gap-3">
-      <span class="font-display text-2xl font-medium text-clik-midnight/80">How it works</span>
+  <!-- Close button -->
+  <button
+    id="mobile-menu-close"
+    class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center text-clik-midnight/65 transition-colors hover:text-clik-midnight"
+    aria-label="Close menu"
+  >
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+  </button>
+
+  <!-- Scrollable nav content -->
+  <nav class="flex-1 overflow-y-auto px-6 pb-6 pt-3">
+    <a href="/use-cases/creators" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 0">
+      <span>For Creators</span>
+      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="/use-cases/agencies" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 1">
+      <span>For Agencies</span>
+      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href={pricingHref} class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 2">
+      <span>Pricing</span>
+      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <button
+      id="mobile-howitworks-btn"
+      class="mobile-menu-row stagger-row w-full text-left"
+      style="--i: 3"
+      aria-expanded="false"
+      aria-controls="mobile-howitworks-panel"
+    >
+      <span>How it works</span>
+      <svg id="mobile-howitworks-chevron" class="mobile-menu-chevron transition-transform duration-200" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <div id="mobile-howitworks-panel" class="hidden">
       {agents.map((agent) => (
-        <a
-          href={agent.href}
-          class="mobile-menu-link font-ui text-base text-clik-midnight/55 transition-colors hover:text-clik-midnight"
-        >
-          {agent.label}
+        <a href={agent.href} class="mobile-menu-link mobile-menu-subrow">
+          <span class="flex items-center gap-2">
+            {agent.label}
+            {agent.isNew && (
+              <span class="rounded-pill border border-clik-royce/40 bg-clik-royce/10 px-1.5 py-[1px] text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">NEW</span>
+            )}
+          </span>
+          <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none" style="opacity: 0.4;"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </a>
       ))}
     </div>
-    {navLinks.map((link) => (
-      <a
-        href={link.href}
-        class="mobile-menu-link font-display text-2xl font-medium text-clik-midnight/80 transition-colors hover:text-clik-midnight"
-      >
-        {link.label}
+    <a href="/docs" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 4">
+      <span>Learn</span>
+      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- Pinned bottom CTA -->
+  <div class="shrink-0 border-t border-clik-midnight/10 px-6 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+    <div class="flex items-center gap-4">
+      <a href="https://app.clik.vision" class="mobile-menu-link font-ui text-sm font-bold text-clik-midnight/65 transition-colors hover:text-clik-midnight">
+        Sign in
       </a>
-    ))}
-    <a
-      href="/founding-creators"
-      class="mobile-menu-link font-display text-2xl font-medium text-clik-salmon transition-opacity hover:opacity-80"
-    >
-      Founding Creators
-    </a>
-    <a
-      href="https://app.clik.vision/sign-up"
-      class="mobile-menu-link clik-btn clik-btn-primary mt-4"
-    >
-      Start for free <span aria-hidden="true">→</span>
-    </a>
+      <a href="https://app.clik.vision/sign-up" class="mobile-menu-link clik-btn clik-btn-primary ml-auto">
+        Start for free <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </div>
 
+<style>
+  .mobile-menu-drawer {
+    background: #FAFAF7;
+    color: var(--clik-midnight);
+    box-shadow: 0 -1px 0 rgba(14, 24, 52, 0.08); /* hairline above the top edge, subtle */
+  }
+
+  /* Nav rows — destination label in display/serif treatment */
+  .mobile-menu-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 56px;
+    padding: 10px 0;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--clik-midnight);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 0.5px solid rgba(14, 24, 52, 0.12); /* hairline divider */
+  }
+  /* No divider on the final row in the nav */
+  nav > .mobile-menu-row:last-child {
+    border-bottom: none;
+  }
+  /* When the how-it-works panel is open, fade the trigger button's divider */
+  #mobile-howitworks-btn[aria-expanded="true"] {
+    border-bottom-color: rgba(14, 24, 52, 0.06);
+  }
+  .mobile-menu-row:active {
+    background: rgba(14, 24, 52, 0.03);
+  }
+
+  /* Indented agent subrows under "How it works" — smaller, lighter */
+  .mobile-menu-subrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 8px 0 8px 18px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: rgba(14, 24, 52, 0.65);
+    border-bottom: 0.5px solid rgba(14, 24, 52, 0.08);
+  }
+  .mobile-menu-subrow:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu-chevron {
+    width: 14px;
+    height: 14px;
+    opacity: 0.45;
+    color: currentColor;
+  }
+
+  /* Stagger-fade animation on open — rows fade in 40ms apart, 200ms each */
+  .mobile-menu-drawer .stagger-row {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .mobile-menu-drawer.drawer-open .stagger-row {
+    animation: mobileNavStagger 200ms ease-out forwards;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+  @keyframes mobileNavStagger {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
 <script>
   const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
+  const drawer = document.getElementById('mobile-menu-drawer');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
   const close = document.getElementById('mobile-menu-close');
-  const links = menu?.querySelectorAll('.mobile-menu-link');
+  const links = drawer?.querySelectorAll('.mobile-menu-link');
+  const howBtn = document.getElementById('mobile-howitworks-btn');
+  const howPanel = document.getElementById('mobile-howitworks-panel');
+  const howChevron = document.getElementById('mobile-howitworks-chevron');
 
   function openMenu() {
-    menu?.classList.remove('hidden');
-    menu?.classList.add('flex');
+    drawer?.classList.remove('translate-y-full');
+    drawer?.classList.add('drawer-open');
+    backdrop?.classList.remove('opacity-0', 'pointer-events-none');
     document.body.style.overflow = 'hidden';
   }
   function closeMenu() {
-    menu?.classList.add('hidden');
-    menu?.classList.remove('flex');
+    drawer?.classList.add('translate-y-full');
+    drawer?.classList.remove('drawer-open');
+    backdrop?.classList.add('opacity-0', 'pointer-events-none');
     document.body.style.overflow = '';
   }
 
   btn?.addEventListener('click', openMenu);
   close?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
   links?.forEach((link) => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer && drawer.classList.contains('drawer-open')) {
+      closeMenu();
+    }
+  });
+
+  howBtn?.addEventListener('click', () => {
+    const expanded = howBtn.getAttribute('aria-expanded') === 'true';
+    howBtn.setAttribute('aria-expanded', String(!expanded));
+    howPanel?.classList.toggle('hidden');
+    howChevron?.classList.toggle('rotate-180');
+  });
 </script>

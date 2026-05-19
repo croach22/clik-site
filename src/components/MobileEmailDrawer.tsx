@@ -96,7 +96,7 @@ export default function MobileEmailDrawer() {
                       Built for the desktop, where creators do their best work.
                     </h3>
                     <p className="mb-6 text-sm text-brand-cream/50">
-                      We designed this alongside top creators who edit on their computer. We'll send you a link to start your free trial when you're back at yours.
+                      We designed this alongside top creators and agencies who edit on their computers. We'll send you a link to start your free trial when you're back at yours.
                     </p>
 
                     <form onSubmit={handleSubmit} className="space-y-3">

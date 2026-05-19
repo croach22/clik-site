@@ -104,9 +104,9 @@ function UploadArea({ visible }: { visible: boolean }) {
     >
       <div
         className="rounded-lg border border-dashed px-4 py-3 text-center"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.15)', background: 'rgba(14, 24, 52, 0.04)' }}
+        style={{ borderColor: 'rgba(14, 24, 52, 0.25)', background: 'rgba(14, 24, 52, 0.04)' }}
       >
-        <p className="text-xs mb-2" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>Drop your footage</p>
+        <p className="text-xs mb-2" style={{ color: 'rgba(14, 24, 52, 0.65)' }}>Drop your footage</p>
         <div className="flex gap-1 justify-center flex-wrap">
           {UPLOADS.map((u, i) => (
             <motion.div
@@ -118,12 +118,12 @@ function UploadArea({ visible }: { visible: boolean }) {
               style={{
                 width: 44,
                 height: 34,
-                background: u.color,
-                border: `1px solid ${u.accent}30`,
+                background: `${u.accent}33`,
+                border: `1px solid ${u.accent}80`,
               }}
             >
-              <div className="w-3 h-2 rounded-sm mb-0.5" style={{ background: `${u.accent}40` }} />
-              <span className="text-[6px] font-mono" style={{ color: `${u.accent}99` }}>{u.name.replace('.MOV', '')}</span>
+              <div className="w-3 h-2 rounded-sm mb-0.5" style={{ background: u.accent }} />
+              <span className="text-[6px] font-mono" style={{ color: u.accent, opacity: 0.95 }}>{u.name.replace('.MOV', '')}</span>
             </motion.div>
           ))}
         </div>
@@ -334,16 +334,15 @@ export default function FeatureEdit() {
 
   return (
     <section ref={sectionRef} id="how-it-works" className="relative py-24 md:py-32 px-6 overflow-hidden">
-      <div className="mx-auto max-w-6xl flex flex-col lg:flex-row-reverse items-start gap-12 lg:gap-20">
+      <div className="mx-auto max-w-6xl flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
 
-        {/* ── Right: copy (reversed layout from Plan) ── */}
+        {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
-          <p
-            className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: '#5481E8' }}
-          >
-            Edit Agent
-          </p>
+          <div className="clik-section-header">
+            <span className="idx">[ 03 ]</span>
+            <span className="rule"></span>
+            <span className="label">EDIT AGENT</span>
+          </div>
           <h2
             className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
@@ -382,7 +381,7 @@ export default function FeatureEdit() {
             className="rounded-2xl border overflow-hidden"
             style={{
               borderColor: 'rgba(14, 24, 52, 0.10)',
-              background: '#E8E5DC',
+              background: '#F1EEE5',
             }}
           >
             {/* Window chrome */}

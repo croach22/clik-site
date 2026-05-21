@@ -319,23 +319,37 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
       </h2>
 
       <div class="grid gap-5 md:grid-cols-2">
-        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7">
-          <p class="font-ui text-clik-midnight/85 leading-relaxed mb-5" style="font-size: 16px;">
-            "With drafts ready instantly, our creative directors take projects deeper and iterate faster. Our editors just make finishing touches. Now we can scale without hiring more editors."
+        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7 flex flex-col">
+          <p class="font-ui text-clik-midnight/85 leading-relaxed mb-4" style="font-size: 16px;">
+            "Clik is by far the fastest path from raw footage to finished content I've ever used. We'll upload an entire shoot's worth of footage and get back tons of serviceable edits almost instantly. It even suggests really good angles and edits our team hadn't considered prior."
           </p>
-          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
-            <span class="font-bold text-clik-midnight">Feed Studios LA</span>
+          <p class="font-ui text-clik-midnight/85 leading-relaxed" style="font-size: 16px;">
+            "I love that it knows everything we shot — from visuals to dialog to b-roll — so it never misses the right moment, and the pacing of the cuts feels like it came from a veteran editor. It's really freaking good!"
           </p>
+          <div class="mt-auto pt-6 flex items-center gap-3">
+            <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5 shrink-0">
+              <img src="/images/testimonials/feed-studios.png" alt="Feed Studios" class="h-3 w-auto" loading="lazy" />
+            </span>
+            <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+              <span class="font-bold text-clik-midnight">Andrew Basille</span>
+              <span class="text-clik-midnight/45"> · Feed Studios</span>
+            </p>
+          </div>
         </div>
 
-        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7">
-          <p class="font-ui text-clik-midnight/85 leading-relaxed mb-5" style="font-size: 16px;">
+        <div class="rounded-2xl border border-clik-royce/25 bg-clik-cream p-7 flex flex-col">
+          <p class="font-ui text-clik-midnight/85 leading-relaxed" style="font-size: 16px;">
             "Clik finds extra concepts in my footage that a traditional editor would never bother to pull. Same shoot, more deliverables, less time."
           </p>
-          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
-            <span class="font-bold text-clik-midnight">Bobby</span>
-            <span class="text-clik-midnight/45"> · Founder, MAE Media</span>
-          </p>
+          <div class="mt-auto pt-6 flex items-center gap-3">
+            <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5 shrink-0">
+              <img src="/images/testimonials/mae-media.png" alt="MAE Media" class="h-3 w-auto" loading="lazy" />
+            </span>
+            <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+              <span class="font-bold text-clik-midnight">Bobby</span>
+              <span class="text-clik-midnight/45"> · Founder, MAE Media</span>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -348,7 +362,12 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
   </section>
 
   <!-- Agency plans -->
-  <section id="agency-plans" class="scroll-mt-24 px-6 md:px-12 py-20 md:py-24">
+  <section
+    id="agency-plans"
+    data-track-view="AgencyPlansView"
+    data-track-params={JSON.stringify({ audience: 'agency', surface: 'agency-page' })}
+    class="scroll-mt-24 px-6 md:px-12 py-20 md:py-24"
+  >
     <div class="mx-auto max-w-[1200px] mb-10">
       <div class="clik-section-header justify-center">
         <span class="idx">[ 06 ]</span>
@@ -406,6 +425,8 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             href={CALENDLY}
             target="_blank"
             rel="noopener noreferrer"
+            data-track-click="AgencyCTAClick"
+            data-track-params={JSON.stringify({ audience: 'agency', surface: 'agency-page', content_name: 'chat-with-ceo' })}
             class="clik-btn clik-btn-primary"
           >
             Chat with CEO <span aria-hidden="true">→</span>

@@ -85,6 +85,61 @@ const { title, description = 'Clik — AI video editor for creators', theme = 'd
   <FloatingCTA />
   <MobileEmailDrawer client:load />
   <script>
+    import { trackMetaEvent } from '../lib/analytics';
+
+    // Fire AgencyPageView once the agency page loads (custom event — stronger
+    // optimization signal than the vanilla PageView already fired by the Pixel snippet).
+    if (location.pathname.startsWith('/use-cases/agencies')) {
+      trackMetaEvent('AgencyPageView', { audience: 'agency', surface: 'agency-page' });
+    }
+    if (location.pathname.startsWith('/use-cases/creators')) {
+      trackMetaEvent('CreatorPageView', { audience: 'creator', surface: 'creator-page' });
+    }
+
+    // Delegated click tracking via [data-track-click="EventName"].
+    // Optional [data-track-params='{"audience":"agency"}'] for custom params.
+    document.addEventListener('click', (e) => {
+      const el = (e.target as HTMLElement)?.closest?.('[data-track-click]') as HTMLElement | null;
+      if (!el) return;
+      const eventName = el.getAttribute('data-track-click');
+      if (!eventName) return;
+      let params: Record<string, unknown> = {};
+      const raw = el.getAttribute('data-track-params');
+      if (raw) {
+        try { params = JSON.parse(raw); } catch { /* malformed JSON — ignore */ }
+      }
+      trackMetaEvent(eventName, params);
+    });
+
+    // Delegated view tracking via [data-track-view="EventName"] using
+    // IntersectionObserver. Each event fires at most once per session
+    // (sessionStorage flag) so it survives in-page scrolls.
+    const trackViewEls = document.querySelectorAll<HTMLElement>('[data-track-view]');
+    if (trackViewEls.length && 'IntersectionObserver' in window) {
+      const viewObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const eventName = el.getAttribute('data-track-view');
+          if (!eventName) return;
+          const sessionKey = `mt-view:${eventName}`;
+          if (sessionStorage.getItem(sessionKey)) {
+            viewObserver.unobserve(el);
+            return;
+          }
+          sessionStorage.setItem(sessionKey, '1');
+          let params: Record<string, unknown> = {};
+          const raw = el.getAttribute('data-track-params');
+          if (raw) {
+            try { params = JSON.parse(raw); } catch { /* malformed — ignore */ }
+          }
+          trackMetaEvent(eventName, params);
+          viewObserver.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      trackViewEls.forEach((el) => viewObserver.observe(el));
+    }
+
     // On mobile, intercept sign-up links and show email drawer instead
     document.addEventListener('click', (e) => {
       if (window.innerWidth > 768) return;

@@ -8,8 +8,14 @@ const onAgenciesPage = Astro.url.pathname.startsWith('/use-cases/agencies');
 const pricingHref = onAgenciesPage ? '#agency-plans' : '/#pricing';
 
 const navLinks = [
-  { label: 'Pricing', href: pricingHref },
-  { label: 'Learn',   href: '/docs'     },
+  {
+    label: 'Pricing',
+    href: pricingHref,
+    // Clicking Pricing while on the agencies page is a very high intent signal.
+    track: onAgenciesPage ? 'AgencyPricingNavClick' : undefined,
+    trackParams: onAgenciesPage ? { audience: 'agency', surface: 'nav' } : undefined,
+  },
+  { label: 'Learn', href: '/docs' },
 ];
 
 const agents = [
@@ -19,8 +25,8 @@ const agents = [
 ];
 
 const useCases = [
-  { label: 'For Creators', href: '/use-cases/creators' },
-  { label: 'For Agencies', href: '/use-cases/agencies' },
+  { label: 'For Creators', href: '/use-cases/creators', track: 'CreatorNavClick', trackParams: { audience: 'creator', surface: 'nav' } },
+  { label: 'For Agencies', href: '/use-cases/agencies', track: 'AgencyNavClick',  trackParams: { audience: 'agency',  surface: 'nav' } },
 ];
 ---
 
@@ -74,6 +80,8 @@ const useCases = [
             {useCases.map((item) => (
               <a
                 href={item.href}
+                data-track-click={item.track}
+                data-track-params={JSON.stringify(item.trackParams)}
                 class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
               >
                 {item.label}
@@ -86,6 +94,8 @@ const useCases = [
       {navLinks.map((link) => (
         <a
           href={link.href}
+          data-track-click={link.track}
+          data-track-params={link.trackParams ? JSON.stringify(link.trackParams) : undefined}
           class="font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream"
         >
           {link.label}
@@ -151,15 +161,33 @@ const useCases = [
 
   <!-- Scrollable nav content -->
   <nav class="flex-1 overflow-y-auto px-6 pb-6 pt-3">
-    <a href="/use-cases/creators" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 0">
+    <a
+      href="/use-cases/creators"
+      data-track-click="CreatorNavClick"
+      data-track-params={JSON.stringify({ audience: 'creator', surface: 'mobile-drawer' })}
+      class="mobile-menu-link mobile-menu-row stagger-row"
+      style="--i: 0"
+    >
       <span>For Creators</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
-    <a href="/use-cases/agencies" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 1">
+    <a
+      href="/use-cases/agencies"
+      data-track-click="AgencyNavClick"
+      data-track-params={JSON.stringify({ audience: 'agency', surface: 'mobile-drawer' })}
+      class="mobile-menu-link mobile-menu-row stagger-row"
+      style="--i: 1"
+    >
       <span>For Agencies</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
-    <a href={pricingHref} class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 2">
+    <a
+      href={pricingHref}
+      data-track-click={onAgenciesPage ? 'AgencyPricingNavClick' : undefined}
+      data-track-params={onAgenciesPage ? JSON.stringify({ audience: 'agency', surface: 'mobile-drawer' }) : undefined}
+      class="mobile-menu-link mobile-menu-row stagger-row"
+      style="--i: 2"
+    >
       <span>Pricing</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>

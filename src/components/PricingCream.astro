@@ -139,6 +139,9 @@ const ICONS: Record<NonNullable<Tier['exportsTo']>[number], { label: string; abb
     <!-- Agency callout — smaller treatment below the 3-tier grid -->
     <a
       href="/use-cases/agencies#agency-plans"
+      data-track-click="AgencyPricingClick"
+      data-track-params={JSON.stringify({ audience: 'agency', surface: 'pricing' })}
+      data-track-view="AgencyPricingView"
       class="group mt-8 block rounded-2xl border border-clik-midnight/12 bg-clik-bone/40 p-6 md:p-7 transition-colors hover:border-clik-midnight/25"
     >
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">

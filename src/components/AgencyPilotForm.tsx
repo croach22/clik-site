@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackMetaEvent } from '../lib/analytics';
 
 // Shared Formspark destination with AgencyQualificationForm — both forms feed the
 // same agency-leads inbox so we don't manage two pipelines.
@@ -58,9 +59,20 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
       // Continue gracefully — Formspark also emails on failure
     }
 
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead', { content_name: 'agency-demo' });
-    }
+    // Meta standard Lead + custom AgencyLead (both via Pixel + Stape CAPI, dedup'd by event_id).
+    // Email gets SHA-256 hashed before going to the server for Meta match-rate improvement.
+    trackMetaEvent('Lead', { content_name: 'agency-demo', audience: 'agency' }, { email: form.email });
+    trackMetaEvent(
+      'AgencyLead',
+      {
+        audience: 'agency',
+        surface: variant === 'accent' ? 'agency-page' : 'agency-page',
+        content_name: 'agency-demo',
+        monthly_output: form.monthlyOutput,
+      },
+      { email: form.email },
+    );
+
     if (typeof window !== 'undefined' && window.posthog) {
       window.posthog.capture('agency_demo_requested', {
         monthly_output: form.monthlyOutput,

@@ -339,7 +339,7 @@ export default function FeatureEdit() {
         {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <div className="clik-section-header">
-            <span className="idx">[ 03 ]</span>
+            <span className="idx">[ 04 ]</span>
             <span className="rule"></span>
             <span className="label">EDIT AGENT</span>
           </div>

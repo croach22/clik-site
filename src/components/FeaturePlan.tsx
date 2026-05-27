@@ -296,7 +296,7 @@ export default function FeaturePlan() {
         {/* ── Left: copy ── */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <div className="clik-section-header">
-            <span className="idx">[ 05 ]</span>
+            <span className="idx">[ 06 ]</span>
             <span className="rule"></span>
             <span className="label">BRAINSTORM AGENT</span>
           </div>

@@ -138,7 +138,7 @@ export default function FeatureWorkflowAgent() {
         {/* Right: copy (alternating layout — opposite of Edit Agent) */}
         <div className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <div className="clik-section-header">
-            <span className="idx">[ 04 ]</span>
+            <span className="idx">[ 05 ]</span>
             <span className="rule"></span>
             <span className="label">WORKFLOW AGENT · NEW</span>
           </div>

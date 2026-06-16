@@ -1,8 +1,8 @@
 import pkg from '@notionhq/client';
 import mdPkg from 'notion-to-md';
-import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
+// slugify + downloadImage live in a shared, env-free module so the build-time
+// prefetch (scripts/prefetch-docs.mjs) produces byte-identical filenames.
+import { slugify, downloadImage } from './docs-images.mjs';
 
 const { Client } = pkg;
 const { NotionToMarkdown } = mdPkg;
@@ -10,12 +10,7 @@ const { NotionToMarkdown } = mdPkg;
 const notion = new Client({ auth: import.meta.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-export function slugify(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
+export { slugify };
 
 export interface DocPage {
   id: string;
@@ -49,25 +44,6 @@ export async function getAllDocs(): Promise<DocPage[]> {
       };
     })
     .sort((a, b) => a.order - b.order);
-}
-
-async function downloadImage(url: string, slug: string): Promise<string> {
-  const hash = crypto.createHash('md5').update(url.split('?')[0]).digest('hex').slice(0, 10);
-  const ext = url.match(/\.(png|jpg|jpeg|gif|webp|svg)/i)?.[1] || 'png';
-  const filename = `${slug}-${hash}.${ext}`;
-  const dir = path.join(process.cwd(), 'public', 'images', 'docs');
-  const filepath = path.join(dir, filename);
-
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  if (!fs.existsSync(filepath)) {
-    const res = await fetch(url);
-    if (res.ok) {
-      const buffer = Buffer.from(await res.arrayBuffer());
-      fs.writeFileSync(filepath, buffer);
-    }
-  }
-
-  return `/images/docs/${filename}`;
 }
 
 export async function getDocContent(pageId: string, slug: string = 'doc'): Promise<string> {

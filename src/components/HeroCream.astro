@@ -1,5 +1,6 @@
 ---
-// Cream-surface hero — viewfinder L-brackets frame the headline + CTAs only.
+// Hero — engine/throughput ethos, no camera motifs. Kicker gets the
+// accent-bar treatment; the headline sits clean above the loop.
 // Headline stays input-agnostic (shoots, podcasts, clip folders) so clipping
 // isn't alienated; the subhead does the differentiating — "sorts, plans" is
 // the wedge nobody else can claim.
@@ -11,17 +12,14 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 <section id="hero" class="relative pt-32 md:pt-36">
   <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-24">
 
-    <!-- Headline frame: all four viewfinder L-brackets present at the corners. -->
-    <div class="relative w-full px-8 py-16 md:px-16 md:py-20">
-      <span class="vf vf-tl"></span>
-      <span class="vf vf-tr"></span>
-      <span class="vf vf-bl"></span>
-      <span class="vf vf-br"></span>
-
-      <!-- Kicker -->
-      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
-        AI-Powered Content Ops
-      </p>
+    <div class="w-full py-8 md:py-12">
+      <!-- Kicker — vertical accent bar, systems language -->
+      <div class="flex items-center gap-3">
+        <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+          AI-Powered Content Ops
+        </p>
+      </div>
 
       <!-- Headline -->
       <h1
@@ -49,7 +47,7 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 
     <!-- Hero visual — looping inputs → engine → fan-out animation, with
          flowing line-art garnish converging into the card from both sides -->
-    <div class="relative mt-16 md:mt-24">
+    <div class="relative mt-12 md:mt-16">
       <svg
         class="pointer-events-none absolute -left-24 top-1/2 hidden w-64 -translate-y-1/2 md:block"
         viewBox="0 0 260 200"
@@ -84,19 +82,3 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
     </div>
   </div>
 </section>
-
-<style>
-  /* Viewfinder L-brackets — frame the headline + CTAs region */
-  .vf {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-color: var(--clik-cream);
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  .vf-tl { top: 0; left: 0;       border-top: 1.5px solid; border-left: 1.5px solid; }
-  .vf-tr { top: 0; right: 0;      border-top: 1.5px solid; border-right: 1.5px solid; }
-  .vf-bl { bottom: 0; left: 0;    border-bottom: 1.5px solid; border-left: 1.5px solid; }
-  .vf-br { bottom: 0; right: 0;   border-bottom: 1.5px solid; border-right: 1.5px solid; }
-</style>

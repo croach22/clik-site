@@ -44,13 +44,10 @@ const others = [
       {statLine.headline}<span class="clik-period">.</span>
     </h2>
 
-    <!-- Hero quote — bracket-framed window -->
+    <!-- Hero quote -->
     <div
-      class="clik-frame relative mt-12"
-      style="color: var(--clik-cream); padding: 56px clamp(24px, 5vw, 64px);"
+      class="bento-card relative mt-12 border" style="border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03); color: var(--clik-cream); padding: 56px clamp(24px, 5vw, 64px);"
     >
-      <span class="clik-corner-tr"></span>
-      <span class="clik-corner-bl"></span>
 
       <p
         class="font-display font-medium italic text-clik-cream"
@@ -74,11 +71,8 @@ const others = [
     <div class="marquee-track">
       {[...others, ...others, ...others].map((t) => (
         <div
-          class="marquee-card flex-shrink-0 w-[360px] clik-frame relative bg-transparent flex flex-col"
-          style="color: var(--clik-cream); padding: 24px; min-height: 220px;"
+          class="marquee-card bento-card flex-shrink-0 w-[360px] relative border flex flex-col" style="border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03); color: var(--clik-cream); padding: 24px; min-height: 220px;"
         >
-          <span class="clik-corner-tr"></span>
-          <span class="clik-corner-bl"></span>
           <p class="font-ui text-clik-cream" style="font-size: 15px; line-height: 1.55;">"{t.quote}"</p>
           <div class="mt-auto pt-4 flex items-center gap-2.5">
             {t.avatar && t.avatarKind === 'photo' && (
@@ -106,11 +100,8 @@ const others = [
   <!-- Case detail — featured video testimonial, Bobby / MAE Media -->
   <div class="mx-auto max-w-[1100px] mt-16">
     <div
-      class="clik-frame relative bg-transparent"
-      style="color: var(--clik-cream); padding: clamp(16px, 2vw, 20px);"
+      class="bento-card relative border" style="border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03); color: var(--clik-cream); padding: clamp(16px, 2vw, 20px);"
     >
-      <span class="clik-corner-tr"></span>
-      <span class="clik-corner-bl"></span>
 
       <video
         controls

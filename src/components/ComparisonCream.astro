@@ -1,0 +1,146 @@
+---
+// Clik vs. hiring an editor — bridges directly into pricing, so cost rows are
+// scoped per video (matches how buyers already think about editor cost).
+// The "your time per video" row is the one that wins arguments: the obvious
+// objection to any AI tool is "I have to explain what I want either way" —
+// directing a human costs more than teaching Clik, which then persists.
+const rows = [
+  {
+    label: 'First draft',
+    human: 'Multiple business days',
+    clik: 'Minutes',
+    emphasis: false,
+  },
+  {
+    label: 'Iteration',
+    human: 'Business days',
+    clik: 'Instant',
+    emphasis: false,
+  },
+  {
+    label: 'Cost per video',
+    human: '$25–50',
+    clik: '~$5',
+    emphasis: false,
+  },
+  {
+    label: 'Your time per video',
+    human: 'Brief, review, re-brief — every time',
+    clik: 'Context once, into the brand guide',
+    emphasis: true,
+  },
+  {
+    label: 'Availability',
+    human: 'Time off, turnover, handoffs',
+    clik: '24/7, never loses your brand rules',
+    emphasis: false,
+  },
+];
+---
+
+<section id="comparison" class="px-6 md:px-12 py-24 md:py-32">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 07 ]</span>
+      <span class="rule"></span>
+      <span class="label">THE MATH</span>
+    </div>
+
+    <h2
+      class="font-display font-medium text-clik-midnight"
+      style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
+    >
+      Clik vs. hiring an editor<span class="clik-period">.</span>
+    </h2>
+
+    <!-- Comparison grid — .clik-kv dashed-row vocabulary, Clik column royce-accented -->
+    <div class="mt-12 comparison-grid">
+      <!-- Column header row -->
+      <div class="comp-row comp-head">
+        <div class="comp-label" aria-hidden="true"></div>
+        <div class="comp-cell font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+          Human editor
+        </div>
+        <div class="comp-cell comp-clik font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+          Clik
+        </div>
+      </div>
+
+      {rows.map((row) => (
+        <div class={`comp-row ${row.emphasis ? 'comp-emphasis' : ''}`}>
+          <div class="comp-label font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+            {row.label}
+          </div>
+          <div class="comp-cell font-ui text-clik-midnight/60" style="font-size: 15px; line-height: 1.45;">
+            {row.human}
+          </div>
+          <div class="comp-cell comp-clik font-ui text-clik-midnight" style="font-size: 15px; line-height: 1.45;">
+            {row.clik}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-grid {
+    border: 1px solid var(--clik-mid-12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .comp-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.2fr;
+    border-bottom: 1px dashed var(--clik-mid-12);
+  }
+  .comp-row:last-child {
+    border-bottom: none;
+  }
+  .comp-head {
+    border-bottom: 1px solid var(--clik-mid-12);
+    background: var(--clik-bone);
+  }
+  .comp-label,
+  .comp-cell {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+  }
+  /* Clik column — royce-tinted, full-height band down the grid */
+  .comp-clik {
+    background: rgba(84, 129, 232, 0.06);
+    border-left: 1px solid rgba(84, 129, 232, 0.25);
+  }
+  /* The row that wins arguments */
+  .comp-emphasis .comp-label,
+  .comp-emphasis .comp-cell {
+    font-weight: 700;
+  }
+  .comp-emphasis .comp-clik {
+    background: rgba(84, 129, 232, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    .comp-row {
+      grid-template-columns: 1fr 1fr;
+    }
+    .comp-label {
+      grid-column: 1 / -1;
+      padding: 14px 16px 0;
+    }
+    .comp-head .comp-label {
+      display: none;
+    }
+    .comp-label,
+    .comp-cell {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .comp-cell {
+      padding-top: 10px;
+      padding-bottom: 14px;
+      font-size: 14px !important;
+    }
+  }
+</style>

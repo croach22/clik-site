@@ -182,7 +182,6 @@ const { title, description = 'Clik — AI video editor for creators', theme = 'd
     });
 
     // Track section visibility (fires once per section per page load)
-    const sectionNames = ['hero', 'value', 'feature-edit', 'feature-plan', 'use-cases', 'manifesto', 'founding-cta', 'social-proof', 'pricing', 'cta'];
     const seen = new Set<string>();
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

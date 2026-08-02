@@ -1,36 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroCream from '../components/HeroCream.astro';
-import AgencyBandCream from '../components/AgencyBandCream.astro';
-import ValueCream from '../components/ValueCream.astro';
-import TestimonialVideoCream from '../components/TestimonialVideoCream.astro';
-import FeatureEdit from '../components/FeatureEdit';
-import FeatureWorkflowAgent from '../components/FeatureWorkflowAgent';
-import FeaturePlan from '../components/FeaturePlan';
-import ManifestoCream from '../components/ManifestoCream.astro';
-import UseCasesCream from '../components/UseCasesCream.astro';
-import QuoteCream from '../components/QuoteCream.astro';
-import FoundingCTACream from '../components/FoundingCTACream.astro';
+import LogoStripCream from '../components/LogoStripCream.astro';
+import UseCaseTabs from '../components/UseCaseTabs';
+import SocialProofCream from '../components/SocialProofCream.astro';
+import FeatureBrandMemory from '../components/FeatureBrandMemory';
+import FeatureWorkflows from '../components/FeatureWorkflows';
+import FeatureBuild from '../components/FeatureBuild';
+import FeatureDashboard from '../components/FeatureDashboard';
+import ComparisonCream from '../components/ComparisonCream.astro';
+import AutopilotCream from '../components/AutopilotCream.astro';
 import PricingCream from '../components/PricingCream.astro';
+import NotForCream from '../components/NotForCream.astro';
+import FaqCream from '../components/FaqCream.astro';
 import CTACream from '../components/CTACream.astro';
 ---
 
 <BaseLayout
-  title="Clik - AI Agents for Video Editing"
-  description="Go from raw footage to a clean, publish-ready edit in minutes. AI video editing built for creators."
+  title="Clik - An On-Brand Content Engine for Any Video Input"
+  description="Point it at a shoot, a podcast, or a folder of clips. It sorts, plans, and builds — and gets sharper every project."
   theme="cream"
 >
   <div data-section="hero"><HeroCream /></div>
-  <div data-section="agency-band"><AgencyBandCream /></div>
-  <div data-section="value"><ValueCream /></div>
-  <div data-section="testimonial-video"><TestimonialVideoCream /></div>
-  <div data-section="social-proof"><QuoteCream /></div>
-  <div id="feature-edit" data-section="feature-edit"><FeatureEdit client:load /></div>
-  <div id="feature-workflow-agent" data-section="feature-workflow-agent"><FeatureWorkflowAgent client:load /></div>
-  <div id="feature-plan" data-section="feature-plan"><FeaturePlan client:load /></div>
-  <div data-section="manifesto"><ManifestoCream /></div>
-  <div data-section="formats"><UseCasesCream /></div>
-  <div data-section="founding-cta"><FoundingCTACream /></div>
+  <div data-section="logo-strip"><LogoStripCream /></div>
+  <div data-section="use-cases"><UseCaseTabs client:visible /></div>
+  <div data-section="social-proof"><SocialProofCream /></div>
+  <div data-section="brand-memory"><FeatureBrandMemory client:visible /></div>
+  <div data-section="workflows"><FeatureWorkflows client:visible /></div>
+  <div data-section="build-agent"><FeatureBuild client:visible /></div>
+  <div data-section="dashboard"><FeatureDashboard client:visible /></div>
+  <div data-section="comparison"><ComparisonCream /></div>
+  <div data-section="autopilot"><AutopilotCream /></div>
   <div data-section="pricing"><PricingCream /></div>
+  <div data-section="who-for"><NotForCream /></div>
+  <div data-section="faq"><FaqCream /></div>
   <div data-section="cta"><CTACream /></div>
 </BaseLayout>

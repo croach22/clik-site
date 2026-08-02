@@ -1,0 +1,61 @@
+---
+// "Who this isn't for" — placed AFTER pricing, deliberately: it reinforces
+// that the price makes sense once you know who it's for. Reads as a trust
+// filter, not a discouragement. No CTA — the filter is the point.
+const builtFor = [
+  'Teams turning shoot days into weekly publishing pipelines',
+  'Agencies running content for multiple accounts',
+  'Podcasts and shows clipping every episode',
+];
+
+const notFor = [
+  'Posting a video here and there',
+  'One-off edits with no repeatable format',
+];
+---
+
+<section id="who-for" class="px-6 md:px-12 py-24 md:py-32">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 10 ]</span>
+      <span class="rule"></span>
+      <span class="label">A STRAIGHT ANSWER</span>
+    </div>
+
+    <h2
+      class="font-display font-medium text-clik-midnight"
+      style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 22ch;"
+    >
+      Built for teams scaling output<span class="clik-period">.</span>
+    </h2>
+
+    <p class="mt-5 max-w-[620px] font-ui text-clik-midnight/70" style="font-size: 17px; line-height: 1.55;">
+      Clik earns its keep when content is a system, not an occasional post. If that's you, the math above works on your first project. If it isn't yet, we'd rather you know now.
+    </p>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-2 md:gap-12">
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">Built for</p>
+        <ul class="mt-4 space-y-3">
+          {builtFor.map((item) => (
+            <li class="flex items-start gap-3 font-ui text-clik-midnight" style="font-size: 15px; line-height: 1.5;">
+              <span class="mt-0.5 text-clik-royce" aria-hidden="true">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/45">Not built for</p>
+        <ul class="mt-4 space-y-3">
+          {notFor.map((item) => (
+            <li class="flex items-start gap-3 font-ui text-clik-midnight/55" style="font-size: 15px; line-height: 1.5;">
+              <span class="mt-0.5" aria-hidden="true">✕</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

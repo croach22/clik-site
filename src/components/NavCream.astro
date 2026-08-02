@@ -1,5 +1,7 @@
 ---
 // Midnight nav for cream pages — inverted contrast against the cream body.
+// Flat nav: Pricing + Blog. Solutions dropdown (creators/agencies/media teams)
+// is phase two — build after the single landing page is converting.
 // Founding Creators lives in the footer, not the primary nav.
 
 // Pricing is audience-contextual: on the agencies page, "Pricing" jumps to the
@@ -15,18 +17,7 @@ const navLinks = [
     track: onAgenciesPage ? 'AgencyPricingNavClick' : undefined,
     trackParams: onAgenciesPage ? { audience: 'agency', surface: 'nav' } : undefined,
   },
-  { label: 'Learn', href: '/docs' },
-];
-
-const agents = [
-  { label: 'Edit Agent',       href: '/#feature-edit',           isNew: false },
-  { label: 'Workflow Agent',   href: '/#feature-workflow-agent', isNew: true  },
-  { label: 'Brainstorm Agent', href: '/#feature-plan',           isNew: false },
-];
-
-const useCases = [
-  { label: 'For Creators', href: '/use-cases/creators', track: 'CreatorNavClick', trackParams: { audience: 'creator', surface: 'nav' } },
-  { label: 'For Agencies', href: '/use-cases/agencies', track: 'AgencyNavClick',  trackParams: { audience: 'agency',  surface: 'nav' } },
+  { label: 'Blog', href: '/blog' },
 ];
 ---
 
@@ -39,58 +30,6 @@ const useCases = [
 
     <!-- Desktop nav -->
     <div class="hidden items-center gap-8 md:flex">
-
-      <!-- How it works dropdown -->
-      <div class="group relative">
-        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream">
-          How it works
-          <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
-            <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
-          <div class="min-w-[200px] rounded-xl border border-clik-cream/10 p-1.5" style="background: #0E1834;">
-            {agents.map((agent) => (
-              <a
-                href={agent.href}
-                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
-              >
-                {agent.label}
-                {agent.isNew && (
-                  <span class="rounded-pill bg-clik-royce/25 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">
-                    New
-                  </span>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- Use Cases dropdown -->
-      <div class="group relative">
-        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream">
-          Use Cases
-          <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
-            <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
-          <div class="min-w-[200px] rounded-xl border border-clik-cream/10 p-1.5" style="background: #0E1834;">
-            {useCases.map((item) => (
-              <a
-                href={item.href}
-                data-track-click={item.track}
-                data-track-params={JSON.stringify(item.trackParams)}
-                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -162,60 +101,17 @@ const useCases = [
   <!-- Scrollable nav content -->
   <nav class="flex-1 overflow-y-auto px-6 pb-6 pt-3">
     <a
-      href="/use-cases/creators"
-      data-track-click="CreatorNavClick"
-      data-track-params={JSON.stringify({ audience: 'creator', surface: 'mobile-drawer' })}
-      class="mobile-menu-link mobile-menu-row stagger-row"
-      style="--i: 0"
-    >
-      <span>For Creators</span>
-      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </a>
-    <a
-      href="/use-cases/agencies"
-      data-track-click="AgencyNavClick"
-      data-track-params={JSON.stringify({ audience: 'agency', surface: 'mobile-drawer' })}
-      class="mobile-menu-link mobile-menu-row stagger-row"
-      style="--i: 1"
-    >
-      <span>For Agencies</span>
-      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </a>
-    <a
       href={pricingHref}
       data-track-click={onAgenciesPage ? 'AgencyPricingNavClick' : undefined}
       data-track-params={onAgenciesPage ? JSON.stringify({ audience: 'agency', surface: 'mobile-drawer' }) : undefined}
       class="mobile-menu-link mobile-menu-row stagger-row"
-      style="--i: 2"
+      style="--i: 0"
     >
       <span>Pricing</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
-    <button
-      id="mobile-howitworks-btn"
-      class="mobile-menu-row stagger-row w-full text-left"
-      style="--i: 3"
-      aria-expanded="false"
-      aria-controls="mobile-howitworks-panel"
-    >
-      <span>How it works</span>
-      <svg id="mobile-howitworks-chevron" class="mobile-menu-chevron transition-transform duration-200" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <div id="mobile-howitworks-panel" class="hidden">
-      {agents.map((agent) => (
-        <a href={agent.href} class="mobile-menu-link mobile-menu-subrow">
-          <span class="flex items-center gap-2">
-            {agent.label}
-            {agent.isNew && (
-              <span class="rounded-pill border border-clik-royce/40 bg-clik-royce/10 px-1.5 py-[1px] text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">NEW</span>
-            )}
-          </span>
-          <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none" style="opacity: 0.4;"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      ))}
-    </div>
-    <a href="/docs" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 4">
-      <span>Learn</span>
+    <a href="/blog" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 1">
+      <span>Blog</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
   </nav>
@@ -262,28 +158,8 @@ const useCases = [
   nav > .mobile-menu-row:last-child {
     border-bottom: none;
   }
-  /* When the how-it-works panel is open, fade the trigger button's divider */
-  #mobile-howitworks-btn[aria-expanded="true"] {
-    border-bottom-color: rgba(14, 24, 52, 0.06);
-  }
   .mobile-menu-row:active {
     background: rgba(14, 24, 52, 0.03);
-  }
-
-  /* Indented agent subrows under "How it works" — smaller, lighter */
-  .mobile-menu-subrow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 44px;
-    padding: 8px 0 8px 18px;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    color: rgba(14, 24, 52, 0.65);
-    border-bottom: 0.5px solid rgba(14, 24, 52, 0.08);
-  }
-  .mobile-menu-subrow:last-child {
-    border-bottom: none;
   }
 
   .mobile-menu-chevron {
@@ -314,9 +190,6 @@ const useCases = [
   const backdrop = document.getElementById('mobile-menu-backdrop');
   const close = document.getElementById('mobile-menu-close');
   const links = drawer?.querySelectorAll('.mobile-menu-link');
-  const howBtn = document.getElementById('mobile-howitworks-btn');
-  const howPanel = document.getElementById('mobile-howitworks-panel');
-  const howChevron = document.getElementById('mobile-howitworks-chevron');
 
   function openMenu() {
     drawer?.classList.remove('translate-y-full');
@@ -340,12 +213,5 @@ const useCases = [
     if (e.key === 'Escape' && drawer && drawer.classList.contains('drawer-open')) {
       closeMenu();
     }
-  });
-
-  howBtn?.addEventListener('click', () => {
-    const expanded = howBtn.getAttribute('aria-expanded') === 'true';
-    howBtn.setAttribute('aria-expanded', String(!expanded));
-    howPanel?.classList.toggle('hidden');
-    howChevron?.classList.toggle('rotate-180');
   });
 </script>

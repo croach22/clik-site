@@ -1,0 +1,155 @@
+---
+// Social proof — placed AFTER the use-case tabs, not under the hero:
+// endorsements only land once the reader knows what's being endorsed.
+// Leads with volume numbers over adjectives, then quotes, then the
+// Bobby/MAE video as the case detail.
+// All quotes are real and verbatim — never substitute or invent testimonials.
+
+// TODO(conner): verify the exact volume stat before deploy — "100 files into
+// 15 videos in 11 minutes" is the outline's example framing.
+const statLine = {
+  headline: '100 files in. 15 videos out. 11 minutes',
+};
+
+const hero = {
+  quote: "Clik is by far the fastest path from raw footage to finished content I've ever used. The pacing feels like it came from a veteran editor.",
+  author: 'ANDREW BASILLE',
+  handle: 'FEED STUDIOS',
+  avatar: '/images/testimonials/feed-studios.png',
+  avatarKind: 'logo' as const,
+};
+
+const others = [
+  { quote: 'This just turned an 8 hour edit process into 2. I went from opening my computer to posting on YouTube in 2 hours. It was magical.', author: 'MATT RAGLAND', handle: 'YOUTUBER', avatar: '/images/testimonials/matt-ragland.jpg', avatarKind: 'photo' as const },
+  { quote: 'Clik finds extra concepts in my footage that a traditional editor would never bother to pull. Same shoot, more deliverables, less time.', author: 'BOBBY', handle: 'FOUNDER, MAE MEDIA', avatar: '/images/testimonials/mae-media.png', avatarKind: 'logo' as const },
+  { quote: 'This will totally change how people create content.', author: 'ZACH NEMAN', handle: '@CHEFFINWITHZACH', avatar: '/images/testimonials/zach-neman.jpg', avatarKind: 'photo' as const },
+  { quote: 'Clik has completely changed not only how I edit but how I film. What used to take over two hours now takes 20 minutes, and I enjoy the entire process around cooking content much more now.', author: 'RANDY STOEVER', handle: '@HOTOFFTHESTOEVER', avatar: '/images/testimonials/randy-stoever.jpg', avatarKind: 'photo' as const },
+  { quote: "I've tried so many AI content tools; Clik is my favorite by far.", author: 'GIGI ROBINSON', handle: '@ITSGIGIROBINSON', avatar: '/images/testimonials/gigi-robinson.jpg', avatarKind: 'photo' as const },
+];
+---
+
+<section id="social-proof" class="px-6 md:px-12 py-24 md:py-32 overflow-hidden">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="clik-section-header">
+      <span class="idx">[ 02 ]</span>
+      <span class="rule"></span>
+      <span class="label">PROOF</span>
+    </div>
+
+    <!-- Volume stat leads — numbers over adjectives -->
+    <h2
+      class="font-display font-medium text-clik-midnight"
+      style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 24ch;"
+    >
+      {statLine.headline}<span class="clik-period">.</span>
+    </h2>
+
+    <!-- Hero quote — bracket-framed window -->
+    <div
+      class="clik-frame relative mt-12"
+      style="color: var(--clik-midnight); padding: 56px clamp(24px, 5vw, 64px);"
+    >
+      <span class="clik-corner-tr"></span>
+      <span class="clik-corner-bl"></span>
+
+      <p
+        class="font-display font-medium italic text-clik-midnight"
+        style="font-size: clamp(26px, 3.4vw, 38px); line-height: 1.25; letter-spacing: -0.01em; max-width: 42ch;"
+      >
+        "{hero.quote}"
+      </p>
+      <div class="mt-8 flex items-center gap-3">
+        <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5">
+          <img src={hero.avatar} alt={hero.author} class="h-3 w-auto" loading="lazy" />
+        </span>
+        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+          {hero.author} · {hero.handle}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supporting marquee -->
+  <div class="mt-16 marquee-row">
+    <div class="marquee-track">
+      {[...others, ...others, ...others].map((t) => (
+        <div
+          class="marquee-card flex-shrink-0 w-[360px] clik-frame relative bg-clik-cream flex flex-col"
+          style="color: var(--clik-midnight); padding: 24px; min-height: 220px;"
+        >
+          <span class="clik-corner-tr"></span>
+          <span class="clik-corner-bl"></span>
+          <p class="font-ui text-clik-midnight" style="font-size: 15px; line-height: 1.55;">"{t.quote}"</p>
+          <div class="mt-auto pt-4 flex items-center gap-2.5">
+            {t.avatar && t.avatarKind === 'photo' && (
+              <img
+                src={t.avatar}
+                alt={t.author}
+                class="h-8 w-8 rounded-full object-cover ring-1 ring-clik-midnight/15"
+                loading="lazy"
+              />
+            )}
+            {t.avatar && t.avatarKind === 'logo' && (
+              <span class="inline-flex h-6 items-center rounded-md bg-clik-midnight px-2">
+                <img src={t.avatar} alt={t.author} class="h-2.5 w-auto" loading="lazy" />
+              </span>
+            )}
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">
+              {t.author} · {t.handle}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Case detail — featured video testimonial, Bobby / MAE Media -->
+  <div class="mx-auto max-w-[1100px] mt-16">
+    <div
+      class="clik-frame relative bg-clik-cream"
+      style="color: var(--clik-midnight); padding: clamp(16px, 2vw, 20px);"
+    >
+      <span class="clik-corner-tr"></span>
+      <span class="clik-corner-bl"></span>
+
+      <video
+        controls
+        preload="none"
+        playsinline
+        poster="/images/testimonials/bobby-mae-poster.jpg"
+        class="w-full aspect-video rounded-xl bg-clik-midnight"
+      >
+        <source src="/videos/testimonial-bobby-mae.mp4" type="video/mp4" />
+      </video>
+
+      <div class="mt-5 flex items-center gap-3 px-2 pb-1">
+        <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5 shrink-0">
+          <img src="/images/testimonials/mae-media.png" alt="MAE Media" class="h-3 w-auto" loading="lazy" />
+        </span>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+          <span class="font-bold text-clik-midnight">Bobby</span>
+          <span class="text-clik-midnight/45"> · Founder, MAE Media</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-row {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: clik-marquee 60s linear infinite;
+  }
+  .marquee-row:hover .marquee-track { animation-play-state: paused; }
+  @keyframes clik-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+</style>

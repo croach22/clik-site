@@ -1,28 +1,22 @@
 ---
 // Cream-surface hero — viewfinder L-brackets frame the headline + CTAs only.
-// Screenshot below is unframed; bottom gradient fades it into the cream bg.
-const today = new Date();
-const recDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+// Headline stays input-agnostic (shoots, podcasts, clip folders) so clipping
+// isn't alienated; the subhead does the differentiating — "sorts, plans" is
+// the wedge nobody else can claim.
+// Visual: interim hero-animation.mp4 loop. The inputs → hub → fan-out
+// animation replaces it in the animation phase (spec from Conner).
+const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 ---
 
-<section class="relative pt-32 md:pt-36">
+<section id="hero" class="relative pt-32 md:pt-36">
   <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-24">
 
-    <!-- Headline frame: all four viewfinder L-brackets present at the corners.
-         Generous internal padding so eyebrow / headline / REC chip / lens metadata
-         all sit inset from the brackets — same pattern as the final CTA section. -->
+    <!-- Headline frame: all four viewfinder L-brackets present at the corners. -->
     <div class="relative w-full px-8 py-16 md:px-16 md:py-20">
       <span class="vf vf-tl"></span>
       <span class="vf vf-tr"></span>
       <span class="vf vf-bl"></span>
       <span class="vf vf-br"></span>
-
-      <!-- REC pill — INSIDE the frame at top-right, inset from the TR bracket -->
-      <div class="absolute top-6 right-6 md:top-8 md:right-8 hidden sm:block">
-        <span class="clik-chip clik-chip-rec bg-clik-cream">
-          <span class="dot"></span>REC · <span id="rec-date">{recDate}</span>
-        </span>
-      </div>
 
       <!-- Kicker -->
       <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
@@ -32,26 +26,28 @@ const recDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(
       <!-- Headline -->
       <h1
         class="mt-6 font-display font-medium tracking-display text-clik-midnight"
-        style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 32ch;"
+        style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 20ch;"
       >
-        From raw footage to<br/>
-        viral shorts in minutes<span class="clik-period">.</span>
+        An on-brand content engine for any video input<span class="clik-period">.</span>
       </h1>
 
       <!-- Body -->
       <p class="mt-6 max-w-[620px] font-ui text-clik-midnight/70" style="font-size: 18px; line-height: 1.55;">
-        Hand Clik a brief and raw footage. It audits your shoot against the brief and drafts every video that's in there — 95% done, just add your touch.
+        Point it at a shoot, a podcast, or a folder of clips. It sorts, plans, and builds — and gets sharper every project.
       </p>
 
-      <!-- CTAs -->
+      <!-- CTAs — self-serve + teams who want a conversation first -->
       <div class="mt-8 flex flex-wrap items-center gap-3">
         <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-primary">
           Start for free <span aria-hidden="true">→</span>
         </a>
+        <a href={CALENDLY_URL} class="clik-btn clik-btn-secondary">
+          Book a demo
+        </a>
       </div>
     </div>
 
-    <!-- Hero animation — looping batch workflow visualization -->
+    <!-- Hero visual — interim looping workflow animation (replaced in animation phase) -->
     <div class="mt-16 md:mt-24">
       <video
         autoplay
@@ -60,7 +56,7 @@ const recDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(
         playsinline
         preload="auto"
         poster="/videos/hero-animation-poster.jpg"
-        aria-label="Clik batch workflow animation showing raw footage and brief converging into 22 parallel drafts and an editor"
+        aria-label="Clik batch workflow animation showing raw footage and brief converging into parallel drafts and an editor"
         class="block w-full rounded-[8px] border border-clik-midnight/15"
       >
         <source src="/videos/hero-animation.mp4" type="video/mp4" />
@@ -68,15 +64,6 @@ const recDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(
     </div>
   </div>
 </section>
-
-<script>
-  // Update REC date to today on page load (build is static so the SSR'd date can drift)
-  const el = document.getElementById('rec-date');
-  if (el) {
-    const d = new Date();
-    el.textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-  }
-</script>
 
 <style>
   /* Viewfinder L-brackets — frame the headline + CTAs region */

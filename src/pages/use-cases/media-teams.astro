@@ -1,0 +1,334 @@
+---
+// For Media Teams — the content engine for shows, podcasts, and publishers.
+// New page complementing creators/agencies. Engine positioning, dark bento system.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03);';
+const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
+
+const teamFeatures = [
+  {
+    title: 'Brand memory, per show',
+    body: 'Caption styles, title cards, format rules — saved per property, applied automatically. Episode 40 looks like episode 4, no matter who ran the batch.',
+    accent: '#5481E8',
+  },
+  {
+    title: 'A dashboard the whole team sees',
+    body: 'Producers watch the slate move — planned, building, ready for review. No status meetings, no "where are the clips?" threads.',
+    accent: '#F9838E',
+  },
+  {
+    title: 'Native to your post pipeline',
+    body: 'Review and finish in Clik’s web editor, or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro. Clik feeds your pipeline — it doesn’t replace it.',
+    accent: '#9785B8',
+  },
+];
+
+const steps = [
+  {
+    title: 'The episode drops in.',
+    body: 'The finished cut — or the raw recording — plus your B-roll library and graphics. One upload per episode.',
+  },
+  {
+    title: 'Clik plans the clip slate.',
+    body: 'Every strong moment becomes a planned clip with a hook, scope, and duration. Your producer reviews the slate and approves.',
+  },
+  {
+    title: 'The build agent constructs every clip.',
+    body: 'Cutaways from your own B-roll and graphics — not stock. Captions and title cards in the show’s saved style.',
+  },
+  {
+    title: 'Review, export, publish.',
+    body: 'The team reviews in the queue, adjusts anything in the web editor, and ships — or exports XML for a final pass in your NLE.',
+  },
+];
+---
+
+<BaseLayout
+  title="Clik for Media Teams — Every episode becomes a week of content"
+  description="Feed Clik the raw recording or the finished cut — plus your B-roll and graphics. It plans and builds the clips for every channel, on brand, every episode."
+  theme="midnight"
+>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden pt-32 md:pt-36">
+    <div class="dot-grid absolute inset-x-0 top-0 h-[520px]" aria-hidden="true"></div>
+    <div
+      class="glow -top-24 left-[-10%] h-[420px] w-[640px]"
+      style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.14), transparent 72%);"
+      aria-hidden="true"
+    ></div>
+
+    <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-16">
+      <div class="w-full py-8 md:py-10">
+        <div class="flex items-center gap-3">
+          <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
+          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">For Media Teams</p>
+        </div>
+
+        <h1
+          class="mt-6 font-display font-medium tracking-display text-clik-cream"
+          style="font-size: clamp(44px, 7vw, 68px); line-height: 1.04; letter-spacing: -0.02em; max-width: 18ch;"
+        >
+          Every episode becomes a week of content<span class="clik-period">.</span>
+        </h1>
+
+        <p class="mt-6 max-w-[620px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
+          Feed Clik the raw recording or the finished cut — plus your B-roll and graphics. It plans and builds the clips for every channel, on brand, every episode.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={CALENDLY}
+            data-track-click="MediaCTAClick"
+            data-track-params={JSON.stringify({ audience: 'media', surface: 'media-page', content_name: 'hero-demo' })}
+            class="clik-btn clik-btn-primary"
+          >
+            Book a demo <span aria-hidden="true">→</span>
+          </a>
+          <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-secondary">
+            Start for free
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [01] Problem -->
+  <section class="px-6 md:px-12 py-16 md:py-20">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 01 ]</span>
+        <span class="rule"></span>
+        <span class="label">THE PROBLEM</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-display font-medium text-clik-cream mb-8" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch;">
+        The episode ships. The clips don’t<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
+        Every episode should become ten pieces of content — the recap, the compilation, the vertical clips, the quote cards. Everyone on the team knows it.
+      </p>
+      <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
+        But clipping falls to whoever has spare hours, which is nobody. The backlog grows an episode a week. Consistency slips across shows — one editor’s caption style here, another’s pacing there. And the clip that should have gone up while the episode was fresh goes up eleven days later, or never.
+      </p>
+      <p class="font-ui text-clik-cream mb-0 font-semibold" style="font-size: 18px; line-height: 1.6;">
+        You don’t have a content problem. You have a throughput problem.
+      </p>
+    </div>
+  </section>
+
+  <!-- [02] Works from either end -->
+  <section class="px-6 md:px-12 py-16 md:py-20">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 02 ]</span>
+        <span class="rule"></span>
+        <span class="label">EITHER END</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-cream mb-4 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Most tools need a finished episode. Clik works from either end<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-cream/70 mb-12 max-w-[60ch]" style="font-size: 18px; line-height: 1.6;">
+        Start clipping before post finishes — or hand over the produced cut. Same engine, same output.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="bento-card border flex flex-col" style={`${CARD} padding: 32px;`}>
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            01 · From the raw recording
+          </p>
+          <h3 class="font-display font-medium text-clik-cream mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            Clips before the edit is even done.
+          </h3>
+          <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">
+            Upload the session the day you record. Clik finds the strongest moments across the full runtime and builds the social slate while your editor is still cutting the episode. Publish-day clips, ready on publish day.
+          </p>
+        </div>
+
+        <div class="bento-card border flex flex-col" style={`${CARD} padding: 32px;`}>
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+            02 · From the finished cut
+          </p>
+          <h3 class="font-display font-medium text-clik-cream mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
+            Clips that cut to your footage — not stock.
+          </h3>
+          <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">
+            Hand Clik the produced episode plus your B-roll library and graphics. Every clip cuts away to your own material, in your own style — not a stock reel that could belong to any show.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [03] Built for teams -->
+  <section class="px-6 md:px-12 py-16 md:py-20">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 03 ]</span>
+        <span class="rule"></span>
+        <span class="label">BUILT FOR TEAMS</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-cream mb-12 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        One engine. Every show. Every channel<span class="clik-period">.</span>
+      </h2>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        {teamFeatures.map((cap) => (
+          <div class="bento-card border" style={`${CARD} padding: 28px;`}>
+            <span
+              class="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm"
+              style={`color: ${cap.accent}; background: ${cap.accent}14; border: 1px solid ${cap.accent}35;`}
+              aria-hidden="true"
+            >✦</span>
+            <h3 class="font-display font-medium text-clik-cream mb-3" style="font-size: clamp(20px, 2.2vw, 24px); line-height: 1.2; letter-spacing: -0.01em;">
+              {cap.title}<span class="clik-period">.</span>
+            </h3>
+            <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.6;">
+              {cap.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- [04] The weekly cadence -->
+  <section class="px-6 md:px-12 py-16 md:py-20">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 04 ]</span>
+        <span class="rule"></span>
+        <span class="label">THE CADENCE</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-display font-medium text-clik-cream mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Episode in Monday. Slate out Monday<span class="clik-period">.</span>
+      </h2>
+
+      <ol class="space-y-5">
+        {steps.map((step, i) => (
+          <li class="bento-card border flex gap-5" style={`${CARD} padding: 28px;`}>
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border font-mono text-sm font-bold text-clik-royce" style="border-color: rgba(84, 129, 232, 0.4); background: rgba(84, 129, 232, 0.12);">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <p class="mb-2 font-display font-medium text-clik-cream" style="font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;">{step.title}</p>
+              <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-10 font-ui text-clik-cream/70 text-center" style="font-size: 18px; line-height: 1.6;">
+        Every week. Every show. Without adding headcount.
+      </p>
+    </div>
+  </section>
+
+  <!-- [05] Proof -->
+  <section class="px-6 md:px-12 py-16 md:py-20">
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header">
+        <span class="idx">[ 05 ]</span>
+        <span class="rule"></span>
+        <span class="label">PROOF</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-4xl">
+      <div class="bento-card border mb-8 p-3" style={CARD}>
+        <video
+          controls
+          preload="metadata"
+          playsinline
+          poster="/images/testimonials/bobby-mae-poster.jpg"
+          class="w-full aspect-video rounded-xl bg-black"
+        >
+          <source src="/videos/testimonial-bobby-mae.mp4" type="video/mp4" />
+        </video>
+        <div class="flex items-center gap-3 px-4 pt-5 pb-3">
+          <span class="inline-flex h-7 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-2.5 shrink-0">
+            <img src="/images/testimonials/mae-media.png" alt="MAE Media" class="h-3 w-auto" loading="lazy" />
+          </span>
+          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/70">
+            <span class="font-bold text-clik-cream">Bobby</span>
+            <span class="text-clik-cream/45"> · Founder, MAE Media</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="bento-card border flex flex-col" style={`${CARD} padding: 28px;`}>
+        <p class="font-ui text-clik-cream/85 leading-relaxed" style="font-size: 16px;">
+          "Clik finds extra concepts in my footage that a traditional editor would never bother to pull. Same shoot, more deliverables, less time."
+        </p>
+        <div class="mt-auto pt-6 flex items-center gap-3">
+          <span class="inline-flex h-7 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-2 shrink-0">
+            <img src="/images/testimonials/mae-media.png" alt="MAE Media" class="h-3 w-auto" loading="lazy" />
+          </span>
+          <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/70">
+            <span class="font-bold text-clik-cream">Bobby</span>
+            <span class="text-clik-cream/45"> · Founder, MAE Media</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [06] Final CTA -->
+  <section class="px-6 md:px-12 py-16 md:py-28">
+    <div class="mx-auto max-w-[1200px]">
+      <div class="clik-section-header mb-8">
+        <span class="idx">[ 06 ]</span>
+        <span class="rule"></span>
+        <span class="label">START</span>
+      </div>
+      <div
+        class="on-midnight relative overflow-hidden"
+        style="background: #13204A; border: 1px solid rgba(249, 247, 241, 0.10); border-radius: 12px; padding: clamp(48px, 7vw, 96px) clamp(24px, 5vw, 64px); color: var(--clik-cream);"
+      >
+        <div
+          class="glow -left-32 -top-32 h-[420px] w-[640px]"
+          style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.20), transparent 72%);"
+          aria-hidden="true"
+        ></div>
+        <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: -0.02em; max-width: 16ch;">
+          Ship the episode. Clik ships the rest<span class="clik-period">.</span>
+        </h2>
+        <p class="mt-6 max-w-[52ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
+          Bring one episode to a demo and watch the slate come back. Plans scale with your episode volume.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={CALENDLY}
+            data-track-click="MediaCTAClick"
+            data-track-params={JSON.stringify({ audience: 'media', surface: 'media-page', content_name: 'closing-demo' })}
+            class="clik-btn clik-btn-light"
+          >
+            Book a demo <span aria-hidden="true">→</span>
+          </a>
+          <a href="https://app.clik.vision/sign-up" class="clik-btn cta-ghost">
+            Start for free
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .cta-ghost {
+    background: transparent;
+    color: var(--clik-cream);
+    border: 1px solid rgba(249, 247, 241, 0.25);
+  }
+  .cta-ghost:hover {
+    border-color: var(--clik-cream);
+  }
+</style>

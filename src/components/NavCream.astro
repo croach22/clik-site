@@ -1,13 +1,18 @@
 ---
-// Midnight nav for cream pages — inverted contrast against the cream body.
-// Flat nav: Pricing + Blog. Solutions dropdown (creators/agencies/media teams)
-// is phase two — build after the single landing page is converting.
+// Midnight nav for cream/midnight pages — inverted contrast against the body.
+// Solutions dropdown segments by audience: creators / agencies / media teams.
 // Founding Creators lives in the footer, not the primary nav.
 
 // Pricing is audience-contextual: on the agencies page, "Pricing" jumps to the
 // agency plans section. Everywhere else it goes to the home pricing tier grid.
 const onAgenciesPage = Astro.url.pathname.startsWith('/use-cases/agencies');
 const pricingHref = onAgenciesPage ? '#agency-plans' : '/#pricing';
+
+const solutions = [
+  { label: 'For Creators', href: '/use-cases/creators', track: 'CreatorNavClick', trackParams: { audience: 'creator', surface: 'nav' } },
+  { label: 'For Agencies', href: '/use-cases/agencies', track: 'AgencyNavClick', trackParams: { audience: 'agency', surface: 'nav' } },
+  { label: 'For Media Teams', href: '/use-cases/media-teams', track: 'MediaNavClick', trackParams: { audience: 'media', surface: 'nav' }, isNew: true },
+];
 
 const navLinks = [
   {
@@ -18,6 +23,7 @@ const navLinks = [
     trackParams: onAgenciesPage ? { audience: 'agency', surface: 'nav' } : undefined,
   },
   { label: 'Blog', href: '/blog' },
+  { label: 'Learn', href: '/docs' },
 ];
 ---
 
@@ -30,6 +36,36 @@ const navLinks = [
 
     <!-- Desktop nav -->
     <div class="hidden items-center gap-8 md:flex">
+
+      <!-- Solutions dropdown -->
+      <div class="group relative">
+        <button class="flex items-center gap-1 font-ui text-sm font-bold text-clik-cream/70 transition-colors hover:text-clik-cream">
+          Solutions
+          <svg class="h-3 w-3 opacity-50 transition-transform group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
+            <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+          <div class="min-w-[210px] rounded-xl border border-clik-cream/10 p-1.5" style="background: #0E1834;">
+            {solutions.map((item) => (
+              <a
+                href={item.href}
+                data-track-click={item.track}
+                data-track-params={JSON.stringify(item.trackParams)}
+                class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-ui text-sm font-bold text-clik-cream/80 transition-colors hover:bg-clik-cream/5 hover:text-clik-cream"
+              >
+                {item.label}
+                {item.isNew && (
+                  <span class="rounded-pill bg-clik-royce/25 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">
+                    New
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -100,18 +136,39 @@ const navLinks = [
 
   <!-- Scrollable nav content -->
   <nav class="flex-1 overflow-y-auto px-6 pb-6 pt-3">
+    {solutions.map((item, i) => (
+      <a
+        href={item.href}
+        data-track-click={item.track}
+        data-track-params={JSON.stringify({ ...item.trackParams, surface: 'mobile-drawer' })}
+        class="mobile-menu-link mobile-menu-row stagger-row"
+        style={`--i: ${i}`}
+      >
+        <span class="flex items-center gap-2">
+          {item.label}
+          {item.isNew && (
+            <span class="rounded-pill border border-clik-royce/40 bg-clik-royce/10 px-1.5 py-[1px] text-[9px] font-bold uppercase tracking-[0.14em] text-clik-royce">NEW</span>
+          )}
+        </span>
+        <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    ))}
     <a
       href={pricingHref}
       data-track-click={onAgenciesPage ? 'AgencyPricingNavClick' : undefined}
       data-track-params={onAgenciesPage ? JSON.stringify({ audience: 'agency', surface: 'mobile-drawer' }) : undefined}
       class="mobile-menu-link mobile-menu-row stagger-row"
-      style="--i: 0"
+      style="--i: 3"
     >
       <span>Pricing</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
-    <a href="/blog" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 1">
+    <a href="/blog" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 4">
       <span>Blog</span>
+      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="/docs" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 5">
+      <span>Learn</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
   </nav>

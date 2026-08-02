@@ -89,7 +89,7 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
   // Style tokens — branch by variant
   const s = isAccent
     ? {
-        card: 'relative rounded-[12px] bg-clik-midnight on-midnight overflow-hidden p-8 md:p-12 lg:p-16',
+        card: 'relative rounded-[12px] on-midnight overflow-hidden border border-clik-cream/10 bg-[#13204A] p-8 md:p-12 lg:p-16',
         headlineColor: 'text-clik-cream',
         headlineSize: 'clamp(36px, 4.5vw, 56px)',
         subColor: 'text-clik-cream/70',
@@ -104,19 +104,19 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
         successAttr: 'text-clik-cream/55',
       }
     : {
-        card: 'rounded-2xl border border-clik-midnight/12 bg-clik-bone/50 p-6 md:p-7',
-        headlineColor: 'text-clik-midnight',
+        card: 'rounded-2xl border border-clik-cream/10 bg-clik-cream/[0.03] p-6 md:p-7',
+        headlineColor: 'text-clik-cream',
         headlineSize: '24px',
-        subColor: 'text-clik-midnight/70',
-        label: 'block font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70 mb-2',
+        subColor: 'text-clik-cream/70',
+        label: 'block font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/70 mb-2',
         input:
-          'w-full rounded-xl border border-clik-midnight/15 bg-clik-cream px-4 py-3 text-base text-clik-midnight placeholder:text-clik-midnight/35 outline-none transition-colors focus:border-clik-royce/60',
-        selectArrow: '%230E183480',
+          'w-full rounded-xl border border-clik-cream/15 bg-clik-cream/[0.04] px-4 py-3 text-base text-clik-cream placeholder:text-clik-cream/30 outline-none transition-colors focus:border-clik-royce/70',
+        selectArrow: '%23F9F7F180',
         button: 'clik-btn clik-btn-primary w-full justify-center disabled:opacity-60',
-        errorColor: 'text-clik-tally',
-        successCard: 'mt-6 rounded-xl border border-clik-royce/25 bg-clik-royce/5 p-6',
-        successText: 'text-clik-midnight',
-        successAttr: 'text-clik-midnight/55',
+        errorColor: 'text-clik-salmon',
+        successCard: 'mt-6 rounded-xl border border-clik-royce/25 bg-clik-royce/10 p-6',
+        successText: 'text-clik-cream',
+        successAttr: 'text-clik-cream/55',
       };
 
   const selectBg = {
@@ -231,17 +231,6 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
 
   return (
     <div className={s.card}>
-      {isAccent && (
-        <>
-          {/* Viewfinder L-brackets */}
-          <span className="vf vf-tl"></span>
-          <span className="vf vf-tr"></span>
-          <span className="vf vf-bl"></span>
-          <span className="vf vf-br"></span>
-
-        </>
-      )}
-
       {isAccent ? (
         <div className="grid gap-10 md:grid-cols-2 md:gap-16 items-start">
           <div>{copyBlock}</div>
@@ -252,23 +241,6 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
           {copyBlock}
           <div className="mt-6">{formBlock}</div>
         </>
-      )}
-
-      {isAccent && (
-        <style>{`
-          .vf {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border-color: var(--clik-cream);
-            opacity: 0.5;
-            pointer-events: none;
-          }
-          .vf-tl { top: 14px; left: 14px; border-top: 1.5px solid; border-left: 1.5px solid; }
-          .vf-tr { top: 14px; right: 14px; border-top: 1.5px solid; border-right: 1.5px solid; }
-          .vf-bl { bottom: 14px; left: 14px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
-          .vf-br { bottom: 14px; right: 14px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
-        `}</style>
       )}
     </div>
   );

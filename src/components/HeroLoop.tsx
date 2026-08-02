@@ -42,7 +42,7 @@ function ProcessingLabel({ active }: { active: boolean }) {
     return () => clearInterval(id);
   }, [active]);
   return (
-    <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+    <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
       {active ? words[i] : 'ready'}
     </span>
   );
@@ -98,16 +98,16 @@ export default function HeroLoop() {
         animate={{ opacity: fading ? 0 : 1 }}
         transition={{ duration: fading ? FADE_OUT / 1000 : 0.3 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#F1EEE5' }}
+        style={{ borderColor: 'rgba(249, 247, 241, 0.10)', background: '#13204A' }}
         role="img"
         aria-label="A shoot's talking head and B-roll flow into Clik and fan out as six finished vertical clips"
       >
         {/* Window chrome */}
-        <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}>
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
+        <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(249, 247, 241, 0.08)' }}>
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>
             clik · content engine
           </span>
         </div>
@@ -118,10 +118,10 @@ export default function HeroLoop() {
             {/* ── Inputs ── */}
             <div className="w-full md:w-[240px] md:shrink-0 space-y-1.5">
               <div className="flex items-center gap-2 mb-2.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
                   Any input
                 </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
+                <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
               </div>
               {INPUTS.map((f, i) => (
                 <motion.div
@@ -139,8 +139,8 @@ export default function HeroLoop() {
                   style={{ background: `${f.accent}08`, border: `1px solid ${f.accent}20` }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: f.accent }} />
-                  <span className="text-xs flex-1 truncate" style={{ color: 'rgba(14, 24, 52, 0.75)' }}>{f.name}</span>
-                  <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>{f.size}</span>
+                  <span className="text-xs flex-1 truncate" style={{ color: 'rgba(249, 247, 241, 0.75)' }}>{f.name}</span>
+                  <span className="text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>{f.size}</span>
                 </motion.div>
               ))}
             </div>
@@ -158,8 +158,8 @@ export default function HeroLoop() {
                 style={{
                   width: 64,
                   height: 64,
-                  background: converged ? `${ROYCE}12` : 'rgba(14, 24, 52, 0.05)',
-                  border: `1px solid ${converged ? `${ROYCE}40` : 'rgba(14, 24, 52, 0.10)'}`,
+                  background: converged ? `${ROYCE}12` : 'rgba(249, 247, 241, 0.05)',
+                  border: `1px solid ${converged ? `${ROYCE}40` : 'rgba(249, 247, 241, 0.10)'}`,
                   transition: 'background 0.4s, border-color 0.4s',
                 }}
               >
@@ -167,7 +167,7 @@ export default function HeroLoop() {
                   animate={processing ? { rotate: 360 } : { rotate: 0 }}
                   transition={processing ? { duration: 2.4, repeat: Infinity, ease: 'linear' } : {}}
                   className="text-xl"
-                  style={{ color: converged ? ROYCE : 'rgba(14, 24, 52, 0.35)' }}
+                  style={{ color: converged ? ROYCE : 'rgba(249, 247, 241, 0.35)' }}
                 >
                   ✦
                 </motion.span>
@@ -178,10 +178,10 @@ export default function HeroLoop() {
             {/* ── Outputs ── */}
             <div className="w-full flex-1">
               <div className="flex items-center gap-2 mb-2.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
                   Publish-ready
                 </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
+                <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
                 <AnimatePresence>
                   {showBadge && (
                     <motion.span
@@ -228,7 +228,7 @@ export default function HeroLoop() {
                     />
                     <div
                       className="absolute inset-x-0 bottom-0 flex items-center justify-between px-1.5 py-1"
-                      style={{ background: 'rgba(14, 24, 52, 0.75)' }}
+                      style={{ background: 'rgba(7, 12, 27, 0.8)' }}
                     >
                       <span className="text-[7px] font-mono truncate" style={{ color: '#F9F7F1' }}>{o.label}</span>
                       <span className="text-[7px] font-mono" style={{ color: `#F9F7F1AA` }}>{o.duration}</span>

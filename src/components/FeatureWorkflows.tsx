@@ -13,7 +13,7 @@ const ACCENT = '#5481E8';
 // (drop the file in public/images/features/).
 const SCREENSHOT_SRC: string | null = null; // e.g. '/images/features/workflows.png'
 
-function BatchVisual() {
+export function BatchVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
 
@@ -37,17 +37,17 @@ function BatchVisual() {
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#F1EEE5' }}
+        style={{ borderColor: 'rgba(249, 247, 241, 0.10)', background: '#13204A' }}
       >
         {/* Window chrome */}
         <div
           className="flex items-center gap-1.5 px-4 py-3 border-b"
-          style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}
+          style={{ borderColor: 'rgba(249, 247, 241, 0.08)' }}
         >
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>
             workflow agent
           </span>
         </div>
@@ -59,10 +59,10 @@ function BatchVisual() {
           {/* Input files */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
                 Input
               </span>
-              <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
+              <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
             </div>
             <div className="space-y-1.5">
               {inputFiles.map((f, i) => (
@@ -72,13 +72,13 @@ function BatchVisual() {
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
                   transition={{ delay: i * 0.1, duration: 0.3 }}
                   className="flex items-center gap-2.5 rounded-lg px-3 py-2"
-                  style={{ background: 'rgba(14, 24, 52, 0.04)', border: '1px solid rgba(14, 24, 52, 0.08)' }}
+                  style={{ background: 'rgba(249, 247, 241, 0.04)', border: '1px solid rgba(249, 247, 241, 0.08)' }}
                 >
                   <span className="text-xs" style={{ color: f.name.endsWith('.pdf') ? '#5481E8' : '#5481E8' }}>
                     {f.name.endsWith('.pdf') ? '\u{1F4CB}' : '\u{1F3AC}'}
                   </span>
-                  <span className="text-xs flex-1" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>{f.name}</span>
-                  <span className="text-[10px]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>{f.size}</span>
+                  <span className="text-xs flex-1" style={{ color: 'rgba(249, 247, 241, 0.7)' }}>{f.name}</span>
+                  <span className="text-[10px]" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>{f.size}</span>
                 </motion.div>
               ))}
             </div>
@@ -102,7 +102,7 @@ function BatchVisual() {
                 />
               ))}
             </div>
-            <span className="text-[10px]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>
+            <span className="text-[10px]" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>
               Processing batch footage against brief...
             </span>
           </motion.div>
@@ -110,10 +110,10 @@ function BatchVisual() {
           {/* Output drafts */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
                 Output
               </span>
-              <div className="flex-1 h-px" style={{ background: 'rgba(14, 24, 52, 0.08)' }} />
+              <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
             </div>
             <div className="space-y-1.5">
               {outputs.map((o, i) => (
@@ -126,7 +126,7 @@ function BatchVisual() {
                   style={{ background: `${o.accent}08`, border: `1px solid ${o.accent}18` }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: o.accent }} />
-                  <span className="text-xs flex-1" style={{ color: 'rgba(14, 24, 52, 0.78)' }}>{o.label}</span>
+                  <span className="text-xs flex-1" style={{ color: 'rgba(249, 247, 241, 0.78)' }}>{o.label}</span>
                   <span className="text-[10px] font-mono" style={{ color: `${o.accent}80` }}>{o.duration}</span>
                 </motion.div>
               ))}
@@ -151,12 +151,12 @@ export default function FeatureWorkflows() {
             <span className="label">WORKFLOWS</span>
           </div>
           <h2
-            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-cream"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
             A full batch in. Every video planned<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'rgba(249, 247, 241, 0.7)' }}>
             The agent takes a complete set of inputs — a batch day, a podcast plus your B-roll — and plans every
             video output from it. Each concept gets its own project, configured and ready to build. No more
             per-video setup.
@@ -171,7 +171,7 @@ export default function FeatureWorkflows() {
                 style={{
                   border: '1px solid #5481E820',
                   background: '#5481E808',
-                  color: 'rgba(14, 24, 52, 0.7)',
+                  color: 'rgba(249, 247, 241, 0.7)',
                 }}
               >
                 <span style={{ color: ACCENT, fontSize: 10 }}>{cap.icon}</span>

@@ -11,7 +11,7 @@ const SALMON = '#F9838E';
 const SAGE = '#7CA088';
 const LAVENDER = '#9785B8';
 const OCHRE = '#C5A578';
-const MID = (a: string) => `rgba(14, 24, 52, ${a})`;
+const MID = (a: string) => `rgba(249, 247, 241, ${a})`;
 
 interface Tab {
   id: string;
@@ -108,14 +108,14 @@ function VisualShell({
         animate={{ opacity: fading ? 0 : 1 }}
         transition={{ duration: fading ? FADE_OUT / 1000 : 0.3 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: MID('0.10'), background: '#F1EEE5' }}
+        style={{ borderColor: MID('0.10'), background: '#13204A' }}
         role="img"
         aria-label={ariaLabel}
       >
         <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: MID('0.08') }}>
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
           <span className="ml-3 text-[10px] font-mono" style={{ color: MID('0.4') }}>{chrome}</span>
         </div>
         <div className="px-4 py-5 min-h-[320px] md:min-h-[360px] flex flex-col justify-center">{children}</div>
@@ -524,11 +524,11 @@ export default function UseCaseTabs() {
 
         {/* The market-opportunity argument, in one line — the tabs are the evidence */}
         <h2
-          className="font-display font-medium text-clik-midnight"
+          className="font-display font-medium text-clik-cream"
           style={{ fontSize: 'clamp(32px, 4.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', maxWidth: '28ch' }}
         >
           Every content team wants an automated content system.{' '}
-          <span style={{ color: 'rgba(14, 24, 52, 0.45)' }}>
+          <span style={{ color: 'rgba(249, 247, 241, 0.45)' }}>
             Right now only one format has one<span style={{ color: ROYCE }}>.</span>
           </span>
         </h2>
@@ -538,7 +538,7 @@ export default function UseCaseTabs() {
           role="tablist"
           aria-label="Use cases"
           className="mt-10 flex flex-wrap gap-x-7 gap-y-2 border-b"
-          style={{ borderColor: 'rgba(14, 24, 52, 0.12)' }}
+          style={{ borderColor: 'rgba(249, 247, 241, 0.12)' }}
         >
           {TABS.map((t, i) => (
             <button
@@ -549,7 +549,7 @@ export default function UseCaseTabs() {
               aria-controls={`panel-${t.id}`}
               onClick={() => setActive(i)}
               className="relative pb-3 font-mono text-[12px] uppercase tracking-[0.14em] transition-colors"
-              style={{ color: i === active ? '#0E1834' : 'rgba(14, 24, 52, 0.45)' }}
+              style={{ color: i === active ? '#F9F7F1' : 'rgba(249, 247, 241, 0.45)' }}
             >
               {t.label}
               {i === active && (
@@ -580,18 +580,18 @@ export default function UseCaseTabs() {
             <div className="flex-1 lg:max-w-md">
               <div className="space-y-5">
                 <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>
                     In
                   </p>
-                  <p className="mt-1.5 font-ui text-clik-midnight" style={{ fontSize: 17, lineHeight: 1.5 }}>
+                  <p className="mt-1.5 font-ui text-clik-cream" style={{ fontSize: 17, lineHeight: 1.5 }}>
                     {tab.inLines.join('. ')}.
                   </p>
                 </div>
                 <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>
                     Out
                   </p>
-                  <p className="mt-1.5 font-ui text-clik-midnight" style={{ fontSize: 17, lineHeight: 1.5 }}>
+                  <p className="mt-1.5 font-ui text-clik-cream" style={{ fontSize: 17, lineHeight: 1.5 }}>
                     {tab.outLines.join('. ')}.
                   </p>
                 </div>
@@ -601,7 +601,7 @@ export default function UseCaseTabs() {
                 style={{
                   fontSize: 15,
                   lineHeight: 1.55,
-                  color: 'rgba(14, 24, 52, 0.75)',
+                  color: 'rgba(249, 247, 241, 0.75)',
                   background: `${tab.accent}08`,
                   border: `1px solid ${tab.accent}20`,
                 }}

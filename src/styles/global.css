@@ -369,3 +369,50 @@
 /* Hide scrollbar but keep scrolling — used inside animated panels */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ───────────────────────────────────────────────────────────────
+   MIDNIGHT THEME — dark bento restyle (landing-dark experiment).
+   Applied as body.theme-cream.theme-midnight so cream's typography
+   rules still apply; this block only flips color roles.
+   --clik-mid-* alphas become cream alphas, so every component class
+   built on them (.clik-card, .clik-frame, .clik-kv, section headers,
+   .clik-btn-secondary borders) flips automatically.
+   ─────────────────────────────────────────────────────────────── */
+body.theme-midnight {
+  background-color: var(--clik-midnight);
+  color: var(--clik-cream);
+
+  --clik-mid-90: rgba(249, 247, 241, 0.9);
+  --clik-mid-70: rgba(249, 247, 241, 0.7);
+  --clik-mid-55: rgba(249, 247, 241, 0.55);
+  --clik-mid-45: rgba(249, 247, 241, 0.45);
+  --clik-mid-25: rgba(249, 247, 241, 0.22);
+  --clik-mid-12: rgba(249, 247, 241, 0.12);
+  --clik-mid-08: rgba(249, 247, 241, 0.09);
+  --clik-mid-06: rgba(249, 247, 241, 0.07);
+
+  --bg:        var(--clik-midnight);
+  --surface:   #13204A;
+  --surface-2: rgba(249, 247, 241, 0.04);
+  --fg-1:      var(--clik-cream);
+}
+body.theme-midnight h1,
+body.theme-midnight h2,
+body.theme-midnight h3,
+body.theme-midnight h4 {
+  color: var(--clik-cream);
+}
+body.theme-midnight .clik-btn-secondary {
+  color: var(--clik-cream);
+  border-color: rgba(249, 247, 241, 0.25);
+}
+body.theme-midnight .clik-btn-secondary:hover { border-color: var(--clik-cream); }
+body.theme-midnight .clik-chip { color: var(--clik-cream); }
+body.theme-midnight .clik-card {
+  background: rgba(249, 247, 241, 0.03);
+}
+/* Dark bento card + inner mockup surfaces (used by React visuals) */
+body.theme-midnight .bento-card,
+.bento-card {
+  border-radius: 16px;
+}

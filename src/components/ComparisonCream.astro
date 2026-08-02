@@ -41,13 +41,13 @@ const rows = [
 <section id="comparison" class="px-6 md:px-12 py-24 md:py-32">
   <div class="mx-auto max-w-[1100px]">
     <div class="clik-section-header">
-      <span class="idx">[ 07 ]</span>
+      <span class="idx">[ 04 ]</span>
       <span class="rule"></span>
       <span class="label">THE MATH</span>
     </div>
 
     <h2
-      class="font-display font-medium text-clik-midnight"
+      class="font-display font-medium text-clik-cream"
       style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
     >
       Clik vs. hiring an editor<span class="clik-period">.</span>
@@ -58,7 +58,7 @@ const rows = [
       <!-- Column header row -->
       <div class="comp-row comp-head">
         <div class="comp-label" aria-hidden="true"></div>
-        <div class="comp-cell font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+        <div class="comp-cell font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/55">
           Human editor
         </div>
         <div class="comp-cell comp-clik font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
@@ -68,13 +68,13 @@ const rows = [
 
       {rows.map((row) => (
         <div class={`comp-row ${row.emphasis ? 'comp-emphasis' : ''}`}>
-          <div class="comp-label font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/55">
+          <div class="comp-label font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/55">
             {row.label}
           </div>
-          <div class="comp-cell font-ui text-clik-midnight/60" style="font-size: 15px; line-height: 1.45;">
+          <div class="comp-cell font-ui text-clik-cream/60" style="font-size: 15px; line-height: 1.45;">
             {row.human}
           </div>
-          <div class="comp-cell comp-clik font-ui text-clik-midnight" style="font-size: 15px; line-height: 1.45;">
+          <div class="comp-cell comp-clik font-ui text-clik-cream" style="font-size: 15px; line-height: 1.45;">
             {row.clik}
           </div>
         </div>
@@ -99,7 +99,7 @@ const rows = [
   }
   .comp-head {
     border-bottom: 1px solid var(--clik-mid-12);
-    background: var(--clik-bone);
+    background: rgba(249, 247, 241, 0.06);
   }
   .comp-label,
   .comp-cell {

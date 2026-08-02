@@ -9,7 +9,7 @@ import FloatingCTA from '../components/FloatingCTA.astro';
 interface Props {
   title: string;
   description?: string;
-  theme?: 'dark' | 'cream';
+  theme?: 'dark' | 'cream' | 'midnight'; // midnight = cream components on a dark bento surface
 }
 const { title, description = 'Clik — AI video editor for creators', theme = 'dark' } = Astro.props;
 ---
@@ -77,9 +77,12 @@ const { title, description = 'Clik — AI video editor for creators', theme = 'd
   src="https://www.facebook.com/tr?id=754145170241342&ev=PageView&noscript=1"
   /></noscript>
 </head>
-<body class={theme === 'cream' ? 'theme-cream' : ''} data-theme={theme}>
+<body
+  class={theme === 'cream' ? 'theme-cream' : theme === 'midnight' ? 'theme-cream theme-midnight' : ''}
+  data-theme={theme}
+>
 
-  {theme === 'cream' ? <NavCream /> : <Nav />}
+  {theme === 'cream' || theme === 'midnight' ? <NavCream /> : <Nav />}
   <slot />
   <Footer />
   <FloatingCTA />

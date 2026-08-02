@@ -38,7 +38,7 @@ const others = [
 
     <!-- Volume stat leads — numbers over adjectives -->
     <h2
-      class="font-display font-medium text-clik-midnight"
+      class="font-display font-medium text-clik-cream"
       style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 24ch;"
     >
       {statLine.headline}<span class="clik-period">.</span>
@@ -47,22 +47,22 @@ const others = [
     <!-- Hero quote — bracket-framed window -->
     <div
       class="clik-frame relative mt-12"
-      style="color: var(--clik-midnight); padding: 56px clamp(24px, 5vw, 64px);"
+      style="color: var(--clik-cream); padding: 56px clamp(24px, 5vw, 64px);"
     >
       <span class="clik-corner-tr"></span>
       <span class="clik-corner-bl"></span>
 
       <p
-        class="font-display font-medium italic text-clik-midnight"
+        class="font-display font-medium italic text-clik-cream"
         style="font-size: clamp(26px, 3.4vw, 38px); line-height: 1.25; letter-spacing: -0.01em; max-width: 42ch;"
       >
         "{hero.quote}"
       </p>
       <div class="mt-8 flex items-center gap-3">
-        <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5">
+        <span class="inline-flex h-7 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-2.5">
           <img src={hero.avatar} alt={hero.author} class="h-3 w-auto" loading="lazy" />
         </span>
-        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
+        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/70">
           {hero.author} · {hero.handle}
         </div>
       </div>
@@ -74,27 +74,27 @@ const others = [
     <div class="marquee-track">
       {[...others, ...others, ...others].map((t) => (
         <div
-          class="marquee-card flex-shrink-0 w-[360px] clik-frame relative bg-clik-cream flex flex-col"
-          style="color: var(--clik-midnight); padding: 24px; min-height: 220px;"
+          class="marquee-card flex-shrink-0 w-[360px] clik-frame relative bg-transparent flex flex-col"
+          style="color: var(--clik-cream); padding: 24px; min-height: 220px;"
         >
           <span class="clik-corner-tr"></span>
           <span class="clik-corner-bl"></span>
-          <p class="font-ui text-clik-midnight" style="font-size: 15px; line-height: 1.55;">"{t.quote}"</p>
+          <p class="font-ui text-clik-cream" style="font-size: 15px; line-height: 1.55;">"{t.quote}"</p>
           <div class="mt-auto pt-4 flex items-center gap-2.5">
             {t.avatar && t.avatarKind === 'photo' && (
               <img
                 src={t.avatar}
                 alt={t.author}
-                class="h-8 w-8 rounded-full object-cover ring-1 ring-clik-midnight/15"
+                class="h-8 w-8 rounded-full object-cover ring-1 ring-clik-cream/20"
                 loading="lazy"
               />
             )}
             {t.avatar && t.avatarKind === 'logo' && (
-              <span class="inline-flex h-6 items-center rounded-md bg-clik-midnight px-2">
+              <span class="inline-flex h-6 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-2">
                 <img src={t.avatar} alt={t.author} class="h-2.5 w-auto" loading="lazy" />
               </span>
             )}
-            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-midnight/55">
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55">
               {t.author} · {t.handle}
             </p>
           </div>
@@ -106,8 +106,8 @@ const others = [
   <!-- Case detail — featured video testimonial, Bobby / MAE Media -->
   <div class="mx-auto max-w-[1100px] mt-16">
     <div
-      class="clik-frame relative bg-clik-cream"
-      style="color: var(--clik-midnight); padding: clamp(16px, 2vw, 20px);"
+      class="clik-frame relative bg-transparent"
+      style="color: var(--clik-cream); padding: clamp(16px, 2vw, 20px);"
     >
       <span class="clik-corner-tr"></span>
       <span class="clik-corner-bl"></span>
@@ -123,12 +123,12 @@ const others = [
       </video>
 
       <div class="mt-5 flex items-center gap-3 px-2 pb-1">
-        <span class="inline-flex h-7 items-center rounded-md bg-clik-midnight px-2.5 shrink-0">
+        <span class="inline-flex h-7 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-2.5 shrink-0">
           <img src="/images/testimonials/mae-media.png" alt="MAE Media" class="h-3 w-auto" loading="lazy" />
         </span>
-        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-midnight/70">
-          <span class="font-bold text-clik-midnight">Bobby</span>
-          <span class="text-clik-midnight/45"> · Founder, MAE Media</span>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/70">
+          <span class="font-bold text-clik-cream">Bobby</span>
+          <span class="text-clik-cream/45"> · Founder, MAE Media</span>
         </p>
       </div>
     </div>

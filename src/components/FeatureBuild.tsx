@@ -89,7 +89,7 @@ function TypingDots() {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="w-1.5 h-1.5 rounded-full bg-clik-midnight/40 block"
+          className="w-1.5 h-1.5 rounded-full bg-clik-cream/40 block"
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
         />
@@ -108,9 +108,9 @@ function UploadArea({ visible }: { visible: boolean }) {
     >
       <div
         className="rounded-lg border border-dashed px-4 py-3 text-center"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.25)', background: 'rgba(14, 24, 52, 0.04)' }}
+        style={{ borderColor: 'rgba(249, 247, 241, 0.25)', background: 'rgba(249, 247, 241, 0.04)' }}
       >
-        <p className="text-xs mb-2" style={{ color: 'rgba(14, 24, 52, 0.65)' }}>Drop your footage</p>
+        <p className="text-xs mb-2" style={{ color: 'rgba(249, 247, 241, 0.65)' }}>Drop your footage</p>
         <div className="flex gap-1 justify-center flex-wrap">
           {UPLOADS.map((u, i) => (
             <motion.div
@@ -147,20 +147,20 @@ function OptionsSelector({ visible }: { visible: boolean }) {
     >
       {/* Story driver toggle */}
       <div className="flex-1 space-y-1.5">
-        <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>Story driver</span>
+        <span className="text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>Story driver</span>
         <div className="flex gap-1">
           <motion.div
-            initial={{ borderColor: 'rgba(14, 24, 52, 0.10)' }}
+            initial={{ borderColor: 'rgba(249, 247, 241, 0.10)' }}
             animate={{ borderColor: '#5481E860', background: '#5481E815' }}
             transition={{ delay: 0.3, duration: 0.3 }}
             className="flex-1 rounded-lg border px-2.5 py-2 text-xs text-center"
-            style={{ background: 'rgba(14, 24, 52, 0.05)' }}
+            style={{ background: 'rgba(249, 247, 241, 0.05)' }}
           >
             <span style={{ color: '#5481E8' }}>Visual</span>
           </motion.div>
           <div
             className="flex-1 rounded-lg border px-2.5 py-2 text-xs text-center"
-            style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: 'rgba(14, 24, 52, 0.04)', color: 'rgba(14, 24, 52, 0.45)' }}
+            style={{ borderColor: 'rgba(249, 247, 241, 0.10)', background: 'rgba(249, 247, 241, 0.04)', color: 'rgba(249, 247, 241, 0.45)' }}
           >
             Dialogue
           </div>
@@ -168,16 +168,16 @@ function OptionsSelector({ visible }: { visible: boolean }) {
       </div>
       {/* Hook selector */}
       <div className="flex-1 space-y-1.5">
-        <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>Hook</span>
+        <span className="text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>Hook</span>
         <motion.div
-          initial={{ borderColor: 'rgba(14, 24, 52, 0.10)' }}
+          initial={{ borderColor: 'rgba(249, 247, 241, 0.10)' }}
           animate={{ borderColor: '#F9838E60' }}
           transition={{ delay: 0.5, duration: 0.3 }}
           className="rounded-lg border px-3 py-2 text-xs flex items-center justify-between"
-          style={{ background: 'rgba(14, 24, 52, 0.05)' }}
+          style={{ background: 'rgba(249, 247, 241, 0.05)' }}
         >
-          <span style={{ color: 'rgba(14, 24, 52, 0.85)' }}>Final plating</span>
-          <span style={{ color: 'rgba(14, 24, 52, 0.45)' }}>▾</span>
+          <span style={{ color: 'rgba(249, 247, 241, 0.85)' }}>Final plating</span>
+          <span style={{ color: 'rgba(249, 247, 241, 0.45)' }}>▾</span>
         </motion.div>
       </div>
     </motion.div>
@@ -200,7 +200,7 @@ function AIMessage({ text, isLatest }: { text: string; isLatest: boolean }) {
       >
         ✦
       </motion.span>
-      <span className="text-sm" style={{ color: isLatest ? 'rgba(14, 24, 52, 0.85)' : 'rgba(14, 24, 52, 0.5)' }}>
+      <span className="text-sm" style={{ color: isLatest ? 'rgba(249, 247, 241, 0.85)' : 'rgba(249, 247, 241, 0.5)' }}>
         {text}
       </span>
     </motion.div>
@@ -226,9 +226,9 @@ function Timeline({ clips, label }: { clips: TimelineClip[]; label?: string }) {
     >
       {label && (
         <div className="flex items-center gap-3">
-          <div className="h-px flex-1" style={{ background: 'rgba(14, 24, 52, 0.10)' }} />
-          <span className="text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>{label}</span>
-          <div className="h-px flex-1" style={{ background: 'rgba(14, 24, 52, 0.10)' }} />
+          <div className="h-px flex-1" style={{ background: 'rgba(249, 247, 241, 0.10)' }} />
+          <span className="text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>{label}</span>
+          <div className="h-px flex-1" style={{ background: 'rgba(249, 247, 241, 0.10)' }} />
         </div>
       )}
       <div className="flex gap-1">
@@ -348,12 +348,12 @@ export default function FeatureBuild() {
             <span className="label">BUILD AGENT</span>
           </div>
           <h2
-            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-cream"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
             Approved plan in. Built videos out<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(249, 247, 241, 0.7)' }}>
             The build agent constructs the actual videos from the approved plan — downstream of your brand guide,
             the project, and the workflow. Review and adjust anything in the built-in editor, or let it run.
           </p>
@@ -367,7 +367,7 @@ export default function FeatureBuild() {
                 style={{
                   border: '1px solid #5481E820',
                   background: '#5481E808',
-                  color: 'rgba(14, 24, 52, 0.7)',
+                  color: 'rgba(249, 247, 241, 0.7)',
                 }}
               >
                 <span style={{ color: '#5481E8', fontSize: 10 }}>{cap.icon}</span>
@@ -384,16 +384,16 @@ export default function FeatureBuild() {
             transition={{ duration: fading ? FADE_OUT_DURATION / 1000 : 0.3 }}
             className="rounded-2xl border overflow-hidden"
             style={{
-              borderColor: 'rgba(14, 24, 52, 0.10)',
-              background: '#F1EEE5',
+              borderColor: 'rgba(249, 247, 241, 0.10)',
+              background: '#13204A',
             }}
           >
             {/* Window chrome */}
-            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}>
-              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-              <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-              <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(249, 247, 241, 0.08)' }}>
+              <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+              <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+              <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+              <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>
                 clik editor
               </span>
             </div>

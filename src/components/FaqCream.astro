@@ -46,13 +46,13 @@ const faqSchema = {
 <section id="faq" class="px-6 md:px-12 py-24 md:py-32">
   <div class="mx-auto max-w-[900px]">
     <div class="clik-section-header">
-      <span class="idx">[ 11 ]</span>
+      <span class="idx">[ 08 ]</span>
       <span class="rule"></span>
       <span class="label">FAQ</span>
     </div>
 
     <h2
-      class="font-display font-medium text-clik-midnight"
+      class="font-display font-medium text-clik-cream"
       style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em;"
     >
       Common questions<span class="clik-period">.</span>
@@ -62,12 +62,12 @@ const faqSchema = {
       {faqs.map((f) => (
         <details class="faq-item group">
           <summary class="faq-summary">
-            <span class="font-display font-medium text-clik-midnight" style="font-size: 19px; letter-spacing: -0.01em;">
+            <span class="font-display font-medium text-clik-cream" style="font-size: 19px; letter-spacing: -0.01em;">
               {f.q}
             </span>
             <span class="faq-icon" aria-hidden="true"></span>
           </summary>
-          <p class="pb-6 pr-10 font-ui text-clik-midnight/70" style="font-size: 15px; line-height: 1.6; max-width: 62ch;">
+          <p class="pb-6 pr-10 font-ui text-clik-cream/70" style="font-size: 15px; line-height: 1.6; max-width: 62ch;">
             {f.a}
           </p>
         </details>
@@ -108,7 +108,7 @@ const faqSchema = {
     position: absolute;
     inset: 0;
     margin: auto;
-    background: var(--clik-midnight);
+    background: var(--clik-cream);
     transition: transform var(--dur-base) var(--ease-soft);
   }
   .faq-icon::before { width: 14px; height: 1.5px; }

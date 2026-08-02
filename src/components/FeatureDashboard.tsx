@@ -22,7 +22,7 @@ const PROJECTS = [
   { name: 'Community account — week 31', videos: '12 videos', status: 'Planned', accent: '#9785B8' },
 ];
 
-function DashboardVisual() {
+export function DashboardVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
 
@@ -32,17 +32,17 @@ function DashboardVisual() {
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: 'rgba(14, 24, 52, 0.10)', background: '#F1EEE5' }}
+        style={{ borderColor: 'rgba(249, 247, 241, 0.10)', background: '#13204A' }}
       >
         {/* Window chrome */}
         <div
           className="flex items-center gap-1.5 px-4 py-3 border-b"
-          style={{ borderColor: 'rgba(14, 24, 52, 0.08)' }}
+          style={{ borderColor: 'rgba(249, 247, 241, 0.08)' }}
         >
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <div className="w-2 h-2 rounded-full bg-clik-midnight/15" />
-          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(14, 24, 52, 0.4)' }}>
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
+          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>
             projects
           </span>
         </div>
@@ -58,11 +58,11 @@ function DashboardVisual() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
               transition={{ delay: i * 0.1, duration: 0.3 }}
               className="flex items-center gap-2.5 rounded-lg px-3 py-2.5"
-              style={{ background: 'rgba(14, 24, 52, 0.04)', border: '1px solid rgba(14, 24, 52, 0.08)' }}
+              style={{ background: 'rgba(249, 247, 241, 0.04)', border: '1px solid rgba(249, 247, 241, 0.08)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: p.accent }} />
-              <span className="text-xs flex-1 truncate" style={{ color: 'rgba(14, 24, 52, 0.78)' }}>{p.name}</span>
-              <span className="text-[10px] hidden sm:block" style={{ color: 'rgba(14, 24, 52, 0.45)' }}>{p.videos}</span>
+              <span className="text-xs flex-1 truncate" style={{ color: 'rgba(249, 247, 241, 0.78)' }}>{p.name}</span>
+              <span className="text-[10px] hidden sm:block" style={{ color: 'rgba(249, 247, 241, 0.45)' }}>{p.videos}</span>
               <span
                 className="text-[10px] font-mono rounded-full px-2 py-0.5 flex-shrink-0"
                 style={{ background: `${p.accent}15`, color: `${p.accent}CC`, border: `1px solid ${p.accent}30` }}
@@ -78,7 +78,7 @@ function DashboardVisual() {
             className="flex items-center gap-2 pt-2.5 pl-1"
           >
             <span className="text-xs" style={{ color: ACCENT }}>{'✦'}</span>
-            <span className="text-[11px]" style={{ color: 'rgba(14, 24, 52, 0.5)' }}>
+            <span className="text-[11px]" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
               29 videos in flight this week
             </span>
           </motion.div>
@@ -101,12 +101,12 @@ export default function FeatureDashboard() {
             <span className="label">DASHBOARD</span>
           </div>
           <h2
-            className="font-display font-medium leading-[1.05] mb-5 text-clik-midnight"
+            className="font-display font-medium leading-[1.05] mb-5 text-clik-cream"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.02em' }}
           >
             See where everything stands<span style={{ color: '#5481E8' }}>.</span>
           </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(14, 24, 52, 0.7)' }}>
+          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'rgba(249, 247, 241, 0.7)' }}>
             Track status across every project, collaborate with teammates, and see what's planned, building,
             and ready to review — the whole engine in one view.
           </p>
@@ -120,7 +120,7 @@ export default function FeatureDashboard() {
                 style={{
                   border: '1px solid #5481E820',
                   background: '#5481E808',
-                  color: 'rgba(14, 24, 52, 0.7)',
+                  color: 'rgba(249, 247, 241, 0.7)',
                 }}
               >
                 <span style={{ color: ACCENT, fontSize: 10 }}>{cap.icon}</span>

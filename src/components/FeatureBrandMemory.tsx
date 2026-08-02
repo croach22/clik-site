@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 // Brand & org memory — the upstream layer of the four-part flow.
-// Visual is a RESERVED SLOT: static brand-guide card in the established
-// bone/chrome frame. The looping animation lands in the animation phase
-// (spec from Conner) without changing the slot's dimensions.
+// Visual: product screenshot when provided (drop the file in public/images/
+// features/ and set SCREENSHOT_SRC); static brand-guide card as fallback.
+const SCREENSHOT_SRC: string | null = null; // e.g. '/images/features/brand-guide.png'
 
 const CAPABILITIES = [
   { label: 'Caption styles', icon: '✦' },
@@ -49,7 +49,9 @@ function BrandGuideVisual() {
           </span>
         </div>
 
-        {/* ANIMATION SLOT — static placeholder rows until the animation phase */}
+        {SCREENSHOT_SRC ? (
+          <img src={SCREENSHOT_SRC} alt="Clik brand guide" className="block w-full" loading="lazy" />
+        ) : (
         <div className="px-4 py-5 space-y-1.5">
           {GUIDE_ITEMS.map((item, i) => (
             <motion.div
@@ -77,6 +79,7 @@ function BrandGuideVisual() {
             </span>
           </motion.div>
         </div>
+        )}
       </motion.div>
     </div>
   );

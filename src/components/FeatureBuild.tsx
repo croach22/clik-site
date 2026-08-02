@@ -77,6 +77,10 @@ const CAPABILITIES = [
   { label: 'Conversational edits', icon: '✦' },
 ];
 
+// Product screenshot override — set to swap the animation for a real screenshot
+// (drop the file in public/images/features/).
+const SCREENSHOT_SRC: string | null = null; // e.g. '/images/features/build-agent.png'
+
 // ── Sub-components ──
 
 function TypingDots() {
@@ -394,7 +398,9 @@ export default function FeatureBuild() {
               </span>
             </div>
 
-            {/* Animation area */}
+            {SCREENSHOT_SRC ? (
+              <img src={SCREENSHOT_SRC} alt="Clik build agent" className="block w-full" loading="lazy" />
+            ) : (
             <div ref={animRef} className="no-scrollbar px-4 py-5 space-y-4 h-[380px] md:h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
 
               {/* Upload step */}
@@ -442,6 +448,7 @@ export default function FeatureBuild() {
                 )}
               </AnimatePresence>
             </div>
+            )}
           </motion.div>
         </div>
       </div>

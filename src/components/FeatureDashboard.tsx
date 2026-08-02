@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 // Project dashboard — the team-visibility layer of the four-part flow.
-// Visual is a RESERVED SLOT: static status board in the established
-// bone/chrome frame with the cheap stagger-reveal pattern. A richer visual
-// can land in the animation phase without changing the slot's dimensions.
+// Visual: product screenshot when provided (drop the file in public/images/
+// features/ and set SCREENSHOT_SRC); static status board as fallback.
+const SCREENSHOT_SRC: string | null = null; // e.g. '/images/features/dashboard.png'
 
 const CAPABILITIES = [
   { label: 'Project status', icon: '✦' },
@@ -47,7 +47,9 @@ function DashboardVisual() {
           </span>
         </div>
 
-        {/* ANIMATION SLOT — static status board until the animation phase */}
+        {SCREENSHOT_SRC ? (
+          <img src={SCREENSHOT_SRC} alt="Clik project dashboard" className="block w-full" loading="lazy" />
+        ) : (
         <div className="px-4 py-5 space-y-1.5">
           {PROJECTS.map((p, i) => (
             <motion.div
@@ -81,6 +83,7 @@ function DashboardVisual() {
             </span>
           </motion.div>
         </div>
+        )}
       </motion.div>
     </div>
   );

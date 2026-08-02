@@ -9,6 +9,10 @@ const CAPABILITIES = [
 
 const ACCENT = '#5481E8';
 
+// Product screenshot override — set to swap the animation for a real screenshot
+// (drop the file in public/images/features/).
+const SCREENSHOT_SRC: string | null = null; // e.g. '/images/features/workflows.png'
+
 function BatchVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
@@ -48,6 +52,9 @@ function BatchVisual() {
           </span>
         </div>
 
+        {SCREENSHOT_SRC ? (
+          <img src={SCREENSHOT_SRC} alt="Clik workflow agent" className="block w-full" loading="lazy" />
+        ) : (
         <div className="px-4 py-5 space-y-4">
           {/* Input files */}
           <div>
@@ -126,6 +133,7 @@ function BatchVisual() {
             </div>
           </div>
         </div>
+        )}
       </motion.div>
     </div>
   );

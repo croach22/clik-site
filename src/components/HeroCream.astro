@@ -3,8 +3,8 @@
 // Headline stays input-agnostic (shoots, podcasts, clip folders) so clipping
 // isn't alienated; the subhead does the differentiating — "sorts, plans" is
 // the wedge nobody else can claim.
-// Visual: interim hero-animation.mp4 loop. The inputs → hub → fan-out
-// animation replaces it in the animation phase (spec from Conner).
+// Visual: HeroLoop — code-built inputs → hub → fan-out loop.
+import HeroLoop from './HeroLoop';
 const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 ---
 
@@ -47,20 +47,9 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
       </div>
     </div>
 
-    <!-- Hero visual — interim looping workflow animation (replaced in animation phase) -->
+    <!-- Hero visual — looping inputs → engine → fan-out animation -->
     <div class="mt-16 md:mt-24">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster="/videos/hero-animation-poster.jpg"
-        aria-label="Clik batch workflow animation showing raw footage and brief converging into parallel drafts and an editor"
-        class="block w-full rounded-[8px] border border-clik-midnight/15"
-      >
-        <source src="/videos/hero-animation.mp4" type="video/mp4" />
-      </video>
+      <HeroLoop client:load />
     </div>
   </div>
 </section>

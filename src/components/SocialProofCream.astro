@@ -7,9 +7,6 @@
 
 // TODO(conner): verify the exact volume stat before deploy — "100 files into
 // 15 videos in 11 minutes" is the outline's example framing.
-const statLine = {
-  headline: '100 files in. 15 videos out. 11 minutes',
-};
 
 const hero = {
   quote: "Clik is by far the fastest path from raw footage to finished content I've ever used. The pacing feels like it came from a veteran editor.",
@@ -36,13 +33,26 @@ const others = [
       <span class="label">PROOF</span>
     </div>
 
-    <!-- Volume stat leads — numbers over adjectives -->
-    <h2
-      class="font-display font-medium text-clik-cream"
-      style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 24ch;"
-    >
-      {statLine.headline}<span class="clik-period">.</span>
-    </h2>
+    <!-- Volume stat leads — numbers over adjectives. Count-up on view. -->
+    <div class="stat-band mt-2 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
+      {[
+        { n: 100, label: 'files in' },
+        { n: 15, label: 'videos out' },
+        { n: 11, label: 'minutes' },
+      ].map((s, i) => (
+        <div class={`stat-cell ${i > 0 ? 'sm:border-l sm:border-clik-cream/10 sm:pl-8' : ''}`}>
+          <div
+            class="font-display font-medium text-clik-cream"
+            style="font-size: clamp(56px, 7vw, 88px); line-height: 1; letter-spacing: -0.02em;"
+          >
+            <span data-count={s.n}>0</span><span class="clik-period">.</span>
+          </div>
+          <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/50">
+            {s.label}
+          </p>
+        </div>
+      ))}
+    </div>
 
     <!-- Hero quote -->
     <div
@@ -71,7 +81,7 @@ const others = [
     <div class="marquee-track">
       {[...others, ...others, ...others].map((t) => (
         <div
-          class="marquee-card bento-card flex-shrink-0 w-[360px] relative border flex flex-col" style="border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03); color: var(--clik-cream); padding: 24px; min-height: 220px;"
+          class="marquee-card bento-card flex-shrink-0 w-[360px] relative border flex flex-col" style="border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03); color: var(--clik-cream); padding: 22px; min-height: 184px;"
         >
           <p class="font-ui text-clik-cream" style="font-size: 15px; line-height: 1.55;">"{t.quote}"</p>
           <div class="mt-auto pt-4 flex items-center gap-2.5">
@@ -125,6 +135,39 @@ const others = [
     </div>
   </div>
 </section>
+
+<script>
+  // Count-up on first view — eased, ~1.1s
+  const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+  if (counters.length && 'IntersectionObserver' in window) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          io.unobserve(el);
+          const target = parseInt(el.getAttribute('data-count') || '0', 10);
+          if (reduce) {
+            el.textContent = String(target);
+            return;
+          }
+          const start = performance.now();
+          const dur = 1100;
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = String(Math.round(target * eased));
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach((el) => io.observe(el));
+  }
+</script>
 
 <style>
   .marquee-row {

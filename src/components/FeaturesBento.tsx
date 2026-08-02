@@ -150,7 +150,15 @@ function BentoCard({ card }: { card: Card }) {
       className={`bento-card flex flex-col gap-6 border p-6 md:p-7 ${card.wide ? 'md:col-span-2' : ''}`}
       style={{ borderColor: CREAM('0.10'), background: CREAM('0.03') }}
     >
-      <span className="text-sm" style={{ color: card.glyphColor }} aria-hidden="true">
+      <span
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm"
+        style={{
+          color: card.glyphColor,
+          background: `${card.glyphColor}14`,
+          border: `1px solid ${card.glyphColor}35`,
+        }}
+        aria-hidden="true"
+      >
         {card.glyph}
       </span>
       <div className="flex-1 flex flex-col justify-center">

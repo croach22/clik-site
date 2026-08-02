@@ -4,6 +4,8 @@
 // The "your time per video" row is the one that wins arguments: the obvious
 // objection to any AI tool is "I have to explain what I want either way" —
 // directing a human costs more than teaching Clik, which then persists.
+const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
+
 const rows = [
   {
     label: 'First draft',
@@ -79,6 +81,16 @@ const rows = [
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Verdict — mid-page conversion moment, bridges into pricing -->
+    <div class="reveal-me mt-8 flex flex-wrap items-center justify-between gap-4">
+      <p class="font-ui text-clik-cream/60" style="font-size: 15px; line-height: 1.5;">
+        Scoped per video — the same way you already price editors.
+      </p>
+      <a href={CALENDLY_URL} class="clik-btn clik-btn-secondary">
+        See it on your footage <span aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </section>

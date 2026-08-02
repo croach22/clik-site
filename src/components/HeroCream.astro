@@ -1,20 +1,34 @@
 ---
-// Hero — engine/throughput ethos, no camera motifs. Kicker gets the
-// accent-bar treatment; the headline sits clean above the loop.
+// Hero — engine/throughput ethos. Radial glow + dot-grid atmosphere,
+// staggered load-in, proof row under the CTAs so trust lands above the fold.
 // Headline stays input-agnostic (shoots, podcasts, clip folders) so clipping
 // isn't alienated; the subhead does the differentiating — "sorts, plans" is
 // the wedge nobody else can claim.
 // Visual: HeroLoop — code-built inputs → hub → fan-out loop.
 import HeroLoop from './HeroLoop';
 const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
+
+const proofFaces = [
+  { src: '/images/testimonials/matt-ragland.jpg', alt: 'Matt Ragland' },
+  { src: '/images/testimonials/gigi-robinson.jpg', alt: 'Gigi Robinson' },
+  { src: '/images/testimonials/randy-stoever.jpg', alt: 'Randy Stoever' },
+];
 ---
 
-<section id="hero" class="relative pt-32 md:pt-36">
-  <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-24">
+<section id="hero" class="relative overflow-hidden pt-32 md:pt-36">
+  <!-- atmosphere -->
+  <div class="dot-grid absolute inset-x-0 top-0 h-[620px]" aria-hidden="true"></div>
+  <div
+    class="glow -top-24 left-[-10%] h-[480px] w-[720px]"
+    style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.14), transparent 72%);"
+    aria-hidden="true"
+  ></div>
 
-    <div class="w-full py-8 md:py-12">
+  <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-14">
+
+    <div class="w-full py-8 md:py-10">
       <!-- Kicker — vertical accent bar, systems language -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3" data-reveal style="--reveal-delay: 0ms;">
         <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
         <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
           AI-Powered Content Ops
@@ -24,18 +38,23 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
       <!-- Headline -->
       <h1
         class="mt-6 font-display font-medium tracking-display text-clik-cream"
-        style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 20ch;"
+        style="font-size: clamp(44px, 8vw, 72px); line-height: 1.02; letter-spacing: -0.02em; max-width: 20ch; --reveal-delay: 80ms;"
+        data-reveal
       >
         An on-brand content engine for any video input<span class="clik-period">.</span>
       </h1>
 
       <!-- Body -->
-      <p class="mt-6 max-w-[620px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
+      <p
+        class="mt-6 max-w-[620px] font-ui text-clik-cream/70"
+        style="font-size: 18px; line-height: 1.55; --reveal-delay: 160ms;"
+        data-reveal
+      >
         Point it at a shoot, a podcast, or a folder of clips. It sorts, plans, and builds — and gets sharper every project.
       </p>
 
       <!-- CTAs — self-serve + teams who want a conversation first -->
-      <div class="mt-8 flex flex-wrap items-center gap-3">
+      <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay: 240ms;">
         <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-primary">
           Start for free <span aria-hidden="true">→</span>
         </a>
@@ -43,11 +62,33 @@ const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
           Book a demo
         </a>
       </div>
+
+      <!-- Proof row — trust above the fold -->
+      <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay: 320ms;">
+        <div class="flex -space-x-2">
+          {proofFaces.map((f) => (
+            <img
+              src={f.src}
+              alt={f.alt}
+              class="h-7 w-7 rounded-full object-cover ring-2 ring-[#0E1834]"
+              loading="eager"
+            />
+          ))}
+        </div>
+        <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/50">
+          Runs content for Feed Studios, MAE Media &amp; top creators
+        </p>
+      </div>
     </div>
 
     <!-- Hero visual — looping inputs → engine → fan-out animation, with
          flowing line-art garnish converging into the card from both sides -->
-    <div class="relative mt-12 md:mt-16">
+    <div class="relative mt-10 md:mt-14">
+      <div
+        class="glow left-1/2 top-1/2 h-[130%] w-[110%] -translate-x-1/2 -translate-y-1/2"
+        style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.10), transparent 74%);"
+        aria-hidden="true"
+      ></div>
       <svg
         class="pointer-events-none absolute -left-24 top-1/2 hidden w-64 -translate-y-1/2 md:block"
         viewBox="0 0 260 200"

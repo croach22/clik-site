@@ -88,6 +88,56 @@ const { title, description = 'Clik — an on-brand content engine for any video 
   <FloatingCTA />
   <MobileEmailDrawer client:load />
   <script>
+    // Scroll-reveal (midnight theme only) — stamps [data-reveal] on section
+    // furniture and fades it up on first viewport entry, staggered per parent.
+    // React islands' internal animations are untouched; this only moves the
+    // static shells.
+    if (
+      document.body.classList.contains('theme-midnight') &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      'IntersectionObserver' in window
+    ) {
+      const SELECTORS = [
+        '.clik-section-header',
+        'section h2',
+        '.bento-card',
+        '.clik-card',
+        '.comparison-grid',
+        '.faq-item',
+        '.stat-cell',
+        '.reveal-me',
+      ].join(', ');
+
+      const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTORS));
+      // stagger siblings that share a parent
+      const parentCounts = new Map<Element, number>();
+      els.forEach((el) => {
+        // Never stamp inside React islands — attributes added before hydration
+        // trigger mismatch warnings, and the islands animate themselves.
+        if (el.closest('astro-island')) return;
+        if (el.hasAttribute('data-reveal')) return;
+        const parent = el.parentElement;
+        const idx = parent ? (parentCounts.get(parent) ?? 0) : 0;
+        if (parent) parentCounts.set(parent, idx + 1);
+        el.setAttribute('data-reveal', '');
+        el.style.setProperty('--reveal-delay', `${Math.min(idx, 5) * 70}ms`);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-inview');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    }
+  </script>
+  <script>
     import { trackMetaEvent } from '../lib/analytics';
 
     // Fire AgencyPageView once the agency page loads (custom event — stronger

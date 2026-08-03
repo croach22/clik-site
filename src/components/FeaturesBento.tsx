@@ -83,7 +83,7 @@ export default function FeaturesBento() {
     <section id="features" className="relative py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <div className="mx-auto max-w-[1200px]">
         <div className="clik-section-header">
-          <span className="idx">[ 03 ]</span>
+          <span className="idx">[ 02 ]</span>
           <span className="rule"></span>
           <span className="label">THE SYSTEM</span>
         </div>

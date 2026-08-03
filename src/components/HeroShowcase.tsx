@@ -40,6 +40,7 @@ interface Variant {
   inputFiles: { name: string; kind: string; accent: string }[];
   moreCount: number;
   outLabel: string;
+  claim: string;
   outputs: Output[];
   raw?: string | null;
   prompt: string;
@@ -58,6 +59,7 @@ const VARIANTS: Variant[] = [
     ],
     moreCount: 33,
     outLabel: '12 videos · 4 concepts',
+    claim: 'Clik reads the whole batch and splits it by concept. You never sort a file.',
     outputs: [
       { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
       { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
@@ -82,6 +84,7 @@ const VARIANTS: Variant[] = [
     ],
     moreCount: 56,
     outLabel: '5 videos',
+    claim: 'Clik finds the best moments across every clip and builds multiple storylines. Nobody scrubs hours of footage to find them.',
     outputs: [
       { label: 'recap_guest01', dur: '0:48', accent: ROYCE },
       { label: 'recap_guest02', dur: '0:52', accent: SALMON },
@@ -105,6 +108,7 @@ const VARIANTS: Variant[] = [
     ],
     moreCount: 12,
     outLabel: '8 clips · your B-roll',
+    claim: 'Most tools can only start once someone has produced the episode. Clik works from either end.',
     outputs: [
       { label: 'ep42_clip01', dur: '0:41', accent: ROYCE },
       { label: 'ep42_clip02', dur: '0:37', accent: SALMON },
@@ -129,6 +133,7 @@ const VARIANTS: Variant[] = [
     ],
     moreCount: 14,
     outLabel: '6 videos · best takes',
+    claim: 'Clik keeps the best delivery of every line and drops the rest. One sitting becomes a week of posts.',
     outputs: [
       { label: 'idea01_hookA', dur: '0:38', accent: ROYCE },
       { label: 'idea01_hookB', dur: '0:35', accent: ROYCE },
@@ -343,6 +348,17 @@ export default function HeroShowcase() {
 
   return (
     <div ref={ref}>
+      {/* The thesis, then the proof directly under it */}
+      <p
+        className="mb-4 font-display font-medium text-clik-cream"
+        style={{ fontSize: 'clamp(19px, 2.1vw, 24px)', lineHeight: 1.3, letterSpacing: '-0.01em', maxWidth: '38ch' }}
+      >
+        Imagine a clipping tool that worked on raw footage{' '}
+        <span style={{ color: C(0.45) }}>
+          (and on podcasts)<span style={{ color: ROYCE }}>.</span>
+        </span>
+      </p>
+
       {/* variant tabs */}
       <div
         role="tablist"
@@ -478,8 +494,8 @@ export default function HeroShowcase() {
 
         {/* prompt CTA */}
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-ui" style={{ fontSize: 12.5, color: C(0.55) }}>
-            This is one prompt. Run the same thing on your footage.
+          <p className="font-ui" style={{ fontSize: 13, lineHeight: 1.5, color: C(0.6), maxWidth: '62ch' }}>
+            {v.claim}
           </p>
           <button
             onClick={() => setModalOpen(true)}

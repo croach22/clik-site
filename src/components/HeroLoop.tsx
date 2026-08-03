@@ -28,11 +28,11 @@ interface Beat {
 }
 
 const BEATS: Beat[] = [
-  { line: 'Ingesting a shoot day, a podcast, and a folder of clips', zone: 'in', stage: 0, hold: 2000 },
-  { line: 'Reading dialogue and visuals across 128 clips', zone: 'in', stage: 0, hold: 2000 },
-  { line: 'Classifying footage: interview, B-roll, everything else', zone: 'in', stage: 0, hold: 2100 },
-  { line: 'Checking every idea against your brand guidelines', zone: 'brand', stage: 1, hold: 2200 },
-  { line: 'Planning 12 videos across four concepts', zone: 'out', stage: 1, hold: 2000 },
+  { line: 'Ingesting a batch day · 37 clips', zone: 'in', stage: 0, hold: 2000 },
+  { line: 'Reading dialogue and visuals across every clip', zone: 'in', stage: 0, hold: 2000 },
+  { line: 'Classifying A-roll, B-roll, and graphics', zone: 'in', stage: 0, hold: 2100 },
+  { line: 'Checking concepts against your brand guidelines', zone: 'brand', stage: 1, hold: 2200 },
+  { line: 'Planning 12 videos across 4 concepts', zone: 'out', stage: 1, hold: 2000 },
   { line: 'Cutting dead air, matching B-roll by meaning', zone: 'out', stage: 2, hold: 2100 },
   { line: 'Captions, title cards, hooks in your saved style', zone: 'out', stage: 2, hold: 2000 },
   { line: '12 videos ready for review', zone: 'out', stage: 3, hold: 2600 },
@@ -40,11 +40,12 @@ const BEATS: Beat[] = [
 
 const STAGES = ['Sort', 'Plan', 'Build', 'Review'];
 
+// One batch day: unsorted camera files, classified into A-roll / B-roll / graphics
 const INPUTS = [
-  { name: 'shoot_day_01.mp4', meta: '2.4 GB', accent: ROYCE, kind: 'interview' },
-  { name: 'podcast_ep42.mp4', meta: '1:02:14', accent: SALMON, kind: 'interview' },
-  { name: 'broll_kitchen.mov', meta: '1.4 GB', accent: SAGE, kind: 'b-roll' },
-  { name: 'broll_street.mov', meta: '980 MB', accent: OCHRE, kind: 'b-roll' },
+  { name: 'IMG_0978.mp4', meta: '00:42', accent: ROYCE, kind: 'a-roll' },
+  { name: 'IMG_0982.mp4', meta: '01:15', accent: SAGE, kind: 'b-roll' },
+  { name: 'IMG_0991.mp4', meta: '00:28', accent: ROYCE, kind: 'a-roll' },
+  { name: 'IMG_1004.mp4', meta: '02:03', accent: LAVENDER, kind: 'graphics' },
 ];
 
 const BRAND_RULES = [
@@ -55,13 +56,14 @@ const BRAND_RULES = [
   { label: 'Brand assets', accent: LAVENDER },
 ];
 
+// Concept × hook — accent groups the hooks that belong to the same concept
 const OUTPUTS = [
-  { label: 'Hook A', dur: '0:34', accent: ROYCE },
-  { label: 'Recap', dur: '0:48', accent: SALMON },
-  { label: 'Tutorial', dur: '0:58', accent: SAGE },
-  { label: 'Story', dur: '0:41', accent: LAVENDER },
-  { label: 'Listicle', dur: '0:39', accent: OCHRE },
-  { label: 'BTS', dur: '0:52', accent: ROYCE },
+  { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
+  { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
+  { label: 'vidB_hookA', dur: '0:48', accent: SALMON },
+  { label: 'vidB_hookB', dur: '0:44', accent: SALMON },
+  { label: 'vidC_hookA', dur: '0:58', accent: SAGE },
+  { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
 ];
 
 const FADE_OUT = 700;
@@ -148,7 +150,7 @@ export default function HeroLoop() {
         className="rounded-2xl border p-4 md:p-6"
         style={{ borderColor: C(0.1), background: '#13204A' }}
         role="img"
-        aria-label="Clik ingesting a shoot, a podcast and B-roll, checking them against saved brand rules, and producing twelve finished videos"
+        aria-label="Clik ingesting a 37-clip batch day, classifying A-roll, B-roll and graphics, checking concepts against saved brand rules, and producing twelve finished videos"
       >
         {/* ── Reasoning line + stage rail ── */}
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -206,7 +208,7 @@ export default function HeroLoop() {
         <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)_minmax(0,1.3fr)]">
           {/* IN */}
           <Zone active={zone === 'in'}>
-            <ZoneLabel text="Any input" />
+            <ZoneLabel text="Batch day · 37 clips" />
             <div className="space-y-1.5">
               {INPUTS.map((f, i) => (
                 <motion.div
@@ -250,6 +252,19 @@ export default function HeroLoop() {
                   </AnimatePresence>
                 </motion.div>
               ))}
+              {/* the rest of the batch */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: inputsIn ? 1 : 0 }}
+                transition={{ delay: 0.45, duration: 0.35 }}
+                className="flex items-center gap-2 rounded-lg px-2.5 py-2"
+                style={{ border: `1px dashed ${C(0.1)}` }}
+              >
+                <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: C(0.15) }} />
+                <span className="font-mono" style={{ fontSize: 10, color: C(0.4) }}>
+                  +33 more
+                </span>
+              </motion.div>
             </div>
           </Zone>
 

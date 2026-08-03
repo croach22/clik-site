@@ -527,9 +527,9 @@ export default function UseCaseTabs() {
           className="font-display font-medium text-clik-cream"
           style={{ fontSize: 'clamp(32px, 4.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', maxWidth: '28ch' }}
         >
-          Every content team wants an automated content system.{' '}
+          Imagine a clipping tool that worked on raw footage{' '}
           <span style={{ color: 'rgba(249, 247, 241, 0.45)' }}>
-            Right now only one format has one<span style={{ color: ROYCE }}>.</span>
+            (and on podcasts)<span style={{ color: ROYCE }}>.</span>
           </span>
         </h2>
 

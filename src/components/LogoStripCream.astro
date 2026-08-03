@@ -1,14 +1,16 @@
 ---
 // Thin trust bar immediately below the hero — no section header, no idx
 // (same "quiet band" treatment as the old AgencyBandCream).
-// Two logo families: white-knockout marks sit in a translucent dark chip;
-// full-color marks (Keller Williams) get a cream tile so the brand colors
-// read correctly against midnight.
+//
+// Every logo sits on the same cream tile so the row reads as one system:
+//   • `invert` flips white-knockout source art to dark so it reads on cream
+//   • `mix-blend-multiply` drops any baked-in white background to transparent
+//     (Dapper ships without an alpha channel) and is harmless on the rest
 const logos = [
-  { src: '/images/testimonials/feed-studios.png', alt: 'Feed Studios', kind: 'knockout' as const, h: 'h-3.5' },
-  { src: '/images/testimonials/mae-media.png', alt: 'MAE Media', kind: 'knockout' as const, h: 'h-3.5' },
-  // Stacked lockup — needs more height than the horizontal marks to stay legible
-  { src: '/images/testimonials/keller-williams.png', alt: 'Keller Williams', kind: 'color' as const, h: 'h-7' },
+  { src: '/images/testimonials/keller-williams.png', alt: 'Keller Williams', h: 'h-7', invert: false },
+  { src: '/images/testimonials/dapper.png', alt: 'Dapper', h: 'h-5', invert: false },
+  { src: '/images/testimonials/feed-studios.png', alt: 'Feed Studios', h: 'h-3.5', invert: true },
+  { src: '/images/testimonials/mae-media.png', alt: 'MAE Media', h: 'h-4', invert: true },
 ];
 
 const textMarks = ['Matt Ragland', 'Gigi Robinson', '@cheffinwithzach'];
@@ -16,20 +18,19 @@ const textMarks = ['Matt Ragland', 'Gigi Robinson', '@cheffinwithzach'];
 
 <section id="logo-strip" class="border-y border-clik-cream/10 bg-clik-cream/5">
   <div class="mx-auto max-w-[1200px] px-6 py-6 md:px-12 md:py-7">
-    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:gap-x-10">
+    <div class="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 md:gap-x-9">
       <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/45">
-        Runs content for
+        Trusted by
       </span>
       {logos.map((logo) => (
-        logo.kind === 'knockout' ? (
-          <span class="inline-flex h-8 items-center rounded-md border border-clik-cream/15 bg-clik-cream/10 px-3">
-            <img src={logo.src} alt={logo.alt} class={`${logo.h} w-auto`} loading="lazy" />
-          </span>
-        ) : (
-          <span class="inline-flex h-11 items-center rounded-md bg-clik-cream px-3">
-            <img src={logo.src} alt={logo.alt} class={`${logo.h} w-auto`} loading="lazy" />
-          </span>
-        )
+        <span class="inline-flex h-11 items-center rounded-md bg-clik-cream px-3">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            class={`${logo.h} w-auto mix-blend-multiply ${logo.invert ? 'invert' : ''}`}
+            loading="lazy"
+          />
+        </span>
       ))}
       {textMarks.map((name) => (
         <span class="font-mono text-[12px] uppercase tracking-[0.14em] text-clik-cream/55">

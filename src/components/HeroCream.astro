@@ -4,8 +4,8 @@
 // Headline stays input-agnostic (shoots, podcasts, clip folders) so clipping
 // isn't alienated; the subhead does the differentiating — "sorts, plans" is
 // the wedge nobody else can claim.
-// Visual: HeroLoop — code-built inputs → hub → fan-out loop.
-import HeroLoop from './HeroLoop';
+// Visual: HeroShowcase — four switchable workflows, each with its prompt.
+import HeroShowcase from './HeroShowcase';
 const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 
 const proofFaces = [
@@ -89,7 +89,7 @@ const proofFaces = [
         style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.10), transparent 74%);"
         aria-hidden="true"
       ></div>
-      <HeroLoop client:load />
+      <HeroShowcase client:load />
     </div>
   </div>
 </section>

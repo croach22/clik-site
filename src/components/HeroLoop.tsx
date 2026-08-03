@@ -42,7 +42,7 @@ const STAGES = ['Sort', 'Plan', 'Build', 'Review'];
 
 const INPUTS = [
   { name: 'shoot_day_01.mp4', meta: '2.4 GB', accent: ROYCE, kind: 'interview' },
-  { name: 'podcast_ep42.wav', meta: '1:02:14', accent: SALMON, kind: 'interview' },
+  { name: 'podcast_ep42.mp4', meta: '1:02:14', accent: SALMON, kind: 'interview' },
   { name: 'broll_kitchen.mov', meta: '1.4 GB', accent: SAGE, kind: 'b-roll' },
   { name: 'broll_street.mov', meta: '980 MB', accent: OCHRE, kind: 'b-roll' },
 ];

@@ -81,44 +81,14 @@ const proofFaces = [
       </div>
     </div>
 
-    <!-- Hero visual — looping inputs → engine → fan-out animation, with
-         flowing line-art garnish converging into the card from both sides -->
+    <!-- Hero visual — the engine running end to end. Glow only for atmosphere;
+         no line-art behind it (the card covered it, leaving stray line ends). -->
     <div class="relative mt-10 md:mt-14">
       <div
         class="glow left-1/2 top-1/2 h-[130%] w-[110%] -translate-x-1/2 -translate-y-1/2"
         style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.10), transparent 74%);"
         aria-hidden="true"
       ></div>
-      <svg
-        class="pointer-events-none absolute -left-24 top-1/2 hidden w-64 -translate-y-1/2 md:block"
-        viewBox="0 0 260 200"
-        fill="none"
-        aria-hidden="true"
-      >
-        {[0, 1, 2, 3, 4].map((i) => (
-          <path
-            d={`M0 ${30 + i * 35} C 120 ${30 + i * 35}, 160 ${100 - i * 4}, 260 ${96 + i * 2}`}
-            stroke="#5481E8"
-            stroke-opacity={0.28 - i * 0.04}
-            stroke-width="1.2"
-          />
-        ))}
-      </svg>
-      <svg
-        class="pointer-events-none absolute -right-24 top-1/2 hidden w-64 -translate-y-1/2 md:block"
-        viewBox="0 0 260 200"
-        fill="none"
-        aria-hidden="true"
-      >
-        {[0, 1, 2, 3, 4].map((i) => (
-          <path
-            d={`M260 ${30 + i * 35} C 140 ${30 + i * 35}, 100 ${100 - i * 4}, 0 ${96 + i * 2}`}
-            stroke="#F9838E"
-            stroke-opacity={0.22 - i * 0.035}
-            stroke-width="1.2"
-          />
-        ))}
-      </svg>
       <HeroLoop client:load />
     </div>
   </div>

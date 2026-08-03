@@ -5,20 +5,15 @@ import {
   DashboardVisual,
 } from './FeatureVisuals';
 
-// The four-part flow as a bento grid — card anatomy borrowed from the
-// Mintlify-style inspo: glyph tile top-left, abstract product-UI mockup in the
-// middle, title + description at the bottom. Visuals live in FeatureVisuals.tsx
-// so a real product screenshot can replace any one of them independently.
+// The four-part flow as a bento grid. Card anatomy: abstract product-UI mockup
+// floating directly on the card (no inner window chrome — the card is already
+// the frame), then title + description. Visuals live in FeatureVisuals.tsx so a
+// real product screenshot can replace any one of them independently.
 
 const ROYCE = '#5481E8';
-const SALMON = '#F9838E';
-const SAGE = '#7CA088';
-const LAVENDER = '#9785B8';
 const CREAM = (a: string) => `rgba(249, 247, 241, ${a})`;
 
 interface Card {
-  glyph: string;
-  glyphColor: string;
   title: string;
   desc: string;
   wide: boolean;
@@ -27,32 +22,24 @@ interface Card {
 
 const CARDS: Card[] = [
   {
-    glyph: '⌘',
-    glyphColor: ROYCE,
     title: 'A full batch in. Every video planned',
     desc: 'The agent reads concepts, dialogue, and visuals, classifies every clip — interview, B-roll, everything else — and drafts a slate of videos against your brand rules. You approve, it builds.',
     wide: true,
     Visual: PlanningVisual,
   },
   {
-    glyph: '◆',
-    glyphColor: SALMON,
     title: 'Teach it once',
     desc: 'Caption style, title cards, hooks, skills, brand assets — saved once and applied to every project, instead of briefing someone every time.',
     wide: false,
     Visual: BrandMemoryVisual,
   },
   {
-    glyph: '▤',
-    glyphColor: SAGE,
     title: 'See where everything stands',
     desc: "Status across every project — what's planned, building, and ready to review — the whole engine in one view.",
     wide: false,
     Visual: DashboardVisual,
   },
   {
-    glyph: '▶',
-    glyphColor: LAVENDER,
     title: 'Approved plan in. Built videos out',
     desc: 'The build agent cuts the dead air out of your dialogue and pulls B-roll from your own library by what the moment actually means — not by filename.',
     wide: true,
@@ -67,17 +54,6 @@ function BentoCard({ card }: { card: Card }) {
       className={`bento-card flex flex-col gap-6 border p-6 md:p-7 ${card.wide ? 'md:col-span-2' : ''}`}
       style={{ borderColor: CREAM('0.10'), background: CREAM('0.03') }}
     >
-      <span
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm"
-        style={{
-          color: card.glyphColor,
-          background: `${card.glyphColor}14`,
-          border: `1px solid ${card.glyphColor}35`,
-        }}
-        aria-hidden="true"
-      >
-        {card.glyph}
-      </span>
       <div className="flex-1 flex flex-col justify-center">
         <Visual />
       </div>

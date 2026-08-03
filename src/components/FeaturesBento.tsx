@@ -57,7 +57,9 @@ function BentoCard({ card }: { card: Card }) {
       <div className="flex-1 flex flex-col justify-center">
         <Visual />
       </div>
-      <div>
+      {/* Wide cards split the footer into two columns so the copy uses the full
+          card width without pushing line length past a readable measure. */}
+      <div className={card.wide ? 'grid gap-x-10 gap-y-2 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-baseline' : ''}>
         <h3
           className="font-display font-medium text-clik-cream"
           style={{ fontSize: 21, letterSpacing: '-0.01em', lineHeight: 1.2 }}
@@ -65,7 +67,10 @@ function BentoCard({ card }: { card: Card }) {
           {card.title}
           <span style={{ color: ROYCE }}>.</span>
         </h3>
-        <p className="mt-2 font-ui" style={{ fontSize: 15, lineHeight: 1.55, color: CREAM('0.65'), maxWidth: '52ch' }}>
+        <p
+          className={card.wide ? 'font-ui' : 'mt-2 font-ui'}
+          style={{ fontSize: 15, lineHeight: 1.55, color: CREAM('0.65') }}
+        >
           {card.desc}
         </p>
       </div>
@@ -83,16 +88,20 @@ export default function FeaturesBento() {
           <span className="label">THE SYSTEM</span>
         </div>
 
-        <h2
-          className="font-display font-medium text-clik-cream"
-          style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '20ch' }}
-        >
-          One engine. Four parts<span style={{ color: ROYCE }}>.</span>
-        </h2>
-        <p className="mt-5 max-w-[620px] font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7') }}>
-          The same flow regardless of format — brand memory upstream, an agent planning at the batch level, a build
-          agent constructing every video, and a dashboard so the whole team can see it.
-        </p>
+        {/* Headline left, intro right — uses the full container width instead
+            of stacking two short-measure blocks against a dead right column. */}
+        <div className="grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
+          <h2
+            className="font-display font-medium text-clik-cream"
+            style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '20ch' }}
+          >
+            One engine. Four parts<span style={{ color: ROYCE }}>.</span>
+          </h2>
+          <p className="font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7') }}>
+            The same flow regardless of format — brand memory upstream, an agent planning at the batch level, a build
+            agent constructing every video, and a dashboard so the whole team can see it.
+          </p>
+        </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {CARDS.map((card) => (

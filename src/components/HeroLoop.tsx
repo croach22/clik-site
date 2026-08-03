@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
-// Hero loop — the flagship workflow as a seamless ~9s loop:
-// talking head + B-roll in → central engine → fan-out of vertical clips out.
-// Structure borrowed from Overlap/Opus: inputs → hub → fan-out.
-// Timer state machine + framer-motion, same mechanics as the feature sections.
+// Hero loop — a compressed run of the whole engine, so the hero previews the
+// feature section rather than just showing files turning into clips.
+// A live reasoning line drives three columns: what came in, the brand rules
+// being applied, and the videos coming out. Same skeleton-UI language as
+// FeatureVisuals, at hero scale.
 
 const ROYCE = '#5481E8';
 const SALMON = '#F9838E';
@@ -12,232 +13,363 @@ const SAGE = '#7CA088';
 const LAVENDER = '#9785B8';
 const OCHRE = '#C5A578';
 
+const C = (a: number) => `rgba(249, 247, 241, ${a})`;
+const INSET = 'rgba(249, 247, 241, 0.04)';
+const NODE_BG = '#101B3E';
+
+// Each beat: the line the engine is "thinking", which column it lights up,
+// and how long it holds.
+type Zone = 'in' | 'brand' | 'out';
+interface Beat {
+  line: string;
+  zone: Zone;
+  stage: number; // 0 sort · 1 plan · 2 build · 3 review
+  hold: number;
+}
+
+const BEATS: Beat[] = [
+  { line: 'Ingesting a shoot day, a podcast, and a folder of clips', zone: 'in', stage: 0, hold: 2000 },
+  { line: 'Reading dialogue and visuals across 128 clips', zone: 'in', stage: 0, hold: 2000 },
+  { line: 'Classifying footage: interview, B-roll, everything else', zone: 'in', stage: 0, hold: 2100 },
+  { line: 'Checking every idea against your brand guidelines', zone: 'brand', stage: 1, hold: 2200 },
+  { line: 'Planning 12 videos across four concepts', zone: 'out', stage: 1, hold: 2000 },
+  { line: 'Cutting dead air, matching B-roll by meaning', zone: 'out', stage: 2, hold: 2100 },
+  { line: 'Captions, title cards, hooks in your saved style', zone: 'out', stage: 2, hold: 2000 },
+  { line: '12 videos ready for review', zone: 'out', stage: 3, hold: 2600 },
+];
+
+const STAGES = ['Sort', 'Plan', 'Build', 'Review'];
+
 const INPUTS = [
-  { name: 'talking_head.mp4', size: '2.1 GB', accent: ROYCE },
-  { name: 'broll_kitchen.mov', size: '1.4 GB', accent: SALMON },
-  { name: 'broll_street.mov', size: '980 MB', accent: SAGE },
-  { name: 'brand_guide', size: 'saved', accent: LAVENDER },
+  { name: 'shoot_day_01.mp4', meta: '2.4 GB', accent: ROYCE, kind: 'interview' },
+  { name: 'podcast_ep42.wav', meta: '1:02:14', accent: SALMON, kind: 'interview' },
+  { name: 'broll_kitchen.mov', meta: '1.4 GB', accent: SAGE, kind: 'b-roll' },
+  { name: 'broll_street.mov', meta: '980 MB', accent: OCHRE, kind: 'b-roll' },
+];
+
+const BRAND_RULES = [
+  { label: 'Caption style', accent: ROYCE },
+  { label: 'Title card', accent: SALMON },
+  { label: 'Hook', accent: OCHRE },
+  { label: 'Skills', accent: SAGE },
+  { label: 'Brand assets', accent: LAVENDER },
 ];
 
 const OUTPUTS = [
-  { label: 'Hook A', duration: '0:34', accent: ROYCE },
-  { label: 'Hook B', duration: '0:41', accent: SALMON },
-  { label: 'Tutorial', duration: '0:58', accent: SAGE },
-  { label: 'Story', duration: '0:47', accent: LAVENDER },
-  { label: 'Listicle', duration: '0:39', accent: OCHRE },
-  { label: 'BTS', duration: '0:52', accent: ROYCE },
+  { label: 'Hook A', dur: '0:34', accent: ROYCE },
+  { label: 'Recap', dur: '0:48', accent: SALMON },
+  { label: 'Tutorial', dur: '0:58', accent: SAGE },
+  { label: 'Story', dur: '0:41', accent: LAVENDER },
+  { label: 'Listicle', dur: '0:39', accent: OCHRE },
+  { label: 'BTS', dur: '0:52', accent: ROYCE },
 ];
 
-// step: 0 inputs in · 1 converge on hub · 2 processing · 3 clips fan out · 4 badge
-const STEP_DELAYS = [400, 1600, 900, 1700, 2200];
-const LOOP_PAUSE = 2600;
-const FADE_OUT = 800;
+const FADE_OUT = 700;
+const LOOP_PAUSE = 900;
 
-function ProcessingLabel({ active }: { active: boolean }) {
-  const words = ['sorting', 'planning', 'building'];
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (!active) return;
-    const id = setInterval(() => setI((v) => (v + 1) % words.length), 900);
-    return () => clearInterval(id);
-  }, [active]);
+function Zone({ active, children }: { active: boolean; children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
-      {active ? words[i] : 'ready'}
-    </span>
+    <div
+      className="rounded-xl border p-3 transition-colors duration-500"
+      style={{
+        borderColor: active ? `${ROYCE}45` : C(0.09),
+        background: active ? `${ROYCE}0A` : INSET,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function ZoneLabel({ text, right }: { text: string; right?: React.ReactNode }) {
+  return (
+    <div className="mb-2.5 flex items-center justify-between">
+      <span className="font-mono uppercase" style={{ fontSize: 8, letterSpacing: '0.12em', color: C(0.45) }}>
+        {text}
+      </span>
+      {right}
+    </div>
   );
 }
 
 export default function HeroLoop() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
+  const isInView = useInView(sectionRef, { once: false, amount: 0.25 });
 
-  const [step, setStep] = useState(-1);
+  const [beat, setBeat] = useState(-1);
   const [fading, setFading] = useState(false);
-  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const timeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const clearAll = useCallback(() => {
-    timeoutsRef.current.forEach(clearTimeout);
-    timeoutsRef.current = [];
+    timeouts.current.forEach(clearTimeout);
+    timeouts.current = [];
   }, []);
 
-  const runSequence = useCallback(() => {
+  const run = useCallback(() => {
     clearAll();
-    setStep(-1);
+    setBeat(-1);
     setFading(false);
-    let elapsed = 0;
-    STEP_DELAYS.forEach((d, i) => {
-      elapsed += d;
-      const id = setTimeout(() => setStep(i), elapsed);
-      timeoutsRef.current.push(id);
+    let elapsed = 300;
+    BEATS.forEach((b, i) => {
+      timeouts.current.push(setTimeout(() => setBeat(i), elapsed));
+      elapsed += b.hold;
     });
-    const total = elapsed + LOOP_PAUSE;
-    timeoutsRef.current.push(setTimeout(() => setFading(true), total));
-    timeoutsRef.current.push(setTimeout(() => runSequence(), total + FADE_OUT + 200));
+    timeouts.current.push(setTimeout(() => setFading(true), elapsed));
+    timeouts.current.push(setTimeout(run, elapsed + FADE_OUT + LOOP_PAUSE));
   }, [clearAll]);
 
   useEffect(() => {
-    if (isInView) runSequence();
+    if (isInView) run();
     else {
       clearAll();
-      setStep(-1);
+      setBeat(-1);
       setFading(false);
     }
     return clearAll;
-  }, [isInView, runSequence, clearAll]);
+  }, [isInView, run, clearAll]);
 
-  const showInputs = step >= 0;
-  const converged = step >= 1;
-  const processing = step >= 2 && step < 3;
-  const showOutputs = step >= 3;
-  const showBadge = step >= 4;
+  const current = beat >= 0 ? BEATS[beat] : null;
+  const stage = current?.stage ?? -1;
+  const zone = current?.zone;
+
+  // progressive reveal thresholds
+  const inputsIn = beat >= 0;
+  const classified = beat >= 2;
+  const brandLit = beat >= 3;
+  const outputCount = beat < 4 ? 0 : beat === 4 ? 3 : OUTPUTS.length;
+  const polished = beat >= 6;
+  const done = beat >= 7;
 
   return (
     <div ref={sectionRef}>
       <motion.div
         animate={{ opacity: fading ? 0 : 1 }}
-        transition={{ duration: fading ? FADE_OUT / 1000 : 0.3 }}
-        className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: 'rgba(249, 247, 241, 0.10)', background: '#13204A' }}
+        transition={{ duration: fading ? FADE_OUT / 1000 : 0.4 }}
+        className="rounded-2xl border p-4 md:p-6"
+        style={{ borderColor: C(0.1), background: '#13204A' }}
         role="img"
-        aria-label="A shoot's talking head and B-roll flow into Clik and fan out as six finished vertical clips"
+        aria-label="Clik ingesting a shoot, a podcast and B-roll, checking them against saved brand rules, and producing twelve finished videos"
       >
-        {/* Window chrome */}
-        <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'rgba(249, 247, 241, 0.08)' }}>
-          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
-          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
-          <div className="w-2 h-2 rounded-full bg-clik-cream/20" />
-          <span className="ml-3 text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>
-            clik · content engine
-          </span>
+        {/* ── Reasoning line + stage rail ── */}
+        <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex min-h-[22px] items-center gap-2.5">
+            <motion.span
+              animate={done ? { opacity: 1 } : { opacity: [0.45, 1, 0.45] }}
+              transition={done ? {} : { duration: 1.6, repeat: Infinity }}
+              style={{ color: done ? SAGE : SALMON, fontSize: 13 }}
+            >
+              ✦
+            </motion.span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={beat}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.28 }}
+                className="font-ui"
+                style={{ fontSize: 14, color: C(0.88) }}
+              >
+                {current?.line ?? 'Ready'}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            {STAGES.map((s, i) => {
+              const on = stage >= i;
+              return (
+                <span key={s} className="flex items-center gap-1.5">
+                  <span
+                    className="font-mono uppercase transition-colors duration-500"
+                    style={{
+                      fontSize: 8,
+                      letterSpacing: '0.12em',
+                      color: on ? ROYCE : C(0.3),
+                    }}
+                  >
+                    {s}
+                  </span>
+                  {i < STAGES.length - 1 && (
+                    <span
+                      className="block h-px transition-colors duration-500"
+                      style={{ width: 18, background: stage > i ? `${ROYCE}90` : C(0.12) }}
+                    />
+                  )}
+                </span>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="px-5 py-6 md:px-8 md:py-8">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-
-            {/* ── Inputs ── */}
-            <div className="w-full md:w-[240px] md:shrink-0 space-y-1.5">
-              <div className="flex items-center gap-2 mb-2.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
-                  Any input
-                </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
-              </div>
+        {/* ── Three zones ── */}
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)_minmax(0,1.3fr)]">
+          {/* IN */}
+          <Zone active={zone === 'in'}>
+            <ZoneLabel text="Any input" />
+            <div className="space-y-1.5">
               {INPUTS.map((f, i) => (
                 <motion.div
                   key={f.name}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={
-                    showInputs
-                      ? converged
-                        ? { opacity: 0.45, x: 6, scale: 0.97 }
-                        : { opacity: 1, x: 0, scale: 1 }
-                      : { opacity: 0, x: -12, scale: 1 }
-                  }
-                  transition={{ delay: converged ? i * 0.08 : i * 0.12, duration: 0.35 }}
-                  className="flex items-center gap-2.5 rounded-lg px-3 py-2"
-                  style={{ background: `${f.accent}08`, border: `1px solid ${f.accent}20` }}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={inputsIn ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
+                  transition={{ delay: i * 0.1, duration: 0.35 }}
+                  className="flex items-center gap-2 rounded-lg px-2.5 py-2"
+                  style={{ background: C(0.04), border: `1px solid ${C(0.08)}` }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: f.accent }} />
-                  <span className="text-xs flex-1 truncate" style={{ color: 'rgba(249, 247, 241, 0.75)' }}>{f.name}</span>
-                  <span className="text-[10px] font-mono" style={{ color: 'rgba(249, 247, 241, 0.4)' }}>{f.size}</span>
+                  <span
+                    className="block h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors duration-500"
+                    style={{ background: classified ? f.accent : C(0.25) }}
+                  />
+                  <span className="flex-1 truncate" style={{ fontSize: 11, color: C(0.72) }}>
+                    {f.name}
+                  </span>
+                  <AnimatePresence mode="wait">
+                    {classified ? (
+                      <motion.span
+                        key="kind"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="font-mono uppercase"
+                        style={{ fontSize: 7, letterSpacing: '0.1em', color: `${f.accent}DD` }}
+                      >
+                        {f.kind}
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="meta"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="font-mono"
+                        style={{ fontSize: 8, color: C(0.35) }}
+                      >
+                        {f.meta}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </div>
+          </Zone>
 
-            {/* ── Hub ── */}
-            <div className="flex md:flex-col items-center gap-3 md:shrink-0">
-              <motion.div
-                animate={
-                  processing
-                    ? { boxShadow: [`0 0 0 0px ${ROYCE}30`, `0 0 0 14px ${ROYCE}00`] }
-                    : { boxShadow: `0 0 0 0px ${ROYCE}00` }
-                }
-                transition={processing ? { duration: 1.1, repeat: Infinity } : {}}
-                className="flex items-center justify-center rounded-2xl"
-                style={{
-                  width: 64,
-                  height: 64,
-                  background: converged ? `${ROYCE}12` : 'rgba(249, 247, 241, 0.05)',
-                  border: `1px solid ${converged ? `${ROYCE}40` : 'rgba(249, 247, 241, 0.10)'}`,
-                  transition: 'background 0.4s, border-color 0.4s',
-                }}
-              >
-                <motion.span
-                  animate={processing ? { rotate: 360 } : { rotate: 0 }}
-                  transition={processing ? { duration: 2.4, repeat: Infinity, ease: 'linear' } : {}}
-                  className="text-xl"
-                  style={{ color: converged ? ROYCE : 'rgba(249, 247, 241, 0.35)' }}
+          {/* BRAND */}
+          <Zone active={zone === 'brand'}>
+            <ZoneLabel text="Your brand rules" />
+            <div className="space-y-1.5">
+              {BRAND_RULES.map((r, i) => (
+                <motion.div
+                  key={r.label}
+                  animate={
+                    brandLit
+                      ? { opacity: 1, borderColor: `${r.accent}45`, backgroundColor: `${r.accent}12` }
+                      : { opacity: 0.5, borderColor: C(0.08), backgroundColor: C(0.03) }
+                  }
+                  transition={{ delay: brandLit ? i * 0.09 : 0, duration: 0.4 }}
+                  className="flex items-center gap-2 rounded-lg border px-2.5 py-1.5"
                 >
-                  ✦
-                </motion.span>
-              </motion.div>
-              <ProcessingLabel active={processing} />
+                  <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: r.accent }} />
+                  <span className="truncate" style={{ fontSize: 10.5, color: C(0.75) }}>
+                    {r.label}
+                  </span>
+                  <AnimatePresence>
+                    {brandLit && (
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.09 + 0.15 }}
+                        className="ml-auto"
+                        style={{ fontSize: 9, color: r.accent }}
+                      >
+                        ✓
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
             </div>
+          </Zone>
 
-            {/* ── Outputs ── */}
-            <div className="w-full flex-1">
-              <div className="flex items-center gap-2 mb-2.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'rgba(249, 247, 241, 0.5)' }}>
-                  Publish-ready
-                </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(249, 247, 241, 0.08)' }} />
+          {/* OUT */}
+          <Zone active={zone === 'out'}>
+            <ZoneLabel
+              text="Publish-ready"
+              right={
                 <AnimatePresence>
-                  {showBadge && (
+                  {done && (
                     <motion.span
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="font-mono text-[9px] uppercase tracking-[0.14em] rounded-full px-2 py-0.5"
-                      style={{ background: `${ROYCE}15`, color: ROYCE, border: `1px solid ${ROYCE}30` }}
+                      className="inline-flex items-center rounded-full px-2 py-0.5 font-mono uppercase"
+                      style={{
+                        fontSize: 8,
+                        letterSpacing: '0.1em',
+                        background: `${SAGE}18`,
+                        color: `${SAGE}EE`,
+                        border: `1px solid ${SAGE}45`,
+                      }}
                     >
-                      6 clips · on-brand
+                      12 videos · on brand
                     </motion.span>
                   )}
                 </AnimatePresence>
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
-                {OUTPUTS.map((o, i) => (
+              }
+            />
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-6">
+              {OUTPUTS.map((o, i) => {
+                const shown = i < outputCount;
+                return (
+                  <div key={o.label} className="relative" style={{ aspectRatio: '9 / 16' }}>
+                    {/* ghost slot — keeps the zone from reading empty pre-build */}
+                    <motion.span
+                      animate={{ opacity: shown ? 0 : 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 rounded-lg"
+                      style={{ border: `1px dashed ${C(0.1)}`, background: C(0.02) }}
+                    />
                   <motion.div
-                    key={o.label}
-                    initial={{ opacity: 0, scale: 0.7, y: 14 }}
-                    animate={showOutputs ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.7, y: 14 }}
-                    transition={{ delay: i * 0.12, type: 'spring', stiffness: 220, damping: 20 }}
-                    className="relative rounded-lg overflow-hidden"
+                    initial={{ opacity: 0, scale: 0.75, y: 10 }}
+                    animate={shown ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 10 }}
+                    transition={{ delay: shown ? (i % 3) * 0.09 : 0, type: 'spring', stiffness: 220, damping: 20 }}
+                    className="absolute inset-0 overflow-hidden rounded-lg"
                     style={{
-                      aspectRatio: '9 / 16',
                       background: `${o.accent}12`,
                       border: `1px solid ${o.accent}40`,
                     }}
                   >
-                    {/* fake video frame: subject block + caption bars */}
-                    <div
-                      className="absolute left-1/2 top-[22%] -translate-x-1/2 rounded-full"
-                      style={{ width: '38%', aspectRatio: '1', background: `${o.accent}30` }}
+                    {/* subject + frame furniture */}
+                    <span
+                      className="absolute left-1/2 top-[20%] block -translate-x-1/2 rounded-full"
+                      style={{ width: '36%', aspectRatio: '1', background: `${o.accent}30` }}
                     />
-                    <div
-                      className="absolute left-1/2 top-[46%] -translate-x-1/2 rounded-t-xl"
-                      style={{ width: '58%', height: '26%', background: `${o.accent}25` }}
+                    <span
+                      className="absolute left-1/2 top-[44%] block -translate-x-1/2 rounded-t-lg"
+                      style={{ width: '56%', height: '24%', background: `${o.accent}22` }}
                     />
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={showOutputs ? { opacity: 1 } : { opacity: 0 }}
-                      transition={{ delay: 0.5 + i * 0.12 }}
-                      className="absolute left-1/2 -translate-x-1/2 bottom-[18%] rounded-sm"
-                      style={{ width: '64%', height: 5, background: `${o.accent}CC` }}
+                    {/* caption bar appears once styling is applied */}
+                    <motion.span
+                      animate={{ opacity: polished ? 1 : 0 }}
+                      transition={{ delay: polished ? (i % 3) * 0.08 : 0, duration: 0.3 }}
+                      className="absolute left-1/2 block -translate-x-1/2 rounded-sm"
+                      style={{ bottom: '22%', width: '62%', height: 4, background: o.accent }}
                     />
                     <div
                       className="absolute inset-x-0 bottom-0 flex items-center justify-between px-1.5 py-1"
-                      style={{ background: 'rgba(7, 12, 27, 0.8)' }}
+                      style={{ background: 'rgba(7, 12, 27, 0.75)' }}
                     >
-                      <span className="text-[7px] font-mono truncate" style={{ color: '#F9F7F1' }}>{o.label}</span>
-                      <span className="text-[7px] font-mono" style={{ color: `#F9F7F1AA` }}>{o.duration}</span>
+                      <span className="truncate font-mono" style={{ fontSize: 7, color: C(0.85) }}>
+                        {o.label}
+                      </span>
+                      <span className="font-mono" style={{ fontSize: 7, color: C(0.45) }}>
+                        {o.dur}
+                      </span>
                     </div>
                   </motion.div>
-                ))}
-              </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
+          </Zone>
         </div>
       </motion.div>
     </div>

@@ -82,7 +82,7 @@ const { title, description = 'Clik — an on-brand content engine for any video 
   data-theme={theme}
 >
 
-  {theme === 'cream' || theme === 'midnight' ? <NavCream /> : <Nav />}
+  {theme === 'cream' || theme === 'midnight' ? <NavCream theme={theme} /> : <Nav />}
   <slot />
   <Footer />
   <FloatingCTA />

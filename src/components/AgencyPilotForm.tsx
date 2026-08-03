@@ -222,7 +222,7 @@ export default function AgencyPilotForm({ variant = 'default' }: { variant?: Var
             Thanks. Our team will reach out within 24 hours to set up a demo on your footage.
           </p>
           <p className={`mt-3 font-mono text-[11px] uppercase tracking-[0.14em] ${s.successAttr}`}>
-            — Conner, founder
+            Conner, founder
           </p>
         </motion.div>
       )}

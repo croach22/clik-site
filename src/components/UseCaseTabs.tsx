@@ -29,10 +29,10 @@ const TABS: Tab[] = [
     label: 'Street interviews',
     chrome: 'street interviews',
     accent: ROYCE,
-    inLines: ['A full day of interviews', '40–80 clips', 'No master file — there never will be one'],
+    inLines: ['A full day of interviews', '40–80 clips', 'No master file, and there never will be one'],
     outLines: ['A recap per guest', 'A compilation', 'Or both'],
     claim:
-      'Clik finds the best moments across every clip and builds multiple storylines — without anyone scrubbing hours of footage to find them.',
+      'Clik finds the best moments across every clip and builds multiple storylines. Nobody scrubs hours of footage to find them.',
   },
   {
     id: 'batch-concepts',
@@ -48,7 +48,7 @@ const TABS: Tab[] = [
     label: 'Podcast clipping',
     chrome: 'podcast clipping',
     accent: LAVENDER,
-    inLines: ['A finished episode — or the raw recording', 'Your B-roll', 'Your graphics'],
+    inLines: ['A finished episode, or the raw recording', 'Your B-roll', 'Your graphics'],
     outLines: ['Clips that cut to your own footage', 'Not stock'],
     claim: 'Most tools can only start once someone has produced the episode. Clik works from either end.',
   },
@@ -222,7 +222,7 @@ function StreetVisual() {
 
       <div className="mt-4 space-y-2">
         {[
-          { label: 'RECAP — GUEST 02', time: '0:48', segs: [ROYCE, SAGE, ROYCE] },
+          { label: 'RECAP · GUEST 02', time: '0:48', segs: [ROYCE, SAGE, ROYCE] },
           { label: 'COMPILATION', time: '1:24', segs: [ROYCE, SALMON, SAGE, OCHRE] },
         ].map((row, r) => (
           <motion.div
@@ -357,7 +357,7 @@ function ConceptsVisual() {
             style={{ background: `${c.accent}08`, border: `1px solid ${c.accent}20` }}
           >
             <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: c.accent }} />
-            <span className="text-xs flex-1 truncate" style={{ color: MID('0.78') }}>Concept — {c.name}</span>
+            <span className="text-xs flex-1 truncate" style={{ color: MID('0.78') }}>Concept · {c.name}</span>
             <span className="text-[9px] font-mono hidden sm:block" style={{ color: MID('0.4') }}>{c.files} files</span>
             <AnimatePresence mode="wait">
               <motion.span
@@ -496,7 +496,7 @@ function PodcastVisual() {
         className="mt-2 text-[10px]"
         style={{ color: MID('0.45') }}
       >
-        Cutaways from your footage — not stock.
+        Cutaways from your footage, not stock.
       </motion.p>
     </VisualShell>
   );

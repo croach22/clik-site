@@ -2,23 +2,26 @@
 // Thin trust bar immediately below the hero — no section header, no idx
 // (same "quiet band" treatment as the old AgencyBandCream).
 //
-// Every logo sits on the same cream tile so the row reads as one system:
-//   • `invert` flips white-knockout source art to dark so it reads on cream
-//   • `mix-blend-multiply` drops any baked-in white background to transparent
-//     (Dapper ships without an alpha channel) and is harmless on the rest
+// Every logo sits on the same cream tile so the row reads as one system.
+// `filter` normalizes whatever source art we were given:
+//   • invert            → white-knockout art becomes dark
+//   • grayscale invert  → light-on-black art becomes dark monochrome
+//                         (straight invert would flip brand hues)
+// mix-blend-multiply then drops any baked-in white background to transparent.
 const logos = [
-  { src: '/images/testimonials/keller-williams.png', alt: 'Keller Williams', h: 'h-7', invert: false },
-  { src: '/images/testimonials/dapper.png', alt: 'Dapper', h: 'h-5', invert: false },
-  { src: '/images/testimonials/feed-studios.png', alt: 'Feed Studios', h: 'h-3.5', invert: true },
-  { src: '/images/testimonials/mae-media.png', alt: 'MAE Media', h: 'h-4', invert: true },
+  { src: '/images/testimonials/keller-williams.png', alt: 'Keller Williams', h: 'h-7', filter: '' },
+  { src: '/images/testimonials/dapper.png', alt: 'Dapper', h: 'h-5', filter: '' },
+  { src: '/images/testimonials/oasis.png', alt: 'Oasis', h: 'h-5', filter: 'grayscale invert' },
+  { src: '/images/testimonials/feed-studios.png', alt: 'Feed Studios', h: 'h-3.5', filter: 'invert' },
+  { src: '/images/testimonials/mae-media.png', alt: 'MAE Media', h: 'h-4', filter: 'invert' },
 ];
 
-const textMarks = ['Matt Ragland', 'Gigi Robinson', '@cheffinwithzach'];
+const textMarks = ['Matt Ragland', 'Gigi Robinson'];
 ---
 
 <section id="logo-strip" class="border-y border-clik-cream/10 bg-clik-cream/5">
   <div class="mx-auto max-w-[1200px] px-6 py-6 md:px-12 md:py-7">
-    <div class="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 md:gap-x-9">
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-8">
       <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/45">
         Trusted by
       </span>
@@ -27,7 +30,7 @@ const textMarks = ['Matt Ragland', 'Gigi Robinson', '@cheffinwithzach'];
           <img
             src={logo.src}
             alt={logo.alt}
-            class={`${logo.h} w-auto mix-blend-multiply ${logo.invert ? 'invert' : ''}`}
+            class={`${logo.h} w-auto mix-blend-multiply ${logo.filter}`}
             loading="lazy"
           />
         </span>

@@ -9,17 +9,17 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
 const teamFeatures = [
   {
     title: 'Brand memory, per show',
-    body: 'Caption styles, title cards, format rules — saved per property, applied automatically. Episode 40 looks like episode 4, no matter who ran the batch.',
+    body: 'Caption styles, title cards, format rules. Saved per property, applied automatically. Episode 40 looks like episode 4, no matter who ran the batch.',
     accent: '#5481E8',
   },
   {
     title: 'A dashboard the whole team sees',
-    body: 'Producers watch the slate move — planned, building, ready for review. No status meetings, no "where are the clips?" threads.',
+    body: 'Producers watch the slate move: planned, building, ready for review. No status meetings, no "where are the clips?" threads.',
     accent: '#F9838E',
   },
   {
     title: 'Native to your post pipeline',
-    body: 'Review and finish in Clik’s web editor, or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro. Clik feeds your pipeline — it doesn’t replace it.',
+    body: 'Review and finish in Clik’s web editor, or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro. Clik feeds your pipeline instead of replacing it.',
     accent: '#9785B8',
   },
 ];
@@ -27,7 +27,7 @@ const teamFeatures = [
 const steps = [
   {
     title: 'The episode drops in.',
-    body: 'The finished cut — or the raw recording — plus your B-roll library and graphics. One upload per episode.',
+    body: 'The finished cut, or the raw recording, plus your B-roll library and graphics. One upload per episode.',
   },
   {
     title: 'Clik plans the clip slate.',
@@ -35,18 +35,18 @@ const steps = [
   },
   {
     title: 'The build agent constructs every clip.',
-    body: 'Cutaways from your own B-roll and graphics — not stock. Captions and title cards in the show’s saved style.',
+    body: 'Cutaways from your own B-roll and graphics, not stock. Captions and title cards in the show’s saved style.',
   },
   {
     title: 'Review, export, publish.',
-    body: 'The team reviews in the queue, adjusts anything in the web editor, and ships — or exports XML for a final pass in your NLE.',
+    body: 'The team reviews in the queue, adjusts anything in the web editor, then ships, or exports XML for a final pass in your NLE.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Clik for Media Teams — Every episode becomes a week of content"
-  description="Feed Clik the raw recording or the finished cut — plus your B-roll and graphics. It plans and builds the clips for every channel, on brand, every episode."
+  title="Clik for Media Teams · Every episode becomes a week of content"
+  description="Feed Clik the raw recording or the finished cut, plus your B-roll and graphics. It plans and builds the clips for every channel, on brand, every episode."
   theme="midnight"
 >
 
@@ -74,7 +74,7 @@ const steps = [
         </h1>
 
         <p class="mt-6 max-w-[620px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
-          Clik is the engine behind your shows. Every episode runs through one system — planned, built, and on brand for every channel — without adding headcount.
+          Clik is the engine behind your shows. Every episode runs through one system: planned, built, and on brand for every channel, without adding headcount.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -108,10 +108,10 @@ const steps = [
         The episode ships. The clips don’t<span class="clik-period">.</span>
       </h2>
       <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
-        Every episode should become ten pieces of content — the recap, the compilation, the vertical clips, the quote cards. Everyone on the team knows it.
+        Every episode should become ten pieces of content: the recap, the compilation, the vertical clips, the quote cards. Everyone on the team knows it.
       </p>
       <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
-        But clipping falls to whoever has spare hours, which is nobody. The backlog grows an episode a week. Consistency slips across shows — one editor’s caption style here, another’s pacing there. And the clip that should have gone up while the episode was fresh goes up eleven days later, or never.
+        But clipping falls to whoever has spare hours, which is nobody. The backlog grows an episode a week. Consistency slips across shows, one editor’s caption style here, another’s pacing there. And the clip that should have gone up while the episode was fresh goes up eleven days later, or never.
       </p>
       <p class="font-ui text-clik-cream mb-0 font-semibold" style="font-size: 18px; line-height: 1.6;">
         You don’t have a content problem. You have a throughput problem.
@@ -129,12 +129,15 @@ const steps = [
       </div>
     </div>
     <div class="mx-auto max-w-[1200px]">
-      <h2 class="font-display font-medium text-clik-cream mb-4 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+      <!-- Headline left, intro right — uses the full width at a readable measure -->
+      <div class="mb-12 grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
+        <h2 class="font-display font-medium text-clik-cream max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
         Most tools need a finished episode. Clik works from either end<span class="clik-period">.</span>
-      </h2>
-      <p class="font-ui text-clik-cream/70 mb-12 max-w-[60ch]" style="font-size: 18px; line-height: 1.6;">
-        Start clipping before post finishes — or hand over the produced cut. Same engine, same output.
-      </p>
+        </h2>
+        <p class="font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
+        Start clipping before post finishes, or hand over the produced cut. Same engine, same output.
+        </p>
+      </div>
 
       <div class="grid gap-6 md:grid-cols-2">
         <div class="bento-card border flex flex-col" style={`${CARD} padding: 32px;`}>
@@ -154,10 +157,10 @@ const steps = [
             02 · From the finished cut
           </p>
           <h3 class="font-display font-medium text-clik-cream mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
-            Clips that cut to your footage — not stock.
+            Clips that cut to your footage, not stock.
           </h3>
           <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">
-            Hand Clik the produced episode plus your B-roll library and graphics. Every clip cuts away to your own material, in your own style — not a stock reel that could belong to any show.
+            Hand Clik the produced episode plus your B-roll library and graphics. Every clip cuts away to your own material, in your own style, not a stock reel that could belong to any show.
           </p>
         </div>
       </div>

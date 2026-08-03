@@ -15,7 +15,7 @@ const capabilities = [
   },
   {
     title: 'The agent tells you what’s missing',
-    body: 'Clik reads your brief and notices the gaps — a shot you didn’t get, a graphic that doesn’t exist yet, a hook with no matching B-roll. Your CD can reshoot, pivot, or rewrite — early.',
+    body: 'Clik reads your brief and notices the gaps: a shot you didn’t get, a graphic that doesn’t exist yet, a hook with no matching B-roll. Your CD can reshoot, pivot, or rewrite while there’s still time.',
     accent: '#F9838E',
   },
   {
@@ -28,7 +28,7 @@ const capabilities = [
 const steps = [
   {
     title: 'Upload a shoot day + brief.',
-    body: 'Raw client footage, scripts, hook variants, creative direction — all into one workflow.',
+    body: 'Raw client footage, scripts, hook variants, creative direction, all into one workflow.',
   },
   {
     title: 'Clik plans the output.',
@@ -40,7 +40,7 @@ const steps = [
   },
   {
     title: 'Editors finish in Clik.',
-    body: "Add caption text overlays right in Clik's web editor — your whole team collaborates online, no project files to pass around. Export to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you need deeper timeline control.",
+    body: "Add caption text overlays right in Clik's web editor. Your whole team collaborates online, with no project files to pass around. Export to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you need deeper timeline control.",
   },
 ];
 
@@ -55,8 +55,8 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
 ---
 
 <BaseLayout
-  title="Clik for Agencies — Scale your agency without hiring more editors"
-  description="Feed Clik a shoot day and a brief. It plans and builds every deliverable — your editors finish the work, they don't start from scratch."
+  title="Clik for Agencies · Scale your agency without hiring more editors"
+  description="Feed Clik a shoot day and a brief. It plans and builds every deliverable, so your editors finish the work instead of starting from scratch."
   theme="midnight"
 >
 
@@ -87,7 +87,7 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             </h1>
 
             <p class="mt-6 max-w-[560px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
-              Clik is the content engine under your agency. Every client runs on one system — planned, built, on brand — so your editors finish craft instead of assembly.
+              Clik is the content engine under your agency. Every client runs on one system: planned, built, on brand. Your editors finish craft instead of assembly.
             </p>
           </div>
 
@@ -152,12 +152,15 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
       </div>
     </div>
     <div class="mx-auto max-w-[1200px]">
-      <h2 class="font-display font-medium text-clik-cream mb-4 max-w-[22ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+      <!-- Headline left, intro right — uses the full width at a readable measure -->
+      <div class="mb-12 grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
+        <h2 class="font-display font-medium text-clik-cream max-w-[22ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
         What Clik delivers, day one<span class="clik-period">.</span>
-      </h2>
-      <p class="font-ui text-clik-cream/70 mb-12 max-w-[60ch]" style="font-size: 18px; line-height: 1.6;">
+        </h2>
+        <p class="font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
         Upload a shoot and a brief. Before your editor opens the project, Clik has already done two things.
-      </p>
+        </p>
+      </div>
 
       <div class="grid gap-6 md:grid-cols-2">
         <!-- LEFT: Brief audit report -->
@@ -169,13 +172,13 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             An audit of your shoot, against your brief.
           </h3>
           <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 16px; line-height: 1.55;">
-            Clik reads the brief, scans the footage, and tells you what's there — and what isn't.
+            Clik reads the brief, scans the footage, and tells you what's there, and what isn't.
           </p>
 
           <div class="mt-auto rounded-xl border border-clik-cream/10 bg-clik-cream/[0.04] p-5">
             <div class="flex items-center justify-between border-b border-clik-cream/10 pb-3 mb-4">
               <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/55">
-                Spring Cleanser — UGC Brief
+                Spring Cleanser · UGC Brief
               </span>
               <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce font-bold">
                 12 / 14 captured
@@ -188,15 +191,15 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/20 font-mono text-[10px] font-bold text-clik-royce">✓</span>
-                Product application — face-cam, AM routine
+                Product application, face-cam, AM routine
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/25 font-mono text-[10px] font-bold text-clik-salmon">✗</span>
-                Missing: direct-to-camera testimonial — "why this one"
+                Missing: direct-to-camera testimonial, "why this one"
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/25 font-mono text-[10px] font-bold text-clik-salmon">✗</span>
-                Missing: golden hour B-roll — product on bathroom counter
+                Missing: golden hour B-roll, product on bathroom counter
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/10 font-mono text-[10px] font-bold text-clik-royce">+</span>
@@ -219,7 +222,7 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             Drafts in 12 minutes, not 3 days.
           </h3>
           <p class="font-ui text-clik-cream/70 mb-8" style="font-size: 16px; line-height: 1.55;">
-            Every variant in your script lands as a ~90%-done rough cut. Your editors finish — they don't start from scratch.
+            Every variant in your script lands as a ~90%-done rough cut. Your editors finish it. They don't start from scratch.
           </p>
 
           <div class="mt-auto space-y-3">
@@ -415,7 +418,7 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
         Built for your volume<span class="clik-period">.</span>
       </h2>
       <p class="font-ui text-clik-cream/70 mb-12 max-w-2xl mx-auto" style="font-size: 18px; line-height: 1.6;">
-        Transparent floor. Custom from there — scaled to your monthly output.
+        Transparent floor. Custom from there, scaled to your monthly output.
       </p>
 
       <div
@@ -439,7 +442,7 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             </span>
           </div>
           <p class="mt-3 font-ui text-clik-cream/70" style="font-size: 15px; line-height: 1.5;">
-            Volume-based — scales with your monthly video output. Cancel anytime.
+            Volume-based, scaling with your monthly video output. Cancel anytime.
           </p>
         </div>
 

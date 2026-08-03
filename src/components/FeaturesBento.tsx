@@ -23,25 +23,25 @@ interface Card {
 const CARDS: Card[] = [
   {
     title: 'A full batch in. Every video planned',
-    desc: 'The agent reads concepts, dialogue, and visuals, classifies every clip — interview, B-roll, everything else — and drafts a slate of videos against your brand rules. You approve, it builds.',
+    desc: 'The agent reads concepts, dialogue, and visuals. It classifies every clip: interview, B-roll, everything else. Then it drafts a slate of videos against your brand rules. You approve, it builds.',
     wide: true,
     Visual: PlanningVisual,
   },
   {
     title: 'Teach it once',
-    desc: 'Caption style, title cards, hooks, skills, brand assets — saved once and applied to every project, instead of briefing someone every time.',
+    desc: 'Caption style, title cards, hooks, skills, brand assets. Saved once, applied to every project, so you stop briefing someone every time.',
     wide: false,
     Visual: BrandMemoryVisual,
   },
   {
     title: 'See where everything stands',
-    desc: "Status across every project — what's planned, building, and ready to review — the whole engine in one view.",
+    desc: "Status across every project. What's planned, what's building, what's ready to review. The whole engine in one view.",
     wide: false,
     Visual: DashboardVisual,
   },
   {
     title: 'Approved plan in. Built videos out',
-    desc: 'The build agent cuts the dead air out of your dialogue and pulls B-roll from your own library by what the moment actually means — not by filename.',
+    desc: 'The build agent cuts the dead air out of your dialogue, then pulls B-roll from your own library by what the moment actually means, not by filename.',
     wide: true,
     Visual: EditAgentVisual,
   },
@@ -98,7 +98,7 @@ export default function FeaturesBento() {
             One engine. Four parts<span style={{ color: ROYCE }}>.</span>
           </h2>
           <p className="font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7') }}>
-            The same flow regardless of format — brand memory upstream, an agent planning at the batch level, a build
+            The same flow regardless of format. Brand memory upstream, an agent planning at the batch level, a build
             agent constructing every video, and a dashboard so the whole team can see it.
           </p>
         </div>

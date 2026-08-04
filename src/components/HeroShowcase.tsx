@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import HeroFlow from './HeroFlow';
+import HeroScrub, { type ScrubClip, type ScrubSource } from './HeroScrub';
 
 // Hero showcase — four workflows. Each runs its own four-step sequence
 // (analyze → concepts → B-roll → build) and hands off to the next tab when it
@@ -70,6 +72,14 @@ interface Variant {
   prompt: string;
   outputs: Output[];
   moreOutputs?: number;
+  // when present, this tab renders the before/after scrub instead of the flow
+  scrub?: {
+    steps: string[];
+    source: ScrubSource;
+    clips: ScrubClip[];
+    stackLabel: string;
+    stackSub?: string;
+  };
 }
 
 const VARIANTS: Variant[] = [
@@ -98,6 +108,21 @@ const VARIANTS: Variant[] = [
       { label: 'ep42_clip05', dur: '0:46', accent: OCHRE },
       { label: 'ep42_clip06', dur: '0:33', accent: ROYCE },
     ],
+    scrub: {
+      steps: [
+        'Analyzing the episode',
+        'Finding the key moments',
+        'Writing hooks from your rules',
+        'Reframing to vertical',
+      ],
+      source: { kind: 'landscape', name: 'ep42_full.mp4', dur: '1:12:40' },
+      clips: [
+        { title: 'The cold open', caption: "That's the part", dur: '0:41', label: 'ep42_clip01', accent: ROYCE },
+        { title: 'Best argument', caption: 'Nobody says this', dur: '0:37', label: 'ep42_clip02', accent: SALMON },
+        { title: 'Guest origin', caption: 'I had no plan', dur: '0:55', label: 'ep42_clip03', accent: SAGE },
+      ],
+      stackLabel: '+5',
+    },
   },
   {
     id: 'content-day',
@@ -123,6 +148,31 @@ const VARIANTS: Variant[] = [
       { label: 'vidB_hookA', dur: '0:47', accent: SALMON, src: '/videos/showcase/content-day/out-b.mp4' },
     ],
     moreOutputs: 8,
+    scrub: {
+      steps: [
+        'Analyzing 79 clips',
+        'Sorting A-roll from B-roll',
+        'Planning the concepts',
+        'Building the videos',
+      ],
+      source: {
+        kind: 'batch',
+        count: 79,
+        note: '79 clips · one shoot day',
+        more: 76,
+        items: [
+          { name: 'IMG_3237.mov', type: 'a-roll', tag: 'interview', src: '/videos/showcase/content-day/raw-a.mp4' },
+          { name: 'DJI_0003.mp4', type: 'b-roll', tag: 'drone', src: '/videos/showcase/content-day/raw-b.mp4' },
+          { name: 'IMG_3299.mov', type: 'b-roll', tag: 'firepole', src: '/videos/showcase/content-day/raw-c.mp4' },
+        ],
+      },
+      clips: [
+        { title: 'The hardest calls', dur: '0:57', label: 'vidA_hookA', accent: ROYCE, src: '/videos/showcase/content-day/out-a.mp4' },
+        { title: 'Looks like chaos', dur: '0:47', label: 'vidB_hookA', accent: SALMON, src: '/videos/showcase/content-day/out-b.mp4' },
+      ],
+      stackLabel: '+8',
+      stackSub: 'videos · 4 concepts',
+    },
   },
   {
     id: 'street-interviews',
@@ -335,6 +385,7 @@ export default function HeroShowcase() {
   const [modalOpen, setModalOpen] = useState(false);
   const [autoplay, setAutoplay] = useState(true);
   const [reduced, setReduced] = useState(false);
+  const [scrubStep, setScrubStep] = useState(0);
   const v = VARIANTS[active];
 
   const ref = useRef<HTMLDivElement>(null);
@@ -441,8 +492,9 @@ export default function HeroShowcase() {
       </div>
 
       <div className="rounded-2xl border p-4 md:p-5" style={{ borderColor: C(0.1), background: PANEL }}>
+       <div className={v.scrub ? 'grid gap-6 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] md:items-center' : ''}>
         {/* claim + prompt */}
-        <div className="mb-4">
+        <div className={v.scrub ? '' : 'mb-4'}>
           <motion.p
             key={`claim-${v.id}`}
             initial={{ opacity: 0, y: 4 }}
@@ -462,8 +514,8 @@ export default function HeroShowcase() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="min-w-0 flex-1 truncate font-ui"
-                style={{ fontSize: 13, color: C(0.7) }}
+                className="min-w-0 flex-1 font-ui"
+                style={{ fontSize: 13, lineHeight: 1.45, color: C(0.7) }}
               >
                 {v.promptPreview}
               </motion.span>
@@ -480,244 +532,67 @@ export default function HeroShowcase() {
               </svg>
             </button>
           </div>
-        </div>
 
-        {/* ── the four steps ── */}
-        <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1.5">
-          {v.steps.map((label, i) => {
-            const done = step > i;
-            const now = step === i;
-            return (
-              <span key={label} className="flex items-center gap-2">
-                <span className="flex items-center gap-1.5">
-                  <span
-                    className="flex h-3.5 w-3.5 items-center justify-center rounded-full transition-colors"
-                    style={{ border: `1.5px solid ${done || now ? ROYCE : C(0.28)}`, background: done ? ROYCE : 'transparent' }}
-                  >
-                    {done ? (
-                      <svg width="7" height="7" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5.2l2 2L8 3" stroke={PANEL} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    ) : now ? (
-                      <motion.span
-                        className="block h-1.5 w-1.5 rounded-full"
-                        style={{ background: ROYCE }}
-                        animate={{ opacity: [0.35, 1, 0.35] }}
-                        transition={{ duration: 1.4, repeat: Infinity }}
-                      />
-                    ) : null}
-                  </span>
-                  <span
-                    className="font-mono uppercase transition-colors"
-                    style={{ fontSize: 8.5, letterSpacing: '0.1em', color: now ? C(0.9) : done ? C(0.55) : C(0.3) }}
-                  >
-                    {label}
-                  </span>
-                </span>
-                {i < v.steps.length - 1 && (
-                  <span className="block h-px transition-colors" style={{ width: 14, background: step > i ? `${ROYCE}80` : C(0.12) }} />
-                )}
-              </span>
-            );
-          })}
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-          {/* ── RAW ── */}
-          <div className="rounded-xl border p-3" style={{ borderColor: C(0.09), background: INSET }}>
-            <div className="mb-2.5 flex items-center justify-between gap-2">
-              <span className="font-mono uppercase" style={{ fontSize: 8, letterSpacing: '0.12em', color: C(0.45) }}>
-                Raw
-              </span>
-              <span className="font-mono" style={{ fontSize: 8, color: C(0.4) }}>
-                <span style={{ color: step === 0 ? ROYCE : C(0.55) }}>
-                  {reduced ? v.fileCount : analyzed}/{v.fileCount}
-                </span>{' '}
-                clips · {v.inputSummary}
-              </span>
-            </div>
-
-            {/* the three named clips, at their real vertical aspect */}
-            <div className="flex gap-2">
-              {v.inputFiles.map((f, i) => {
-                const typeColor = TYPE_COLOR[f.type];
-                const lit = brollIn && f.type === 'b-roll';
+          {/* the steps live out here, next to the stage — not inside it */}
+          {v.scrub && (
+            <ol className="mt-5 space-y-2">
+              {v.scrub.steps.map((s, i) => {
+                const on = i === scrubStep;
                 return (
-                  <motion.div
-                    key={f.name}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08, duration: 0.35 }}
-                    className="min-w-0 flex-1"
-                  >
-                    <div className="relative overflow-hidden rounded-md" style={{ aspectRatio: '9 / 16', background: C(0.05) }}>
-                      {f.src ? (
-                        <video src={f.src} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" />
-                      ) : (
-                        <span className="absolute inset-0" style={{ background: `${typeColor}14` }} />
-                      )}
-
-                      {/* border reacts as the agent classifies, then when it goes hunting for B-roll */}
-                      <span
-                        className="pointer-events-none absolute inset-0 z-[2] rounded-md"
-                        style={{
-                          border: `1px solid ${lit ? `${SAGE}DD` : `${typeColor}55`}`,
-                          boxShadow: lit ? `0 0 0 2px ${SAGE}33` : 'none',
-                          transition: 'border-color 0.45s, box-shadow 0.45s',
-                        }}
-                      />
-
-                      <motion.span
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + i * 0.18 }}
-                        className="absolute left-1 top-1 z-[3] rounded px-1 py-px font-mono uppercase"
-                        style={{ fontSize: 6.5, letterSpacing: '0.08em', color: '#0B1330', background: typeColor }}
-                      >
-                        {f.type}
-                      </motion.span>
-                    </div>
-
-                    <p className="mt-1 truncate font-mono" style={{ fontSize: 7.5, color: C(0.5) }}>
-                      {f.name}
-                    </p>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.55 + i * 0.18 }}
-                      className="mt-0.5 flex flex-wrap gap-0.5"
+                  <li key={s} className="flex items-center gap-2.5">
+                    <span
+                      className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full font-mono"
+                      style={{
+                        fontSize: 8.5,
+                        color: on ? '#0B1330' : C(0.45),
+                        background: on ? ROYCE : 'transparent',
+                        border: `1px solid ${on ? ROYCE : C(0.16)}`,
+                        transition: 'all .25s',
+                      }}
                     >
-                      {f.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="rounded px-1 py-px font-mono"
-                          style={{ fontSize: 6.5, color: C(0.5), background: C(0.05), border: `1px solid ${C(0.1)}` }}
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </motion.div>
-                  </motion.div>
+                      {i + 1}
+                    </span>
+                    <span
+                      className="font-ui"
+                      style={{ fontSize: 13.5, color: on ? C(0.92) : C(0.42), transition: 'color .25s' }}
+                    >
+                      {s}
+                    </span>
+                  </li>
                 );
               })}
-            </div>
-
-            {/* the rest of the batch, as an actual pile of footage */}
-            <div className="mt-3">
-              <p className="mb-1.5 font-mono uppercase" style={{ fontSize: 7.5, letterSpacing: '0.1em', color: C(0.35) }}>
-                + {v.fileCount - v.inputFiles.length} more in this batch
-              </p>
-              <div className="grid grid-cols-12 gap-[3px]">
-                {Array.from({ length: mosaicCount }).map((_, i) => {
-                  const lit = i < litCount;
-                  const src = v.mosaic?.[i];
-                  return (
-                    <motion.div
-                      key={i}
-                      className="relative overflow-hidden rounded-[2px]"
-                      style={{ aspectRatio: '9 / 16', background: C(0.06) }}
-                      animate={{ opacity: lit ? 1 : 0.3 }}
-                      transition={{ duration: 0.25 }}
-                    >
-                      {src ? (
-                        <img
-                          src={src}
-                          alt=""
-                          loading="lazy"
-                          className="absolute inset-0 h-full w-full object-cover"
-                          style={{ filter: lit ? 'none' : 'grayscale(1)', transition: 'filter 0.3s' }}
-                        />
-                      ) : (
-                        <span className="absolute inset-0" style={{ background: lit ? `${ROYCE}30` : C(0.07) }} />
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* ── OUT ── */}
-          <div className="rounded-xl border p-3" style={{ borderColor: `${ROYCE}30`, background: `${ROYCE}0A` }}>
-            <div className="mb-2.5 flex items-center justify-between gap-2">
-              <span className="font-mono uppercase" style={{ fontSize: 8, letterSpacing: '0.12em', color: C(0.45) }}>
-                Clik output
-              </span>
-              <AnimatePresence>
-                {built && (
-                  <motion.span
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="inline-flex items-center rounded-full px-2 py-0.5 font-mono uppercase"
-                    style={{ fontSize: 8, letterSpacing: '0.1em', background: `${SAGE}18`, color: `${SAGE}EE`, border: `1px solid ${SAGE}45` }}
-                  >
-                    {v.outLabel}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* concepts land at step 2, pick up B-roll at step 3 */}
-            <div className="mb-2.5 flex flex-wrap gap-1.5">
-              {v.concepts.map((c, i) => (
-                <motion.span
-                  key={c}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={conceptsIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
-                  transition={{ delay: conceptsIn ? i * 0.12 : 0, duration: 0.3 }}
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 font-ui"
-                  style={{
-                    fontSize: 10,
-                    color: C(0.8),
-                    background: `${CONCEPT_COLORS[i % 4]}14`,
-                    border: `1px solid ${CONCEPT_COLORS[i % 4]}45`,
-                  }}
-                >
-                  <span className="block h-1 w-1 rounded-full" style={{ background: CONCEPT_COLORS[i % 4] }} />
-                  {c}
-                  {brollIn && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: i * 0.09 }}
-                      className="ml-0.5 font-mono"
-                      style={{ fontSize: 7, color: `${SAGE}DD`, whiteSpace: 'nowrap' }}
-                    >
-                      +b-roll
-                    </motion.span>
-                  )}
-                </motion.span>
-              ))}
-            </div>
-
-            <div
-              className={`grid gap-2 ${
-                v.outputs.length + (v.moreOutputs ? 1 : 0) <= 3
-                  ? 'grid-cols-3 sm:grid-cols-4'
-                  : v.outputs.length === 5
-                    ? 'grid-cols-3 sm:grid-cols-5'
-                    : 'grid-cols-3 sm:grid-cols-6'
-              }`}
-            >
-              {v.outputs.map((o, i) => (
-                <OutputTile key={o.label} o={o} i={i} shown={built} />
-              ))}
-              {v.moreOutputs ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: built ? 1 : 0 }}
-                  transition={{ delay: built ? v.outputs.length * 0.12 : 0 }}
-                  className="flex items-center justify-center rounded-lg"
-                  style={{ aspectRatio: '9 / 16', border: `1px dashed ${C(0.14)}`, background: C(0.02) }}
-                >
-                  <span className="font-mono" style={{ fontSize: 9, color: C(0.45) }}>
-                    +{v.moreOutputs}
-                  </span>
-                </motion.div>
-              ) : null}
-            </div>
-          </div>
+            </ol>
+          )}
         </div>
+
+        {v.scrub ? (
+          <HeroScrub
+            steps={v.scrub.steps}
+            source={v.scrub.source}
+            clips={v.scrub.clips}
+            stackLabel={v.scrub.stackLabel}
+            stackSub={v.scrub.stackSub}
+            outLabel={v.outLabel}
+            reduced={reduced}
+            onScrub={() => setAutoplay(false)}
+            onStep={setScrubStep}
+          />
+        ) : (
+          <HeroFlow
+            step={step}
+            stepLabels={v.steps}
+            fileCount={v.fileCount}
+            analyzed={reduced ? v.fileCount : analyzed}
+            files={v.inputFiles}
+            mosaic={v.mosaic}
+            concepts={v.concepts}
+            outputs={v.outputs}
+            moreOutputs={v.moreOutputs}
+            outLabel={v.outLabel}
+            reduced={reduced}
+          />
+        )}
+       </div>
       </div>
 
       {mounted &&

@@ -47,16 +47,9 @@ export interface ScrubClip {
   src?: string;
 }
 
-export interface RawClip {
-  src?: string;
-  name: string;
-  tag: string;
-  type: 'a-roll' | 'b-roll';
-}
-
 export type ScrubSource =
   | { kind: 'landscape'; name: string; dur: string }
-  | { kind: 'batch'; items: RawClip[]; stills: string[]; count: number; more: number; note: string };
+  | { kind: 'batch'; stills: string[]; count: number; more: number; note: string };
 
 interface Props {
   steps: string[];
@@ -112,13 +105,10 @@ export default function HeroScrub({
       if (elapsed < span) {
         commit(from + (elapsed / span) * (1 - from));
         raf = requestAnimationFrame(tick);
-      } else if (elapsed < span + HOLD_MS) {
-        commit(1);
-        raf = requestAnimationFrame(tick);
       } else {
-        start = 0;
-        commit(0);
-        raf = requestAnimationFrame(tick);
+        // rest at the finished state — the bar stays grabbable from there
+        commit(1);
+        setAuto(false);
       }
     };
     raf = requestAnimationFrame(tick);
@@ -211,7 +201,7 @@ export default function HeroScrub({
           {source.kind === 'landscape' ? (
             <Waveform p={p} />
           ) : (
-            <SortingField p={p} items={source.items} count={source.count} />
+            <SortingField p={p} count={source.count} />
           )}
         </div>
 
@@ -331,7 +321,7 @@ export default function HeroScrub({
         {!reduced && (
           <div
             className="pointer-events-none absolute inset-y-0"
-            style={{ left: `${p * 100}%`, opacity: done ? 0 : 1, transition: 'opacity .3s' }}
+            style={{ left: `${p * 100}%` }}
             aria-hidden="true"
           >
             <span
@@ -356,7 +346,11 @@ export default function HeroScrub({
             </span>
             <span
               className="absolute top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
-              style={{ background: C(0.94), boxShadow: `0 0 0 4px ${ROYCE}33, 0 6px 18px rgba(4,8,22,.6)` }}
+              style={{
+                background: C(0.94),
+                boxShadow: `0 0 0 4px ${ROYCE}33, 0 6px 18px rgba(4,8,22,.6)`,
+                marginLeft: Math.min(0, (0.975 - p) * 640),
+              }}
             >
               <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
                 <path
@@ -437,48 +431,16 @@ function Waveform({ p }: { p: number }) {
   );
 }
 
-// A shoot day: nothing to look at but the sort itself — each clip's type and
-// subject stamped as the bar reaches it, with the count running behind.
-function SortingField({ p, items, count }: { p: number; items: RawClip[]; count: number }) {
+// A shoot day: nothing to show but the sort itself, running behind the bar.
+function SortingField({ p, count }: { p: number; count: number }) {
   const sorted = Math.round(Math.min(1, p / 0.9) * count);
-  const stamps = items.slice(0, 3).map((f, i) => ({ ...f, at: 0.15 + i * 0.3 }));
 
   return (
     <>
-      {/* a soft field so the cleared side reads as processed, not empty */}
       <div
         className="absolute inset-0"
         style={{ background: `radial-gradient(90% 120% at 30% 50%, ${ROYCE}1A, transparent 70%)` }}
       />
-
-      {stamps.map((f) => {
-        const tint = f.type === 'a-roll' ? ROYCE : SAGE;
-        const on = p > f.at;
-        return (
-          <motion.div
-            key={f.name}
-            className="absolute top-1/2 flex -translate-y-1/2 flex-col items-start gap-1"
-            style={{ left: `${f.at * 100}%` }}
-            initial={false}
-            animate={{ opacity: on ? 1 : 0, y: on ? '-50%' : '-40%' }}
-            transition={{ duration: 0.28 }}
-          >
-            <span
-              className="rounded px-1.5 py-[3px] font-mono uppercase"
-              style={{ fontSize: 8, letterSpacing: '0.08em', color: '#0B1330', background: tint }}
-            >
-              {f.type}
-            </span>
-            <span
-              className="rounded px-1.5 py-[3px] font-mono"
-              style={{ fontSize: 8, color: C(0.75), background: 'rgba(6,11,26,.8)', border: `1px solid ${tint}55` }}
-            >
-              {f.tag}
-            </span>
-          </motion.div>
-        );
-      })}
-
       <div
         className="absolute bottom-2"
         style={{ left: `${Math.min(p, 0.92) * 100}%`, transform: 'translateX(-100%)', paddingRight: 8 }}

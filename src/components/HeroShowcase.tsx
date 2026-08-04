@@ -168,11 +168,6 @@ const VARIANTS: Variant[] = [
         note: '79 clips · one shoot day',
         more: 71,
         stills: CONTENT_DAY_RAW,
-        items: [
-          { name: 'IMG_3237.mov', type: 'a-roll', tag: 'interview' },
-          { name: 'DJI_0003.mp4', type: 'b-roll', tag: 'drone' },
-          { name: 'IMG_3299.mov', type: 'b-roll', tag: 'firepole' },
-        ],
       },
       clips: [
         { title: 'The hardest calls', dur: '0:57', label: 'vidA_hookA', accent: ROYCE, src: '/videos/showcase/content-day/out-a.mp4' },
@@ -235,10 +230,10 @@ const VARIANTS: Variant[] = [
     ],
     scrub: {
       steps: [
-        'Listening to every take',
-        'Grouping takes by idea',
-        'Keeping the best delivery',
-        'Building the videos',
+        'Analyzing footage for concept boundaries',
+        'Comparing concepts to the brief',
+        'Finding the best takes',
+        'Adding on-brand captions and title cards',
       ],
       source: {
         kind: 'batch',
@@ -246,11 +241,6 @@ const VARIANTS: Variant[] = [
         more: 18,
         note: '26 takes · one sitting',
         stills: YAP_BATCH_RAW,
-        items: [
-          { name: 'C0106.MP4', type: 'a-roll', tag: 'batch filming' },
-          { name: 'C0107.MP4', type: 'a-roll', tag: 'shooting tips' },
-          { name: 'C0108.MP4', type: 'a-roll', tag: 'trial reels' },
-        ],
       },
       clips: [
         { title: "Don't start a podcast", dur: '0:44', label: 'idea01_hookA', accent: ROYCE, src: '/videos/showcase/yap-batch/out-a.mp4' },
@@ -601,6 +591,7 @@ export default function HeroShowcase() {
 
         {v.scrub ? (
           <HeroScrub
+            key={v.id}
             steps={v.scrub.steps}
             source={v.scrub.source}
             clips={v.scrub.clips}

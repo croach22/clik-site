@@ -73,6 +73,7 @@ interface Variant {
   concepts: string[];
   steps: string[];
   outLabel: string;
+  headline: string;
   claim: string;
   promptPreview: string;
   prompt: string;
@@ -102,7 +103,8 @@ const VARIANTS: Variant[] = [
     concepts: ['The cold open', 'Best argument', 'Guest origin', 'Closing line'],
     steps: ['Scanning the episode', 'Finding the strongest moments', 'Matching your B-roll', 'Building the clips'],
     outLabel: '8 clips · your B-roll',
-    claim: 'Most tools can only start once someone has produced the episode. Clik works from either end.',
+    headline: 'One episode. Eight clips.',
+    claim: 'Build on-brand clipping flows based on your target audience, hook structures, and more.',
     promptPreview: 'Pull the 8 strongest moments from ep 42 and cut away to my own B-roll.',
     prompt:
       "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nUse my saved caption style and title cards, and cut the dead air out of the dialogue.",
@@ -145,7 +147,8 @@ const VARIANTS: Variant[] = [
     concepts: ['The hardest calls', 'Looks like chaos', 'Life at the station', 'Why they serve'],
     steps: ['Analyzing footage', 'Identifying narrative concepts', 'Finding relevant B-roll', 'Building the videos'],
     outLabel: '10 videos · 4 concepts',
-    claim: 'Clik reads the whole batch and splits it by concept. You never sort a file.',
+    headline: 'One shoot day. A month of posts.',
+    claim: 'Clik reads the whole batch, splits it by concept, and plans what you can actually make from what you shot.',
     promptPreview: 'Sort 79 clips, plan 4 concepts, build 2 hooks each.',
     prompt:
       "Here's a full content day, 79 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
@@ -189,8 +192,9 @@ const VARIANTS: Variant[] = [
     concepts: ['Guest 01 recap', 'Guest 02 recap', 'Guest 03 recap', 'Best of the day'],
     steps: ['Watching every clip', 'Grouping answers by guest', 'Picking the best moments', 'Building the recaps'],
     outLabel: '5 variants',
+    headline: 'One interview. Five hooks to test.',
     claim:
-      'Most of a street interview is restarts. Clik cuts them, then rebuilds the open five ways so you can find out which hook actually lands.',
+      'Create multiple interview variations instantly to increase reach on trial reels and find winning formats faster.',
     promptPreview: 'Cut the restarts, then give me 5 opens I can test.',
     prompt:
       "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
@@ -244,7 +248,8 @@ const VARIANTS: Variant[] = [
     concepts: ['Idea 01', 'Idea 02', 'Idea 03', 'Bonus rant'],
     steps: ['Listening to every take', 'Grouping takes by idea', 'Keeping the best delivery', 'Building the videos'],
     outLabel: '6 videos · best takes',
-    claim: 'Clik keeps the best delivery of every line and drops the rest. One sitting becomes a week of posts.',
+    headline: 'One yap session. A week of posts.',
+    claim: 'Clik detects concept boundaries, alternate spoken hooks, and builds polished talking head videos.',
     promptPreview: 'Group 26 takes by idea, keep the best delivery, build 2 hooks each.',
     prompt:
       "Here's a yap batch, 26 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
@@ -544,13 +549,24 @@ export default function HeroShowcase() {
        <div className="grid gap-6 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] md:items-center">
         {/* claim + prompt */}
         <div>
+          <motion.h3
+            key={`head-${v.id}`}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="font-display font-medium text-clik-cream"
+            style={{ fontSize: 'clamp(22px, 2.4vw, 28px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}
+          >
+            {v.headline}
+          </motion.h3>
+
           <motion.p
             key={`claim-${v.id}`}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="font-ui"
-            style={{ fontSize: 15, lineHeight: 1.5, color: C(0.82), maxWidth: '72ch' }}
+            transition={{ duration: 0.3, delay: 0.05 }}
+            className="mt-3 font-ui"
+            style={{ fontSize: 15, lineHeight: 1.55, color: C(0.62), maxWidth: '48ch' }}
           >
             {v.claim}
           </motion.p>

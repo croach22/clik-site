@@ -24,7 +24,7 @@ const tiers: Tier[] = [
       ['FOOTAGE',  '1H / MO'],
       ['EXPORT',   '720P'],
       ['PROJECTS', '3'],
-      ['VIBES',    'STARTING'],
+      ['BEST FOR',  'TRYING IT OUT'],
     ],
     cta: 'Start for free',
     ctaHref: 'https://app.clik.vision/sign-up',
@@ -39,7 +39,7 @@ const tiers: Tier[] = [
       ['FOOTAGE',  '3H / MO'],
       ['EXPORT',   '1080P'],
       ['PROJECTS', '20'],
-      ['VIBES',    'SHIPPING'],
+      ['BEST FOR',  'POSTING WEEKLY'],
     ],
     cta: 'Get started',
     ctaHref: 'https://app.clik.vision/sign-up',
@@ -54,7 +54,7 @@ const tiers: Tier[] = [
       ['FOOTAGE',  '6H / MO'],
       ['EXPORT',   'XML · 4K SOON'],
       ['PROJECTS', '40'],
-      ['VIBES',    'DIRECTING'],
+      ['BEST FOR',  'RUNNING A CHANNEL'],
     ],
     cta: 'Get started',
     ctaHref: 'https://app.clik.vision/sign-up',
@@ -78,9 +78,13 @@ const ICONS: Record<NonNullable<Tier['exportsTo']>[number], { label: string; abb
       <span class="label">PRICING</span>
     </div>
 
-    <h2 class="font-display font-medium text-clik-cream mb-12" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch;">
-      Pick a tier. Ship the cut<span class="clik-period">.</span>
+    <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch;">
+      Start free. Scale when it's working<span class="clik-period">.</span>
     </h2>
+
+    <p class="mt-5 mb-12 font-ui text-clik-cream/70" style="font-size: 17px; line-height: 1.55; max-width: 66ch;">
+      Every plan runs the same engine. What changes is how much footage you can put through it, and how you get the videos out.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pricing-grid">
       {tiers.map((t) => (
@@ -153,7 +157,7 @@ const ICONS: Record<NonNullable<Tier['exportsTo']>[number], { label: string; abb
             Plans from <span class="text-clik-royce">$499 / mo</span>, built around your monthly volume.
           </p>
           <p class="mt-2 font-ui text-clik-cream/65" style="font-size: 14px; line-height: 1.5;">
-            Brief audit, parallel drafts, web editor + NLE export, hands-on workflow help.
+            We set your brand rules and workflows up with you, so your team directs the work instead of learning a tool.
           </p>
         </div>
         <span class="clik-btn clik-btn-secondary shrink-0 group-hover:border-clik-midnight">

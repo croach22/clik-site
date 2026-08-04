@@ -75,7 +75,6 @@ interface Variant {
   outLabel: string;
   headline: string;
   claim: string;
-  promptPreview: string;
   prompt: string;
   outputs: Output[];
   moreOutputs?: number;
@@ -105,7 +104,6 @@ const VARIANTS: Variant[] = [
     outLabel: '8 clips · your B-roll',
     headline: 'One episode. Eight clips.',
     claim: 'Build on-brand clipping flows based on your target audience, hook structures, and more.',
-    promptPreview: 'Pull the 8 strongest moments from ep 42 and cut away to my own B-roll.',
     prompt:
       "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nUse my saved caption style and title cards, and cut the dead air out of the dialogue.",
     outputs: [
@@ -149,7 +147,6 @@ const VARIANTS: Variant[] = [
     outLabel: '10 videos · 4 concepts',
     headline: 'One shoot day. A month of posts.',
     claim: 'Clik reads the whole batch, splits it by concept, and plans what you can actually make from what you shot.',
-    promptPreview: 'Sort 79 clips, plan 4 concepts, build 2 hooks each.',
     prompt:
       "Here's a full content day, 79 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
     outputs: [
@@ -195,7 +192,6 @@ const VARIANTS: Variant[] = [
     headline: 'One interview. Five hooks to test.',
     claim:
       'Create multiple interview variations instantly to increase reach on trial reels and find winning formats faster.',
-    promptPreview: 'Cut the restarts, then give me 5 opens I can test.',
     prompt:
       "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
     outputs: [
@@ -250,7 +246,6 @@ const VARIANTS: Variant[] = [
     outLabel: '6 videos · best takes',
     headline: 'One yap session. A week of posts.',
     claim: 'Clik detects concept boundaries, alternate spoken hooks, and builds polished talking head videos.',
-    promptPreview: 'Group 26 takes by idea, keep the best delivery, build 2 hooks each.',
     prompt:
       "Here's a yap batch, 26 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
     outputs: [
@@ -571,32 +566,17 @@ export default function HeroShowcase() {
             {v.claim}
           </motion.p>
 
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
-            <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg border px-3 py-2" style={{ borderColor: C(0.12), background: INSET }}>
-              <span style={{ color: SALMON, fontSize: 12 }}>✦</span>
-              <motion.span
-                key={`prev-${v.id}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="min-w-0 flex-1 font-ui"
-                style={{ fontSize: 13, lineHeight: 1.45, color: C(0.7) }}
-              >
-                {v.promptPreview}
-              </motion.span>
-            </div>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-lg border px-3.5 py-2 font-mono uppercase"
-              style={{ fontSize: 10, letterSpacing: '0.1em', color: ROYCE, borderColor: `${ROYCE}55`, background: `${ROYCE}12` }}
-            >
-              Copy prompt
-              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <rect x="4.5" y="4.5" width="8" height="8" rx="1.6" stroke="currentColor" strokeWidth="1.3" />
-                <path d="M9.5 2.5h-7a1 1 0 0 0-1 1v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
+          {/* The truncated preview said less than the headline already does
+              and stole the button's weight. One button instead. */}
+          <button
+            onClick={() => setModalOpen(true)}
+            className="mt-5 inline-flex items-center gap-2.5 rounded-xl border px-5 py-3 font-ui transition-colors"
+            style={{ fontSize: 14, color: '#F9F7F1', borderColor: `${ROYCE}70`, background: `${ROYCE}20` }}
+          >
+            <span aria-hidden="true" style={{ color: SALMON, fontSize: 13 }}>✦</span>
+            See the prompt
+            <span aria-hidden="true" style={{ color: C(0.5) }}>→</span>
+          </button>
 
           {/* the steps live out here, next to the stage — not inside it */}
           {v.scrub && (

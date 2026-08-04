@@ -43,6 +43,13 @@ const CONTENT_DAY_MOSAIC = Array.from(
   (_, i) => `/images/showcase/content-day/${String(i + 1).padStart(2, '0')}.jpg`,
 );
 
+// eight frames off the card, enough to read as a batch without competing
+// with the finished cuts for attention
+const strip = (dir: string) =>
+  Array.from({ length: 8 }, (_, i) => `/images/showcase/${dir}/${String(i + 1).padStart(2, '0')}.jpg`);
+const CONTENT_DAY_RAW = strip('content-day-raw');
+const YAP_BATCH_RAW = strip('yap-batch-raw');
+
 interface Output {
   label: string;
   dur: string;
@@ -159,11 +166,12 @@ const VARIANTS: Variant[] = [
         kind: 'batch',
         count: 79,
         note: '79 clips · one shoot day',
-        more: 76,
+        more: 71,
+        stills: CONTENT_DAY_RAW,
         items: [
-          { name: 'IMG_3237.mov', type: 'a-roll', tag: 'interview', src: '/videos/showcase/content-day/raw-a.mp4' },
-          { name: 'DJI_0003.mp4', type: 'b-roll', tag: 'drone', src: '/videos/showcase/content-day/raw-b.mp4' },
-          { name: 'IMG_3299.mov', type: 'b-roll', tag: 'firepole', src: '/videos/showcase/content-day/raw-c.mp4' },
+          { name: 'IMG_3237.mov', type: 'a-roll', tag: 'interview' },
+          { name: 'DJI_0003.mp4', type: 'b-roll', tag: 'drone' },
+          { name: 'IMG_3299.mov', type: 'b-roll', tag: 'firepole' },
         ],
       },
       clips: [
@@ -204,7 +212,7 @@ const VARIANTS: Variant[] = [
     id: 'yap-batch',
     tab: 'Yap batch',
     inputSummary: 'one sitting',
-    fileCount: 18,
+    fileCount: 26,
     inputFiles: [
       { name: 'take_01.mp4', type: 'a-roll', tags: ['idea 01', 'take 1'] },
       { name: 'take_02.mp4', type: 'a-roll', tags: ['idea 01', 'take 2'] },
@@ -214,9 +222,9 @@ const VARIANTS: Variant[] = [
     steps: ['Listening to every take', 'Grouping takes by idea', 'Keeping the best delivery', 'Building the videos'],
     outLabel: '6 videos · best takes',
     claim: 'Clik keeps the best delivery of every line and drops the rest. One sitting becomes a week of posts.',
-    promptPreview: 'Group 18 takes by idea, keep the best delivery, build 2 hooks each.',
+    promptPreview: 'Group 26 takes by idea, keep the best delivery, build 2 hooks each.',
     prompt:
-      "Here's a yap batch, 18 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
+      "Here's a yap batch, 26 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
     outputs: [
       { label: 'idea01_hookA', dur: '0:38', accent: ROYCE },
       { label: 'idea01_hookB', dur: '0:35', accent: ROYCE },
@@ -225,6 +233,32 @@ const VARIANTS: Variant[] = [
       { label: 'idea03_hookA', dur: '0:51', accent: SAGE },
       { label: 'idea03_hookB', dur: '0:47', accent: SAGE },
     ],
+    scrub: {
+      steps: [
+        'Listening to every take',
+        'Grouping takes by idea',
+        'Keeping the best delivery',
+        'Building the videos',
+      ],
+      source: {
+        kind: 'batch',
+        count: 26,
+        more: 18,
+        note: '26 takes · one sitting',
+        stills: YAP_BATCH_RAW,
+        items: [
+          { name: 'C0106.MP4', type: 'a-roll', tag: 'batch filming' },
+          { name: 'C0107.MP4', type: 'a-roll', tag: 'shooting tips' },
+          { name: 'C0108.MP4', type: 'a-roll', tag: 'trial reels' },
+        ],
+      },
+      clips: [
+        { title: "Don't start a podcast", dur: '0:44', label: 'idea01_hookA', accent: ROYCE, src: '/videos/showcase/yap-batch/out-a.mp4' },
+        { title: '8 tips for shooting', dur: '1:06', label: 'idea02_hookA', accent: SALMON, src: '/videos/showcase/yap-batch/out-b.mp4' },
+        { title: '4 trial reels', dur: '0:47', label: 'idea03_hookA', accent: SAGE, src: '/videos/showcase/yap-batch/out-c.mp4' },
+      ],
+      stackLabel: '+3',
+    },
   },
 ];
 

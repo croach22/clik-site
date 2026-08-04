@@ -56,7 +56,7 @@ export interface RawClip {
 
 export type ScrubSource =
   | { kind: 'landscape'; name: string; dur: string }
-  | { kind: 'batch'; items: RawClip[]; count: number; more: number; note: string };
+  | { kind: 'batch'; items: RawClip[]; stills: string[]; count: number; more: number; note: string };
 
 interface Props {
   steps: string[];
@@ -301,7 +301,7 @@ export default function HeroScrub({
             height: inSlot ? '88%' : '58%',
             y: '-50%',
             border: `1px dashed ${C(0.22)}`,
-            background: 'rgba(9, 16, 40, 0.74)',
+            background: 'rgba(9, 16, 40, 0.94)',
           }}
           initial={false}
           animate={p >= stackReveal ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
@@ -323,7 +323,7 @@ export default function HeroScrub({
           {source.kind === 'landscape' ? (
             <RawEpisode name={source.name} dur={source.dur} />
           ) : (
-            <RawBatch items={source.items} more={source.more} note={source.note} />
+            <RawBatch stills={source.stills} more={source.more} note={source.note} />
           )}
         </div>
 
@@ -371,22 +371,6 @@ export default function HeroScrub({
           </div>
         )}
 
-        {/* result chip, once it's through */}
-        <motion.span
-          className="absolute right-3 top-3 rounded-md px-2 py-1 font-mono uppercase"
-          style={{
-            fontSize: 8.5,
-            letterSpacing: '0.1em',
-            color: SAGE,
-            background: `${SAGE}1F`,
-            border: `1px solid ${SAGE}55`,
-          }}
-          initial={false}
-          animate={{ opacity: done ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {outLabel}
-        </motion.span>
       </div>
 
       <div className="mt-2.5 flex items-center justify-between gap-3">
@@ -578,67 +562,51 @@ function RawEpisode({ name, dur }: { name: string; dur: string }) {
   );
 }
 
-// A shoot day: the three clips you'd actually look at, and a note that the
-// rest of the card came with them.
-function RawBatch({ items, more, note }: { items: RawClip[]; more: number; note: string }) {
+// The batch itself: a strip of what came off the card. Stills rather than
+// video — eight things moving at once fights the finished cuts for attention.
+function RawBatch({ stills, more, note }: { stills: string[]; more: number; note: string }) {
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: '#0B1430' }}>
+    <div className="absolute inset-0 flex flex-col overflow-hidden" style={{ background: '#0B1430' }}>
       <div
         className="absolute inset-0"
         style={{ background: 'radial-gradient(110% 90% at 40% 45%, rgba(84,129,232,.10), transparent 72%)' }}
       />
 
-      {items.slice(0, 3).map((f, i) => (
-        <div
-          key={f.name}
-          className="absolute top-1/2 overflow-hidden rounded-lg"
-          style={{
-            left: `${CLIP_X[i] * 100}%`,
-            width: `${CLIP_W * 100}%`,
-            aspectRatio: '9 / 16',
-            transform: 'translateY(-50%)',
-            border: `1px solid ${C(0.16)}`,
-            background: C(0.05),
-            boxShadow: '0 14px 34px rgba(4, 8, 22, 0.55)',
-          }}
-        >
-          {f.src && (
-            <video
-              src={f.src}
-              className="absolute inset-0 h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-            />
-          )}
-          <span
-            className="absolute left-1.5 top-1.5 rounded px-1.5 py-[3px] font-mono"
-            style={{ fontSize: 7.5, color: C(0.85), background: 'rgba(6,11,26,.75)' }}
+      <div className="relative flex flex-1 items-center gap-[6px] px-3 pt-7">
+        {stills.map((src, i) => (
+          <div
+            key={src}
+            className="relative min-w-0 flex-1 overflow-hidden rounded-md"
+            style={{
+              aspectRatio: '9 / 16',
+              border: `1px solid ${C(0.14)}`,
+              background: C(0.05),
+              // a little scatter so it reads as a pile off the card, not a filmstrip
+              transform: `translateY(${i % 2 ? 13 : -13}%)`,
+            }}
           >
-            {f.name}
-          </span>
-          <span
-            className="absolute bottom-1.5 left-1.5 rounded px-1.5 py-[3px] font-mono uppercase"
-            style={{ fontSize: 7, letterSpacing: '0.08em', color: C(0.5), background: 'rgba(6,11,26,.75)' }}
-          >
-            Unsorted
+            <img src={src} alt="" className="h-full w-full object-cover" />
+          </div>
+        ))}
+
+        {/* the rest of the card, implied rather than rendered */}
+        <div className="flex flex-shrink-0 items-center gap-[3px] self-stretch py-6 pl-1">
+          <span className="block self-center rounded-sm" style={{ width: 5, height: 64, background: C(0.08), border: `1px solid ${C(0.13)}` }} />
+          <span className="block self-center rounded-sm" style={{ width: 4, height: 48, background: C(0.06), border: `1px solid ${C(0.1)}` }} />
+          <span className="ml-1 self-center font-mono uppercase leading-tight" style={{ fontSize: 8, letterSpacing: '0.08em', color: C(0.5) }}>
+            +{more}
+            <br />
+            more
           </span>
         </div>
-      ))}
+      </div>
 
-      {/* the rest of the card, implied rather than rendered */}
-      <div
-        className="absolute top-1/2 flex -translate-y-1/2 items-center"
-        style={{ left: `${(CLIP_X[2] + CLIP_W + 0.015) * 100}%` }}
-      >
-        <span className="block rounded-l-md" style={{ width: 6, height: 150, background: C(0.07), border: `1px solid ${C(0.12)}`, borderRight: 'none' }} />
-        <span className="block rounded-l-md" style={{ width: 5, height: 128, background: C(0.05), border: `1px solid ${C(0.09)}`, borderRight: 'none' }} />
-        <span className="ml-2 font-mono uppercase" style={{ fontSize: 8.5, letterSpacing: '0.1em', color: C(0.5) }}>
-          +{more}
-          <br />
-          more
+      <div className="relative px-3 pb-2.5">
+        <span
+          className="rounded px-1.5 py-1 font-mono uppercase"
+          style={{ fontSize: 8, letterSpacing: '0.1em', color: C(0.5), background: 'rgba(6,11,26,.7)' }}
+        >
+          Unsorted
         </span>
       </div>
 

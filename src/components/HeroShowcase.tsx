@@ -45,6 +45,10 @@ interface Variant {
   promptPreview: string;
   prompt: string;
   outputs: Output[];
+  /** small looping excerpts of the actual raw footage, shown above the file list */
+  rawClips?: { src: string; label: string }[];
+  /** outputs produced beyond the ones shown */
+  moreOutputs?: number;
   raw?: string | null;
 }
 
@@ -78,19 +82,18 @@ const VARIANTS: Variant[] = [
   {
     id: 'content-day',
     tab: 'Content day',
-    inputSummary: '37 clips · one shoot day',
+    inputSummary: '79 clips · one shoot day',
     inputFiles: [
-      { name: 'IMG_0978.mp4', kind: 'a-roll', accent: ROYCE },
-      { name: 'IMG_0982.mp4', kind: 'b-roll', accent: SAGE },
-      { name: 'IMG_0991.mp4', kind: 'a-roll', accent: ROYCE },
-      { name: 'IMG_1004.mp4', kind: 'graphics', accent: LAVENDER },
+      { name: 'IMG_3237.mov', kind: 'interview', accent: ROYCE },
+      { name: 'DJI_0003.mp4', kind: 'drone b-roll', accent: SAGE },
+      { name: 'IMG_3299.mov', kind: 'b-roll · firepole', accent: OCHRE },
     ],
-    moreCount: 33,
-    outLabel: '12 videos · 4 concepts',
+    moreCount: 76,
+    outLabel: '10 videos · 4 concepts',
     claim: 'Clik reads the whole batch and splits it by concept. You never sort a file.',
-    promptPreview: 'Sort 37 clips, plan 4 concepts, build 2 hooks each.',
+    promptPreview: 'Sort 79 clips, plan 4 concepts, build 2 hooks each.',
     prompt:
-      "Here's a full content day, 37 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
+      "Here's a full content day, 79 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
     outputs: [
       { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
       { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
@@ -98,6 +101,12 @@ const VARIANTS: Variant[] = [
       { label: 'vidB_hookB', dur: '0:44', accent: SALMON },
       { label: 'vidC_hookA', dur: '0:58', accent: SAGE },
       { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
+    ],
+    moreOutputs: 4,
+    rawClips: [
+      { src: '/videos/showcase/content-day/raw-a.mp4', label: 'IMG_3237' },
+      { src: '/videos/showcase/content-day/raw-b.mp4', label: 'DJI_0003' },
+      { src: '/videos/showcase/content-day/raw-c.mp4', label: 'IMG_3299' },
     ],
     raw: null,
   },
@@ -490,6 +499,35 @@ export default function HeroShowcase() {
               />
             ) : null}
 
+            {/* the actual footage, then the analysis of it */}
+            {v.rawClips && (
+              <motion.div
+                key={`clips-${v.id}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="mb-2 grid grid-cols-3 gap-1.5"
+              >
+                {v.rawClips.map((c) => (
+                  <div
+                    key={c.src}
+                    className="relative overflow-hidden rounded-md"
+                    style={{ aspectRatio: '16 / 9', border: `1px solid ${C(0.1)}`, background: C(0.04) }}
+                  >
+                    <video
+                      src={c.src}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
             <motion.div
               key={`in-${v.id}`}
               initial={{ opacity: 0, y: 6 }}
@@ -556,12 +594,26 @@ export default function HeroShowcase() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.25 }}
               className={`grid gap-2 ${
-                v.outputs.length === 5 ? 'grid-cols-3 sm:grid-cols-5' : 'grid-cols-3 sm:grid-cols-6'
+                v.outputs.length + (v.moreOutputs ? 1 : 0) === 7
+                  ? 'grid-cols-4 sm:grid-cols-7'
+                  : v.outputs.length === 5
+                    ? 'grid-cols-3 sm:grid-cols-5'
+                    : 'grid-cols-3 sm:grid-cols-6'
               }`}
             >
               {v.outputs.map((o, i) => (
                 <OutputTile key={o.label} o={o} i={i} shown={inView} />
               ))}
+              {v.moreOutputs ? (
+                <div
+                  className="flex items-center justify-center rounded-lg"
+                  style={{ aspectRatio: '9 / 16', border: `1px dashed ${C(0.14)}`, background: C(0.02) }}
+                >
+                  <span className="font-mono" style={{ fontSize: 9, color: C(0.45) }}>
+                    +{v.moreOutputs}
+                  </span>
+                </div>
+              ) : null}
             </motion.div>
           </div>
         </div>

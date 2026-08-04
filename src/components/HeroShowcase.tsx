@@ -499,17 +499,14 @@ export default function HeroShowcase() {
 
   return (
     <div ref={ref}>
-      <p
-        className="mb-4 font-display font-medium text-clik-cream"
-        style={{ fontSize: 'clamp(19px, 2.1vw, 24px)', lineHeight: 1.3, letterSpacing: '-0.01em', maxWidth: '38ch' }}
-      >
-        Imagine a clipping tool that worked on raw footage{' '}
-        <span style={{ color: C(0.45) }}>
-          (and on podcasts)<span style={{ color: ROYCE }}>.</span>
-        </span>
+      {/* No display headline here — it sat directly under the h1 and the two
+          competed. This reads as the hero continuing, and echoes "any video
+          input" so the tabs are obviously the thing to touch. */}
+      <p className="mb-3 font-mono uppercase" style={{ fontSize: 11, letterSpacing: '0.14em', color: C(0.45) }}>
+        Pick your input
       </p>
 
-      <div role="tablist" aria-label="Workflow examples" className="mb-3 flex flex-wrap gap-1.5">
+      <div role="tablist" aria-label="Workflow examples" className="mb-4 flex flex-wrap gap-2">
         {VARIANTS.map((variant, i) => {
           const on = i === active;
           return (
@@ -518,12 +515,12 @@ export default function HeroShowcase() {
               role="tab"
               aria-selected={on}
               onClick={() => pick(i)}
-              className="relative overflow-hidden rounded-lg border px-3 py-1.5 font-mono uppercase transition-colors"
+              className="relative overflow-hidden rounded-lg border px-4 py-2.5 font-mono uppercase transition-colors"
               style={{
-                fontSize: 10,
+                fontSize: 12,
                 letterSpacing: '0.1em',
-                color: on ? '#F9F7F1' : C(0.5),
-                borderColor: on ? `${ROYCE}70` : C(0.1),
+                color: on ? '#F9F7F1' : C(0.62),
+                borderColor: on ? `${ROYCE}70` : C(0.16),
                 background: on ? `${ROYCE}1A` : 'transparent',
               }}
             >

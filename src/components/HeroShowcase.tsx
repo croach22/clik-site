@@ -210,8 +210,9 @@ const VARIANTS: Variant[] = [
       ],
       source: {
         kind: 'take',
-        name: 'pink_girl_raw.mp4',
-        dur: '12:40',
+        src: '/videos/showcase/street-interviews/raw.mp4',
+        name: 'IMG_1826.MOV',
+        dur: '2:39',
         note: 'one interview · mostly restarts',
         takes: [
           { n: '01', cut: true },

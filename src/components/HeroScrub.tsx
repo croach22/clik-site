@@ -51,7 +51,7 @@ export interface ScrubClip {
 export type ScrubSource =
   | { kind: 'landscape'; name: string; dur: string }
   | { kind: 'batch'; stills: string[]; count: number; more: number; note: string }
-  | { kind: 'take'; name: string; dur: string; note: string; takes: { n: string; cut: boolean }[] };
+  | { kind: 'take'; src?: string; name: string; dur: string; note: string; takes: { n: string; cut: boolean }[] };
 
 interface Props {
   steps: string[];
@@ -80,6 +80,8 @@ export default function HeroScrub({
   const [auto, setAuto] = useState(!reduced);
   const stage = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
+  // latched once the sweep has run, so nothing can restart it behind our back
+  const parked = useRef(false);
 
   const stepAt = useCallback(
     (v: number) => Math.min(steps.length - 1, Math.floor(v * steps.length)),
@@ -95,7 +97,7 @@ export default function HeroScrub({
 
   // autoplay sweep — runs off rAF so a manual grab can interrupt mid-frame
   useEffect(() => {
-    if (!auto || reduced) return;
+    if (!auto || reduced || parked.current) return;
     let raf = 0;
     let start = 0;
     const from = p;
@@ -109,6 +111,7 @@ export default function HeroScrub({
         raf = requestAnimationFrame(tick);
       } else {
         // rest at the finished state — the bar stays grabbable from there
+        parked.current = true;
         commit(1);
         setAuto(false);
       }
@@ -131,6 +134,7 @@ export default function HeroScrub({
 
   const grab = (clientX: number) => {
     if (reduced) return;
+    parked.current = false;
     dragging.current = true;
     setAuto(false);
     onScrub?.();
@@ -180,6 +184,7 @@ export default function HeroScrub({
         onKeyDown={(e) => {
           if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
           e.preventDefault();
+          parked.current = false;
           setAuto(false);
           commit(Math.min(1, Math.max(0, p + (e.key === 'ArrowRight' ? 0.05 : -0.05))));
         }}
@@ -315,7 +320,7 @@ export default function HeroScrub({
           {source.kind === 'landscape' && <RawEpisode name={source.name} dur={source.dur} />}
           {source.kind === 'batch' && <RawBatch stills={source.stills} more={source.more} note={source.note} />}
           {source.kind === 'take' && (
-            <RawTake name={source.name} dur={source.dur} note={source.note} takes={source.takes} />
+            <RawTake src={source.src} name={source.name} dur={source.dur} note={source.note} takes={source.takes} />
           )}
         </div>
 
@@ -342,6 +347,8 @@ export default function HeroScrub({
                 color: '#0B1330',
                 background: C(0.92),
                 transform: p > 0.62 ? 'translateX(calc(-100% - 6px))' : 'translateX(6px)',
+                opacity: done ? 0 : 1,
+                transition: 'opacity .3s',
               }}
             >
               {steps[stepIdx]}
@@ -528,13 +535,14 @@ function RawEpisode({ name, dur }: { name: string; dur: string }) {
 
 // One interview, shot in a single sitting: the take log is the story here,
 // because most of what was recorded is a restart.
-// TODO(conner): swap the drawn frame for a still off the actual raw take.
 function RawTake({
+  src,
   name,
   dur,
   note,
   takes,
 }: {
+  src?: string;
   name: string;
   dur: string;
   note: string;
@@ -557,31 +565,20 @@ function RawTake({
           transform: 'translateY(-50%)',
           border: `1px solid ${C(0.16)}`,
           boxShadow: '0 14px 34px rgba(4, 8, 22, 0.55)',
-          background: 'linear-gradient(180deg, #7E93BE 0%, #56688F 38%, #2B3757 62%, #1B2440 100%)',
+          background: C(0.05),
         }}
       >
-        {/* street behind */}
-        <span className="absolute left-[4%] top-[6%] block rounded-sm" style={{ width: '22%', height: '38%', background: 'rgba(12,20,44,.5)' }} />
-        <span className="absolute right-[5%] top-[3%] block rounded-sm" style={{ width: '26%', height: '46%', background: 'rgba(12,20,44,.42)' }} />
-        <span className="absolute inset-x-0 block" style={{ top: '58%', height: 1, background: C(0.14) }} />
-        {/* subject */}
-        <span
-          className="absolute left-1/2 block -translate-x-1/2 rounded-full"
-          style={{ top: '30%', width: '26%', aspectRatio: '1', background: '#8E6E58' }}
-        />
-        <span
-          className="absolute left-1/2 block -translate-x-1/2 rounded-t-[999px]"
-          style={{ top: '48%', width: '52%', height: '34%', background: SALMON }}
-        />
-        {/* mic in the foreground */}
-        <span
-          className="absolute left-[14%] block rounded-full"
-          style={{ bottom: '2%', width: '13%', height: '20%', background: C(0.3), border: `1px solid ${C(0.2)}` }}
-        />
-        <span
-          className="absolute inset-0 block"
-          style={{ background: 'radial-gradient(80% 70% at 50% 45%, transparent 45%, rgba(4,8,22,.5))' }}
-        />
+        {src && (
+          <video
+            src={src}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+        )}
         <span
           className="absolute left-1.5 top-1.5 rounded px-1.5 py-[3px] font-mono"
           style={{ fontSize: 7.5, color: C(0.85), background: 'rgba(6,11,26,.75)' }}

@@ -34,18 +34,15 @@ const uses = [
       <span class="label">IN PRACTICE</span>
     </div>
 
-    <!-- Headline left, intro right — uses the full width at a readable measure -->
-    <div class="grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
-      <h2
-        class="font-display font-medium text-clik-cream"
-        style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
-      >
-        How teams use Clik<span class="clik-period">.</span>
-      </h2>
-      <p class="font-ui text-clik-cream/70" style="font-size: 17px; line-height: 1.55;">
-        Same engine, pointed at three different problems. Most teams start with the first one and grow into the others.
-      </p>
-    </div>
+    <h2
+      class="font-display font-medium text-clik-cream"
+      style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
+    >
+      How teams use Clik<span class="clik-period">.</span>
+    </h2>
+    <p class="mt-5 font-ui text-clik-cream/70" style="font-size: 17px; line-height: 1.55; max-width: 66ch;">
+      Same engine, pointed at three different problems. Most teams start with the first one and grow into the others.
+    </p>
 
     <div class="mt-12 grid gap-5 md:grid-cols-3">
       {uses.map((u) => (

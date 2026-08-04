@@ -24,6 +24,12 @@ const C = (a: number) => `rgba(249, 247, 241, ${a})`;
 const INSET = 'rgba(249, 247, 241, 0.04)';
 const PANEL = '#13204A';
 
+const TYPE_COLOR = {
+  'a-roll': ROYCE,
+  'b-roll': SAGE,
+  graphics: LAVENDER,
+} as const;
+
 const SIGNUP = 'https://app.clik.vision/sign-up';
 const CYCLE_MS = 7000; // hold per workflow before auto-advancing
 
@@ -38,15 +44,21 @@ interface Variant {
   id: string;
   tab: string;
   inputSummary: string;
-  inputFiles: { name: string; kind: string; accent: string }[];
+  inputFiles: {
+    name: string;
+    /** a-roll | b-roll | graphics — colour-coded consistently */
+    type: keyof typeof TYPE_COLOR;
+    /** what's actually in the shot */
+    tags: string[];
+    /** looping excerpt of the real file, when we have it */
+    src?: string;
+  }[];
   moreCount: number;
   outLabel: string;
   claim: string;
   promptPreview: string;
   prompt: string;
   outputs: Output[];
-  /** small looping excerpts of the actual raw footage, shown above the file list */
-  rawClips?: { src: string; label: string }[];
   /** outputs produced beyond the ones shown */
   moreOutputs?: number;
   raw?: string | null;
@@ -58,10 +70,10 @@ const VARIANTS: Variant[] = [
     tab: 'Podcast clipping',
     inputSummary: 'Episode 42 · plus your B-roll',
     inputFiles: [
-      { name: 'ep42_full.mp4', kind: 'episode', accent: ROYCE },
-      { name: 'broll_studio.mp4', kind: 'b-roll', accent: SAGE },
-      { name: 'broll_city.mp4', kind: 'b-roll', accent: OCHRE },
-      { name: 'lower_thirds.mp4', kind: 'graphics', accent: LAVENDER },
+      { name: 'ep42_full.mp4', type: 'a-roll', tags: ['episode'] },
+      { name: 'broll_studio.mp4', type: 'b-roll', tags: ['studio'] },
+      { name: 'broll_city.mp4', type: 'b-roll', tags: ['city'] },
+      { name: 'lower_thirds.mp4', type: 'graphics', tags: ['lower thirds'] },
     ],
     moreCount: 12,
     outLabel: '8 clips · your B-roll',
@@ -84,9 +96,24 @@ const VARIANTS: Variant[] = [
     tab: 'Content day',
     inputSummary: '79 clips · one shoot day',
     inputFiles: [
-      { name: 'IMG_3237.mov', kind: 'interview', accent: ROYCE },
-      { name: 'DJI_0003.mp4', kind: 'drone b-roll', accent: SAGE },
-      { name: 'IMG_3299.mov', kind: 'b-roll · firepole', accent: OCHRE },
+      {
+        name: 'IMG_3237.mov',
+        type: 'a-roll',
+        tags: ['interview'],
+        src: '/videos/showcase/content-day/raw-a.mp4',
+      },
+      {
+        name: 'DJI_0003.mp4',
+        type: 'b-roll',
+        tags: ['drone', 'exterior'],
+        src: '/videos/showcase/content-day/raw-b.mp4',
+      },
+      {
+        name: 'IMG_3299.mov',
+        type: 'b-roll',
+        tags: ['firepole', 'station'],
+        src: '/videos/showcase/content-day/raw-c.mp4',
+      },
     ],
     moreCount: 76,
     outLabel: '10 videos · 4 concepts',
@@ -103,11 +130,6 @@ const VARIANTS: Variant[] = [
       { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
     ],
     moreOutputs: 4,
-    rawClips: [
-      { src: '/videos/showcase/content-day/raw-a.mp4', label: 'IMG_3237' },
-      { src: '/videos/showcase/content-day/raw-b.mp4', label: 'DJI_0003' },
-      { src: '/videos/showcase/content-day/raw-c.mp4', label: 'IMG_3299' },
-    ],
     raw: null,
   },
   {
@@ -115,10 +137,10 @@ const VARIANTS: Variant[] = [
     tab: 'Street interviews',
     inputSummary: '60 clips · no master file',
     inputFiles: [
-      { name: 'IMG_2210.mp4', kind: 'guest 01', accent: ROYCE },
-      { name: 'IMG_2214.mp4', kind: 'guest 02', accent: SALMON },
-      { name: 'IMG_2231.mp4', kind: 'guest 03', accent: SAGE },
-      { name: 'IMG_2247.mp4', kind: 'b-roll', accent: LAVENDER },
+      { name: 'IMG_2210.mp4', type: 'a-roll', tags: ['guest 01'] },
+      { name: 'IMG_2214.mp4', type: 'a-roll', tags: ['guest 02'] },
+      { name: 'IMG_2231.mp4', type: 'a-roll', tags: ['guest 03'] },
+      { name: 'IMG_2247.mp4', type: 'b-roll', tags: ['street'] },
     ],
     moreCount: 56,
     outLabel: '5 videos',
@@ -141,10 +163,10 @@ const VARIANTS: Variant[] = [
     tab: 'Yap batch',
     inputSummary: '18 takes · one sitting',
     inputFiles: [
-      { name: 'take_01.mp4', kind: 'idea 01', accent: ROYCE },
-      { name: 'take_02.mp4', kind: 'idea 01', accent: ROYCE },
-      { name: 'take_03.mp4', kind: 'idea 02', accent: SALMON },
-      { name: 'take_04.mp4', kind: 'idea 03', accent: SAGE },
+      { name: 'take_01.mp4', type: 'a-roll', tags: ['idea 01', 'take 1'] },
+      { name: 'take_02.mp4', type: 'a-roll', tags: ['idea 01', 'take 2'] },
+      { name: 'take_03.mp4', type: 'a-roll', tags: ['idea 02'] },
+      { name: 'take_04.mp4', type: 'a-roll', tags: ['idea 03'] },
     ],
     moreCount: 14,
     outLabel: '6 videos · best takes',
@@ -499,35 +521,7 @@ export default function HeroShowcase() {
               />
             ) : null}
 
-            {/* the actual footage, then the analysis of it */}
-            {v.rawClips && (
-              <motion.div
-                key={`clips-${v.id}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="mb-2 grid grid-cols-3 gap-1.5"
-              >
-                {v.rawClips.map((c) => (
-                  <div
-                    key={c.src}
-                    className="relative overflow-hidden rounded-md"
-                    style={{ aspectRatio: '16 / 9', border: `1px solid ${C(0.1)}`, background: C(0.04) }}
-                  >
-                    <video
-                      src={c.src}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            )}
-
+            {/* one row per file: the footage, what it is, what's in it */}
             <motion.div
               key={`in-${v.id}`}
               initial={{ opacity: 0, y: 6 }}
@@ -535,27 +529,79 @@ export default function HeroShowcase() {
               transition={{ duration: 0.25 }}
               className="space-y-1.5"
             >
-              {v.inputFiles.map((f, i) => (
-                <motion.div
-                  key={f.name}
-                  initial={{ opacity: 0, x: -6 }}
-                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
-                  transition={{ delay: i * 0.06, duration: 0.3 }}
-                  className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
-                  style={{ background: C(0.04), border: `1px solid ${C(0.08)}` }}
-                >
-                  <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: f.accent }} />
-                  <span className="flex-1 truncate" style={{ fontSize: 10.5, color: C(0.72) }}>
-                    {f.name}
-                  </span>
-                  <span
-                    className="font-mono uppercase"
-                    style={{ fontSize: 7, letterSpacing: '0.1em', color: `${f.accent}DD` }}
+              {v.inputFiles.map((f, i) => {
+                const typeColor = TYPE_COLOR[f.type];
+                return (
+                  <motion.div
+                    key={f.name}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
+                    transition={{ delay: i * 0.06, duration: 0.3 }}
+                    className="flex items-center gap-2 rounded-lg p-1.5"
+                    style={{ background: C(0.04), border: `1px solid ${C(0.08)}` }}
                   >
-                    {f.kind}
-                  </span>
-                </motion.div>
-              ))}
+                    {/* the clip itself, when we have it */}
+                    {f.src ? (
+                      <div
+                        className="relative flex-shrink-0 overflow-hidden rounded"
+                        style={{ width: 52, aspectRatio: '16 / 9', border: `1px solid ${C(0.1)}` }}
+                      >
+                        <video
+                          src={f.src}
+                          className="absolute inset-0 h-full w-full object-cover"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                        />
+                      </div>
+                    ) : (
+                      <span
+                        className="block flex-shrink-0 rounded"
+                        style={{ width: 52, aspectRatio: '16 / 9', background: C(0.06), border: `1px solid ${C(0.08)}` }}
+                      />
+                    )}
+
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate" style={{ fontSize: 10.5, color: C(0.75) }}>
+                        {f.name}
+                      </p>
+                      <div className="mt-1 flex flex-wrap items-center gap-1">
+                        {/* what kind of footage */}
+                        <span
+                          className="inline-flex flex-shrink-0 items-center rounded px-1.5 py-px font-mono uppercase"
+                          style={{
+                            fontSize: 7,
+                            letterSpacing: '0.08em',
+                            color: typeColor,
+                            background: `${typeColor}1A`,
+                            border: `1px solid ${typeColor}45`,
+                          }}
+                        >
+                          {f.type}
+                        </span>
+                        {/* what's in it */}
+                        {f.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="inline-flex flex-shrink-0 items-center rounded px-1.5 py-px font-mono"
+                            style={{
+                              fontSize: 7,
+                              letterSpacing: '0.06em',
+                              color: C(0.5),
+                              background: C(0.05),
+                              border: `1px solid ${C(0.1)}`,
+                            }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
               <div
                 className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
                 style={{ border: `1px dashed ${C(0.1)}` }}

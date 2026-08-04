@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import HeroFlow from './HeroFlow';
 import HeroScrub, { type ScrubClip, type ScrubSource } from './HeroScrub';
 
 // Hero showcase — four workflows. Each runs its own four-step sequence
@@ -157,10 +156,10 @@ const VARIANTS: Variant[] = [
     moreOutputs: 8,
     scrub: {
       steps: [
-        'Analyzing 79 clips',
-        'Sorting A-roll from B-roll',
-        'Planning the concepts',
-        'Building the videos',
+        'Watching 79 raw clips',
+        'Tagging A-roll and B-roll',
+        'Pulling out actions and scenes',
+        'Planning narrative concepts and building the videos',
       ],
       source: {
         kind: 'batch',
@@ -189,10 +188,10 @@ const VARIANTS: Variant[] = [
     ],
     concepts: ['Guest 01 recap', 'Guest 02 recap', 'Guest 03 recap', 'Best of the day'],
     steps: ['Watching every clip', 'Grouping answers by guest', 'Picking the best moments', 'Building the recaps'],
-    outLabel: '5 videos',
+    outLabel: '5 variants',
     claim:
-      'Clik finds the best moments across every clip and builds multiple storylines. Nobody scrubs hours of footage to find them.',
-    promptPreview: 'Find the best moments across 60 clips. One recap per guest, plus a compilation.',
+      'Most of a street interview is restarts. Clik cuts them, then rebuilds the open five ways so you can find out which hook actually lands.',
+    promptPreview: 'Cut the restarts, then give me 5 opens I can test.',
     prompt:
       "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
     outputs: [
@@ -202,6 +201,34 @@ const VARIANTS: Variant[] = [
       { label: 'compilation_best', dur: '1:24', accent: LAVENDER },
       { label: 'teaser_hookA', dur: '0:22', accent: OCHRE },
     ],
+    scrub: {
+      steps: [
+        'Watching the whole interview',
+        'Cutting the restarts and retakes',
+        'Writing opens against your hook rules',
+        'Building every version to test',
+      ],
+      source: {
+        kind: 'take',
+        name: 'pink_girl_raw.mp4',
+        dur: '12:40',
+        note: 'one interview · mostly restarts',
+        takes: [
+          { n: '01', cut: true },
+          { n: '02', cut: false },
+          { n: '03', cut: true },
+          { n: '04', cut: true },
+          { n: '05', cut: false },
+          { n: '06', cut: true },
+        ],
+      },
+      clips: [
+        { title: 'Standard open', dur: '1:13', label: 'variant_a', accent: ROYCE, src: '/videos/showcase/street-interviews/out-a.mp4' },
+        { title: "\u2018I don\u2019t know you\u2019", dur: '1:10', label: 'variant_b1', accent: SALMON, src: '/videos/showcase/street-interviews/out-b.mp4' },
+        { title: 'Mid-question flip', dur: '0:57', label: 'variant_c', accent: SAGE, src: '/videos/showcase/street-interviews/out-c.mp4' },
+      ],
+      stackLabel: '+2',
+    },
   },
   {
     id: 'yap-batch',
@@ -516,9 +543,9 @@ export default function HeroShowcase() {
       </div>
 
       <div className="rounded-2xl border p-4 md:p-5" style={{ borderColor: C(0.1), background: PANEL }}>
-       <div className={v.scrub ? 'grid gap-6 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] md:items-center' : ''}>
+       <div className="grid gap-6 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] md:items-center">
         {/* claim + prompt */}
-        <div className={v.scrub ? '' : 'mb-4'}>
+        <div>
           <motion.p
             key={`claim-${v.id}`}
             initial={{ opacity: 0, y: 4 }}
@@ -589,8 +616,7 @@ export default function HeroShowcase() {
           )}
         </div>
 
-        {v.scrub ? (
-          <HeroScrub
+        <HeroScrub
             key={v.id}
             steps={v.scrub.steps}
             source={v.scrub.source}
@@ -602,21 +628,6 @@ export default function HeroShowcase() {
             onScrub={() => setAutoplay(false)}
             onStep={setScrubStep}
           />
-        ) : (
-          <HeroFlow
-            step={step}
-            stepLabels={v.steps}
-            fileCount={v.fileCount}
-            analyzed={reduced ? v.fileCount : analyzed}
-            files={v.inputFiles}
-            mosaic={v.mosaic}
-            concepts={v.concepts}
-            outputs={v.outputs}
-            moreOutputs={v.moreOutputs}
-            outLabel={v.outLabel}
-            reduced={reduced}
-          />
-        )}
        </div>
       </div>
 

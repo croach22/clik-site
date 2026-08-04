@@ -12,7 +12,8 @@ import { motion } from 'framer-motion';
 //
 // Two inputs, two substrates:
 //   podcast → one landscape frame, read off a waveform
-//   batch   → three clips off the card, sorted by type and subject
+//   batch   → a strip of what came off the card
+//   take    → one interview, with its restarts and retakes logged
 
 const ROYCE = '#5481E8';
 const SALMON = '#F9838E';
@@ -49,7 +50,8 @@ export interface ScrubClip {
 
 export type ScrubSource =
   | { kind: 'landscape'; name: string; dur: string }
-  | { kind: 'batch'; stills: string[]; count: number; more: number; note: string };
+  | { kind: 'batch'; stills: string[]; count: number; more: number; note: string }
+  | { kind: 'take'; name: string; dur: string; note: string; takes: { n: string; cut: boolean }[] };
 
 interface Props {
   steps: string[];
@@ -198,10 +200,10 @@ export default function HeroScrub({
             className="absolute inset-0"
             style={{ background: `radial-gradient(120% 90% at 20% 40%, ${ROYCE}14, transparent 70%), #08102A` }}
           />
-          {source.kind === 'landscape' ? (
-            <Waveform p={p} />
-          ) : (
-            <SortingField p={p} count={source.count} />
+          {source.kind === 'landscape' && <Waveform p={p} />}
+          {source.kind === 'batch' && <ReadField p={p} count={source.count} unit="analyzed" />}
+          {source.kind === 'take' && (
+            <ReadField p={p} count={source.takes.filter((t) => t.cut).length} unit="retakes cut" />
           )}
         </div>
 
@@ -310,10 +312,10 @@ export default function HeroScrub({
 
         {/* ── the raw input, receding to the right ── */}
         <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${p * 100}%)` }} aria-hidden="true">
-          {source.kind === 'landscape' ? (
-            <RawEpisode name={source.name} dur={source.dur} />
-          ) : (
-            <RawBatch stills={source.stills} more={source.more} note={source.note} />
+          {source.kind === 'landscape' && <RawEpisode name={source.name} dur={source.dur} />}
+          {source.kind === 'batch' && <RawBatch stills={source.stills} more={source.more} note={source.note} />}
+          {source.kind === 'take' && (
+            <RawTake name={source.name} dur={source.dur} note={source.note} takes={source.takes} />
           )}
         </div>
 
@@ -431,9 +433,9 @@ function Waveform({ p }: { p: number }) {
   );
 }
 
-// A shoot day: nothing to show but the sort itself, running behind the bar.
-function SortingField({ p, count }: { p: number; count: number }) {
-  const sorted = Math.round(Math.min(1, p / 0.9) * count);
+// Nothing to show but the read itself, running behind the bar.
+function ReadField({ p, count, unit }: { p: number; count: number; unit: string }) {
+  const analyzed = Math.round(Math.min(1, p / 0.9) * count);
 
   return (
     <>
@@ -449,7 +451,7 @@ function SortingField({ p, count }: { p: number; count: number }) {
           className="block whitespace-nowrap rounded px-1.5 py-[3px] font-mono"
           style={{ fontSize: 8.5, color: C(0.85), background: 'rgba(6,11,26,.82)', border: `1px solid ${C(0.14)}` }}
         >
-          {sorted} / {count} sorted
+          {analyzed} / {count} {unit}
         </span>
       </div>
     </>
@@ -519,6 +521,120 @@ function RawEpisode({ name, dur }: { name: string; dur: string }) {
         style={{ fontSize: 8.5, letterSpacing: '0.1em', color: C(0.55), background: 'rgba(6,11,26,.7)' }}
       >
         Raw · landscape · {dur}
+      </span>
+    </div>
+  );
+}
+
+// One interview, shot in a single sitting: the take log is the story here,
+// because most of what was recorded is a restart.
+// TODO(conner): swap the drawn frame for a still off the actual raw take.
+function RawTake({
+  name,
+  dur,
+  note,
+  takes,
+}: {
+  name: string;
+  dur: string;
+  note: string;
+  takes: { n: string; cut: boolean }[];
+}) {
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={{ background: '#0B1430' }}>
+      <div
+        className="absolute inset-0"
+        style={{ background: 'radial-gradient(110% 90% at 30% 45%, rgba(84,129,232,.10), transparent 72%)' }}
+      />
+
+      {/* the interview, drawn */}
+      <div
+        className="absolute top-1/2 overflow-hidden rounded-lg"
+        style={{
+          left: `${CLIP_X[0] * 100}%`,
+          width: `${CLIP_W * 100}%`,
+          aspectRatio: '9 / 16',
+          transform: 'translateY(-50%)',
+          border: `1px solid ${C(0.16)}`,
+          boxShadow: '0 14px 34px rgba(4, 8, 22, 0.55)',
+          background: 'linear-gradient(180deg, #7E93BE 0%, #56688F 38%, #2B3757 62%, #1B2440 100%)',
+        }}
+      >
+        {/* street behind */}
+        <span className="absolute left-[4%] top-[6%] block rounded-sm" style={{ width: '22%', height: '38%', background: 'rgba(12,20,44,.5)' }} />
+        <span className="absolute right-[5%] top-[3%] block rounded-sm" style={{ width: '26%', height: '46%', background: 'rgba(12,20,44,.42)' }} />
+        <span className="absolute inset-x-0 block" style={{ top: '58%', height: 1, background: C(0.14) }} />
+        {/* subject */}
+        <span
+          className="absolute left-1/2 block -translate-x-1/2 rounded-full"
+          style={{ top: '30%', width: '26%', aspectRatio: '1', background: '#8E6E58' }}
+        />
+        <span
+          className="absolute left-1/2 block -translate-x-1/2 rounded-t-[999px]"
+          style={{ top: '48%', width: '52%', height: '34%', background: SALMON }}
+        />
+        {/* mic in the foreground */}
+        <span
+          className="absolute left-[14%] block rounded-full"
+          style={{ bottom: '2%', width: '13%', height: '20%', background: C(0.3), border: `1px solid ${C(0.2)}` }}
+        />
+        <span
+          className="absolute inset-0 block"
+          style={{ background: 'radial-gradient(80% 70% at 50% 45%, transparent 45%, rgba(4,8,22,.5))' }}
+        />
+        <span
+          className="absolute left-1.5 top-1.5 rounded px-1.5 py-[3px] font-mono"
+          style={{ fontSize: 7.5, color: C(0.85), background: 'rgba(6,11,26,.75)' }}
+        >
+          {name}
+        </span>
+        <span
+          className="absolute bottom-1.5 left-1.5 rounded px-1.5 py-[3px] font-mono uppercase"
+          style={{ fontSize: 7, letterSpacing: '0.08em', color: C(0.5), background: 'rgba(6,11,26,.75)' }}
+        >
+          Raw · {dur}
+        </span>
+      </div>
+
+      {/* what's actually on the card */}
+      <div
+        className="absolute top-1/2 -translate-y-1/2 space-y-[5px]"
+        style={{ left: `${(CLIP_X[0] + CLIP_W + 0.04) * 100}%`, right: '4%' }}
+      >
+        {takes.map((t) => (
+          <div
+            key={t.n}
+            className="flex items-center gap-2 rounded px-2 py-[5px]"
+            style={{
+              background: t.cut ? 'transparent' : C(0.05),
+              border: `1px solid ${t.cut ? C(0.07) : C(0.13)}`,
+            }}
+          >
+            <span className="font-mono" style={{ fontSize: 8, color: C(t.cut ? 0.3 : 0.7) }}>
+              {t.n}
+            </span>
+            <span
+              className="flex-1 font-ui"
+              style={{ fontSize: 9.5, color: C(t.cut ? 0.32 : 0.8), textDecoration: t.cut ? 'line-through' : 'none' }}
+            >
+              {t.cut ? 'restart' : 'usable'}
+            </span>
+            <span className="block h-[3px] rounded-full" style={{ width: t.cut ? 14 : 34, background: t.cut ? C(0.14) : `${ROYCE}AA` }} />
+          </div>
+        ))}
+      </div>
+
+      <span
+        className="absolute right-3 top-3 rounded px-2 py-1 font-mono uppercase"
+        style={{
+          fontSize: 8.5,
+          letterSpacing: '0.1em',
+          color: C(0.7),
+          background: 'rgba(6,11,26,.75)',
+          border: `1px solid ${C(0.12)}`,
+        }}
+      >
+        {note}
       </span>
     </div>
   );

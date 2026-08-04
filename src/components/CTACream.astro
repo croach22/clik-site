@@ -35,11 +35,11 @@ const outputs = [
 
       <!-- Three real outputs, one per input type — the abstract fan said
            "many things come out"; these say what actually comes out. -->
-      <div class="absolute right-12 top-1/2 hidden -translate-y-1/2 items-center gap-3 lg:flex" aria-hidden="true">
+      <div class="absolute right-12 top-1/2 hidden h-[70%] -translate-y-1/2 items-center gap-3 xl:flex" aria-hidden="true">
         {outputs.map((o, i) => (
           <div
             class="relative overflow-hidden rounded-lg"
-            style={`width: 108px; aspect-ratio: 9 / 16; border: 1px solid ${o.accent}66; box-shadow: 0 18px 40px rgba(4, 8, 22, 0.5); transform: translateY(${i % 2 ? 10 : -10}px);`}
+            style={`height: 100%; aspect-ratio: 9 / 16; border: 1px solid ${o.accent}66; box-shadow: 0 18px 40px rgba(4, 8, 22, 0.5); transform: translateY(${i % 2 ? 4 : -4}%);`}
           >
             <video
               src={o.src}
@@ -52,7 +52,7 @@ const outputs = [
             ></video>
             <span
               class="absolute inset-x-0 bottom-0 block px-1.5 py-1 font-mono uppercase"
-              style="font-size: 7.5px; letter-spacing: 0.1em; color: rgba(249,247,241,.8); background: rgba(6,11,26,.8);"
+              style="font-size: 9px; letter-spacing: 0.1em; color: rgba(249,247,241,.85); background: rgba(6,11,26,.8);"
             >
               {o.label}
             </span>

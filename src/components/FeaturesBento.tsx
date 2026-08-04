@@ -88,20 +88,16 @@ export default function FeaturesBento() {
           <span className="label">THE SYSTEM</span>
         </div>
 
-        {/* Headline left, intro right — uses the full container width instead
-            of stacking two short-measure blocks against a dead right column. */}
-        <div className="grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
-          <h2
-            className="font-display font-medium text-clik-cream"
-            style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '20ch' }}
-          >
-            One engine. Four parts<span style={{ color: ROYCE }}>.</span>
-          </h2>
-          <p className="font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7') }}>
-            The same flow regardless of format. Brand memory upstream, an agent planning at the batch level, a build
-            agent constructing every video, and a dashboard so the whole team can see it.
-          </p>
-        </div>
+        <h2
+          className="font-display font-medium text-clik-cream"
+          style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '20ch' }}
+        >
+          One engine. Four parts<span style={{ color: ROYCE }}>.</span>
+        </h2>
+        <p className="mt-5 font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7'), maxWidth: '66ch' }}>
+          The same flow regardless of format. Brand memory upstream, an agent planning at the batch level, a build
+          agent constructing every video, and a dashboard so the whole team can see it.
+        </p>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {CARDS.map((card) => (

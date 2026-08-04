@@ -2,16 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
-// Hero showcase — four real workflows the reader can switch between, each
-// showing what went in, what came out, and the exact prompt that did it.
+// Hero showcase — four real workflows, auto-cycling, each showing the claim,
+// the prompt that produced it, what went in, and what came out.
 //
 // ── DROPPING IN REAL FOOTAGE ────────────────────────────────────────────
 // Each variant has `raw` (the before) and per-output `src` (the after).
 // Both are null today and fall back to abstract tiles. To go live:
 //   1. put files in  public/videos/showcase/<variant-id>/
-//   2. set  raw: '/videos/showcase/content-day/raw.mp4'
-//      and  src: '/videos/showcase/content-day/vidA_hookA.mp4'
-// Nothing else changes — layout, sizing and posters are already wired.
+//   2. set  raw: '/videos/showcase/podcast-clipping/raw.mp4'
+//      and  src: '/videos/showcase/podcast-clipping/ep42_clip01.mp4'
+// Nothing else changes — layout, sizing and playback are already wired.
 // ────────────────────────────────────────────────────────────────────────
 
 const ROYCE = '#5481E8';
@@ -25,6 +25,7 @@ const INSET = 'rgba(249, 247, 241, 0.04)';
 const PANEL = '#13204A';
 
 const SIGNUP = 'https://app.clik.vision/sign-up';
+const CYCLE_MS = 7000; // hold per workflow before auto-advancing
 
 interface Output {
   label: string;
@@ -41,61 +42,13 @@ interface Variant {
   moreCount: number;
   outLabel: string;
   claim: string;
+  promptPreview: string;
+  prompt: string;
   outputs: Output[];
   raw?: string | null;
-  prompt: string;
 }
 
 const VARIANTS: Variant[] = [
-  {
-    id: 'content-day',
-    tab: 'Content day',
-    inputSummary: '37 clips · one shoot day',
-    inputFiles: [
-      { name: 'IMG_0978.mp4', kind: 'a-roll', accent: ROYCE },
-      { name: 'IMG_0982.mp4', kind: 'b-roll', accent: SAGE },
-      { name: 'IMG_0991.mp4', kind: 'a-roll', accent: ROYCE },
-      { name: 'IMG_1004.mp4', kind: 'graphics', accent: LAVENDER },
-    ],
-    moreCount: 33,
-    outLabel: '12 videos · 4 concepts',
-    claim: 'Clik reads the whole batch and splits it by concept. You never sort a file.',
-    outputs: [
-      { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
-      { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
-      { label: 'vidB_hookA', dur: '0:48', accent: SALMON },
-      { label: 'vidB_hookB', dur: '0:44', accent: SALMON },
-      { label: 'vidC_hookA', dur: '0:58', accent: SAGE },
-      { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
-    ],
-    raw: null,
-    prompt:
-      "Here's a full content day, 37 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
-  },
-  {
-    id: 'street-interviews',
-    tab: 'Street interviews',
-    inputSummary: '60 clips · no master file',
-    inputFiles: [
-      { name: 'IMG_2210.mp4', kind: 'guest 01', accent: ROYCE },
-      { name: 'IMG_2214.mp4', kind: 'guest 02', accent: SALMON },
-      { name: 'IMG_2231.mp4', kind: 'guest 03', accent: SAGE },
-      { name: 'IMG_2247.mp4', kind: 'b-roll', accent: LAVENDER },
-    ],
-    moreCount: 56,
-    outLabel: '5 videos',
-    claim: 'Clik finds the best moments across every clip and builds multiple storylines. Nobody scrubs hours of footage to find them.',
-    outputs: [
-      { label: 'recap_guest01', dur: '0:48', accent: ROYCE },
-      { label: 'recap_guest02', dur: '0:52', accent: SALMON },
-      { label: 'recap_guest03', dur: '0:44', accent: SAGE },
-      { label: 'compilation_best', dur: '1:24', accent: LAVENDER },
-      { label: 'teaser_hookA', dur: '0:22', accent: OCHRE },
-    ],
-    raw: null,
-    prompt:
-      "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
-  },
   {
     id: 'podcast-clipping',
     tab: 'Podcast clipping',
@@ -109,6 +62,9 @@ const VARIANTS: Variant[] = [
     moreCount: 12,
     outLabel: '8 clips · your B-roll',
     claim: 'Most tools can only start once someone has produced the episode. Clik works from either end.',
+    promptPreview: 'Pull the 8 strongest moments from ep 42 and cut away to my own B-roll.',
+    prompt:
+      "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nUse my saved caption style and title cards, and cut the dead air out of the dialogue.",
     outputs: [
       { label: 'ep42_clip01', dur: '0:41', accent: ROYCE },
       { label: 'ep42_clip02', dur: '0:37', accent: SALMON },
@@ -118,8 +74,58 @@ const VARIANTS: Variant[] = [
       { label: 'ep42_clip06', dur: '0:33', accent: ROYCE },
     ],
     raw: null,
+  },
+  {
+    id: 'content-day',
+    tab: 'Content day',
+    inputSummary: '37 clips · one shoot day',
+    inputFiles: [
+      { name: 'IMG_0978.mp4', kind: 'a-roll', accent: ROYCE },
+      { name: 'IMG_0982.mp4', kind: 'b-roll', accent: SAGE },
+      { name: 'IMG_0991.mp4', kind: 'a-roll', accent: ROYCE },
+      { name: 'IMG_1004.mp4', kind: 'graphics', accent: LAVENDER },
+    ],
+    moreCount: 33,
+    outLabel: '12 videos · 4 concepts',
+    claim: 'Clik reads the whole batch and splits it by concept. You never sort a file.',
+    promptPreview: 'Sort 37 clips, plan 4 concepts, build 2 hooks each.',
     prompt:
-      "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nUse my saved caption style and title cards, and cut the dead air out of the dialogue.",
+      "Here's a full content day, 37 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
+    outputs: [
+      { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
+      { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
+      { label: 'vidB_hookA', dur: '0:48', accent: SALMON },
+      { label: 'vidB_hookB', dur: '0:44', accent: SALMON },
+      { label: 'vidC_hookA', dur: '0:58', accent: SAGE },
+      { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
+    ],
+    raw: null,
+  },
+  {
+    id: 'street-interviews',
+    tab: 'Street interviews',
+    inputSummary: '60 clips · no master file',
+    inputFiles: [
+      { name: 'IMG_2210.mp4', kind: 'guest 01', accent: ROYCE },
+      { name: 'IMG_2214.mp4', kind: 'guest 02', accent: SALMON },
+      { name: 'IMG_2231.mp4', kind: 'guest 03', accent: SAGE },
+      { name: 'IMG_2247.mp4', kind: 'b-roll', accent: LAVENDER },
+    ],
+    moreCount: 56,
+    outLabel: '5 videos',
+    claim:
+      'Clik finds the best moments across every clip and builds multiple storylines. Nobody scrubs hours of footage to find them.',
+    promptPreview: 'Find the best moments across 60 clips. One recap per guest, plus a compilation.',
+    prompt:
+      "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
+    outputs: [
+      { label: 'recap_guest01', dur: '0:48', accent: ROYCE },
+      { label: 'recap_guest02', dur: '0:52', accent: SALMON },
+      { label: 'recap_guest03', dur: '0:44', accent: SAGE },
+      { label: 'compilation_best', dur: '1:24', accent: LAVENDER },
+      { label: 'teaser_hookA', dur: '0:22', accent: OCHRE },
+    ],
+    raw: null,
   },
   {
     id: 'yap-batch',
@@ -134,6 +140,9 @@ const VARIANTS: Variant[] = [
     moreCount: 14,
     outLabel: '6 videos · best takes',
     claim: 'Clik keeps the best delivery of every line and drops the rest. One sitting becomes a week of posts.',
+    promptPreview: 'Group 18 takes by idea, keep the best delivery, build 2 hooks each.',
+    prompt:
+      "Here's a yap batch, 18 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
     outputs: [
       { label: 'idea01_hookA', dur: '0:38', accent: ROYCE },
       { label: 'idea01_hookB', dur: '0:35', accent: ROYCE },
@@ -143,8 +152,6 @@ const VARIANTS: Variant[] = [
       { label: 'idea03_hookB', dur: '0:47', accent: SAGE },
     ],
     raw: null,
-    prompt:
-      "Here's a yap batch, 18 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
   },
 ];
 
@@ -173,7 +180,7 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
     try {
       await navigator.clipboard.writeText(variant.prompt);
     } catch {
-      /* clipboard blocked — the prompt is selectable in the panel below */
+      /* clipboard blocked — the prompt stays selectable above */
     }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -224,11 +231,7 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
           </button>
         </div>
 
-        {/* the prompt */}
-        <div
-          className="mt-5 rounded-xl border p-4"
-          style={{ borderColor: C(0.1), background: INSET }}
-        >
+        <div className="mt-5 rounded-xl border p-4" style={{ borderColor: C(0.1), background: INSET }}>
           <pre
             className="whitespace-pre-wrap font-ui"
             style={{ fontSize: 13.5, lineHeight: 1.6, color: C(0.85), margin: 0 }}
@@ -239,15 +242,13 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
 
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <button onClick={copy} className="clik-btn clik-btn-primary">
-            {copied ? 'Copied' : 'Copy prompt'}
-            <span aria-hidden="true">{copied ? '✓' : ''}</span>
+            {copied ? 'Copied ✓' : 'Copy prompt'}
           </button>
           <a href={SIGNUP} className="clik-btn clik-btn-secondary">
             Start for free <span aria-hidden="true">→</span>
           </a>
         </div>
 
-        {/* steps */}
         <div className="mt-7 border-t pt-6" style={{ borderColor: C(0.1) }}>
           <p className="font-mono uppercase" style={{ fontSize: 9, letterSpacing: '0.14em', color: C(0.45) }}>
             How to use it
@@ -337,14 +338,31 @@ function OutputTile({ o, i, shown }: { o: Output; i: number; shown: boolean }) {
 export default function HeroShowcase() {
   const [active, setActive] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  // auto-advance stops for good once the reader picks a tab themselves
+  const [autoplay, setAutoplay] = useState(true);
   const v = VARIANTS[active];
 
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const onScreen = useInView(ref, { once: false, amount: 0.3 });
 
   // portals need a DOM target, so wait for hydration
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  // cycle the four workflows; pause off-screen, while the modal is open,
+  // and for anyone who asked for reduced motion
+  useEffect(() => {
+    if (!autoplay || !onScreen || modalOpen) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setTimeout(() => setActive((i) => (i + 1) % VARIANTS.length), CYCLE_MS);
+    return () => clearTimeout(id);
+  }, [active, autoplay, onScreen, modalOpen]);
+
+  const pick = (i: number) => {
+    setActive(i);
+    setAutoplay(false);
+  };
 
   return (
     <div ref={ref}>
@@ -360,11 +378,7 @@ export default function HeroShowcase() {
       </p>
 
       {/* variant tabs */}
-      <div
-        role="tablist"
-        aria-label="Workflow examples"
-        className="mb-3 flex flex-wrap gap-1.5"
-      >
+      <div role="tablist" aria-label="Workflow examples" className="mb-3 flex flex-wrap gap-1.5">
         {VARIANTS.map((variant, i) => {
           const on = i === active;
           return (
@@ -372,8 +386,8 @@ export default function HeroShowcase() {
               key={variant.id}
               role="tab"
               aria-selected={on}
-              onClick={() => setActive(i)}
-              className="rounded-lg border px-3 py-1.5 font-mono uppercase transition-colors"
+              onClick={() => pick(i)}
+              className="relative overflow-hidden rounded-lg border px-3 py-1.5 font-mono uppercase transition-colors"
               style={{
                 fontSize: 10,
                 letterSpacing: '0.1em',
@@ -382,13 +396,75 @@ export default function HeroShowcase() {
                 background: on ? `${ROYCE}1A` : 'transparent',
               }}
             >
-              {variant.tab}
+              {/* fill shows how long until the next workflow */}
+              {on && autoplay && (
+                <motion.span
+                  key={active}
+                  className="absolute inset-y-0 left-0 block"
+                  style={{ background: `${ROYCE}33` }}
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: CYCLE_MS / 1000, ease: 'linear' }}
+                />
+              )}
+              <span className="relative">{variant.tab}</span>
             </button>
           );
         })}
       </div>
 
       <div className="rounded-2xl border p-4 md:p-5" style={{ borderColor: C(0.1), background: PANEL }}>
+        {/* claim + the prompt that produced this run, above the run itself */}
+        <div className="mb-4">
+          <motion.p
+            key={`claim-${v.id}`}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="font-ui"
+            style={{ fontSize: 15, lineHeight: 1.5, color: C(0.82), maxWidth: '72ch' }}
+          >
+            {v.claim}
+          </motion.p>
+
+          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            {/* reads like the Clik chat input this would be pasted into */}
+            <div
+              className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg border px-3 py-2"
+              style={{ borderColor: C(0.12), background: INSET }}
+            >
+              <span style={{ color: SALMON, fontSize: 12 }}>✦</span>
+              <motion.span
+                key={`prev-${v.id}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="min-w-0 flex-1 truncate font-ui"
+                style={{ fontSize: 13, color: C(0.7) }}
+              >
+                {v.promptPreview}
+              </motion.span>
+            </div>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-lg border px-3.5 py-2 font-mono uppercase transition-colors"
+              style={{
+                fontSize: 10,
+                letterSpacing: '0.1em',
+                color: ROYCE,
+                borderColor: `${ROYCE}55`,
+                background: `${ROYCE}12`,
+              }}
+            >
+              Copy prompt
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <rect x="4.5" y="4.5" width="8" height="8" rx="1.6" stroke="currentColor" strokeWidth="1.3" />
+                <path d="M9.5 2.5h-7a1 1 0 0 0-1 1v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
         <div className="grid gap-4 md:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
           {/* ── RAW ── */}
           <div className="rounded-xl border p-3" style={{ borderColor: C(0.09), background: INSET }}>
@@ -415,42 +491,42 @@ export default function HeroShowcase() {
             ) : null}
 
             <motion.div
-              key={v.id}
+              key={`in-${v.id}`}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22 }}
+              transition={{ duration: 0.25 }}
               className="space-y-1.5"
             >
-                {v.inputFiles.map((f, i) => (
-                  <motion.div
-                    key={f.name}
-                    initial={{ opacity: 0, x: -6 }}
-                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
-                    transition={{ delay: i * 0.06, duration: 0.3 }}
-                    className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
-                    style={{ background: C(0.04), border: `1px solid ${C(0.08)}` }}
-                  >
-                    <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: f.accent }} />
-                    <span className="flex-1 truncate" style={{ fontSize: 10.5, color: C(0.72) }}>
-                      {f.name}
-                    </span>
-                    <span
-                      className="font-mono uppercase"
-                      style={{ fontSize: 7, letterSpacing: '0.1em', color: `${f.accent}DD` }}
-                    >
-                      {f.kind}
-                    </span>
-                  </motion.div>
-                ))}
-                <div
+              {v.inputFiles.map((f, i) => (
+                <motion.div
+                  key={f.name}
+                  initial={{ opacity: 0, x: -6 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
+                  transition={{ delay: i * 0.06, duration: 0.3 }}
                   className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
-                  style={{ border: `1px dashed ${C(0.1)}` }}
+                  style={{ background: C(0.04), border: `1px solid ${C(0.08)}` }}
                 >
-                  <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: C(0.15) }} />
-                  <span className="font-mono" style={{ fontSize: 9.5, color: C(0.4) }}>
-                    +{v.moreCount} more
+                  <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: f.accent }} />
+                  <span className="flex-1 truncate" style={{ fontSize: 10.5, color: C(0.72) }}>
+                    {f.name}
                   </span>
-                </div>
+                  <span
+                    className="font-mono uppercase"
+                    style={{ fontSize: 7, letterSpacing: '0.1em', color: `${f.accent}DD` }}
+                  >
+                    {f.kind}
+                  </span>
+                </motion.div>
+              ))}
+              <div
+                className="flex items-center gap-2 rounded-lg px-2.5 py-1.5"
+                style={{ border: `1px dashed ${C(0.1)}` }}
+              >
+                <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: C(0.15) }} />
+                <span className="font-mono" style={{ fontSize: 9.5, color: C(0.4) }}>
+                  +{v.moreCount} more
+                </span>
+              </div>
             </motion.div>
           </div>
 
@@ -475,50 +551,24 @@ export default function HeroShowcase() {
             </div>
 
             <motion.div
-              key={v.id}
+              key={`out-${v.id}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.25 }}
               className={`grid gap-2 ${
-                  v.outputs.length === 5
-                    ? 'grid-cols-3 sm:grid-cols-5'
-                    : 'grid-cols-3 sm:grid-cols-6'
-                }`}
-              >
+                v.outputs.length === 5 ? 'grid-cols-3 sm:grid-cols-5' : 'grid-cols-3 sm:grid-cols-6'
+              }`}
+            >
               {v.outputs.map((o, i) => (
                 <OutputTile key={o.label} o={o} i={i} shown={inView} />
               ))}
             </motion.div>
           </div>
         </div>
-
-        {/* prompt CTA */}
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-ui" style={{ fontSize: 13, lineHeight: 1.5, color: C(0.6), maxWidth: '62ch' }}>
-            {v.claim}
-          </p>
-          <button
-            onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 font-mono uppercase transition-colors"
-            style={{
-              fontSize: 10,
-              letterSpacing: '0.1em',
-              color: ROYCE,
-              borderColor: `${ROYCE}55`,
-              background: `${ROYCE}12`,
-            }}
-          >
-            Copy prompt
-            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <rect x="4.5" y="4.5" width="8" height="8" rx="1.6" stroke="currentColor" strokeWidth="1.3" />
-              <path d="M9.5 2.5h-7a1 1 0 0 0-1 1v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
       </div>
 
       {/* Portalled to <body>: inside the hero the modal sits under a stacking
-          context created by the section's transforms and never surfaces. */}
+          context created by the section and never surfaces. */}
       {mounted &&
         createPortal(
           <AnimatePresence>

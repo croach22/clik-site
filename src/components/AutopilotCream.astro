@@ -1,53 +1,86 @@
 ---
-// Fan-page / community-account autopilot — standalone card, deliberately not
-// merged into the editor comparison. Conceptual for now (no proof stats yet);
-// templated workflow subpages that deep-link into the app are phase two.
+// How teams actually use Clik — three cards covering the range, from the main
+// page through paid testing to secondary accounts. Replaces the single
+// fan-page card, which only told the third of these stories.
+const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03);';
+
+const uses = [
+  {
+    chip: 'Main page',
+    accent: '#5481E8',
+    title: 'Scale the page you already care about',
+    body: 'Post every day without the shoot-to-publish gap. One batch becomes a week of on-brand videos, so your main account stops waiting on edit time.',
+  },
+  {
+    chip: 'Paid + testing',
+    accent: '#F9838E',
+    title: 'Test more variations than you could shoot',
+    body: 'Build every hook, every angle, every cut of the same idea. Run them organically or as creative, find what actually works, then make more of it.',
+  },
+  {
+    chip: 'Secondary pages',
+    accent: '#9785B8',
+    title: 'Run fan and community accounts on autopilot',
+    body: 'Point the same engine at the accounts you never have time for. Same brand rules, no clippers to hire and manage.',
+  },
+];
 ---
 
 <section id="autopilot" class="px-6 md:px-12 py-24 md:py-32">
-  <div class="mx-auto max-w-[1100px]">
+  <div class="mx-auto max-w-[1200px]">
     <div class="clik-section-header">
       <span class="idx">[ 04 ]</span>
       <span class="rule"></span>
-      <span class="label">AUTOPILOT</span>
+      <span class="label">IN PRACTICE</span>
     </div>
 
-    <div
-      class="relative rounded-[17px] p-px"
-      style="background: linear-gradient(120deg, rgba(84, 129, 232, 0.55), rgba(84, 129, 232, 0.10) 30%, rgba(249, 131, 142, 0.10) 70%, rgba(249, 131, 142, 0.5));"
-    >
-    <div
-      class="bento-card relative overflow-hidden" style="background: #101B3E; color: var(--clik-cream); padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 64px);"
-    >
-      <div
-        class="glow -right-24 -top-24 h-[360px] w-[520px]"
-        style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.14), transparent 72%);"
-        aria-hidden="true"
-      ></div>
+    <!-- Headline left, intro right — uses the full width at a readable measure -->
+    <div class="grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
+      <h2
+        class="font-display font-medium text-clik-cream"
+        style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
+      >
+        How teams use Clik<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-cream/70" style="font-size: 17px; line-height: 1.55;">
+        Same engine, pointed at three different problems. Most teams start with the first one and grow into the others.
+      </p>
+    </div>
 
-      <span class="clik-chip clik-chip-fill-royce">Fan pages · Community accounts</span>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {uses.map((u) => (
+        <div class="bento-card border flex flex-col" style={`${CARD} padding: 28px;`}>
+          <span
+            class="clik-chip self-start"
+            style={`background: ${u.accent}14; border-color: ${u.accent}45; color: ${u.accent};`}
+          >
+            {u.chip}
+          </span>
 
-      <!-- Headline left, body right — fills the card width at a readable measure -->
-      <div class="relative mt-6 grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
-        <h2
-          class="font-display font-medium text-clik-cream"
-          style="font-size: clamp(28px, 3.5vw, 40px); line-height: 1.15; letter-spacing: -0.02em; max-width: 24ch;"
-        >
-          Run your secondary accounts on autopilot<span class="clik-period">.</span>
-        </h2>
+          <h3
+            class="mt-5 font-display font-medium text-clik-cream"
+            style="font-size: clamp(20px, 2.2vw, 23px); line-height: 1.2; letter-spacing: -0.01em;"
+          >
+            {u.title}<span class="clik-period">.</span>
+          </h3>
 
-        <p class="font-ui text-clik-cream/70" style="font-size: 17px; line-height: 1.55;">
-          Scale output to fan pages and community accounts without hiring clippers to run them. Same engine, same brand rules, pointed at the accounts you never have time for.
-        </p>
-      </div>
+          <p class="mt-3 font-ui text-clik-cream/70" style="font-size: 15px; line-height: 1.6;">
+            {u.body}
+          </p>
+        </div>
+      ))}
+    </div>
 
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-4">
+      <p class="font-ui text-clik-cream/55" style="font-size: 15px;">
+        One engine covers all three. You don't pick a lane.
+      </p>
       <a
         href="https://app.clik.vision/sign-up"
-        class="mt-8 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce no-underline hover:opacity-80"
+        class="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce no-underline hover:opacity-80"
       >
-        Put an account on autopilot <span aria-hidden="true">→</span>
+        Start with your main page <span aria-hidden="true">→</span>
       </a>
-    </div>
     </div>
   </div>
 </section>

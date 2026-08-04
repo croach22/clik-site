@@ -1,5 +1,5 @@
 ---
-// Clik vs. hiring an editor — bridges directly into pricing, so cost rows are
+// Clik vs. hiring more editors — bridges directly into pricing, so cost rows are
 // scoped per video (matches how buyers already think about editor cost).
 // The "your time per video" row is the one that wins arguments: the obvious
 // objection to any AI tool is "I have to explain what I want either way" —
@@ -7,6 +7,12 @@
 const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 
 const rows = [
+  {
+    label: 'Onboarding',
+    human: 'Weeks',
+    clik: 'Minutes',
+    emphasis: false,
+  },
   {
     label: 'First draft',
     human: 'Multiple business days',
@@ -16,19 +22,19 @@ const rows = [
   {
     label: 'Iteration',
     human: 'Business days',
-    clik: 'Instant',
+    clik: 'Hours',
     emphasis: false,
   },
   {
     label: 'Cost per video',
     human: '$25–50',
-    clik: '~$5',
+    clik: '$2–5, depending on volume',
     emphasis: false,
   },
   {
     label: 'Your time per video',
-    human: 'Brief, review, re-brief. Every time.',
-    clik: 'Context once, into the brand guide',
+    human: '1–2 hours, depending on revisions',
+    clik: 'Minutes',
     emphasis: true,
   },
   {
@@ -52,7 +58,7 @@ const rows = [
       class="font-display font-medium text-clik-cream"
       style="font-size: clamp(36px, 4.5vw, 46px); line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch;"
     >
-      Clik vs. hiring an editor<span class="clik-period">.</span>
+      Clik vs. hiring more editors<span class="clik-period">.</span>
     </h2>
 
     <!-- Comparison grid — .clik-kv dashed-row vocabulary, Clik column royce-accented -->

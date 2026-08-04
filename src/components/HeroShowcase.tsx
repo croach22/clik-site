@@ -122,14 +122,20 @@ const VARIANTS: Variant[] = [
     prompt:
       "Here's a full content day, 79 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
     outputs: [
-      { label: 'vidA_hookA', dur: '0:34', accent: ROYCE },
-      { label: 'vidA_hookB', dur: '0:31', accent: ROYCE },
-      { label: 'vidB_hookA', dur: '0:48', accent: SALMON },
-      { label: 'vidB_hookB', dur: '0:44', accent: SALMON },
-      { label: 'vidC_hookA', dur: '0:58', accent: SAGE },
-      { label: 'vidD_hookA', dur: '0:39', accent: OCHRE },
+      {
+        label: 'vidA_hookA',
+        dur: '0:57',
+        accent: ROYCE,
+        src: '/videos/showcase/content-day/out-a.mp4',
+      },
+      {
+        label: 'vidB_hookA',
+        dur: '0:47',
+        accent: SALMON,
+        src: '/videos/showcase/content-day/out-b.mp4',
+      },
     ],
-    moreOutputs: 4,
+    moreOutputs: 8,
     raw: null,
   },
   {
@@ -640,8 +646,8 @@ export default function HeroShowcase() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.25 }}
               className={`grid gap-2 ${
-                v.outputs.length + (v.moreOutputs ? 1 : 0) === 7
-                  ? 'grid-cols-4 sm:grid-cols-7'
+                v.outputs.length + (v.moreOutputs ? 1 : 0) <= 3
+                  ? 'grid-cols-3 sm:grid-cols-4'
                   : v.outputs.length === 5
                     ? 'grid-cols-3 sm:grid-cols-5'
                     : 'grid-cols-3 sm:grid-cols-6'

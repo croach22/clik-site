@@ -74,7 +74,7 @@ You have an editor. That's most of it, honestly.
 
 If there's a person on your team whose job is to cut, and the thing slowing them down is the hours before the cut starts, the watching, the logging, the take selection, the string-out, Eddie is aimed directly at your problem and is very good at it. If your material is dialogue-led and well-recorded, you're in its sweet spot. If you want b-roll catalogued rather than guessed at, that's a strength. If your finishing happens in Premiere, Resolve, or Final Cut and you have no intention of changing that, Eddie's handoff is native rather than an export step. And if you want a vendor that working editors already trust and that shows up where post professionals show up, that's not a small thing.
 
-If the output is a high-production or cinematic edit, something where a human is going to shape every cut anyway, Eddie is the better bet and I'd say so in the room. A rough cut handed to a skilled editor is worth more there than a finished video they'd only take apart.
+If the output is a high-production or cinematic edit, something where a human is going to shape every cut anyway, Eddie is the better bet.
 
 ## Choose Clik if
 

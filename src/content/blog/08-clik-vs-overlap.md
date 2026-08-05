@@ -87,7 +87,7 @@ This reflects different chosen customers, not one company being right. Demo-gati
 
 ## Choose Overlap if
 
-Your input really is one long recording at a time: a podcast, a webinar series, a livestream, a show with an RSS feed. You want a workflow defined once as an explicit graph and run forever. You have engineers who'd rather call an API than open an interface. You need posting and scheduling in the same place the editing happens. You want a vendor with enterprise references and a person on the other end of the account. For that team, Overlap is likely the better buy, and I'd say so to your face.
+Your input really is one long recording at a time: a podcast, a webinar series, a livestream, a show with an RSS feed. You want a workflow defined once as an explicit graph and run forever. You have engineers who'd rather call an API than open an interface. You need posting and scheduling in the same place the editing happens. You want a vendor with enterprise references and a person on the other end of the account. For that team, Overlap is likely the better buy.
 
 ## Choose Clik if
 

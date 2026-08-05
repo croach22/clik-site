@@ -75,7 +75,7 @@ interface Variant {
   outLabel: string;
   headline: string;
   claim: string;
-  prompt: string;
+  prompts: { label: string; body: string }[];
   outputs: Output[];
   moreOutputs?: number;
   // when present, this tab renders the before/after scrub instead of the flow
@@ -104,8 +104,7 @@ const VARIANTS: Variant[] = [
     outLabel: '8 clips · your B-roll',
     headline: 'One episode. Eight clips.',
     claim: 'Build on-brand clipping flows based on your target audience, hook structures, and more.',
-    prompt:
-      "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nUse my saved caption style and title cards, and cut the dead air out of the dialogue.",
+    prompts: [{ label: 'Clip an episode', body: "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nOUTPUT\nVertical 9:16. My saved caption style. Title card on every clip, using my saved title card rules. Cut the dead air out of the dialogue." }],
     outputs: [
       { label: 'ep42_clip01', dur: '0:41', accent: ROYCE },
       { label: 'ep42_clip02', dur: '0:37', accent: SALMON },
@@ -152,8 +151,7 @@ const VARIANTS: Variant[] = [
     outLabel: '10 videos · 4 concepts',
     headline: 'One shoot day. A month of posts.',
     claim: 'Clik reads the whole batch, splits it by concept, and plans what you can actually make from what you shot.',
-    prompt:
-      "Here's a full content day, 79 clips, unsorted.\n\nSort the footage into A-roll, B-roll, and graphics. Read the dialogue and visuals, then plan 4 concepts you can actually make from what's here.\n\nBuild every concept vertical, with 2 hook variants each. Use my saved caption style, title cards, and hook rules. Cut the dead air, and pull B-roll from my own footage where it fits the meaning.\n\nTell me anything the brief called for that I didn't shoot.",
+    prompts: [{ label: 'Plan a batch before you build', body: "Here's a full content day, 79 clips, unsorted.\n\nFind the 3 to 5 strongest short-form concepts, 45 to 60 seconds each. Every one needs a real arc: an opening, a middle, and an end, plus an insight or a story that is actually entertaining or worth learning. Build each one chronologically. Don't scramble the order to make it work.\n\nOpen every clip on its strongest line, then a title card. Build 2 hook variants of each.\n\nCut to my own B-roll for about 40% of the runtime, a new visual roughly every three seconds, matched to what is being said. If someone names a thing, show the thing. Hold on their face for the payoff line.\n\nDon't build anything yet. Give me the report first: the hook, the arc, why it works, and the B-roll you would cut to.\n\nIf there are more than five concepts in there, tell me and we will build the rest after.\n\nOUTPUT\nVertical 9:16. My saved caption style. Two-second title card on every clip, using my saved title card rules." }],
     outputs: [
       { label: 'vidA_hookA', dur: '0:57', accent: ROYCE, src: '/videos/showcase/content-day/out-a.mp4' },
       { label: 'vidB_hookA', dur: '0:47', accent: SALMON, src: '/videos/showcase/content-day/out-b.mp4' },
@@ -197,8 +195,10 @@ const VARIANTS: Variant[] = [
     headline: 'One interview. Five hooks to test.',
     claim:
       'Create multiple interview variations instantly to increase reach on trial reels and find winning formats faster.',
-    prompt:
-      "This is a day of street interviews. About 60 clips, no master file, every answer is its own file.\n\nWatch all of it and find the strongest moments across every clip. Group them by guest.\n\nBuild me one recap per guest, plus a compilation of the best answers of the day and a short teaser using the single best line.\n\nAll vertical, my caption style, cut the dead air.",
+    prompts: [
+      { label: 'One interview, five variants', body: "You are editing a raw street interview into a matchmaker format: I stop one single person on the street, run a fixed set of dating questions, and pitch them to the audience. One interview, one video. Let the narrative decide the duration.\n\nFORMAT\nA repeatable dating-matchmaker Q&A. Same question script every time. The edit tightens it into a fast, warm, funny clip that opens on \"Are you single?\" and closes by pitching the person to the audience. Their personality plus my playful reframes carry it. Use my saved caption style.\n\nINPUT\nOne street interview. Me off camera asking, one person answering while walking or standing. Handheld, mostly one continuous take. Keep it vertical. No B-roll.\n\nTHE QUESTION ARC\n1. Open: \"Are you single?\"\n2. \"I want to help you find a very cool boyfriend / girlfriend.\"\n3. \"Why are you single?\"\n4. \"What's your type?\" then my playful reframe\n5. \"What's your ideal first date?\"\n6. \"What do you bring into a relationship?\"\n7. Optional: do they need to be local, or open to long distance\n8. Close: \"If you're a cool guy / girl who wants to date this person, slide into their DMs.\"\n\nThis is an example arc from a high performing creator. The actual interview may run differently, so follow what is in the footage.\n\nVARIANTS, five in total\nA, one version. Cold open on the opening question and their reaction. The signature.\nB, three versions. Find their best funny, surprising or spicy lines and build three separate versions, each cold-opening on a different one for 3 to 7 seconds, then cutting back to \"Are you single?\" and running the arc. Pick the three most distinct so the versions feel genuinely different.\nC, one version. Start from a middle question, run through to the DM line, then cut back to the open.\n\nPACING\nNarrative-driven. Keep the full arc. Length is emergent, roughly 45 to 80 seconds, never a target, never cut for time. Trim only genuine dead air over about three seconds, filler, false starts, repeated takes, and energy dips. Keep the banter, the natural pauses, and the funny beats. Cut any production talk.\n\nCUT\nFiller, false starts, dead air, repeated takes, off-topic tangents, anyone else or behind-camera chatter, long walking with no talking.\n\nDO NOT\nChange the question order after the chosen opener. Cut the open or the matchmaker close. Add B-roll or music. Lose my playful reframes, they are the charm.\n\nOUTPUT\nFive versions, vertical 9:16, with one line each on which beat it opens on. My saved caption style, and my saved title card rules on the cold open. If the interview genuinely lacks three distinct funny moments, say so and give me the best available rather than forcing weak hooks." },
+      { label: 'A full day, three compilations', body: "Here's a full day of street interviews. Every answer is its own file, no master.\n\nWatch all of it and build me three compilations, 60 to 90 seconds each, each on a different spine:\n\n1. One question, everyone. Pick the question that got the widest range of answers and cut the best responses back to back, ordered so it builds.\n2. Best of the day. The funniest and most surprising moments across every interview, regardless of question.\n3. One theme. Find a thread that runs through several interviews on its own and cut only what serves it.\n\nOpen each one on the strongest line in that compilation, not on my question. Keep every answer in the order it was said within its own interview. Never stitch one person's sentence onto another's.\n\nVertical 9:16, my saved caption style, and a title card on each one using my saved title card rules. Cut dead air, filler, false starts, and production talk. No B-roll, no music.\n\nDon't build anything yet. Give me the report first: which spine, which interviews it pulls from, the opening line, and roughly how long it runs." },
+    ],
     outputs: [
       { label: 'recap_guest01', dur: '0:48', accent: ROYCE },
       { label: 'recap_guest02', dur: '0:52', accent: SALMON },
@@ -251,8 +251,7 @@ const VARIANTS: Variant[] = [
     outLabel: '6 videos · best takes',
     headline: 'One yap session. A week of posts.',
     claim: 'Clik detects concept boundaries, alternate spoken hooks, and builds polished talking head videos.',
-    prompt:
-      "Here's a yap batch, 26 takes recorded in one sitting, several attempts per idea.\n\nGroup the takes by idea and keep the best delivery of each line. Drop the flubs and the restarts.\n\nBuild one vertical video per idea with 2 hook variants each, using my saved caption style and hook rules. Cut every pause.",
+    prompts: [{ label: 'One sitting, one video per concept', body: "This is a batch film day. For each unique concept in here, build me one polished video.\n\nIf I've pasted a brief or the scripts below, use them to set the concept boundaries and tell me which takes map to which script.\n\nIf I haven't, work the boundaries out from the footage itself: where one idea ends and the next begins, which takes are attempts at the same thing, and which delivery is the strongest.\n\nDrop the flubs, the restarts, and every pause.\n\nOUTPUT\nVertical 9:16. My saved caption style. Title card on every video, using my saved title card rules. My saved hook rules.\n\nTell me what you found before you build: the concepts, how many takes each, and which one you're keeping." }],
     outputs: [
       { label: 'idea01_hookA', dur: '0:38', accent: ROYCE },
       { label: 'idea01_hookB', dur: '0:35', accent: ROYCE },
@@ -296,7 +295,7 @@ const STEPS_HOWTO = [
 
 // ── Prompt modal ──────────────────────────────────────────────
 function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => void }) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<number | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
@@ -308,14 +307,14 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
     };
   }, [onClose]);
 
-  const copy = async () => {
+  const copy = async (body: string, i: number) => {
     try {
-      await navigator.clipboard.writeText(variant.prompt);
+      await navigator.clipboard.writeText(body);
     } catch {
       /* clipboard blocked — the prompt stays selectable above */
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopied(i);
+    setTimeout(() => setCopied(null), 2000);
   };
 
   return (
@@ -363,16 +362,28 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
           </button>
         </div>
 
-        <div className="mt-5 rounded-xl border p-4" style={{ borderColor: C(0.1), background: INSET }}>
-          <pre className="whitespace-pre-wrap font-ui" style={{ fontSize: 13.5, lineHeight: 1.6, color: C(0.85), margin: 0 }}>
-            {variant.prompt}
-          </pre>
-        </div>
+        {variant.prompts.map((p, i) => (
+          <div key={p.label} className="mt-6">
+            {variant.prompts.length > 1 && (
+              <p className="mb-2 font-mono uppercase" style={{ fontSize: 10, letterSpacing: '0.14em', color: C(0.5) }}>
+                {String(i + 1).padStart(2, '0')} · {p.label}
+              </p>
+            )}
+            <div className="rounded-xl border p-4" style={{ borderColor: C(0.1), background: INSET }}>
+              <pre
+                className="whitespace-pre-wrap font-ui"
+                style={{ fontSize: 13.5, lineHeight: 1.6, color: C(0.85), margin: 0 }}
+              >
+                {p.body}
+              </pre>
+            </div>
+            <button onClick={() => copy(p.body, i)} className="clik-btn clik-btn-primary mt-3">
+              {copied === i ? 'Copied ✓' : 'Copy prompt'}
+            </button>
+          </div>
+        ))}
 
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <button onClick={copy} className="clik-btn clik-btn-primary">
-            {copied ? 'Copied ✓' : 'Copy prompt'}
-          </button>
+        <div className="mt-6">
           <a href={SIGNUP} className="clik-btn clik-btn-secondary">
             Start for free <span aria-hidden="true">→</span>
           </a>

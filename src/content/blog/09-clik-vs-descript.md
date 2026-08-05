@@ -56,7 +56,7 @@ Inside each project, it does the A-roll judgment that eats an editor's afternoon
 
 It learns how your team cuts (pacing, hook structure, caption style, title cards) and applies that across everything, getting sharper with each project. When a workflow works, you save it as a reusable skill and run it again the same way.
 
-Then export MP4, or hand off XML to Premiere, Resolve, or Final Cut when you want the last 10% done by hand. Pricing is self-serve and published, from $99/mo.
+Then export MP4, or hand off XML to Premiere, Resolve, or Final Cut when you want the last 10% done by hand. Pricing is self-serve and published, $29/mo to start, with agency plans from $499.
 
 ## Head to head
 

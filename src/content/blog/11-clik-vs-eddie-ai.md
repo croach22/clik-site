@@ -25,7 +25,7 @@ That's hours of unglamorous, high-judgment work that gates everything downstream
 
 It's dialogue-driven by design. Eddie's own documentation is upfront that it performs best where the audio is clear and there's speech to anchor on: interviews, sit-downs, talk-driven material. That's not a weakness, it's a stated design center, and being clear about it is a sign of a serious product rather than a demo.
 
-And you can tell who it's for from how it's sold. Eddie shows up in trade press and on the floor at NAB, not in creator marketing. Pricing sits meaningfully above consumer clipping tools, reportedly somewhere in the range of $167 to $1,250/mo depending on tier. It has a large and growing base of working editors, which is the hardest audience in this category to win. Editors are professionally skeptical of automation aimed at their craft. Eddie won them by aiming at the work *around* the craft instead.
+And you can tell who it's for from how it's sold. Eddie shows up in trade press and on the floor at NAB, not in creator marketing. Pricing sits meaningfully above consumer clipping tools, quoted per team rather than listed. It has a large and growing base of working editors, which is the hardest audience in this category to win. Editors are professionally skeptical of automation aimed at their craft. Eddie won them by aiming at the work *around* the craft instead.
 
 ## Where the two diverge
 
@@ -47,7 +47,7 @@ An agency running batch days for six clients does not have an editor waiting. Ne
 
 Neither org is better run. They have different constraints, and the tools reflect that honestly.
 
-The go-to-market confirms it. Eddie is priced and sold for professional post: higher tiers, industry events, trade coverage, a buyer who evaluates tools against a staffed pipeline. Clik is self-serve with published pricing from $99/mo, because the buyer is someone who wants to run last week's shoot folder through it this afternoon and see whether anything comes out finished.
+The go-to-market confirms it. Eddie is priced and sold for professional post: higher tiers, industry events, trade coverage, a buyer who evaluates tools against a staffed pipeline. Clik is self-serve with published pricing from $29/mo, because the buyer is someone who wants to run last week's shoot folder through it this afternoon and see whether anything comes out finished.
 
 ## Head to head
 
@@ -66,7 +66,7 @@ The go-to-market confirms it. Eddie is priced and sold for professional post: hi
 | Reusable guided workflows saved as skills |, | Yes |
 | Handoff to Premiere / Resolve / Final Cut | **Native to the workflow** | XML export |
 | Trusted by working editors | **Strong, large base** | Earlier |
-| Pricing | Reportedly ~$167–$1,250/mo | Published, from $99/mo |
+| Pricing | Sold for professional post, quoted per team | Published, $29/mo to start |
 
 ## Choose Eddie if
 

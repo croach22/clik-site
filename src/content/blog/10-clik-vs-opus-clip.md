@@ -19,7 +19,7 @@ The model is clean: one long-form video in, many short clips out. You give it a 
 
 Several things it does better than we do:
 
-**Price at the entry tier.** There's a free plan (60 credits a month, watermarked, short storage) and Starter at $15/mo. Pro is $29/mo, or $14.50/mo billed annually with 3,600 credits for the year and two seats. Clik starts at $99/mo. If you're one person clipping a weekly podcast, that gap is not a rounding error, and I'm not going to pretend it is.
+**Price at the entry tier.** There's a free plan (60 credits a month, watermarked, short storage) and Starter at $15/mo. Pro is $29/mo, or $14.50/mo billed annually with 3,600 credits for the year and two seats. Clik starts at $29/mo. If you're one person clipping a weekly podcast, that gap is not a rounding error, and I'm not going to pretend it is.
 
 **Virality scoring.** Every generated clip comes back with a score. You can argue about how predictive any such number is, but the practical effect is real: it ranks the output so you're reviewing twenty clips in order of likely performance instead of scrubbing all twenty cold. That's a genuinely good product decision and we don't have an equivalent.
 
@@ -77,13 +77,13 @@ None of that material is inside the episode file. It's in your archive. A system
 | Social posting and scheduling | **Yes** | No |
 | Multicam sync | No | No |
 | Free tier | **Yes (watermarked)** | No |
-| Entry price | **$15/mo, Pro $29/mo** | $99/mo |
+| Entry price | **$15/mo, Pro $29/mo** | $29/mo |
 | Self-serve, no demo | Yes | Yes |
 | Brand recognition | **Category leader** | Earlier |
 
 ## Choose Opus Clip if
 
-Your input genuinely is one finished long-form video at a time, a weekly podcast, a webinar series, a stream archive. You want clips in minutes with no setup and no call. You're price-sensitive at the individual or small-team level, and $15 versus $99 decides it. You want a score telling you which clips to post first. You want posting and scheduling in the same tool that made the clips. For that team, Opus is very likely the better buy, and I'd say so on a call with you.
+Your input genuinely is one finished long-form video at a time, a weekly podcast, a webinar series, a stream archive. You want clips in minutes with no setup and no call. You're price-sensitive at the individual or small-team level, and a few dollars a month decides it. You want a score telling you which clips to post first. You want posting and scheduling in the same tool that made the clips. For that team, Opus is very likely the better buy.
 
 ## Choose Clik if
 

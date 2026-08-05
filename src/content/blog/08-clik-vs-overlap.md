@@ -17,7 +17,7 @@ The short version: a pipeline can only start once someone has decided what the v
 
 ## What Overlap is genuinely good at
 
-Overlap runs clipping pipelines at real scale. Their anchor customer is iHeartMedia, with case studies from Playback, Stable, and Thursday Labs. That tells you something worth knowing before any feature comparison: the product holds up under volume inside a large media organization, which is a bar most tools in this category have never been tested against.
+Overlap is built for podcast networks and broadcasters, and it is built well for them. Worth saying before any feature comparison: the product holds up under real volume, which is a bar most tools in this category have never been tested against.
 
 The core is a node-based workflow builder. You connect a trigger to a chain of editing nodes and the pipeline runs on its own. There are fourteen nodes: Find Clips, Convert to Vertical, Add Audiogram, Add B-Roll, Add Brainrot, Add Music, Add Outro, Add Subtitles, Add Title Overlay, Add Watermark, Media Overlay, Remove Curse Words, Remove Filler Words, Smart Zoom. Nothing in that list is filler, and the small operational ones (curse word removal, watermarking) are what make a tool usable inside a broadcaster rather than just impressive in a demo.
 
@@ -39,7 +39,7 @@ Overlap is a good product. Nothing below argues otherwise.
 
 A node graph is a set of instructions for processing a video. It cannot tell you which video. All five Overlap triggers deliver exactly one file per run: manual upload, RTMP livestream, new Dropbox video, new YouTube video, RSS episode. One each. Their quickstart tells you to begin with "one recording, webinar, interview, or podcast episode." Their API endpoint takes "a long-form video URL," singular.
 
-For iHeartMedia, that's correct. A podcast network's atomic unit *is* one long recording. Building the system around it isn't a limitation, it's coherence.
+For a podcast network, that's correct. Their atomic unit *is* one long recording. Building the system around it isn't a limitation, it's coherence.
 
 But a lot of content work doesn't arrive that way. A shoot day produces forty files across six unrelated concepts. A talking-head session produces nine takes of one script, three with a restart in the middle and one that's the good one. A morning of street interviews produces sixty clips belonging to four different videos. A client dumps a Drive folder with a launch shoot, product footage, and a founder interview mixed together.
 
@@ -67,11 +67,11 @@ If your process is settled and you have someone who thinks in graphs, wiring win
 
 The plainest difference, and the one you will hit first: you cannot try Overlap. There is no live pricing page, no free tier, and no trial. Every plan runs through a booked demo. Whatever the product does, you will not find out on your own footage this week.
 
-Clik is self-serve with published pricing. A free tier, then $29 and $59, with agency plans from $499. You can sign up, upload your last shoot, and see what comes back before you have spoken to anyone. No onboarding call, no training, no implementation.
+Clik is self-serve with published pricing, $29/mo to start. You can run a project free before you pay anything. You can sign up, upload your last shoot, and see what comes back before you have spoken to anyone. No onboarding call, no training, no implementation.
 
 That gap matters most for the exact evaluation this post is about. The only way to know whether a tool handles *your* footage is to give it your footage, and one of these lets you do that today.
 
-To be fair about why: demo-gating is a reasonable choice when your buyer is a media enterprise with a procurement process, and Overlap's customer list says it is working for them. It is a worse fit when the buyer is an agency owner who wants to test something on a real client project this afternoon.
+To be fair about why: demo-gating is a reasonable choice when your buyer is a media enterprise with a procurement process. It is a worse fit when the buyer is an agency owner who wants to test something on a real client project this afternoon.
 
 ## Head to head
 
@@ -88,9 +88,8 @@ To be fair about why: demo-gating is a reasonable choice when your buyer is a me
 | Node-graph workflow builder | **Yes** | No, guided, saved as skills |
 | B-roll source | Stock and uploads | Your archive and shoot footage |
 | Style learning | Per-workflow config | Learned, applied team-wide |
-| Try before buying | No, demo required | Yes, free tier, self-serve |
+| Try before buying | No, demo required | Yes, run a project free |
 | Setup before first video | Build the node graph | Describe it in a sentence |
-| Enterprise media track record | **Strong (iHeartMedia)** | Earlier |
 
 ## Choose Overlap if
 

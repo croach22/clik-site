@@ -230,7 +230,7 @@ export function PlanningVisual() {
         ))}
       </div>
 
-      {/* output slate */}
+      {/* planned videos */}
       <motion.div
         {...rise(PLAN_STEPS.length)}
         animate={inView ? rise(PLAN_STEPS.length).animate : rise(PLAN_STEPS.length).initial}
@@ -238,7 +238,7 @@ export function PlanningVisual() {
         style={{ borderColor: `${ROYCE}30`, background: `${ROYCE}0C` }}
       >
         <div className="mb-2 flex items-center justify-between">
-          <Label>Planned slate</Label>
+          <Label>Planned videos</Label>
           <Chip label="awaiting approval" />
         </div>
         <div className="grid grid-cols-4 gap-1.5">

@@ -32,19 +32,19 @@ const CARDS: Card[] = [
   {
     step: '02',
     title: 'The agent plans the batch',
-    desc: 'It reads concepts, dialogue, and visuals, classifies every clip, then drafts a slate of videos against your rules. You approve, it builds.',
+    desc: 'It reads concepts, dialogue, and visuals, classifies every clip, then drafts every video you can make against your rules. You approve, it builds.',
     Visual: PlanningVisual,
   },
   {
     step: '03',
-    title: 'The build agent cuts it',
-    desc: 'It cuts the dead air out of your dialogue, then pulls B-roll from your own library by what the moment actually means, not by filename.',
+    title: 'The editing agent cuts them',
+    desc: 'It builds batches of videos in parallel. Dead air out of your dialogue, B-roll pulled from your own library by what the moment actually means, not by filename.',
     Visual: EditAgentVisual,
   },
   {
     step: '04',
     title: 'Track every project',
-    desc: "Status across the whole slate. What's planned, what's building, what's ready to review, in one view the team can see.",
+    desc: "Status across every video. What's planned, what's building, what's ready to review, in one view the team can see.",
     Visual: DashboardVisual,
   },
 ];
@@ -100,7 +100,7 @@ export default function FeaturesBento() {
         </h2>
         <p className="mt-5 font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7'), maxWidth: '92ch' }}>
           Teach it your brand once. After that every project runs the same way, whatever you point it at: the agent
-          plans the batch, the build agent cuts it, and you watch the whole slate move.
+          plans the batch, the editing agent builds them in parallel, and you watch every video move.
         </p>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">

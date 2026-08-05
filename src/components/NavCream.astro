@@ -19,7 +19,8 @@ const t = light
   ? {
       shell: 'nav-dark',
       logo: '/logo-white.svg',
-      link: 'text-clik-cream/65 hover:text-clik-cream',
+      link: 'text-clik-cream/85 hover:text-clik-cream',
+      subtle: 'text-clik-cream/60 hover:text-clik-cream',
       panel: 'border-clik-cream/10',
       panelStyle: 'background: rgba(14, 24, 52, 0.97); backdrop-filter: blur(14px);',
       panelLink: 'text-clik-cream/80 hover:bg-clik-cream/5 hover:text-clik-cream',
@@ -28,7 +29,8 @@ const t = light
   : {
       shell: 'nav-light',
       logo: '/logo-black.svg',
-      link: 'text-clik-midnight/65 hover:text-clik-midnight',
+      link: 'text-clik-midnight/80 hover:text-clik-midnight',
+      subtle: 'text-clik-midnight/55 hover:text-clik-midnight',
       panel: 'border-clik-midnight/10',
       panelStyle: 'background: rgba(249, 247, 241, 0.97); backdrop-filter: blur(14px);',
       panelLink: 'text-clik-midnight/75 hover:bg-clik-midnight/5 hover:text-clik-midnight',
@@ -114,7 +116,7 @@ const navLinks = [
     <div class="flex items-center gap-4">
       <a
         href="https://app.clik.vision"
-        class={`hidden font-ui text-sm font-bold transition-colors md:inline-block ${t.link}`}
+        class={`hidden font-ui text-sm font-bold transition-colors md:inline-block ${t.subtle}`}
       >
         Sign in
       </a>

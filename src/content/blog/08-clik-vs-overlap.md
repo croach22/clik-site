@@ -51,21 +51,27 @@ Not because we're smarter. Because we started at a different point on the timeli
 
 ## Node graph vs. guided
 
-The second difference is the interface, and it cuts both ways more evenly than people expect.
+The second difference is what you have to learn before you can produce anything.
 
-A canvas requires you to know the workflow before you can build it. You lay out the graph, then footage flows through it. When you've already standardized a process, meaning every Tuesday, the same show, the same treatment, that's excellent. It's explicit, inspectable, repeatable, and you can hand it to someone else and they can read it. For a settled pipeline, a graph beats a conversation.
+Overlap's builder is the node-graph pattern, the same shape as Zapier and n8n. If you have built automations in either, you will be at home immediately, and a graph is a genuinely better artifact than a conversation once a process is settled. It is explicit, inspectable, and you can hand it to someone else and they can read it.
 
-It's worse when footage doesn't fit the graph you built. A shoot that produced something unexpected, a client whose brand rules differ, a format you're still figuring out, now you're back on the canvas rewiring before you can process anything.
+If you have not, it is a real learning curve, and it arrives before any of your footage does. You are learning a builder, not editing a video. You have to know the workflow in the abstract, lay out the nodes, wire the order, and understand what each one does to the file, all before the first clip moves. Teams that have tried to roll out Zapier past one power user know how this goes: the graphs get built by one person, and everyone else waits for that person.
 
-Clik goes the other way. You describe what you want, and that description is saved as a reusable skill. Standardization happens after you've done it once, not before. The system also learns your team's style over time (pacing, hook structure, caption conventions, title cards) and applies it across everything rather than requiring you to encode it node by node.
+It also breaks the moment footage stops matching the graph. A shoot that produced something unexpected, a client whose brand rules differ, a format you are still working out, and you are back on the canvas rewiring before you can process anything.
 
-Neither is universally right. If your process is settled, a graph is a better artifact than a chat. If you're still discovering it, describing beats wiring.
+Clik is conversational and skill-based. You describe the workflow you want in plain language, the way you would brief an editor, and that description is saved as a reusable skill you can run again and hand to your team. Standardization happens after you have done it once rather than before you are allowed to start. The system also learns your team's style over time (pacing, hook structure, caption conventions, title cards) and applies it across everything, rather than requiring you to encode it node by node.
+
+If your process is settled and you have someone who thinks in graphs, wiring wins. If you are still working it out, or the person who needs the videos is not the person who would build the pipeline, describing wins.
 
 ## Access
 
-Overlap has no live pricing page; pricing is demo-gated. Archived tiers showed Creator at $20/mo and Team at $250/mo. Third-party reports in 2026 suggest Creator is now around $250/mo and Growth around $1,000/mo, with no free tier or trial and every plan requiring a booked demo. Clik is self-serve with published pricing: a free tier, then $29 and $59, with agency plans from $499.
+The plainest difference, and the one you will hit first: you cannot try Overlap. There is no live pricing page, no free tier, and no trial. Every plan runs through a booked demo. Whatever the product does, you will not find out on your own footage this week.
 
-This reflects different chosen customers, not one company being right. Demo-gating works when your buyer is a media enterprise with a procurement process, and Overlap's customer list says it's working. Published pricing works when your buyer is an agency owner who wants to test something on a real client project this afternoon.
+Clik is self-serve with published pricing. A free tier, then $29 and $59, with agency plans from $499. You can sign up, upload your last shoot, and see what comes back before you have spoken to anyone. No onboarding call, no training, no implementation.
+
+That gap matters most for the exact evaluation this post is about. The only way to know whether a tool handles *your* footage is to give it your footage, and one of these lets you do that today.
+
+To be fair about why: demo-gating is a reasonable choice when your buyer is a media enterprise with a procurement process, and Overlap's customer list says it is working for them. It is a worse fit when the buyer is an agency owner who wants to test something on a real client project this afternoon.
 
 ## Head to head
 
@@ -82,7 +88,8 @@ This reflects different chosen customers, not one company being right. Demo-gati
 | Node-graph workflow builder | **Yes** | No, guided, saved as skills |
 | B-roll source | Stock and uploads | Your archive and shoot footage |
 | Style learning | Per-workflow config | Learned, applied team-wide |
-| Pricing | Demo-gated, reportedly $250–$1,000/mo | Published, free tier then $29/mo |
+| Try before buying | No, demo required | Yes, free tier, self-serve |
+| Setup before first video | Build the node graph | Describe it in a sentence |
 | Enterprise media track record | **Strong (iHeartMedia)** | Earlier |
 
 ## Choose Overlap if

@@ -3,7 +3,17 @@
 // Engine positioning: volume/efficiency/scale. Dark bento system.
 // Agency plans data + #agency-plans anchor + tracking preserved.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AgencyPilotForm from '../../components/AgencyPilotForm';
+import { StepVisual } from '../../components/FeatureVisuals';
+
+const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
+
+// Finished work from three different input types, so the range is visible
+// before anyone reads a word.
+const outputs = [
+  { label: 'podcast', src: '/videos/showcase/podcast/out-a.mp4', accent: '#5481E8' },
+  { label: 'shoot day', src: '/videos/showcase/content-day/out-a.mp4', accent: '#F9838E' },
+  { label: 'interview', src: '/videos/showcase/street-interviews/out-a.mp4', accent: '#7CA088' },
+];
 
 const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03);';
 
@@ -25,22 +35,24 @@ const capabilities = [
   },
 ];
 
+// The homepage's four steps, said for an agency. Deliberately not a shoot-day
+// walkthrough: agencies clipping existing client content run this too.
 const steps = [
   {
-    title: 'Upload a shoot day + brief.',
-    body: 'Raw client footage, scripts, hook variants, creative direction, all into one workflow.',
+    title: 'Set the brand rules per client',
+    body: 'Caption style, title cards, hook rules, brand assets, saved per account and applied automatically. Client 12 looks like client 1, whoever ran the batch.',
   },
   {
-    title: 'Clik plans the output.',
-    body: 'A list of video variants with titles, scope, and duration. Your creative director reviews, tweaks, approves.',
+    title: 'Clik plans the output',
+    body: 'Give it a shoot day, an episode, or a folder of client clips, plus the brief. It comes back with a list of variants: titles, scope, duration. Your CD reviews and approves.',
   },
   {
-    title: 'The build agent executes in parallel.',
-    body: 'One project per variant. Each ~90% done when your editor opens it.',
+    title: 'The build agent executes in parallel',
+    body: 'One project per variant, each about 90% done when your editor opens it. Cutaways come from the client\'s own library, not stock.',
   },
   {
-    title: 'Editors finish in Clik.',
-    body: "Add caption text overlays right in Clik's web editor. Your whole team collaborates online, with no project files to pass around. Export to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you need deeper timeline control.",
+    title: 'Your team finishes and ships',
+    body: 'Everyone sees the same queue: planned, building, ready for review. Finish in Clik, or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro.',
   },
 ];
 
@@ -71,8 +83,7 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
 
     <div class="relative mx-auto max-w-[1296px] px-6 md:px-12 pb-16">
       <div class="w-full py-8 md:py-10">
-        <div class="grid gap-12 md:grid-cols-[1fr_360px] md:gap-16 items-start">
-          <!-- Left column: kicker + headline + sub -->
+        <div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <div class="flex items-center gap-3">
               <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
@@ -89,11 +100,28 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
             <p class="mt-6 max-w-[560px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
               Clik is the content engine under your agency. Every client runs on one system: planned, built, on brand. Your editors finish craft instead of assembly.
             </p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a href={CALENDLY_URL} class="clik-btn clik-btn-primary">
+                Book a demo <span aria-hidden="true">→</span>
+              </a>
+              <a href="#agency-plans" class="clik-btn clik-btn-secondary">See agency plans</a>
+            </div>
           </div>
 
-          <!-- Right column: pilot lead form -->
-          <div class="w-full md:max-w-[360px]">
-            <AgencyPilotForm client:load />
+          <div class="hidden items-center gap-3 lg:flex" aria-hidden="true">
+            {outputs.map((o, i) => (
+              <div
+                class="relative overflow-hidden rounded-xl"
+                style={`width: 132px; aspect-ratio: 9 / 16; border: 1px solid ${o.accent}55; box-shadow: 0 18px 40px rgba(4, 8, 22, 0.45); transform: translateY(${i % 2 ? 14 : -14}px);`}
+              >
+                <video src={o.src} class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata"></video>
+                <span
+                  class="absolute inset-x-0 bottom-0 block px-2 py-1 font-mono uppercase"
+                  style="font-size: 8px; letter-spacing: 0.1em; color: rgba(249,247,241,.85); background: rgba(6,11,26,.8);"
+                >{o.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -271,19 +299,26 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
         How agencies run Clik<span class="clik-period">.</span>
       </h2>
 
-      <ol class="space-y-5">
+      <div class="grid gap-5 md:grid-cols-2">
         {steps.map((step, i) => (
-          <li class="bento-card border flex gap-5" style={`${CARD} padding: 28px;`}>
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border font-mono text-sm font-bold text-clik-royce" style="border-color: rgba(84, 129, 232, 0.4); background: rgba(84, 129, 232, 0.12);">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div>
-              <p class="mb-2 font-display font-medium text-clik-cream" style="font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;">{step.title}</p>
-              <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">{step.body}</p>
+            <div class="bento-card flex flex-col gap-6 border p-6 md:p-7" style={CARD}>
+              <div class="flex items-baseline gap-3">
+                <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 class="font-display font-medium text-clik-cream" style="font-size: 21px; line-height: 1.2; letter-spacing: -0.01em;">
+                  {step.title}<span class="clik-period">.</span>
+                </h3>
+              </div>
+              <div class="flex flex-1 flex-col justify-center">
+                <StepVisual step={i} client:visible />
+              </div>
+              <p class="font-ui text-clik-cream/65" style="font-size: 15px; line-height: 1.55;">
+                {step.body}
+              </p>
             </div>
-          </li>
         ))}
-      </ol>
+      </div>
 
       <p class="mt-10 font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
         Same team. Multiples more output.
@@ -489,7 +524,22 @@ const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
       </div>
     </div>
     <div id="agency-qualification-form" class="mx-auto max-w-[1200px] scroll-mt-24">
-      <AgencyPilotForm client:visible variant="accent" />
+      <div
+        class="on-midnight relative overflow-hidden"
+        style="background: #13204A; border: 1px solid rgba(249, 247, 241, 0.10); border-radius: 12px; padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 56px); color: var(--clik-cream);"
+      >
+        <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1.05; letter-spacing: -0.02em;">
+          Bring one client shoot. Watch the slate come back<span class="clik-period">.</span>
+        </h2>
+        <p class="mt-5 max-w-[62ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
+          We will run a real Clik workflow on your footage and walk you through what came out, and what it would cost at your monthly volume.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href={CALENDLY_URL} class="clik-btn clik-btn-light">
+            Book a demo <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

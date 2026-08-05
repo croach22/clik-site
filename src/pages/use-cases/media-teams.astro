@@ -2,6 +2,15 @@
 // For Media Teams — the content engine for shows, podcasts, and publishers.
 // New page complementing creators/agencies. Engine positioning, dark bento system.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { StepVisual } from '../../components/FeatureVisuals';
+
+// Finished work from three different input types, so the range is visible
+// before anyone reads a word.
+const outputs = [
+  { label: 'podcast', src: '/videos/showcase/podcast/out-a.mp4', accent: '#5481E8' },
+  { label: 'shoot day', src: '/videos/showcase/content-day/out-a.mp4', accent: '#F9838E' },
+  { label: 'interview', src: '/videos/showcase/street-interviews/out-a.mp4', accent: '#7CA088' },
+];
 
 const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03);';
 const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
@@ -24,22 +33,25 @@ const teamFeatures = [
   },
 ];
 
+// The homepage's four steps, said for a team running properties. Deliberately
+// not an episode walkthrough: teams shooting content days and field interviews
+// run this too.
 const steps = [
   {
-    title: 'The episode drops in.',
-    body: 'The finished cut, or the raw recording, plus your B-roll library and graphics. One upload per episode.',
+    title: 'Brand rules, saved per property',
+    body: 'Caption styles, title cards, hook rules, format rules. Saved per show and applied automatically, so episode 40 looks like episode 4 no matter who ran the batch.',
   },
   {
-    title: 'Clik plans the clip slate.',
-    body: 'Every strong moment becomes a planned clip with a hook, scope, and duration. Your producer reviews the slate and approves.',
+    title: 'Clik plans the slate',
+    body: 'Give it the raw recording, the finished cut, a shoot day, or a field batch, plus your B-roll and graphics. Every strong moment comes back as a planned video with a hook, scope, and duration. Your producer approves.',
   },
   {
-    title: 'The build agent constructs every clip.',
-    body: 'Cutaways from your own B-roll and graphics, not stock. Captions and title cards in the show’s saved style.',
+    title: 'The build agent constructs every one',
+    body: 'Cutaways from your own library and graphics, never stock. Captions and title cards in the property\'s saved style.',
   },
   {
-    title: 'Review, export, publish.',
-    body: 'The team reviews in the queue, adjusts anything in the web editor, then ships, or exports XML for a final pass in your NLE.',
+    title: 'The whole team watches it move',
+    body: 'Planned, building, ready for review, in one queue. No status meetings. Finish in Clik, or export XML for a final pass in your NLE.',
   },
 ];
 ---
@@ -60,7 +72,8 @@ const steps = [
     ></div>
 
     <div class="relative mx-auto max-w-[1296px] px-6 md:px-12 pb-16">
-      <div class="w-full py-8 md:py-10">
+      <div class="grid items-center gap-12 py-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div>
         <div class="flex items-center gap-3">
           <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
           <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">For Media Teams</p>
@@ -90,6 +103,23 @@ const steps = [
             Start for free
           </a>
         </div>
+
+      </div>
+
+      <div class="hidden items-center gap-3 lg:flex" aria-hidden="true">
+        {outputs.map((o, i) => (
+          <div
+            class="relative overflow-hidden rounded-xl"
+            style={`width: 132px; aspect-ratio: 9 / 16; border: 1px solid ${o.accent}55; box-shadow: 0 18px 40px rgba(4, 8, 22, 0.45); transform: translateY(${i % 2 ? 14 : -14}px);`}
+          >
+            <video src={o.src} class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata"></video>
+            <span
+              class="absolute inset-x-0 bottom-0 block px-2 py-1 font-mono uppercase"
+              style="font-size: 8px; letter-spacing: 0.1em; color: rgba(249,247,241,.85); background: rgba(6,11,26,.8);"
+            >{o.label}</span>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   </section>
@@ -215,19 +245,26 @@ const steps = [
         Episode in Monday. Slate out Monday<span class="clik-period">.</span>
       </h2>
 
-      <ol class="space-y-5">
+      <div class="grid gap-5 md:grid-cols-2">
         {steps.map((step, i) => (
-          <li class="bento-card border flex gap-5" style={`${CARD} padding: 28px;`}>
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border font-mono text-sm font-bold text-clik-royce" style="border-color: rgba(84, 129, 232, 0.4); background: rgba(84, 129, 232, 0.12);">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div>
-              <p class="mb-2 font-display font-medium text-clik-cream" style="font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;">{step.title}</p>
-              <p class="font-ui text-clik-cream/70" style="font-size: 16px; line-height: 1.55;">{step.body}</p>
+            <div class="bento-card flex flex-col gap-6 border p-6 md:p-7" style={CARD}>
+              <div class="flex items-baseline gap-3">
+                <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 class="font-display font-medium text-clik-cream" style="font-size: 21px; line-height: 1.2; letter-spacing: -0.01em;">
+                  {step.title}<span class="clik-period">.</span>
+                </h3>
+              </div>
+              <div class="flex flex-1 flex-col justify-center">
+                <StepVisual step={i} client:visible />
+              </div>
+              <p class="font-ui text-clik-cream/65" style="font-size: 15px; line-height: 1.55;">
+                {step.body}
+              </p>
             </div>
-          </li>
         ))}
-      </ol>
+      </div>
 
       <p class="mt-10 font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
         Every week. Every show. Without adding headcount.

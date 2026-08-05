@@ -37,11 +37,6 @@ const STEP_MS = [3000, 2600, 2600, 3400];
 const TOTAL_MS = STEP_MS.reduce((a, b) => a + b, 0);
 const HOLD_MS = 1400; // beat on the finished state before handing off
 
-const CONTENT_DAY_MOSAIC = Array.from(
-  { length: 36 },
-  (_, i) => `/images/showcase/content-day/${String(i + 1).padStart(2, '0')}.jpg`,
-);
-
 // eight frames off the card, enough to read as a batch without competing
 // with the finished cuts for attention
 const strip = (dir: string) =>
@@ -66,18 +61,12 @@ interface InputFile {
 interface Variant {
   id: string;
   tab: string;
-  inputSummary: string;
   fileCount: number;
-  inputFiles: InputFile[];
-  mosaic?: string[];
-  concepts: string[];
   steps: string[];
   outLabel: string;
   headline: string;
   claim: string;
   prompts: { label: string; blurb: string; body: string }[];
-  outputs: Output[];
-  moreOutputs?: number;
   // when present, this tab renders the before/after scrub instead of the flow
   scrub?: {
     steps: string[];
@@ -92,27 +81,12 @@ const VARIANTS: Variant[] = [
   {
     id: 'podcast-clipping',
     tab: 'Podcast clipping',
-    inputSummary: 'episode + your B-roll',
     fileCount: 16,
-    inputFiles: [
-      { name: 'ep42_full.mp4', type: 'a-roll', tags: ['episode'] },
-      { name: 'broll_studio.mp4', type: 'b-roll', tags: ['studio'] },
-      { name: 'lower_thirds.mp4', type: 'graphics', tags: ['lower thirds'] },
-    ],
-    concepts: ['The cold open', 'Best argument', 'Guest origin', 'Closing line'],
     steps: ['Scanning the episode', 'Finding the strongest moments', 'Matching your B-roll', 'Building the clips'],
     outLabel: '8 clips · your B-roll',
     headline: 'One episode. Many clips.',
     claim: 'Build on-brand clipping flows based on your target audience, hook structures, and more.',
     prompts: [{ label: 'Clip an episode', blurb: 'For one episode plus your own B-roll library.', body: "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nOUTPUT\nVertical 9:16. My saved caption style. Title card on every clip, using my saved title card rules. Cut the dead air out of the dialogue." }],
-    outputs: [
-      { label: 'ep42_clip01', dur: '0:41', accent: ROYCE },
-      { label: 'ep42_clip02', dur: '0:37', accent: SALMON },
-      { label: 'ep42_clip03', dur: '0:55', accent: SAGE },
-      { label: 'ep42_clip04', dur: '0:29', accent: LAVENDER },
-      { label: 'ep42_clip05', dur: '0:46', accent: OCHRE },
-      { label: 'ep42_clip06', dur: '0:33', accent: ROYCE },
-    ],
     scrub: {
       steps: [
         'Analyzing the episode',
@@ -137,26 +111,12 @@ const VARIANTS: Variant[] = [
   {
     id: 'content-day',
     tab: 'Content day',
-    inputSummary: 'one shoot day',
     fileCount: 79,
-    inputFiles: [
-      { name: 'IMG_3237.mov', type: 'a-roll', tags: ['interview'], src: '/videos/showcase/content-day/raw-a.mp4' },
-      { name: 'DJI_0003.mp4', type: 'b-roll', tags: ['drone', 'exterior'], src: '/videos/showcase/content-day/raw-b.mp4' },
-      { name: 'IMG_3299.mov', type: 'b-roll', tags: ['firepole', 'station'], src: '/videos/showcase/content-day/raw-c.mp4' },
-    ],
-    mosaic: CONTENT_DAY_MOSAIC,
-    // TODO(conner): swap for the concepts Clik actually landed on
-    concepts: ['The hardest calls', 'Looks like chaos', 'Life at the station', 'Why they serve'],
     steps: ['Analyzing footage', 'Identifying narrative concepts', 'Finding relevant B-roll', 'Building the videos'],
     outLabel: '10 videos · 4 concepts',
     headline: 'One shoot day. A month of posts.',
     claim: 'Clik reads the whole batch, splits it by concept, and plans what you can actually make from what you shot.',
     prompts: [{ label: 'Plan a batch before you build', blurb: 'For an unsorted shoot day, when you want the plan before the cut.', body: "Here's a full content day, 79 clips, unsorted.\n\nFind the 3 to 5 strongest short-form concepts, 45 to 60 seconds each. Every one needs a real arc: an opening, a middle, and an end, plus an insight or a story that is actually entertaining or worth learning. Build each one chronologically. Don't scramble the order to make it work.\n\nOpen every clip on its strongest line, then a title card. Build 2 hook variants of each.\n\nCut to my own B-roll for about 40% of the runtime, a new visual roughly every three seconds, matched to what is being said. If someone names a thing, show the thing. Hold on their face for the payoff line.\n\nDon't build anything yet. Give me the report first: the hook, the arc, why it works, and the B-roll you would cut to.\n\nIf there are more than five concepts in there, tell me and we will build the rest after.\n\nOUTPUT\nVertical 9:16. My saved caption style. Two-second title card on every clip, using my saved title card rules." }],
-    outputs: [
-      { label: 'vidA_hookA', dur: '0:57', accent: ROYCE, src: '/videos/showcase/content-day/out-a.mp4' },
-      { label: 'vidB_hookA', dur: '0:47', accent: SALMON, src: '/videos/showcase/content-day/out-b.mp4' },
-    ],
-    moreOutputs: 8,
     scrub: {
       steps: [
         'Watching 79 raw clips',
@@ -182,14 +142,7 @@ const VARIANTS: Variant[] = [
   {
     id: 'street-interviews',
     tab: 'Street interviews',
-    inputSummary: 'no master file',
     fileCount: 60,
-    inputFiles: [
-      { name: 'IMG_2210.mp4', type: 'a-roll', tags: ['guest 01'] },
-      { name: 'IMG_2214.mp4', type: 'a-roll', tags: ['guest 02'] },
-      { name: 'IMG_2247.mp4', type: 'b-roll', tags: ['street'] },
-    ],
-    concepts: ['Guest 01 recap', 'Guest 02 recap', 'Guest 03 recap', 'Best of the day'],
     steps: ['Watching every clip', 'Grouping answers by guest', 'Picking the best moments', 'Building the recaps'],
     outLabel: '5 variants',
     headline: 'One interview. Five hooks to test.',
@@ -198,13 +151,6 @@ const VARIANTS: Variant[] = [
     prompts: [
       { label: 'Single interview variations', blurb: 'For one person, when you want five versions to test against each other.', body: "You are editing a raw street interview into a matchmaker format: I stop one single person on the street, run a fixed set of dating questions, and pitch them to the audience. One interview, one video. Let the narrative decide the duration.\n\nFORMAT\nA repeatable dating-matchmaker Q&A. Same question script every time. The edit tightens it into a fast, warm, funny clip that opens on \"Are you single?\" and closes by pitching the person to the audience. Their personality plus my playful reframes carry it. Use my saved caption style.\n\nINPUT\nOne street interview. Me off camera asking, one person answering while walking or standing. Handheld, mostly one continuous take. Keep it vertical. No B-roll.\n\nTHE QUESTION ARC\n1. Open: \"Are you single?\"\n2. \"I want to help you find a very cool boyfriend / girlfriend.\"\n3. \"Why are you single?\"\n4. \"What's your type?\" then my playful reframe\n5. \"What's your ideal first date?\"\n6. \"What do you bring into a relationship?\"\n7. Optional: do they need to be local, or open to long distance\n8. Close: \"If you're a cool guy / girl who wants to date this person, slide into their DMs.\"\n\nThis is an example arc from a high performing creator. The actual interview may run differently, so follow what is in the footage.\n\nVARIANTS, five in total\nA, one version. Cold open on the opening question and their reaction. The signature.\nB, three versions. Find their best funny, surprising or spicy lines and build three separate versions, each cold-opening on a different one for 3 to 7 seconds, then cutting back to \"Are you single?\" and running the arc. Pick the three most distinct so the versions feel genuinely different.\nC, one version. Start from a middle question, run through to the DM line, then cut back to the open.\n\nPACING\nNarrative-driven. Keep the full arc. Length is emergent, roughly 45 to 80 seconds, never a target, never cut for time. Trim only genuine dead air over about three seconds, filler, false starts, repeated takes, and energy dips. Keep the banter, the natural pauses, and the funny beats. Cut any production talk.\n\nCUT\nFiller, false starts, dead air, repeated takes, off-topic tangents, anyone else or behind-camera chatter, long walking with no talking.\n\nDO NOT\nChange the question order after the chosen opener. Cut the open or the matchmaker close. Add B-roll or music. Lose my playful reframes, they are the charm.\n\nOUTPUT\nFive versions, vertical 9:16, with one line each on which beat it opens on. My saved caption style, and my saved title card rules on the cold open. If the interview genuinely lacks three distinct funny moments, say so and give me the best available rather than forcing weak hooks." },
       { label: 'Compilation flow', blurb: 'For a full day of interviews, cut into three compilations.', body: "Here's a full day of street interviews. Every answer is its own file, no master.\n\nWatch all of it and build me three compilations, 60 to 90 seconds each, each on a different spine:\n\n1. One question, everyone. Pick the question that got the widest range of answers and cut the best responses back to back, ordered so it builds.\n2. Best of the day. The funniest and most surprising moments across every interview, regardless of question.\n3. One theme. Find a thread that runs through several interviews on its own and cut only what serves it.\n\nOpen each one on the strongest line in that compilation, not on my question. Keep every answer in the order it was said within its own interview. Never stitch one person's sentence onto another's.\n\nVertical 9:16, my saved caption style, and a title card on each one using my saved title card rules. Cut dead air, filler, false starts, and production talk. No B-roll, no music.\n\nDon't build anything yet. Give me the report first: which spine, which interviews it pulls from, the opening line, and roughly how long it runs." },
-    ],
-    outputs: [
-      { label: 'recap_guest01', dur: '0:48', accent: ROYCE },
-      { label: 'recap_guest02', dur: '0:52', accent: SALMON },
-      { label: 'recap_guest03', dur: '0:44', accent: SAGE },
-      { label: 'compilation_best', dur: '1:24', accent: LAVENDER },
-      { label: 'teaser_hookA', dur: '0:22', accent: OCHRE },
     ],
     scrub: {
       steps: [
@@ -239,27 +185,12 @@ const VARIANTS: Variant[] = [
   {
     id: 'yap-batch',
     tab: 'Yap batch',
-    inputSummary: 'one sitting',
     fileCount: 26,
-    inputFiles: [
-      { name: 'take_01.mp4', type: 'a-roll', tags: ['idea 01', 'take 1'] },
-      { name: 'take_02.mp4', type: 'a-roll', tags: ['idea 01', 'take 2'] },
-      { name: 'take_04.mp4', type: 'a-roll', tags: ['idea 03'] },
-    ],
-    concepts: ['Idea 01', 'Idea 02', 'Idea 03', 'Bonus rant'],
     steps: ['Listening to every take', 'Grouping takes by idea', 'Keeping the best delivery', 'Building the videos'],
     outLabel: '6 videos · best takes',
     headline: 'One yap session. A week of posts.',
     claim: 'Clik detects concept boundaries, alternate spoken hooks, and builds polished talking head videos.',
     prompts: [{ label: 'One sitting of takes', blurb: 'For a batch film day, one polished video per concept.', body: "This is a batch film day. For each unique concept in here, build me one polished video.\n\nIf I've pasted a brief or the scripts below, use them to set the concept boundaries and tell me which takes map to which script.\n\nIf I haven't, work the boundaries out from the footage itself: where one idea ends and the next begins, which takes are attempts at the same thing, and which delivery is the strongest.\n\nDrop the flubs, the restarts, and every pause.\n\nOUTPUT\nVertical 9:16. My saved caption style. Title card on every video, using my saved title card rules. My saved hook rules.\n\nTell me what you found before you build: the concepts, how many takes each, and which one you're keeping." }],
-    outputs: [
-      { label: 'idea01_hookA', dur: '0:38', accent: ROYCE },
-      { label: 'idea01_hookB', dur: '0:35', accent: ROYCE },
-      { label: 'idea02_hookA', dur: '0:42', accent: SALMON },
-      { label: 'idea02_hookB', dur: '0:40', accent: SALMON },
-      { label: 'idea03_hookA', dur: '0:51', accent: SAGE },
-      { label: 'idea03_hookB', dur: '0:47', accent: SAGE },
-    ],
     scrub: {
       steps: [
         'Analyzing footage for concept boundaries',

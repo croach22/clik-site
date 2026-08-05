@@ -253,5 +253,98 @@ const { title, description = 'Clik — an on-brand content engine for any video 
       document.querySelectorAll('[data-section]').forEach((el) => observer.observe(el));
     });
   </script>
+
+  {/* ── Dev-only copy editing ────────────────────────────────────────────
+       Cmd/Ctrl+E turns the page into a text document. Type anywhere, then
+       hit Copy to get every change as old → new with the section it came
+       from, which is enough to apply it back to source exactly.
+
+       Gated on import.meta.env.DEV, so none of this reaches a build. ── */}
+  {import.meta.env.DEV && (
+    <script is:inline>
+      (() => {
+        const LEAF =
+          'p, h1, h2, h3, h4, h5, li, summary, blockquote, figcaption, td, th, a, button, span';
+        const original = new Map();
+        let on = false;
+
+        // Snapshot text once, so we can diff against it later. "Leaf" has to
+        // tolerate decorative children — headlines carry a .clik-period span —
+        // so an element counts as a leaf when no child holds real text.
+        const holdsText = (el) =>
+          Array.from(el.children).some((c) => c.textContent.trim().length > 2);
+
+        const snapshot = () => {
+          document.querySelectorAll(LEAF).forEach((el) => {
+            if (holdsText(el)) return;
+            const t = el.textContent.trim();
+            if (t && !original.has(el)) original.set(el, t);
+          });
+        };
+
+        const sectionOf = (el) => {
+          const s = el.closest('[data-section]') || el.closest('section[id]');
+          return s ? s.dataset.section || s.id : 'page';
+        };
+
+        const changes = () => {
+          const out = [];
+          original.forEach((was, el) => {
+            if (!el.isConnected) return;
+            const now = el.textContent.trim();
+            if (now !== was) out.push(`[${sectionOf(el)}] "${was}"\n        -> "${now}"`);
+          });
+          return out;
+        };
+
+        const pill = document.createElement('div');
+        pill.style.cssText =
+          'position:fixed;left:16px;bottom:16px;z-index:99999;display:none;gap:10px;' +
+          'align-items:center;padding:8px 12px;border-radius:10px;font:600 11px/1 ui-monospace,monospace;' +
+          'letter-spacing:.1em;text-transform:uppercase;color:#0E1834;background:#F9F7F1;' +
+          'box-shadow:0 8px 30px rgba(0,0,0,.4)';
+        pill.setAttribute('contenteditable', 'false');
+        pill.innerHTML =
+          '<span>Editing</span><button id="clik-copy" style="all:unset;cursor:pointer;' +
+          'padding:4px 8px;border-radius:6px;background:#5481E8;color:#F9F7F1">Copy changes</button>';
+        document.body.appendChild(pill);
+
+        // mousedown, because designMode swallows click on editable surfaces
+        pill.querySelector('#clik-copy').addEventListener('mousedown', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const list = changes();
+          const text = list.length ? list.join('\n\n') : '(no changes yet)';
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch {
+            /* clipboard can be blocked; the log below is the fallback */
+          }
+          console.log('%c[clik] copy changes\n' + text, 'color:#5481E8');
+          const b = pill.querySelector('#clik-copy');
+          b.textContent = list.length ? `Copied ${list.length}` : 'Nothing yet';
+          setTimeout(() => (b.textContent = 'Copy changes'), 1600);
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (!(e.key === 'e' || e.key === 'E') || !(e.metaKey || e.ctrlKey)) return;
+          e.preventDefault();
+          on = !on;
+          if (on) snapshot();
+          document.designMode = on ? 'on' : 'off';
+          pill.style.display = on ? 'flex' : 'none';
+        });
+
+        window.clikEdits = () => {
+          const list = changes();
+          const text = list.length ? list.join('\n\n') : '(no changes yet)';
+          console.log('%c[clik] ' + list.length + ' change(s)\n' + text, 'color:#5481E8');
+          return text;
+        };
+
+        console.log('%c[clik] Cmd/Ctrl+E to edit copy · clikEdits() to dump changes', 'color:#5481E8');
+      })();
+    </script>
+  )}
 </body>
 </html>

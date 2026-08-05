@@ -90,11 +90,11 @@ export default function FeaturesBento() {
 
         <h2
           className="font-display font-medium text-clik-cream"
-          style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '20ch' }}
+          style={{ fontSize: 'clamp(36px, 4.5vw, 46px)', lineHeight: 1.1, letterSpacing: '-0.02em' }}
         >
           One engine. Four parts<span style={{ color: ROYCE }}>.</span>
         </h2>
-        <p className="mt-5 font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7'), maxWidth: '66ch' }}>
+        <p className="mt-5 font-ui" style={{ fontSize: 17, lineHeight: 1.55, color: CREAM('0.7'), maxWidth: '92ch' }}>
           The same flow regardless of format. Brand memory upstream, an agent planning at the batch level, a build
           agent constructing every video, and a dashboard so the whole team can see it.
         </p>

@@ -1,40 +1,38 @@
 ---
-// Nav for cream/midnight pages — always the inverse of the page surface, so
-// the bar reads as a floating control strip rather than blending in:
-//   cream page    → midnight pill
-//   midnight page → cream pill
+// The bar is page furniture, not a widget parked on top of the page. It starts
+// transparent and on the same 1200 grid as every section headline, then earns a
+// tinted, blurred surface and a hairline once content passes under it.
+//
+// The CTA is deliberately quiet until the hero's own CTA leaves the screen —
+// two identical royce buttons in one viewport just split the click.
 // Solutions dropdown segments by audience: creators / agencies / media teams.
 // Founding Creators lives in the footer, not the primary nav.
 interface Props {
   theme?: 'cream' | 'midnight';
 }
 const { theme = 'cream' } = Astro.props;
-const light = theme === 'midnight'; // light pill on the dark page
+const light = theme === 'midnight'; // dark page, so the bar carries cream type
 
+// No pill. The bar sits on the page transparent and only earns a surface once
+// content starts passing under it, which is the moment it needs one.
 const t = light
   ? {
-      shell: '',
-      pill: 'border-clik-midnight/10 shadow-[0_8px_30px_rgba(0,0,0,0.35)]',
-      pillStyle: 'background: rgba(249, 247, 241, 0.96); border-radius: 18px;',
+      shell: 'nav-dark',
+      logo: '/logo-white.svg',
+      link: 'text-clik-cream/65 hover:text-clik-cream',
+      panel: 'border-clik-cream/10',
+      panelStyle: 'background: rgba(14, 24, 52, 0.97); backdrop-filter: blur(14px);',
+      panelLink: 'text-clik-cream/80 hover:bg-clik-cream/5 hover:text-clik-cream',
+      burger: '#F9F7F1',
+    }
+  : {
+      shell: 'nav-light',
       logo: '/logo-black.svg',
       link: 'text-clik-midnight/65 hover:text-clik-midnight',
       panel: 'border-clik-midnight/10',
-      panelStyle: 'background: #F9F7F1;',
+      panelStyle: 'background: rgba(249, 247, 241, 0.97); backdrop-filter: blur(14px);',
       panelLink: 'text-clik-midnight/75 hover:bg-clik-midnight/5 hover:text-clik-midnight',
-      cta: 'clik-btn clik-btn-primary hidden md:inline-flex',
       burger: '#0E1834',
-    }
-  : {
-      shell: 'on-midnight',
-      pill: 'border-clik-cream/10 backdrop-blur-md',
-      pillStyle: 'background: rgba(14, 24, 52, 0.92); border-radius: 18px;',
-      logo: '/logo-white.svg',
-      link: 'text-clik-cream/70 hover:text-clik-cream',
-      panel: 'border-clik-cream/10',
-      panelStyle: 'background: #0E1834;',
-      panelLink: 'text-clik-cream/80 hover:bg-clik-cream/5 hover:text-clik-cream',
-      cta: 'clik-btn clik-btn-light hidden md:inline-flex',
-      burger: '#F9F7F1',
     };
 
 // Pricing is audience-contextual: on the agencies page, "Pricing" jumps to the
@@ -61,8 +59,9 @@ const navLinks = [
 ];
 ---
 
-<nav class={`${t.shell} fixed left-0 right-0 top-1.5 z-50 px-3 md:top-2.5 md:px-6`}>
-  <div class={`mx-auto flex max-w-[1200px] items-center justify-between border p-2 md:p-2.5 ${t.pill}`} style={t.pillStyle}>
+<nav data-nav class={`nav-shell ${t.shell} fixed inset-x-0 top-0 z-50 px-6 md:px-12`}>
+  <span class="nav-rule" aria-hidden="true"></span>
+  <div class="mx-auto flex h-[64px] max-w-[1200px] items-center justify-between md:h-[72px]">
 
     <a href="/" class="flex items-center">
       <img src={t.logo} alt="Clik" class="h-5 w-auto md:h-6" />
@@ -121,7 +120,7 @@ const navLinks = [
       </a>
       <a
         href="https://app.clik.vision/sign-up"
-        class={t.cta}
+        class="nav-cta hidden items-center gap-1.5 rounded-lg px-4 py-2 font-ui text-sm font-bold md:inline-flex"
       >
         Start for free <span aria-hidden="true">→</span>
       </a>
@@ -305,4 +304,86 @@ const navLinks = [
       closeMenu();
     }
   });
+</script>
+
+<style>
+  .nav-shell {
+    position: fixed;
+    transition: background-color 0.32s ease, backdrop-filter 0.32s ease;
+  }
+  .nav-shell .nav-rule {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--nav-rule);
+    opacity: 0;
+    transition: opacity 0.32s ease;
+  }
+  .nav-shell.is-stuck .nav-rule { opacity: 1; }
+
+  .nav-dark {
+    --nav-rule: rgba(249, 247, 241, 0.1);
+    --cta-border: rgba(249, 247, 241, 0.28);
+    --cta-fg: #F9F7F1;
+  }
+  .nav-dark.is-stuck {
+    background: rgba(11, 19, 44, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-light {
+    --nav-rule: rgba(14, 24, 52, 0.1);
+    --cta-border: rgba(14, 24, 52, 0.25);
+    --cta-fg: #0E1834;
+  }
+  .nav-light.is-stuck {
+    background: rgba(249, 247, 241, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-cta {
+    border: 1px solid var(--cta-border);
+    color: var(--cta-fg);
+    background: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  .nav-cta:hover { border-color: var(--cta-fg); }
+
+  /* Once the hero's CTA is gone, this is the only one left, so it fills in. */
+  .nav-shell.is-live .nav-cta {
+    background: #5481E8;
+    border-color: #5481E8;
+    color: #F9F7F1;
+  }
+  .nav-shell.is-live .nav-cta:hover { background: #6b93ec; border-color: #6b93ec; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-shell, .nav-shell .nav-rule, .nav-cta { transition: none; }
+  }
+</style>
+
+<script>
+  const navShell = document.querySelector<HTMLElement>('[data-nav]');
+  if (navShell) {
+    const hero = document.querySelector<HTMLElement>('[data-section="hero"]');
+    let ticking = false;
+    const sync = () => {
+      navShell.classList.toggle('is-stuck', window.scrollY > 16);
+      // Off the homepage there is no hero CTA to defer to, so the bar owns it.
+      const live = hero ? hero.getBoundingClientRect().bottom < 140 : true;
+      navShell.classList.toggle('is-live', live);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    };
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
 </script>

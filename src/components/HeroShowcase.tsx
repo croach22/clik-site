@@ -102,7 +102,7 @@ const VARIANTS: Variant[] = [
     concepts: ['The cold open', 'Best argument', 'Guest origin', 'Closing line'],
     steps: ['Scanning the episode', 'Finding the strongest moments', 'Matching your B-roll', 'Building the clips'],
     outLabel: '8 clips · your B-roll',
-    headline: 'One episode. Eight clips.',
+    headline: 'One episode. Many clips.',
     claim: 'Build on-brand clipping flows based on your target audience, hook structures, and more.',
     prompts: [{ label: 'Clip an episode', blurb: 'For one episode plus your own B-roll library.', body: "Here's episode 42, plus my B-roll library and my graphics.\n\nPull the 8 strongest moments from the episode and build them as vertical clips.\n\nWhen a moment needs a cutaway, use my own B-roll, matched to what's actually being said. Never stock.\n\nOUTPUT\nVertical 9:16. My saved caption style. Title card on every clip, using my saved title card rules. Cut the dead air out of the dialogue." }],
     outputs: [

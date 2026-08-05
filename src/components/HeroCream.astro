@@ -6,6 +6,19 @@
 // the wedge nobody else can claim.
 // Visual: HeroShowcase — four switchable workflows, each with its prompt.
 import HeroShowcase from './HeroShowcase';
+import { getCollection } from 'astro:content';
+
+// Prompts come from src/content/workflows so the hero and a future
+// /workflows page never drift apart.
+const workflowEntries = (await getCollection('workflows')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const prompts = workflowEntries.map((e) => ({
+  title: e.data.title,
+  tab: e.data.tab,
+  blurb: e.data.blurb,
+  body: e.body.trim(),
+}));
 const CALENDLY_URL = 'https://calendly.com/clikphotos/clik-agency-demo';
 
 const proofFaces = [
@@ -89,7 +102,7 @@ const proofFaces = [
         style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.10), transparent 74%);"
         aria-hidden="true"
       ></div>
-      <HeroShowcase client:load />
+      <HeroShowcase prompts={prompts} client:load />
     </div>
   </div>
 </section>

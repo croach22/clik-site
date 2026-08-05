@@ -7,13 +7,13 @@ const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247
 
 const engine = [
   {
-    title: 'One shoot becomes many videos',
-    body: 'The hero edit. The shorts. The alt hooks. The thumbnail moments. Clik reads the whole batch and plans every video that’s in it. You never sort a file.',
+    title: 'One upload becomes many videos',
+    body: 'The long-form cut. The verticals. The alt hooks. Clik reads everything you give it and plans every video that is in there. You never sort a file.',
     accent: '#5481E8',
   },
   {
     title: 'The agent finds what you missed',
-    body: "Clik watches the whole shoot, not just the takes you remember. The line you said off-script, the moment between cuts, the alt take that's actually better. All surfaced, all searchable.",
+    body: 'Clik watches all of it, not just the parts you remember. The line you said off-script, the moment between takes, the tangent that is better than the plan. All surfaced, all searchable.',
     accent: '#F9838E',
   },
   {
@@ -23,22 +23,25 @@ const engine = [
   },
 ];
 
+// The same four steps the homepage runs, said for one person. Deliberately
+// not a shoot-day walkthrough: a coach batching talking heads, a podcaster
+// clipping an episode, and someone with a folder of phone clips all run this.
 const steps = [
   {
-    title: 'Upload your shoot and your idea.',
-    body: 'Drop in your footage. Tell Clik what you’re making: a vlog, a recipe, a tutorial, a sit-down talk. Drop in a rough script if you have one.',
+    title: 'Teach it your style once.',
+    body: 'Caption look, title cards, hook rules, pacing, brand assets. Saved once and applied to everything after, so you stop re-explaining yourself to a tool.',
   },
   {
-    title: 'Clik plans every video in the batch.',
-    body: 'It reads the footage, finds your hooks, flags what’s missing, and lays out the slate: long-form for YouTube, verticals for TikTok and Reels, alt hooks for testing.',
+    title: 'Give it whatever you have.',
+    body: 'A shoot day, an episode, a batch of takes, a folder of clips off your phone. No sorting, no naming, no timeline prep.',
   },
   {
-    title: 'The build agent constructs the drafts.',
-    body: 'Every planned video lands ~90% done, cut to your style. Your caption look, your pacing, your format rules, all remembered from last time.',
+    title: 'It plans every video in there.',
+    body: 'It reads the footage, finds your hooks, flags what is missing, and lays out the slate: the long-form cut, the verticals, the alt hooks worth testing. You approve it.',
   },
   {
-    title: 'Finish your way.',
-    body: "Polish in Clik's web editor: captions, swaps, trims. Or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro when you want full control.",
+    title: 'The drafts land, you finish.',
+    body: 'Every planned video arrives about 90% done, cut to your style. Polish in Clik, or export XML to Premiere Pro, DaVinci Resolve, or Final Cut Pro.',
   },
 ];
 
@@ -76,7 +79,7 @@ const testimonials = [
       aria-hidden="true"
     ></div>
 
-    <div class="relative mx-auto max-w-[1200px] px-6 md:px-12 pb-16">
+    <div class="relative mx-auto max-w-[1296px] px-6 md:px-12 pb-16">
       <div class="w-full py-8 md:py-10">
         <div class="flex items-center gap-3">
           <span class="h-4 w-[3px] rounded-full bg-clik-royce" aria-hidden="true"></span>
@@ -85,13 +88,13 @@ const testimonials = [
 
         <h1
           class="mt-6 font-display font-medium tracking-display text-clik-cream"
-          style="font-size: clamp(44px, 7vw, 68px); line-height: 1.04; letter-spacing: -0.02em; max-width: 18ch;"
+          style="font-size: clamp(44px, 7vw, 68px); line-height: 1.04; letter-spacing: -0.02em;"
         >
           A whole media team. Population: you<span class="clik-period">.</span>
         </h1>
 
         <p class="mt-6 max-w-[620px] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
-          Content coaches, podcasters, creator-founders. If you're running real volume, you're already a one-person media company. Clik is the engine that runs it: planning, building, and shipping on your brand, so output stops depending on your weekends.
+          Content coaches, podcasters, creator-founders. If you are running real volume, you are already a one-person media company. Point Clik at a shoot day, an episode, or a folder of clips, and it plans and builds every video in there, on your brand.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -112,18 +115,18 @@ const testimonials = [
         <span class="label">THE PROBLEM</span>
       </div>
     </div>
-    <div class="mx-auto max-w-3xl">
-      <h2 class="font-display font-medium text-clik-cream mb-8" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch;">
-        You film more than you post. And it’s killing you<span class="clik-period">.</span>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-cream mb-8" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Editing is not the part you love. It is the part you survive<span class="clik-period">.</span>
       </h2>
-      <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
+      <p class="mb-6 max-w-[92ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
         The ideas are there. The footage is there. Your drive is a graveyard of stuff that could’ve been a hit if you’d just had time to cut it.
       </p>
-      <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 18px; line-height: 1.6;">
-        Instead it’s Sunday night again. You’re 6 hours into a timeline. The clip you actually want is buried somewhere on hour 3 of the shoot. You’re going to post late. You’re going to post one thing instead of three. And on Monday you’ll watch someone else post the exact idea you had three weeks ago.
+      <p class="mb-6 max-w-[92ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
+        Instead it is Sunday night again. You are six hours into a timeline. The moment you actually want is buried somewhere in hour three. You are going to post late. You are going to post one thing instead of three. And on Monday you will watch someone else post the exact idea you had three weeks ago.
       </p>
-      <p class="font-ui text-clik-cream mb-0 font-semibold" style="font-size: 18px; line-height: 1.6;">
-        Editing isn’t the part of this you love. It’s the part you survive.
+      <p class="mb-0 max-w-[92ch] font-ui font-semibold text-clik-cream" style="font-size: 18px; line-height: 1.6;">
+        You film more than you post, and the gap keeps growing.
       </p>
     </div>
   </section>
@@ -138,62 +141,59 @@ const testimonials = [
       </div>
     </div>
     <div class="mx-auto max-w-[1200px]">
-      <!-- Headline left, intro right — uses the full width at a readable measure -->
-      <div class="mb-12 grid gap-x-12 gap-y-5 md:grid-cols-2 md:items-end">
-        <h2 class="font-display font-medium text-clik-cream max-w-[22ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
-        What the engine does before you’d even open a timeline<span class="clik-period">.</span>
-        </h2>
-        <p class="font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
-        Upload a shoot. Tell Clik what you’re making. Before you’d normally finish a first cut, it has already done two things.
-        </p>
-      </div>
+      <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        What happens before you would even open a timeline<span class="clik-period">.</span>
+      </h2>
+      <p class="mt-5 mb-12 max-w-[92ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
+        Upload whatever you have. Before you would normally finish a first cut, Clik has already done two things.
+      </p>
 
       <div class="grid gap-6 md:grid-cols-2">
         <!-- LEFT: Shoot breakdown -->
         <div class="bento-card border flex flex-col" style={`${CARD} padding: 32px;`}>
           <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
-            01 · Shoot Breakdown
+            01 · Footage Breakdown
           </p>
           <h3 class="font-display font-medium text-clik-cream mb-3" style="font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.01em;">
             Every moment, sorted and surfaced.
           </h3>
           <p class="font-ui text-clik-cream/70 mb-6" style="font-size: 16px; line-height: 1.55;">
-            Clik reads the whole batch and tells you what’s there. Hooks, B-roll, the line you forgot you said, the candid moment between takes. Searchable, taggable, ready to build with.
+            Clik reads everything you uploaded and tells you what is in there. Hooks, B-roll, the line you forgot you said, the take that is better than the one you planned. Searchable, taggable, ready to build with.
           </p>
 
           <div class="mt-auto rounded-xl border border-clik-cream/10 bg-clik-cream/[0.04] p-5">
             <div class="flex items-center justify-between border-b border-clik-cream/10 pb-3 mb-4">
               <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-clik-cream/55">
-                Morning Routine · Vlog
+                Batch · 41 clips
               </span>
               <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-royce font-bold">
-                14 / 16 beats captured
+                6 concepts found
               </span>
             </div>
             <ul class="space-y-2.5 font-ui text-clik-cream/85" style="font-size: 14px; line-height: 1.5;">
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/20 font-mono text-[10px] font-bold text-clik-royce">✓</span>
-                Hook: "this is my non-negotiable" at 00:08
+                Hook: "nobody tells you this part" at 00:14
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/20 font-mono text-[10px] font-bold text-clik-royce">✓</span>
-                Coffee pour, B-roll
+                Three usable takes of the same line
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/25 font-mono text-[10px] font-bold text-clik-salmon">✗</span>
-                Missing: closing CTA, "comment your routine"
+                Missing: the closing CTA you scripted
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-salmon/25 font-mono text-[10px] font-bold text-clik-salmon">✗</span>
-                Missing: phone notification cutaway (mentioned in script)
+                Missing: B-roll for the section on pricing
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/10 font-mono text-[10px] font-bold text-clik-royce">+</span>
-                Off-script: matcha spill bit at 04:22, great alt hook
+                Off-script: the tangent at 08:20, stronger open
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clik-royce/10 font-mono text-[10px] font-bold text-clik-royce">+</span>
-                Bonus: window light close-up, works as B-roll on three drafts
+                Bonus: the laugh at 12:03, works across three drafts
               </li>
             </ul>
           </div>
@@ -208,7 +208,7 @@ const testimonials = [
             Drafts in 12 minutes, not all weekend.
           </h3>
           <p class="font-ui text-clik-cream/70 mb-8" style="font-size: 16px; line-height: 1.55;">
-            Every format your shoot can become, from the long-form hero to the short to the alt-hook A/B, lands as a ~90%-done draft. You open them, pick the takes you love, and ship.
+            Every video in there, from the long-form cut to the shorts to the alt-hook variants, lands as a draft that is about 90% done. You open them, pick the takes you love, and ship.
           </p>
 
           <div class="mt-auto space-y-3">
@@ -220,7 +220,7 @@ const testimonials = [
                 12 min
               </p>
               <p class="mt-2 font-ui text-clik-cream/70" style="font-size: 14px; line-height: 1.5;">
-                One shoot in. Every format out, as ~90%-done drafts.
+                One upload in. Every video out, about 90% done.
               </p>
             </div>
 
@@ -234,7 +234,7 @@ const testimonials = [
                 </p>
               </div>
               <p class="mt-2 font-ui text-clik-cream/55" style="font-size: 13px; line-height: 1.5;">
-                Per format. And you’ve only got so many weekends.
+                Per video. And there are only so many hours in a week.
               </p>
             </div>
           </div>
@@ -253,8 +253,8 @@ const testimonials = [
       </div>
     </div>
     <div class="mx-auto max-w-[1200px]">
-      <h2 class="font-display font-medium text-clik-cream mb-12 max-w-[24ch]" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
-        The reason you’ll post more<span class="clik-period">.</span>
+      <h2 class="font-display font-medium text-clik-cream mb-12" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        The reason you will post more<span class="clik-period">.</span>
       </h2>
 
       <div class="grid gap-5 md:grid-cols-3">
@@ -286,8 +286,8 @@ const testimonials = [
         <span class="label">THE WORKFLOW</span>
       </div>
     </div>
-    <div class="mx-auto max-w-3xl">
-      <h2 class="font-display font-medium text-clik-cream mb-12 text-center" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-cream mb-12" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
         How it works<span class="clik-period">.</span>
       </h2>
 
@@ -305,8 +305,8 @@ const testimonials = [
         ))}
       </ol>
 
-      <p class="mt-10 font-ui text-clik-cream/70 text-center" style="font-size: 18px; line-height: 1.6;">
-        Same shoot. A week of content.
+      <p class="mt-10 font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.6;">
+        One upload. A week of content.
       </p>
     </div>
   </section>
@@ -354,11 +354,11 @@ const testimonials = [
           style="background: radial-gradient(closest-side, rgba(84, 129, 232, 0.20), transparent 72%);"
           aria-hidden="true"
         ></div>
-        <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: -0.02em; max-width: 16ch;">
-          Film once. Post for a week<span class="clik-period">.</span>
+        <h2 class="font-display font-medium text-clik-cream" style="font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: -0.02em;">
+          Upload once. Post for a week<span class="clik-period">.</span>
         </h2>
         <p class="mt-6 max-w-[52ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
-          Run your first project free. See what’s actually in your footage.
+          Run your first project free. See what is actually in your footage.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-light">

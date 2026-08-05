@@ -56,18 +56,12 @@ function BentoCard({ card }: { card: Card }) {
       className="bento-card flex flex-col gap-6 border p-6 md:p-7"
       style={{ borderColor: CREAM('0.10'), background: CREAM('0.03') }}
     >
-      <span
-        className="font-mono uppercase"
-        style={{ fontSize: 11, letterSpacing: '0.14em', color: ROYCE }}
-      >
-        {card.step}
-      </span>
-
-      <div className="flex flex-1 flex-col justify-center">
-        <Visual />
-      </div>
-
-      <div>
+      {/* Number and title together, so the card has a header that names the
+          step instead of a floating digit. */}
+      <div className="flex items-baseline gap-3">
+        <span className="font-mono uppercase" style={{ fontSize: 11, letterSpacing: '0.14em', color: ROYCE }}>
+          {card.step}
+        </span>
         <h3
           className="font-display font-medium text-clik-cream"
           style={{ fontSize: 21, letterSpacing: '-0.01em', lineHeight: 1.2 }}
@@ -75,10 +69,15 @@ function BentoCard({ card }: { card: Card }) {
           {card.title}
           <span style={{ color: ROYCE }}>.</span>
         </h3>
-        <p className="mt-2 font-ui" style={{ fontSize: 15, lineHeight: 1.55, color: CREAM('0.65') }}>
-          {card.desc}
-        </p>
       </div>
+
+      <div className="flex flex-1 flex-col justify-center">
+        <Visual />
+      </div>
+
+      <p className="font-ui" style={{ fontSize: 15, lineHeight: 1.55, color: CREAM('0.65') }}>
+        {card.desc}
+      </p>
     </div>
   );
 }

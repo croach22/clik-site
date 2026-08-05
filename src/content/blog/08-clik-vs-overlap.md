@@ -13,9 +13,11 @@ Overlap and Clik get compared often, and fairly. Both describe themselves as AI 
 
 But the two diverge somewhere most comparisons never reach, because it happens before either feature list starts: what you're allowed to hand the system on day one. Here's an honest attempt at that comparison, including where Overlap is ahead of us.
 
+The short version: a pipeline can only start once someone has decided what the video is. Which clips belong together. Which take is the good one. Where one idea stops and the next begins. Overlap assumes that decision is already made, because for a podcast episode it genuinely is. Clik makes the decision, and that is the entire difference. Everything else in this comparison follows from it.
+
 ## What Overlap is genuinely good at
 
-Overlap is a Y Combinator Summer 2024 company out of San Francisco. Founders Jonathan Baer and Casey Traina, roughly six people, $1.9M seed announced February 2025 from YC, Collab Fund, Transpose, Orange Collective, Pioneer Fund, and The 23 Fund. Their anchor customer is iHeartMedia, with case studies from Playback, Stable, and Thursday Labs. That's a serious customer list for a team that size, and it tells you something real: the product holds up under volume at a large media organization.
+Overlap runs clipping pipelines at real scale. Their anchor customer is iHeartMedia, with case studies from Playback, Stable, and Thursday Labs. That tells you something worth knowing before any feature comparison: the product holds up under volume inside a large media organization, which is a bar most tools in this category have never been tested against.
 
 The core is a node-based workflow builder. You connect a trigger to a chain of editing nodes and the pipeline runs on its own. There are fourteen nodes: Find Clips, Convert to Vertical, Add Audiogram, Add B-Roll, Add Brainrot, Add Music, Add Outro, Add Subtitles, Add Title Overlay, Add Watermark, Media Overlay, Remove Curse Words, Remove Filler Words, Smart Zoom. Nothing in that list is filler, and the small operational ones (curse word removal, watermarking) are what make a tool usable inside a broadcaster rather than just impressive in a demo.
 
@@ -35,7 +37,7 @@ Overlap is a good product. Nothing below argues otherwise.
 
 ## Where the architectures diverge
 
-All five Overlap triggers deliver exactly one file per run. Manual upload, RTMP livestream, new Dropbox video, new YouTube video, RSS episode. One each. Their quickstart tells you to begin with "one recording, webinar, interview, or podcast episode." Their API endpoint takes "a long-form video URL," singular.
+A node graph is a set of instructions for processing a video. It cannot tell you which video. All five Overlap triggers deliver exactly one file per run: manual upload, RTMP livestream, new Dropbox video, new YouTube video, RSS episode. One each. Their quickstart tells you to begin with "one recording, webinar, interview, or podcast episode." Their API endpoint takes "a long-form video URL," singular.
 
 For iHeartMedia, that's correct. A podcast network's atomic unit *is* one long recording. Building the system around it isn't a limitation, it's coherence.
 
@@ -61,7 +63,7 @@ Neither is universally right. If your process is settled, a graph is a better ar
 
 ## Access
 
-Overlap has no live pricing page; pricing is demo-gated. Archived tiers showed Creator at $20/mo and Team at $250/mo. Third-party reports in 2026 suggest Creator is now around $250/mo and Growth around $1,000/mo, with no free tier or trial and every plan requiring a booked demo. Clik is self-serve with published pricing, from $99.
+Overlap has no live pricing page; pricing is demo-gated. Archived tiers showed Creator at $20/mo and Team at $250/mo. Third-party reports in 2026 suggest Creator is now around $250/mo and Growth around $1,000/mo, with no free tier or trial and every plan requiring a booked demo. Clik is self-serve with published pricing: a free tier, then $29 and $59, with agency plans from $499.
 
 This reflects different chosen customers, not one company being right. Demo-gating works when your buyer is a media enterprise with a procurement process, and Overlap's customer list says it's working. Published pricing works when your buyer is an agency owner who wants to test something on a real client project this afternoon.
 
@@ -80,7 +82,7 @@ This reflects different chosen customers, not one company being right. Demo-gati
 | Node-graph workflow builder | **Yes** | No, guided, saved as skills |
 | B-roll source | Stock and uploads | Your archive and shoot footage |
 | Style learning | Per-workflow config | Learned, applied team-wide |
-| Pricing | Demo-gated, reportedly $250–$1,000/mo | Published, from $99/mo |
+| Pricing | Demo-gated, reportedly $250–$1,000/mo | Published, free tier then $29/mo |
 | Enterprise media track record | **Strong (iHeartMedia)** | Earlier |
 
 ## Choose Overlap if
@@ -89,6 +91,6 @@ Your input really is one long recording at a time: a podcast, a webinar series, 
 
 ## Choose Clik if
 
-Your footage arrives in batches. You shoot days, not files. You have takes to choose between, an archive worth cutting from, and a house style you'd rather teach once than rebuild per workflow. And you want to try it on a real project today without booking a call.
+Your footage arrives as a pile nobody has been through yet. You shoot days, not files. You have takes to choose between, an archive worth cutting from, and a house style you'd rather teach once than rebuild per workflow. And you want to try it on a real project today without booking a call.
 
 Point Clik at your last shoot folder and see what comes back, [clik.vision](https://clik.vision).

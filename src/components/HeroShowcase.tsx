@@ -121,13 +121,18 @@ const VARIANTS: Variant[] = [
         'Writing hooks from your rules',
         'Reframing to vertical',
       ],
-      source: { kind: 'landscape', name: 'ep42_full.mp4', dur: '1:12:40' },
+      source: {
+        kind: 'landscape',
+        src: '/videos/showcase/podcast/raw.mp4',
+        name: 'full_signal_ep.mp4',
+        dur: '42:46',
+      },
       clips: [
-        { title: 'The cold open', caption: "That's the part", dur: '0:41', label: 'ep42_clip01', accent: ROYCE },
-        { title: 'Best argument', caption: 'Nobody says this', dur: '0:37', label: 'ep42_clip02', accent: SALMON },
-        { title: 'Guest origin', caption: 'I had no plan', dur: '0:55', label: 'ep42_clip03', accent: SAGE },
+        { title: 'Want the crash', dur: '1:09', label: 'clip_01', accent: ROYCE, src: '/videos/showcase/podcast/out-a.mp4' },
+        { title: 'The AI bubble', dur: '1:01', label: 'clip_02', accent: SALMON, src: '/videos/showcase/podcast/out-b.mp4' },
       ],
-      stackLabel: '+5',
+      stackLabel: '+6',
+      stackSub: 'clips · your B-roll',
     },
   },
   {

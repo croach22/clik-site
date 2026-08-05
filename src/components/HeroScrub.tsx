@@ -49,7 +49,7 @@ export interface ScrubClip {
 }
 
 export type ScrubSource =
-  | { kind: 'landscape'; name: string; dur: string }
+  | { kind: 'landscape'; src?: string; name: string; dur: string }
   | { kind: 'batch'; stills: string[]; count: number; more: number; note: string }
   | { kind: 'take'; src?: string; name: string; dur: string; note: string; takes: { n: string; cut: boolean }[] };
 
@@ -317,7 +317,7 @@ export default function HeroScrub({
 
         {/* ── the raw input, receding to the right ── */}
         <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${p * 100}%)` }} aria-hidden="true">
-          {source.kind === 'landscape' && <RawEpisode name={source.name} dur={source.dur} />}
+          {source.kind === 'landscape' && <RawEpisode src={source.src} name={source.name} dur={source.dur} />}
           {source.kind === 'batch' && <RawBatch stills={source.stills} more={source.more} note={source.note} />}
           {source.kind === 'take' && (
             <RawTake src={source.src} name={source.name} dur={source.dur} note={source.note} takes={source.takes} />
@@ -469,52 +469,25 @@ function ReadField({ p, count, unit }: { p: number; count: number; unit: string 
 
 // The wide two-camera podcast frame. Drawn rather than shot so it reads as
 // footage without shipping a video for a placeholder.
-function RawEpisode({ name, dur }: { name: string; dur: string }) {
+function RawEpisode({ src, name, dur }: { src?: string; name: string; dur: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div
-        className="absolute inset-0"
-        style={{ background: 'radial-gradient(90% 120% at 50% 15%, #24365F 0%, #16224A 45%, #0C1430 100%)' }}
-      />
-      <div className="absolute inset-x-0 top-0 grid h-[62%] grid-cols-12 gap-[3px] p-3 opacity-[0.18]">
-        {Array.from({ length: 24 }).map((_, i) => (
-          <span key={i} className="block rounded-[2px]" style={{ background: C(0.5) }} />
-        ))}
-      </div>
-
-      {[0.32, 0.68].map((x, i) => (
-        <div key={x} className="absolute bottom-[14%]" style={{ left: `${x * 100}%`, transform: 'translateX(-50%)' }}>
-          <span
-            className="mx-auto block rounded-full"
-            style={{ width: 46, height: 46, background: i ? '#C9A88E' : '#8E6E58' }}
-          />
-          <span
-            className="mt-1 block rounded-t-[999px]"
-            style={{ width: 96, height: 62, background: i ? `${SALMON}70` : `${ROYCE}80` }}
-          />
-        </div>
-      ))}
-
-      {[0.32, 0.68].map((x) => (
-        <span
-          key={`m${x}`}
-          className="absolute block rounded-full"
-          style={{
-            left: `${x * 100 - 9}%`,
-            bottom: '18%',
-            width: 9,
-            height: 26,
-            background: C(0.32),
-            boxShadow: `0 -18px 0 -3px ${C(0.16)}`,
-          }}
+      {src ? (
+        <video
+          src={src}
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
         />
-      ))}
-
-      <span className="absolute inset-x-0 bottom-0 block h-[14%]" style={{ background: '#0A1128' }} />
-      <span className="absolute inset-x-0 bottom-[14%] block h-px" style={{ background: C(0.16) }} />
+      ) : (
+        <DrawnStudio />
+      )}
       <span
         className="absolute inset-0 block"
-        style={{ background: 'radial-gradient(80% 70% at 50% 45%, transparent 40%, rgba(4,8,22,.55))' }}
+        style={{ background: 'radial-gradient(85% 75% at 50% 45%, transparent 45%, rgba(4,8,22,.5))' }}
       />
 
       <span

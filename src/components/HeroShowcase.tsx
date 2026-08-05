@@ -356,6 +356,13 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => copy(variant.prompts[active].body, active)}
+              className="clik-run-btn inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-ui font-bold"
+              style={{ fontSize: 14 }}
+            >
+              {copied === active ? 'Copied ✓' : 'Copy prompt'}
+            </button>
             <a href={SIGNUP} className="clik-btn clik-btn-primary">
               Start for free <span aria-hidden="true">→</span>
             </a>
@@ -388,8 +395,8 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
                   style={{
                     fontSize: 10,
                     letterSpacing: '0.1em',
-                    color: on ? '#F9F7F1' : C(0.55),
-                    borderColor: on ? `${ROYCE}70` : C(0.12),
+                    color: on ? '#F9F7F1' : C(0.78),
+                    borderColor: on ? `${ROYCE}70` : C(0.2),
                     background: on ? `${ROYCE}1A` : 'transparent',
                   }}
                 >
@@ -401,24 +408,9 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
         )}
 
         <div className="mt-5 flex min-h-0 flex-1 flex-col">
-          <div className="mb-3 flex flex-shrink-0 flex-wrap items-center justify-between gap-3">
-            <p className="font-ui" style={{ fontSize: 14, color: C(0.6) }}>
-              {variant.prompts[active].blurb}
-            </p>
-            <button
-              onClick={() => copy(variant.prompts[active].body, active)}
-              className="inline-flex flex-shrink-0 items-center gap-2 rounded-lg border px-3.5 py-2 font-mono uppercase"
-              style={{
-                fontSize: 10,
-                letterSpacing: '0.1em',
-                color: ROYCE,
-                borderColor: `${ROYCE}55`,
-                background: `${ROYCE}12`,
-              }}
-            >
-              {copied === active ? 'Copied ✓' : 'Copy prompt'}
-            </button>
-          </div>
+          <p className="mb-3 flex-shrink-0 font-ui" style={{ fontSize: 15, color: C(0.82) }}>
+            {variant.prompts[active].blurb}
+          </p>
 
           <div
             className="min-h-0 flex-1 overflow-y-auto rounded-xl border p-5"
@@ -440,11 +432,11 @@ function PromptModal({ variant, onClose }: { variant: Variant; onClose: () => vo
               <li key={step} className="flex items-center gap-2">
                 <span
                   className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full font-mono"
-                  style={{ fontSize: 9, color: ROYCE, background: `${ROYCE}15`, border: `1px solid ${ROYCE}40` }}
+                  style={{ fontSize: 9, color: '#F9F7F1', background: `${ROYCE}CC`, border: `1px solid ${ROYCE}` }}
                 >
                   {i + 1}
                 </span>
-                <span className="font-ui" style={{ fontSize: 13, color: C(0.6) }}>
+                <span className="font-ui" style={{ fontSize: 13.5, color: C(0.85) }}>
                   {step}
                 </span>
               </li>
@@ -626,14 +618,16 @@ export default function HeroShowcase() {
 
           {/* The truncated preview said less than the headline already does
               and stole the button's weight. One button instead. */}
+          {/* Cream fill: the highest-contrast thing available on this panel,
+              because this is the action the section is built to earn. */}
           <button
             onClick={() => setModalOpen(true)}
-            className="mt-5 inline-flex items-center gap-2.5 rounded-xl border px-5 py-3 font-ui transition-colors"
-            style={{ fontSize: 14, color: '#F9F7F1', borderColor: `${ROYCE}70`, background: `${ROYCE}20` }}
+            className="clik-run-btn mt-5 inline-flex items-center gap-2.5 rounded-xl px-5 py-3 font-ui font-bold"
+            style={{ fontSize: 14 }}
           >
             <span aria-hidden="true" style={{ color: SALMON, fontSize: 13 }}>✦</span>
             Run this workflow
-            <span aria-hidden="true" style={{ color: C(0.5) }}>→</span>
+            <span aria-hidden="true">→</span>
           </button>
 
           {/* the steps live out here, next to the stage — not inside it */}

@@ -464,3 +464,20 @@ body.theme-midnight [data-reveal].is-inview {
     transition: none;
   }
 }
+
+/* Prompt CTA inside the hero showcase — cream fill so it reads as the
+   primary action on a midnight panel, above the royce buttons around it. */
+.clik-run-btn {
+  background: var(--clik-cream);
+  color: var(--clik-midnight);
+  box-shadow: 0 8px 24px rgba(4, 8, 22, 0.35);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.clik-run-btn:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(4, 8, 22, 0.45);
+}

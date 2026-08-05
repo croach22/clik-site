@@ -579,7 +579,7 @@ export default function HeroShowcase() {
             style={{ fontSize: 14, color: '#F9F7F1', borderColor: `${ROYCE}70`, background: `${ROYCE}20` }}
           >
             <span aria-hidden="true" style={{ color: SALMON, fontSize: 13 }}>✦</span>
-            See the prompt
+            Run this workflow
             <span aria-hidden="true" style={{ color: C(0.5) }}>→</span>
           </button>
 

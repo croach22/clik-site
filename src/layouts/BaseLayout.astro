@@ -326,13 +326,24 @@ const { title, description = 'Clik — an on-brand content engine for any video 
           setTimeout(() => (b.textContent = 'Copy changes'), 1600);
         });
 
-        document.addEventListener('keydown', (e) => {
-          if (!(e.key === 'e' || e.key === 'E') || !(e.metaKey || e.ctrlKey)) return;
-          e.preventDefault();
-          on = !on;
+        const setMode = (next) => {
+          on = next;
           if (on) snapshot();
           document.designMode = on ? 'on' : 'off';
           pill.style.display = on ? 'flex' : 'none';
+        };
+
+        document.addEventListener('keydown', (e) => {
+          // Escape always exits, so it's never possible to get stuck in a
+          // page where nothing clicks.
+          if (e.key === 'Escape' && on) {
+            e.preventDefault();
+            setMode(false);
+            return;
+          }
+          if (!(e.key === 'e' || e.key === 'E') || !(e.metaKey || e.ctrlKey)) return;
+          e.preventDefault();
+          setMode(!on);
         });
 
         window.clikEdits = () => {

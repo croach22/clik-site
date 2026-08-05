@@ -175,8 +175,10 @@ export default function HeroScrub({
         aria-valuetext={steps[stepIdx]}
         tabIndex={0}
         onPointerDown={(e) => grab(e.clientX)}
-        onPointerEnter={() => !reduced && (setAuto(false), onScrub?.())}
-        onPointerMove={(e) => !dragging.current && !reduced && setFromPointer(e.clientX)}
+        onPointerEnter={(e) => e.pointerType === 'mouse' && !reduced && (setAuto(false), onScrub?.())}
+        onPointerMove={(e) =>
+          e.pointerType === 'mouse' && !dragging.current && !reduced && setFromPointer(e.clientX)
+        }
         onPointerLeave={() => {
           dragging.current = false;
           if (!reduced) setAuto(true);
@@ -188,7 +190,7 @@ export default function HeroScrub({
           setAuto(false);
           commit(Math.min(1, Math.max(0, p + (e.key === 'ArrowRight' ? 0.05 : -0.05))));
         }}
-        className="relative w-full cursor-ew-resize touch-none select-none overflow-hidden rounded-xl border outline-none"
+        className="relative w-full cursor-ew-resize touch-pan-y select-none overflow-hidden rounded-xl border outline-none"
         style={{ aspectRatio: '16 / 9', borderColor: C(0.12), background: '#08102A' }}
       >
         {/* ── what the footage is being read off of ── */}

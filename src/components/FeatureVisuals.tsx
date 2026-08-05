@@ -437,3 +437,12 @@ export function DashboardVisual() {
     </div>
   );
 }
+
+// Astro can only hydrate a statically imported component, so pages that pick a
+// visual by index go through here rather than holding one in a variable.
+const BY_STEP = [BrandMemoryVisual, PlanningVisual, EditAgentVisual, DashboardVisual];
+
+export function StepVisual({ step }: { step: number }) {
+  const Visual = BY_STEP[step];
+  return Visual ? <Visual /> : null;
+}

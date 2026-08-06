@@ -56,7 +56,6 @@ const navLinks = [
     track: onAgenciesPage ? 'AgencyPricingNavClick' : undefined,
     trackParams: onAgenciesPage ? { audience: 'agency', surface: 'nav' } : undefined,
   },
-  { label: 'Blog', href: '/blog' },
   { label: 'Learn', href: '/docs' },
 ];
 ---
@@ -190,11 +189,7 @@ const navLinks = [
       <span>Pricing</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>
-    <a href="/blog" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 4">
-      <span>Blog</span>
-      <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </a>
-    <a href="/docs" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 5">
+    <a href="/docs" class="mobile-menu-link mobile-menu-row stagger-row" style="--i: 4">
       <span>Learn</span>
       <svg class="mobile-menu-chevron" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </a>

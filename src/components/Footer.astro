@@ -1,8 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
 const year = new Date().getFullYear();
 ---
 
@@ -29,20 +25,6 @@ const year = new Date().getFullYear();
           <li><a href="/#features" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Features</a></li>
           <li><a href="/#pricing" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Pricing</a></li>
           <li><a href="/docs" class="text-clik-cream/80 hover:text-clik-cream transition-colors">Docs</a></li>
-        </ul>
-      </div>
-
-      <!-- Blog -->
-      <div>
-        <a href="/blog" class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55 mb-4 block hover:text-clik-cream transition-colors">BLOG</a>
-        <ul class="space-y-2.5 font-ui" style="font-size: 14px;">
-          {posts.slice(0, 4).map((post) => (
-            <li>
-              <a href={`/blog/${post.slug}`} class="text-clik-cream/80 hover:text-clik-cream transition-colors line-clamp-1">
-                {post.data.title}
-              </a>
-            </li>
-          ))}
         </ul>
       </div>
 

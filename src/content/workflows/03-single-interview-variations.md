@@ -40,7 +40,7 @@ If there genuinely aren't three distinct funny moments in there, say so and give
 Don't build anything until I've picked from the list.
 
 THEN BUILD
-Vertical, my default caption style. No B-roll, no music. For the title card on the cold open - use the basic title card with white background, 6s by default.
+Vertical, my default caption style. No B-roll, no music. For the title card on the cold open - use the basic title card with white background. The duration of this title card should match the cold open it sits on, OR be 6s if that version doesn't have one.
 
 If I don't have a default caption style, tell me to go to the brand guide from the home screen and save a default caption style, then come back here to add it to the plan.
 

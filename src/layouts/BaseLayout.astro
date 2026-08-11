@@ -193,15 +193,20 @@ const { title, description = 'Clik — an on-brand content engine for any video 
       trackViewEls.forEach((el) => viewObserver.observe(el));
     }
 
-    // On mobile, intercept sign-up links and show email drawer instead
+    // On mobile, intercept sign-up links and show the email drawer instead.
+    // Capture phase, so a React island that stops propagation (the hero prompt
+    // modal, any use-case CTA) can't swallow the click before we see it. This
+    // cancels the navigation, not the event, so [data-track-click] still fires.
+    // matchMedia rather than innerWidth > 768: Tailwind's md is min-width 768,
+    // so at exactly 768 the desktop layout is up and the drawer should not be.
     document.addEventListener('click', (e) => {
-      if (window.innerWidth > 768) return;
-      const link = (e.target as HTMLElement).closest('a[href*="sign-up"]');
+      if (!window.matchMedia('(max-width: 767px)').matches) return;
+      const link = (e.target as HTMLElement)?.closest?.('a[href*="sign-up"]');
       if (link && window.__openEmailDrawer) {
         e.preventDefault();
         window.__openEmailDrawer();
       }
-    });
+    }, true);
 
     // Smooth-scroll for same-page hash links.
     document.addEventListener('click', (e) => {

@@ -37,10 +37,12 @@ const t = light
       burger: '#0E1834',
     };
 
-// Pricing is audience-contextual: on the agencies page, "Pricing" jumps to the
-// agency plans section. Everywhere else it goes to the home pricing tier grid.
+// Pricing is audience-contextual: on the agencies and media-teams pages it
+// jumps to that page's own plans section, since both now carry one. Everywhere
+// else it goes to the home pricing tier grid.
 const onAgenciesPage = Astro.url.pathname.startsWith('/use-cases/agencies');
-const pricingHref = onAgenciesPage ? '#agency-plans' : '/#pricing';
+const onMediaPage = Astro.url.pathname.startsWith('/use-cases/media-teams');
+const pricingHref = onAgenciesPage ? '#agency-plans' : onMediaPage ? '#media-plans' : '/#pricing';
 
 const solutions = [
   { label: 'For Creators', href: '/use-cases/creators', track: 'CreatorNavClick', trackParams: { audience: 'creator', surface: 'nav' } },

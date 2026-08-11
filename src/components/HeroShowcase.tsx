@@ -60,6 +60,10 @@ interface InputFile {
 
 interface Variant {
   id: string;
+  // Permanent URL contract. The drip emails deep-link to `/#<slug>`, and once a
+  // send goes out that URL can never change — so this is set explicitly rather
+  // than derived from `tab`, which is display copy and free to be reworded.
+  slug: string;
   tab: string;
   fileCount: number;
   steps: string[];
@@ -79,6 +83,7 @@ interface Variant {
 const VARIANTS: Variant[] = [
   {
     id: 'podcast-clipping',
+    slug: 'podcast-clipping',
     tab: 'Podcast clipping',
     fileCount: 16,
     steps: ['Scanning the episode', 'Finding the strongest moments', 'Matching your B-roll', 'Building the clips'],
@@ -108,6 +113,7 @@ const VARIANTS: Variant[] = [
   },
   {
     id: 'content-day',
+    slug: 'content-day',
     tab: 'Content day',
     fileCount: 79,
     steps: ['Analyzing footage', 'Identifying narrative concepts', 'Finding relevant B-roll', 'Building the videos'],
@@ -138,6 +144,7 @@ const VARIANTS: Variant[] = [
   },
   {
     id: 'street-interviews',
+    slug: 'street-interviews',
     tab: 'Street interviews',
     fileCount: 60,
     steps: ['Watching every clip', 'Grouping answers by guest', 'Picking the best moments', 'Building the recaps'],
@@ -177,6 +184,7 @@ const VARIANTS: Variant[] = [
   },
   {
     id: 'yap-batch',
+    slug: 'yap-batch',
     tab: 'Yap batch',
     fileCount: 26,
     steps: ['Listening to every take', 'Grouping takes by idea', 'Keeping the best delivery', 'Building the videos'],
@@ -435,7 +443,33 @@ export default function HeroShowcase({ prompts = [] }: { prompts?: WorkflowPromp
   useEffect(() => {
     setMounted(true);
     setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    // Deep link from the drip emails: /#<slug> opens that tab's prompt modal.
+    // Autoplay has to stop, or the hand-off timer keeps advancing `active`
+    // underneath the modal and swaps the prompt out mid-read.
+    const slug = window.location.hash.slice(1);
+    const i = VARIANTS.findIndex((variant) => variant.slug === slug);
+    if (i >= 0) {
+      setActive(i);
+      setAutoplay(false);
+      setModalOpen(true);
+    }
   }, []);
+
+  // Keep the hash pointing at whatever the modal is showing, so the URL stays
+  // shareable. replaceState, not pushState — tab switches shouldn't pile up in
+  // the back button. Skips the first run so it can't stomp the incoming hash.
+  const hashSynced = useRef(false);
+  useEffect(() => {
+    if (!hashSynced.current) {
+      hashSynced.current = true;
+      return;
+    }
+    const next = modalOpen ? `#${VARIANTS[active].slug}` : '';
+    if (window.location.hash === next) return;
+    // pathname + search keeps the email UTMs intact when the hash is cleared.
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}${next}`);
+  }, [modalOpen, active]);
 
   // run the four steps, then hand off to the next tab
   useEffect(() => {

@@ -1,21 +1,33 @@
 ---
 title: "Plan a batch before you build"
 tab: "Content day"
-blurb: "For an unsorted shoot day, when you want the plan before the cut."
+blurb: "For a shoot day of loose clips, when you want the plan before the cut."
 order: 2
 ---
+Here's a batch content day. If I do not upload a brief or drop scripts in the chat, ask me if I have one. If I say I do not have one, explain that you will look for concept boundaries and find the moments that stand out.
 
-Here's a full content day, 79 clips, unsorted.
+PLAN FIRST
+Find the short-form concepts that are actually in the footage, 45 to 90 seconds each. Every one needs a real arc: an opening, a middle, and an end, plus an insight or a story worth watching. For each one:
+- the concept in a sentence
+- the hook line, quoted from what was actually said
+- the title card text you would put on it
+- roughly how long it runs
+- the B-roll you would cut to, and where
+- why it works
 
-Find the 3 to 5 strongest short-form concepts, 45 to 60 seconds each. Every one needs a real arc: an opening, a middle, and an end, plus an insight or a story that is actually entertaining or worth learning. Build each one chronologically. Don't scramble the order to make it work.
+Then take the strongest and give me 2 hook variants of each: the same concept opened on a different line, each with its own title card.
 
-Open every clip on its strongest line, then a title card. Build 2 hook variants of each.
+If there are more than five worth making, say so and I'll tell you which to add.
 
-Cut to my own B-roll for about 40% of the runtime, a new visual roughly every three seconds, matched to what is being said. If someone names a thing, show the thing. Hold on their face for the payoff line.
+Don't build anything until I've picked from the list.
 
-Don't build anything yet. Give me the report first: the hook, the arc, why it works, and the B-roll you would cut to.
+THEN BUILD
+Vertical clips with my default caption style. For the title card - use the basic title card with white background, unless I state I don't want title cards. Title cards default to 6s.
 
-If there are more than five concepts in there, tell me and we will build the rest after.
+If I don't have a default caption style, tell me to go to the brand guide from the home screen and save a default caption style, then come back here to add it to the plan.
 
-OUTPUT
-Vertical 9:16. My saved caption style. Two-second title card on every clip, using my saved title card rules.
+Build each concept with chronological talking points. Don't scramble the order of talking points.
+
+Add B-roll for about 40% coverage of the a-roll runtime, with b-roll clips pacing around 3s each. B-roll should match to what is being said. If someone names a thing, show the thing.
+
+Cut the dead air, the filler, the false starts, and anything said to the camera crew.

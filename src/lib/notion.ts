@@ -63,4 +63,6 @@ export async function getDocContent(pageId: string, slug: string = 'doc'): Promi
 }
 
 // Groups in display order
-export const GROUP_ORDER = ['Getting Started', 'Editing', 'Workflows', 'Captioning and Exports'];
+// Workflows sits above Editing: you plan and build a set of videos before you
+// open any one of them in the editor, so the docs run in the order the product does.
+export const GROUP_ORDER = ['Getting Started', 'Project Workflows', 'Editing', 'Captioning and Exports'];

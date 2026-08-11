@@ -15,6 +15,16 @@ const outputs = [
 const CARD = 'border-color: rgba(249, 247, 241, 0.10); background: rgba(249, 247, 241, 0.03);';
 const CALENDLY = 'https://calendly.com/clikphotos/clik-agency-demo';
 
+// Same plan and same price as the agency page. Media teams and agencies buy
+// the same thing on the same terms, so the pricing must not diverge — if one
+// moves, move the other.
+const planIncludes = [
+  'Shared Slack with the Clik team',
+  'Hands-on prompt and workflow help',
+  'Feature prioritization based on your needs',
+  'Monthly workflow review',
+];
+
 const teamFeatures = [
   {
     title: 'Brand memory, per property',
@@ -99,9 +109,7 @@ const steps = [
           >
             Book a demo <span aria-hidden="true">→</span>
           </a>
-          <a href="https://app.clik.vision/sign-up" class="clik-btn clik-btn-secondary">
-            Start for free
-          </a>
+          <a href="#media-plans" class="clik-btn clik-btn-secondary">See plans</a>
         </div>
 
       </div>
@@ -320,11 +328,91 @@ const steps = [
     </div>
   </section>
 
-  <!-- [06] Final CTA -->
+  <!-- [06] Plans — identical to the agency page by design -->
+  <section
+    id="media-plans"
+    data-track-view="MediaPlansView"
+    data-track-params={JSON.stringify({ audience: 'media', surface: 'media-page' })}
+    class="scroll-mt-24 px-6 md:px-12 py-16 md:py-20"
+  >
+    <div class="mx-auto max-w-[1200px] mb-10">
+      <div class="clik-section-header justify-center">
+        <span class="idx">[ 06 ]</span>
+        <span class="rule"></span>
+        <span class="label">PLANS</span>
+      </div>
+    </div>
+    <div class="mx-auto max-w-[1200px]">
+      <h2 class="font-display font-medium text-clik-cream mb-4" style="font-size: clamp(32px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.02em;">
+        Built for your volume<span class="clik-period">.</span>
+      </h2>
+      <p class="font-ui text-clik-cream/70 mb-12 max-w-2xl mx-auto" style="font-size: 18px; line-height: 1.6;">
+        Transparent floor. Custom from there, scaled to your monthly output.
+      </p>
+
+      <div
+        class="relative rounded-[17px] p-px text-left"
+        style="background: linear-gradient(120deg, rgba(84, 129, 232, 0.55), rgba(84, 129, 232, 0.10) 30%, rgba(249, 131, 142, 0.10) 70%, rgba(249, 131, 142, 0.5));"
+      >
+      <div
+        class="bento-card relative overflow-hidden"
+        style="background: #101B3E; color: var(--clik-cream); padding: clamp(28px, 4vw, 40px);"
+      >
+        <div class="mb-8 pb-8 border-b border-clik-cream/12">
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce font-bold">
+            Starting at
+          </p>
+          <div class="flex items-baseline gap-2">
+            <span class="font-display font-medium text-clik-cream" style="font-size: clamp(48px, 7vw, 72px); line-height: 1; letter-spacing: -0.03em;">
+              $499
+            </span>
+            <span class="font-mono text-[14px] uppercase tracking-[0.14em] text-clik-cream/55">
+              / mo
+            </span>
+          </div>
+          <p class="mt-3 font-ui text-clik-cream/70" style="font-size: 15px; line-height: 1.5;">
+            Volume-based, scaling with your monthly video output. Cancel anytime.
+          </p>
+        </div>
+
+        <p class="mb-5 font-mono text-[11px] uppercase tracking-[0.14em] text-clik-royce">
+          Every plan includes:
+        </p>
+        <ul class="space-y-3 mb-8">
+          {planIncludes.map((item) => (
+            <li class="flex items-start gap-3">
+              <svg class="mt-1 h-4 w-4 shrink-0 text-clik-royce" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="font-ui text-clik-cream/85" style="font-size: 16px; line-height: 1.55;">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <a
+            href={CALENDLY}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-click="MediaCTAClick"
+            data-track-params={JSON.stringify({ audience: 'media', surface: 'media-page', content_name: 'plans-demo' })}
+            class="clik-btn clik-btn-primary"
+          >
+            Book a demo <span aria-hidden="true">→</span>
+          </a>
+          <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-clik-cream/55">
+            for custom quotes & higher volume.
+          </span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [07] Final CTA -->
   <section class="px-6 md:px-12 py-16 md:py-28">
     <div class="mx-auto max-w-[1200px]">
       <div class="clik-section-header mb-8">
-        <span class="idx">[ 06 ]</span>
+        <span class="idx">[ 07 ]</span>
         <span class="rule"></span>
         <span class="label">START</span>
       </div>
@@ -341,7 +429,7 @@ const steps = [
           3× your output without adding headcount<span class="clik-period">.</span>
         </h2>
         <p class="mt-6 max-w-[52ch] font-ui text-clik-cream/70" style="font-size: 18px; line-height: 1.55;">
-          Bring one recording to a demo and watch the videos come back. Plans scale with your monthly volume.
+          Bring one recording to a demo and watch the videos come back. Plans start at $499/mo and scale with your monthly volume.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
@@ -352,8 +440,8 @@ const steps = [
           >
             Book a demo <span aria-hidden="true">→</span>
           </a>
-          <a href="https://app.clik.vision/sign-up" class="clik-btn cta-ghost">
-            Start for free
+          <a href="#media-plans" class="clik-btn cta-ghost">
+            See plans
           </a>
         </div>
       </div>
